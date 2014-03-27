@@ -32,3 +32,21 @@ Route::get('contact', function()
 {
 	return View::make('pages.contact');
 });*/
+
+
+Route::group(array('prefix' => 'backend'), function()
+{
+
+    Route::get('/', function() {
+        return View::make('backend.pages.home');
+    });
+
+    Route::get('/categorias', function() {
+        return 'The Colour of Magic';
+    });
+   
+    Route::get('/noticias', function() {
+        return 'Reaper Man';
+    });
+
+});
