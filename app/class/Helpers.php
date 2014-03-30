@@ -2,6 +2,8 @@
 
 class Helpers {
 
+	public static $prefix_table = 'njv_';
+
 	public static function generateSlug($s)
 	{
 		$s = trim($s);
@@ -14,6 +16,20 @@ class Helpers {
 		$s = trim($s);
 		$s = str_replace(" ","-",$s);
 		return $s;
+	}
+
+	public static function sidebarBackend(){
+
+		$data_sidebar = array(			
+			array('name' => 'Dashboard', 'class'=>'fa-dashboard', 'url' => '#' ),
+			array('name' => 'Estadisticas', 'class'=>'fa-bar-chart-o', 'url' => '#' ),
+			array('name' => 'Administrar Banners', 'class'=>'fa-table', 'url' => '#' ),
+			array('name' => 'Publicaciones', 'class'=>'fa-table', 'url' => url('backend/noticias') ),
+			array('name' => 'Categorias', 'class'=>'fa-table', 'url' => '#' ),
+			array('name' => 'Usuarios', 'class'=>'fa-wrench', 'url' => '#' )
+		);
+
+		return $data_sidebar;
 	}
 
 

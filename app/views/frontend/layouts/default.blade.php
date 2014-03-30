@@ -1,13 +1,13 @@
 <!doctype html>
 <html lang="es">
 <head>
-	@include('includes.head')
+	@include('frontend.includes.head')
 </head>
 <body>
 	<div class="container">
 
 		<header class="row">
-			@include('includes.header')
+			@include('frontend.includes.header')
 		</header>
 
 		<div id="main" class="row">
@@ -15,7 +15,7 @@
 		</div>
 
 		<footer class="row">
-			@include('includes.footer')
+			@include('frontend.includes.footer')
 		</footer>
 	</div>
 	<!-- Javascripts

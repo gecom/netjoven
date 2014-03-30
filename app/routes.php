@@ -11,12 +11,12 @@
 |
 */
 
-/*Route::get('/', function()
+Route::get('/', function()
 {
-	return View::make('pages.home');
+	return View::make('frontend.pages.home');
 });
 
-
+/*
 Route::controller('install_netjoven', 'InstallController');
 
 
@@ -34,19 +34,29 @@ Route::get('contact', function()
 });*/
 
 
+
 Route::group(array('prefix' => 'backend'), function()
 {
 
-    Route::get('/', function() {
-        return View::make('backend.pages.home');
+    View::share('sidebar', Helpers::sidebarBackend());
+
+    Route::group(array('before' => 'auth_admin'), function()
+    {
+
+        Route::get('/', function() {
+            return View::make('backend.pages.home');
+        });
+
+        Route::get('/noticias', function() {
+            $params['type'] = array('NEWS');
+            $dbl_post = Post::getPost($params)->get();
+            return View::make('backend.pages.post', array('dbl_post' => $dbl_post ));
+        });
+       
     });
 
-    Route::get('/categorias', function() {
-        return 'The Colour of Magic';
-    });
-   
-    Route::get('/noticias', function() {
-        return 'Reaper Man';
-    });
+    Route::get('/login', 'UserController@login');
+    Route::post('/login', 'UserController@signin');
+    Route::get('/logout', 'UserController@logout');
 
 });

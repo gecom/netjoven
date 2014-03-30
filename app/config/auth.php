@@ -41,7 +41,7 @@ return array(
 	|
 	*/
 
-	'table' => 'users',
+	'table' => 'njv_user',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -60,11 +60,6 @@ return array(
 
 	'reminder' => array(
 
-		'email' => 'emails.auth.reminder',
-
-		'table' => 'password_reminders',
-
-		'expire' => 60,
 
 	),
 
