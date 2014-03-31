@@ -14,7 +14,7 @@
 <!--<link href="{{{ asset('assets/css/bootstrap.min.css') }}}" rel="stylesheet">-->
 	{{ HTML::style('assets/css/bootstrap.min.css')}}
 	{{ HTML::style('assets/font-awesome/css/font-awesome.min.css')}}
-	{{ HTML::style('assets/css/sb-admin.css')}}
+	{{ HTML::style('assets/css/backend/sb-admin.css')}}
 	@section('css')
 	@show
 

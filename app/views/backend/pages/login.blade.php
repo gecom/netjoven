@@ -30,6 +30,6 @@
     </div>
 @stop
 
-@section('js')
+@section('js') 
     {{ HTML::script('assets/js/sb-admin.js'); }}
 @stop

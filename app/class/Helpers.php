@@ -24,7 +24,15 @@ class Helpers {
 			array('name' => 'Dashboard', 'class'=>'fa-dashboard', 'url' => '#' ),
 			array('name' => 'Estadisticas', 'class'=>'fa-bar-chart-o', 'url' => '#' ),
 			array('name' => 'Administrar Banners', 'class'=>'fa-table', 'url' => '#' ),
-			array('name' => 'Publicaciones', 'class'=>'fa-table', 'url' => url('backend/noticias') ),
+			array('name' => 'Publicaciones', 'class'=>'fa-table', 'url' => '#',
+				'subcategories'=> array(
+						array('name' => 'Noticias', 'url' => url('backend/noticias')),
+						array('name' => 'Juerga', 'url' => '#'),
+						array('name' => 'Pichanga', 'url' => '#'),
+						array('name' => 'Videos', 'url' => '#'),
+						array('name' => 'Fotos', 'url' => '#')
+					)
+			),
 			array('name' => 'Categorias', 'class'=>'fa-table', 'url' => '#' ),
 			array('name' => 'Usuarios', 'class'=>'fa-wrench', 'url' => '#' )
 		);

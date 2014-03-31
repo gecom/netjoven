@@ -44,14 +44,12 @@ Route::group(array('prefix' => 'backend'), function()
     {
 
         Route::get('/', function() {
-            return View::make('backend.pages.home');
+        return View::make('backend.pages.home');
         });
 
-        Route::get('/noticias', function() {
-            $params['type'] = array('NEWS');
-            $dbl_post = Post::getPost($params)->get();
-            return View::make('backend.pages.post', array('dbl_post' => $dbl_post ));
-        });
+
+        Route::get('/noticias', 'AdminNewsController@listNews');
+        Route::get('/noticia/editar/{news_id}', array('as' => 'news_edit', 'uses' => 'AdminNewsController@news' ));
        
     });
 

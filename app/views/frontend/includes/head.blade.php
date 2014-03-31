@@ -6,9 +6,9 @@
 	Laravel 4 Sample Site
 	@show
 </title>
-<meta name="keywords" content="your, awesome, keywords, here" />
-<meta name="author" content="Jon Doe" />
-<meta name="description" content="Lorem ipsum dolor sit amet, nihil fabulas et sea, nam posse menandri scripserit no, mei." />
+<meta name="keywords" content="" />
+<meta name="author" content="" />
+<meta name="description" content="" />
 
 <!-- Mobile Specific Metas
 ================================================== -->
@@ -17,7 +17,8 @@
 <!-- CSS
 ================================================== -->
 <!--<link href="{{{ asset('assets/css/bootstrap.min.css') }}}" rel="stylesheet">-->
-{{ HTML::style('assets/css/bootstrap.min.css')}}
+{{ HTML::style('assets/css/site/bootstrap.min.css')}}
+{{ HTML::style('assets/css/site/style.css')}}
 
 <style>
 	@section('styles')

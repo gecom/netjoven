@@ -1,5 +1,5 @@
 <?php 
-class status {
+class Status {
 	
 	const STATUS_PUBLICADO = 'pbl';
 	const STATUS_DESPUBLICADO = 'dpl';
