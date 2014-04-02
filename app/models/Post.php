@@ -3,38 +3,45 @@
 class Post extends Eloquent {
 	protected $table =  'njv_post';
 
+	public static $rules = array();
+
 	public function category()
 	{ 
 		return $this->belongsTo('Category');
 	}
 
-	    public function tags()
+	public function tags()
     {
         return $this->belongsToMany('Tag');
     }
 
-    public static function getPostById($post_id){
+	public function post_at($date=null)
+    {
+        if(is_null($date)) {
+            $date = $this->created_at;
+        }
 
+        return String::date($date);
+    }
 
-/*select id, (SELECT parent_id FROM njv_category c WHERE c.id = p.category_id ) ,
-category_id, type,id_youtube, dailymotion_code,title, slug, content, summary
-from njv_post p where id = 8870*/
+    public static function getPostById($post_id)
+    {
 
-		$dbr_post = (new Post)
-			->select(' id, '.DB::raw('(SELECT parent_id FROM njv_category c WHERE c.id = njv_post.category_id ) as parent_category_id').',
-			category_id, type,id_youtube, dailymotion_code,title, slug, content, summary')
+		$dbr_post = (new Post())
+			->select('id', DB::raw('(SELECT parent_id FROM njv_category c WHERE c.id = njv_post.category_id ) as parent_category_id'),
+					'category_id', 'type', 'id_youtube', 'dailymotion_code', 'title', 'slug', 'content', 'summary',
+					'twitter', 'america', 'frecuencia')
 			->where('id', '=', $post_id)
-			->where('status', '=', Status::STATUS_PUBLICADO);
+			->where('status', '=', Status::STATUS_PUBLICADO)
+			->first();
 
 		return $dbr_post;
-
-
     }
 
 	public static function getPost($params = array())
 	{
 
-		$params_default = array('type' => array("NEWS", "VIDEOS"), 'show_not_featured' => false, 'show_pagination'=>false, 'show_limit' => false);
+		$params_default = array('type' => array("NEWS", "VIDEOS"), 'show_not_featured' => false, 'show_limit' => false);
 		$params = array_merge($params_default, $params);
 
 		$post = (new Post())
@@ -60,7 +67,7 @@ from njv_post p where id = 8870*/
 			$post->whereIn(Helpers::$prefix_table . 'post.id', DB::table('njv_post_featured')->lists('post_id'));
 		}
 
-		if(is_array($params['show_limit'])){
+		if(is_array($params['show_limit']) && count($params['show_limit'])){
 			$limit_end = $params['show_limit'][0] ;
 			$limit_start = $params['show_limit'][1] ;
 			$post->take($limit_end)->skip($limit_start);

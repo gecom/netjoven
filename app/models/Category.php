@@ -12,8 +12,9 @@ class Category extends Eloquent {
 	public static function getParentCategories()
     {
         $dbl_categories = (new Category())
-        ->where('parent_id  IS NULL')
-        ->where('status', '=', Status::STATUS_ACTIVO);
+        ->where('parent_id')
+        ->where('status', '=', Status::STATUS_ACTIVO)
+        ->where('type', '=', 'CATEGORY');
 
         return $dbl_categories;
     }
@@ -25,6 +26,16 @@ class Category extends Eloquent {
 		->first();
 
 		return $dbr_parent_category;
+    }
+
+    public static function getChildrenCategoryByParentId($parent_id, $type = 'CATEGORY'){
+
+        $categories = (new Category())
+        ->where('status', '=', Status::STATUS_ACTIVO)
+        ->where('type', '=', $type)
+		->where('parent_id','=', $parent_id);
+
+        return $categories;
     }
 
     

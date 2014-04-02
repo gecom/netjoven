@@ -49,7 +49,11 @@ Route::group(array('prefix' => 'backend'), function()
 
 
         Route::get('/noticias', 'AdminNewsController@listNews');
-        Route::get('/noticia/editar/{news_id}', array('as' => 'news_edit', 'uses' => 'AdminNewsController@news' ));
+        Route::get('/noticia/{news_id}/editar', array('as' => 'news_edit', 'uses' => 'AdminNewsController@news' ));
+        Route::post('/noticia/{news_id}/editar', array('as' => 'save_news_edit', 'uses' => 'AdminNewsController@saveNews' ));
+        Route::get('/noticia/nuevo', array('as' => 'news_edit', 'uses' => 'AdminNewsController@news' ));
+        Route::post('/noticia/nuevo', array('as' => 'save_news_create', 'uses' => 'AdminNewsController@saveNews' ));
+        Route::post('/noticia/autocompletar_categoria', array('as' => 'autocomplete_category', 'uses' => 'AdminNewsController@autoCompleteCategory' ));
        
     });
 

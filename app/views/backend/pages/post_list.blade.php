@@ -61,12 +61,12 @@
 						<thead>
   							<a href="#" class="btn btn-primary btn-xs pull-right"><b>+</b> Agregar Nueva Noticia</a>
 							<tr>
-								<th>Titulo</th>
-								<th>Categoria</th>
-								<th>Tags</th>
-								<th>Estado</th>
-								<th>Fec. Creación</th>
-								<th class="text-center">Acciones</th>
+								<th class="col-md-3">Titulo</th>
+								<th class="col-md-3" >Categoria</th>
+								<th class="col-md-3">Tags</th>
+								<th class="col-md-2" >Estado</th>
+								<th class="col-md-2" >Fec. Creación</th>
+								<th class="col-md-4" class="text-center">Acciones</th>
 							</tr>
 						</thead>
 						<tbody>

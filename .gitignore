@@ -8,3 +8,4 @@ composer.lock
 Thumbs.db
 /sb-admin
 /sb-admin-v2
+/nbproject/private/
