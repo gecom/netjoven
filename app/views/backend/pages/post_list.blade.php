@@ -55,16 +55,17 @@
 
                     </form>
                 </div>
-                <div class="show-grid col-lg-12">
-                	
+
+                <div class="col-lg-12">
+                	<a href="#" class="btn btn-primary pull-right"><b>+</b> Agregar Nueva Noticia</a>
+                </div>
+                <div class="show-grid col-lg-12">                	
 					<table class="table table-striped table-bordered table-hover dataTable no-footer">
-						<thead>
-  							<a href="#" class="btn btn-primary btn-xs pull-right"><b>+</b> Agregar Nueva Noticia</a>
+						<thead>  							
 							<tr>
 								<th class="col-md-3">Titulo</th>
 								<th class="col-md-3" >Categoria</th>
 								<th class="col-md-3">Tags</th>
-								<th class="col-md-2" >Estado</th>
 								<th class="col-md-2" >Fec. Creación</th>
 								<th class="col-md-4" class="text-center">Acciones</th>
 							</tr>
@@ -82,10 +83,11 @@
 										@endforeach			
 									@endif
 									<td>{{ implode( ", ",$data_tags)}}</td>
-									<td>{{ Status::$statuses[$dbr_post->status] }}</td>
 									<td>{{$dbr_post->post_at}}</td>
 									<td class="text-center">
-										<a href="{{  route('news_edit', array('news_id'=> $dbr_post->id)); }}" class="btn btn-primary btn-xs" ><span class="glyphicon glyphicon-file"></span> Editar</a><a href="#" class="btn btn-success btn-xs" ><span class="glyphicon glyphicon-pencil"></span> Copiar</a>
+										<a href="{{  route('regiter_post_edit', array('news_id'=> $dbr_post->id)); }}" class="btn btn-primary btn-xs" ><span class="glyphicon glyphicon-file"></span> Editar</a>
+										<a href="#" class="btn btn-success btn-xs" ><span class="glyphicon glyphicon-pencil"></span> Destacar</a>
+										<a href="#" class="btn btn-success btn-xs" ><span class="glyphicon glyphicon-pencil"></span> Copiar</a>
 									</td>
 								</tr>
 							@endforeach

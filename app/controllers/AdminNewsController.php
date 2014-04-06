@@ -11,43 +11,42 @@ class AdminNewsController extends BaseController {
         return View::make('backend.pages.post_list', array('dbl_post' => $dbl_post ));
     }
 
-    public function news($news_id = null)
+    public function news($post = null)
     {
-        $params['is_new'] = $is_new =  false;
-        if(empty($news_id)){
-            $params['is_new'] = $is_new = true;
-        }
 
-        $dbr_post = null;
-        if($is_new == false){
-            $dbr_post = Post::getPostById($news_id);
+        $params['is_new'] = $is_new =  false;
+        if(empty($post)){
+            $params['is_new'] = $is_new = true;
         }
 
     	$params['parent_categories'] = Category::getParentCategories()->get();
         $params['is_new'] = $is_new;
-        $params['dbr_post'] = $dbr_post;
+        $params['dbr_post'] = $post;
     	return View::make('backend.pages.post', $params);
     }
 
 
-    public function saveNews($news_id = null)
+    public function saveNews($post = null)
     {
 
-        $data_frm_news = Input::all();
+        $data_frm_news = Input::get('frm_news');
+
+
+
+
         $is_new = false;
-        if(empty($news_id) && $data_frm_news['is_new'] == true){
+        if(!$post && $data_frm_news['is_new'] == true){
             $is_new = true;
         }
 
-        $post = ($is_new == true ? new Post() : Post::find($news_id));
-
+        $post = ($is_new == true ? new Post() : $post);
 
         $rules = array(
             'title'   => 'required|min:3',
             'category'      => 'required|numeric',
             'subcategory'   => 'required|numeric',
             'keywords'      => 'required',
-            'summary'       => 'required',
+            'summary'       => 'required'
         );
 
         $validator = Validator::make($data_frm_news, $rules);
@@ -56,18 +55,54 @@ class AdminNewsController extends BaseController {
             if ($validator->passes()){
 
                 $post->title = $data_frm_news['title'];
-                $post->slug = Str::slug($data_frm_news['slug']);
-                $post->content = $data_frm_news['content'];
+
+                if($is_new == true){
+                    $post->slug = Str::slug($data_frm_news['title']);                    
+                    $post->type = Helpers::TYPE_POST_NEWS;
+                }
+
+                $post->content = $data_frm_news['description'];
                 $post->summary = $data_frm_news['summary'];
                 $post->category_id = $data_frm_news['subcategory'];
-                $post->type = Helpers::TYPE_POST_NEWS;
-                //$post->title = $data_frm_news['keywords'];
-                if($post){
-                    return "Guardo SatisfactoriMNETE";
+                
+
+                $data_image_principal = $data_frm_news['image_principal'] ? array(json_decode($data_frm_news['image_principal'], true)) : array();
+                $data_gallery = $data_frm_news['gallery'] ? json_decode($data_frm_news['gallery'],true) : array();
+                $data_images = array_merge($data_image_principal, $data_gallery);
+
+                if($post->save()){
+
+                    if(count($data_images)){
+                        foreach ($data_images as $image) {
+                            $gallery = new Gallery();
+
+                            $gallery->image = $image['image']['name'];
+                            $gallery->thumbnail_one = $image['image']['name'];
+                            $gallery->thumbnail_two = $image['image']['name'];
+
+
+                            if(isset($image['is_principal'])){
+                            $gallery->is_principal = 1;
+                            }
+
+                            if(isset($image['is_gallery'])){
+                            $gallery->is_gallery = 1;
+                            }
+
+                            $post->galleries()->save($gallery);
+                        }
+                    }
+
+                //$post->galeries = 
+
+                //return Redirect::to('admin/blogs/' . $post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.update.success'));
+                //return "Guardo SatisfactoriMNETE";
+
+                //URL::current()
                 }
 
             }else{
-                return "Error en la validacion";
+                return Redirect::to('backend/publicaciones/nota/' . $post->id . '/editar')->with('error', 'Error al registrar la nota');
             }
         }else{
             return "La Noticia no existe";

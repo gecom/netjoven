@@ -38,7 +38,7 @@
     @endif
 
     <!-- Core Scripts - Include with every page -->
-    {{ HTML::script('assets/js/jquery-1.10.2.js'); }}
+    {{ HTML::script('assets/js/jquery.js'); }}
     {{ HTML::script('assets/js/bootstrap.min.js'); }}
     {{ HTML::script('assets/js/plugins/metisMenu/jquery.metisMenu.js'); }}
     @section('js')

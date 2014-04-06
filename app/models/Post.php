@@ -15,6 +15,11 @@ class Post extends Eloquent {
         return $this->belongsToMany('Tag');
     }
 
+    public function galleries()
+    {
+        return $this->hasMany('Gallery');
+    }
+
 	public function post_at($date=null)
     {
         if(is_null($date)) {

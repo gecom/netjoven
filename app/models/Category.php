@@ -9,12 +9,12 @@ class Category extends Eloquent {
 		return $this->belongsToMany('Post');
 	}
 
-	public static function getParentCategories()
+	public static function getParentCategories($type = Helpers::TYPE_POST_NEWS)
     {
         $dbl_categories = (new Category())
         ->where('parent_id')
         ->where('status', '=', Status::STATUS_ACTIVO)
-        ->where('type', '=', 'CATEGORY');
+        ->where('type', '=', $type);
 
         return $dbl_categories;
     }
@@ -28,7 +28,7 @@ class Category extends Eloquent {
 		return $dbr_parent_category;
     }
 
-    public static function getChildrenCategoryByParentId($parent_id, $type = 'CATEGORY'){
+    public static function getChildrenCategoryByParentId($parent_id, $type = Helpers::TYPE_POST_NEWS){
 
         $categories = (new Category())
         ->where('status', '=', Status::STATUS_ACTIVO)

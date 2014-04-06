@@ -1,5 +1,11 @@
 @extends('backend.layouts.default')
 
+@section('css')
+
+    {{ HTML::style('assets/css/backend/jquery.fileupload.css')}}
+    {{ HTML::style('assets/css/backend/imgareaselect-default.css')}}
+@stop
+
 @section('title_content')
 	Noticias
 @stop
@@ -12,9 +18,12 @@
     </div>
     <div class="panel-body">
         <div class="row">
-            <div class="col-lg-7">
-                <form method="post" action="{{ ($is_new == true ? route('save_news_create') : route('save_news_edit', array('news_id'=> $dbr_post->id))) }}"  autocomplete="off">
+
+                <form enctype="multipart/form-data" accept-charset="UTF-8" method="post" action="{{ ($is_new == true ? route('save_news_create') : route('save_news_edit', array('news_id'=> $dbr_post->id))) }}"  autocomplete="off">
+                <div class="col-lg-7">
                     {{ Form::hidden('frm_news[is_new]', ($is_new ? 1 : 0) , array('id' => 'frm_is_new')) }}
+                    {{ Form::hidden('frm_news[image_principal]', null, array('id' => 'frm_news_image_principal')) }}
+                    {{ Form::hidden('frm_news[gallery]', null , array('id' => 'frm_news_gallery')) }}
                     <div class="form-group">
                         {{ Form::label('frm_news_title', 'Titulo') }}
                         {{ Form::text('frm_news[title]', ($is_new ? null: $dbr_post->title ), array('id' => 'frm_news_title', 'placeholder' => 'Ingrese un titulo', 'class' => 'form-control')) }}
@@ -64,29 +73,6 @@
                             </label>
                             </div>
                         </div>
-                        <div class="col-lg-6 pull-right">
-                            <label>Destacar en: </label>
-                            <div class="checkbox">
-                                <label>
-                                    {{ Form::checkbox('frm_news[super_featured]', 'si') }} Super Destacado
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    {{ Form::checkbox('frm_news[featured_principal]', 'si') }} Principal
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    {{ Form::checkbox('frm_news[featured_parent_category]', 'si') }} Categoría Padre
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    {{ Form::checkbox('frm_news[featured_children_category]', 'si') }} SubCategoría
-                                </label>
-                            </div>
-                        </div>
                     </div>
                     <div class="form-group">
                         {{ Form::label('frm_news_summary', 'Resumen') }} 
@@ -95,18 +81,70 @@
                     <div class="form-group">
                         {{ Form::label('frm_news_description', 'Descripción') }} 
                         {{ Form::textarea('frm_news[description]', ($is_new ? null: $dbr_post->content ), array('id' => 'frm_news_description', 'placeholder' => 'Ingrese Descripción', 'class' => 'form-control')) }}
+                    </div>                 
+
+                    <div class="form-group">
+                        <span class="btn btn-success fileinput-button">
+                            <i class="glyphicon glyphicon-plus"></i>
+                            <span>Subir Imagen Principal</span>
+                            <input id="fileupload_principal" type="file" name="file_image">
+                        </span>                        
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" id="preview_image_principal"><ul class="thumbnails list-unstyled"></ul></div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <span class="btn btn-success fileinput-button">
+                            <i class="glyphicon glyphicon-plus"></i>
+                            <span>Subir Galeria</span>
+                            <input id="fileupload_gallery" type="file" name="file_image" multiple />
+                        </span>
+                    </div>
+
+                    <div class="row">                        
+                        <div class="col-lg-12" id="wrapper_gallery"><ul class="thumbnails list-unstyled"></ul></div>
                     </div>
                     <button type="submit" class="btn btn-info">Guardar</button>
-                    <button type="reset" class="btn btn-default">Cancelar</button>
+                    <button type="reset" class="btn btn-danger">Cancelar</button>
+                </div>
                 </form>
-            </div>
         </div>
     </div>
 </div>
 @stop
 
+<script type="text/html" id='images-data'>
+    
+        <li class="col-md-<%= item.is_principal == true ?  12 : 3 %>">
+            <div class="thumbnail" style="padding: 0">
+                <div style="padding:4px" class="text-center">
+                    <img  src="<%= item.is_principal == true ? item.image.filename : item.image.filename_thumb %>">
+                </div>
+                <% if(item.is_principal == false){ %>
+                    <div class="caption">
+                        <textarea placeholder="Ingrese Titulo" class="form-control" cols="10" rows="5"></textarea>
+                    </div>
+                <% } %>
+                <% if(item.is_principal == true){ %>
+                    <div class="modal-footer" style="text-align: left">
+                        <button type="reset" class="btn btn-danger">Cortar Imagen</button>
+                    </div>
+                <% } %>
+            </div>
+        </li>        
+</script>
+
 @section('js')
     {{ HTML::script('assets/js/tiny_mce/jquery.tinymce.js'); }}
 	{{ HTML::script('assets/js/sb-admin.js'); }}
+    {{ HTML::script('assets/js/jquery_file_upload/jquery.ui.widget.js'); }}
+    {{ HTML::script('assets/js/jquery_file_upload/jquery.iframe-transport.js'); }}
+    {{ HTML::script('assets/js/jquery_file_upload/jquery.fileupload.js'); }}
+    {{ HTML::script('assets/js/jquery_file_upload/jquery.fileupload-process.js'); }}
+    {{ HTML::script('assets/js/jquery_file_upload/jquery.fileupload-validate.js'); }}
+    {{ HTML::script('assets/js/img_area_select/jquery.imgareaselect.js'); }}
+    {{ HTML::script('assets/js/underscore.js'); }}    
     {{ HTML::script('assets/js/backend/news.js'); }}
 @stop

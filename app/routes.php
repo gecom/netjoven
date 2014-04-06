@@ -11,6 +11,21 @@
 |
 */
 
+/** ------------------------------------------
+ *  Route model binding
+ *  ------------------------------------------
+ */
+Route::model('post', 'Post');
+
+
+/** ------------------------------------------
+ *  Route constraint patterns
+ *  ------------------------------------------
+ */
+Route::pattern('post', '[0-9]+');
+
+
+
 Route::get('/', function()
 {
 	return View::make('frontend.pages.home');
@@ -48,13 +63,16 @@ Route::group(array('prefix' => 'backend'), function()
         });
 
 
-        Route::get('/noticias', 'AdminNewsController@listNews');
-        Route::get('/noticia/{news_id}/editar', array('as' => 'news_edit', 'uses' => 'AdminNewsController@news' ));
-        Route::post('/noticia/{news_id}/editar', array('as' => 'save_news_edit', 'uses' => 'AdminNewsController@saveNews' ));
-        Route::get('/noticia/nuevo', array('as' => 'news_edit', 'uses' => 'AdminNewsController@news' ));
-        Route::post('/noticia/nuevo', array('as' => 'save_news_create', 'uses' => 'AdminNewsController@saveNews' ));
-        Route::post('/noticia/autocompletar_categoria', array('as' => 'autocomplete_category', 'uses' => 'AdminNewsController@autoCompleteCategory' ));
-       
+        Route::get('/publicaciones', array('as' => 'list_post', 'uses' => 'AdminNewsController@listNews' ));
+        Route::get('/publicaciones/nota/{post}/editar/', array('as' => 'regiter_post_edit', 'uses' => 'AdminNewsController@news' ));
+        Route::post('/publicaciones/nota/{post}/editar', array('as' => 'save_news_edit', 'uses' => 'AdminNewsController@saveNews' ));
+        Route::get('/publicaciones/nota/nuevo', array('as' => 'regiter_post_new', 'uses' => 'AdminNewsController@news' ));
+        Route::post('/publicaciones/nota/nuevo', array('as' => 'save_news_create', 'uses' => 'AdminNewsController@saveNews' ));
+
+        Route::post('/autocompletar_categoria', array('as' => 'autocomplete_category', 'uses' => 'AdminNewsController@autoCompleteCategory' ));
+        Route::post('/upload_file_gallery',array('as'=>'upload','uses'=>'UploadController@uploadGallery'));     
+        Route::post('/upload_file',array('as'=>'upload','uses'=>'UploadController@uploadImagePrincipal'));    
+        Route::post('/cortar_imagen',array('as'=>'upload','uses'=>'UploadController@cropImage'));
     });
 
     Route::get('/login', 'UserController@login');
