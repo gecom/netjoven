@@ -24,8 +24,8 @@
             <div id="page-wrapper">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header"> 
-                            @yield('title_content')                 
+                        <h1 class="page-header">
+                            @yield('title_content')
                         </h1>
                     </div>
                 </div>
@@ -40,6 +40,7 @@
     <!-- Core Scripts - Include with every page -->
     {{ HTML::script('assets/js/jquery.js'); }}
     {{ HTML::script('assets/js/bootstrap.min.js'); }}
+    {{ HTML::script('assets/js/notify.min.js'); }}
     {{ HTML::script('assets/js/plugins/metisMenu/jquery.metisMenu.js'); }}
     @section('js')
     @show

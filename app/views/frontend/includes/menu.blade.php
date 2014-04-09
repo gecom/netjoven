@@ -1,7 +1,10 @@
 <div class="row">
     <div class="col-md-12 visible-lg visible-md">
         <ul class="menu">
-            <li class="active"><a href="#" >INICIO</a></li><li><a href="#">ESPECTÁCULOS</a></li><li><a href="#">DEPORTES</a></li><li><a href="#">ACTUALIDAD</a></li><li><a href="#">GAMERS</a></li><li><a href="#">ESTILO DE VIDA</a></li><li><a href="#">NETJOVEN TV</a></li>							
+			<li class="active"><a href="#" >INICIO</a></li>
+			@foreach ($dbl_categories_home as $key => $dbr_category_home)
+				<li><a href="#" >{{ mb_strtoupper($dbr_category_home['name']) }}</a></li>
+			@endforeach
         </ul>
     </div>
 </div>

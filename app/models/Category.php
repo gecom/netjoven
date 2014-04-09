@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 
 class Category extends Eloquent {
@@ -9,12 +9,30 @@ class Category extends Eloquent {
 		return $this->belongsToMany('Post');
 	}
 
+    public function childrenCategories(){
+        return $this->hasMany('Category', 'parent_id', 'id');
+    }
+
+    public function parentCategory()
+    {
+        return $this->belongsTo('Category','id', 'parent_id');
+    }
+
 	public static function getParentCategories($type = Helpers::TYPE_POST_NEWS)
     {
         $dbl_categories = (new Category())
         ->where('parent_id')
-        ->where('status', '=', Status::STATUS_ACTIVO)
-        ->where('type', '=', $type);
+        ->where('status', '=', Status::STATUS_ACTIVO);
+
+        if(is_array($type)){
+            $dbl_categories->whereIn('type', $type);
+        }else{
+            if(!empty($type)){
+                $dbl_categories->where('type', '=', $type);
+            }
+        }
+
+        $dbl_categories->orderBy('created_at', 'desc');
 
         return $dbl_categories;
     }
@@ -38,9 +56,20 @@ class Category extends Eloquent {
         return $categories;
     }
 
-    
+    public static function getParentCategoriesHome(){
 
-	
+        $categories = (new Category())
+        ->whereIn('njv_category.type', array(Helpers::TYPE_POST_NEWS, Helpers::TYPE_POST_VIDEO))
+        ->where('njv_category.parent_id')
+        ->where('njv_category.is_menu', '=', 1);
+
+        return $categories;
+
+    }
+
+
+
+
 }
 
 

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class UploadController extends BaseController{
 
@@ -23,6 +23,23 @@ class UploadController extends BaseController{
         return header('Content-type: application/json') . json_encode($response);
     }
 
+    public function uploadImageCategory(){
+        $file = Input::file('file_image');
+        $data_size = Helpers::$size_images['category'];
+        $data_size_others = Helpers::$size_images['category_others'];
+        $new_name = time().'-'.rand(99,999);
+
+        $response = Helpers::uploadImage($file, $new_name.'_'.implode('x', $data_size).Helpers::$extension, 'category/', $data_size);
+
+        if($response['success'] == true){
+            $response_upload = Helpers::uploadImage($file, $new_name.'_'.implode('x', $data_size_others).Helpers::$extension, 'category/', $data_size_others);
+            $response_upload['name'] = $new_name . Helpers::$extension;
+        }
+
+        return header('Content-type: application/json') . json_encode((isset($response_upload) ? $response_upload : $response));
+
+    }
+
     public function cropImage(){
 
         $filename = Input::get('filename');
@@ -31,7 +48,7 @@ class UploadController extends BaseController{
         $data_pos['width'] = Input::get('width');
         $data_pos['height'] = Input::get('height');
         $response = array();
-    
+
         $path = Config::get('settings.upload') . 'noticias/'. $filename;
 
         $response['success'] = 0;
@@ -44,7 +61,7 @@ class UploadController extends BaseController{
         }
 
         return header('Content-type: application/json') . json_encode($response);
- 
+
     }
 
 

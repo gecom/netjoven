@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class AdminNewsController extends BaseController {
 
@@ -6,7 +6,6 @@ class AdminNewsController extends BaseController {
     public function listNews()
     {
         $params['type'] = array('NEWS');
-        $params['show_pagination'] = 15;
         $dbl_post = Post::getPost($params)->paginate(15);
         return View::make('backend.pages.post_list', array('dbl_post' => $dbl_post ));
     }
@@ -19,7 +18,14 @@ class AdminNewsController extends BaseController {
             $params['is_new'] = $is_new = true;
         }
 
-    	$params['parent_categories'] = Category::getParentCategories()->get();
+    	$params['dbl_parent_categories'] = Category::getParentCategories()->get();
+
+        if(!$is_new){
+            $params['dbr_post_category'] = $dbr_post_category = $post->category()->first();
+            $params['dbl_categories'] = Category::getChildrenCategoryByParentId($dbr_post_category->parent_id)->get();
+            $params['dbl_galleries'] = $post->galleries()->get();
+        }
+
         $params['is_new'] = $is_new;
         $params['dbr_post'] = $post;
     	return View::make('backend.pages.post', $params);
@@ -30,9 +36,6 @@ class AdminNewsController extends BaseController {
     {
 
         $data_frm_news = Input::get('frm_news');
-
-
-
 
         $is_new = false;
         if(!$post && $data_frm_news['is_new'] == true){
@@ -57,14 +60,14 @@ class AdminNewsController extends BaseController {
                 $post->title = $data_frm_news['title'];
 
                 if($is_new == true){
-                    $post->slug = Str::slug($data_frm_news['title']);                    
+                    $post->slug = Str::slug($data_frm_news['title']);
                     $post->type = Helpers::TYPE_POST_NEWS;
                 }
 
                 $post->content = $data_frm_news['description'];
                 $post->summary = $data_frm_news['summary'];
                 $post->category_id = $data_frm_news['subcategory'];
-                
+
 
                 $data_image_principal = $data_frm_news['image_principal'] ? array(json_decode($data_frm_news['image_principal'], true)) : array();
                 $data_gallery = $data_frm_news['gallery'] ? json_decode($data_frm_news['gallery'],true) : array();
@@ -93,7 +96,7 @@ class AdminNewsController extends BaseController {
                         }
                     }
 
-                //$post->galeries = 
+                //$post->galeries =
 
                 //return Redirect::to('admin/blogs/' . $post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.update.success'));
                 //return "Guardo SatisfactoriMNETE";
@@ -107,7 +110,7 @@ class AdminNewsController extends BaseController {
         }else{
             return "La Noticia no existe";
         }
-        
+
     }
 
     public function autoCompleteCategory(){
@@ -118,7 +121,7 @@ class AdminNewsController extends BaseController {
             $dbl_category = Category::getChildrenCategoryByParentId($category_id)->select('id', 'name')->get()->toArray();
 
             return Response::json($dbl_category);
-        }        
+        }
     }
 
 }

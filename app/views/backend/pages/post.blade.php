@@ -34,8 +34,8 @@
                                 {{ Form::label('frm_news_category', 'Categoría') }}
                                 <select name="frm_news[category]" id="frm_news_category" class="form-control">
                                     <option value="">Selecciona Categoria</option>
-                                    @foreach($parent_categories as $parent_category)
-                                    <?php $selected = (!$is_new && ($parent_category->id == $dbr_post->parent_category_id)  ? 'selected="selected"': '' ); ?>
+                                    @foreach($dbl_parent_categories as $parent_category)
+                                    <?php $selected = (!$is_new && ($parent_category->id == $dbr_post_category->parent_id)  ? 'selected="selected"': '' ); ?>
                                         <option value="{{$parent_category->id}}" {{ $selected}}>{{$parent_category->name}}</option>
                                     @endforeach
                                 </select>
@@ -46,6 +46,12 @@
                                 {{ Form::label('frm_news_subcategory', 'Sub Categoría') }}
                                 <select name="frm_news[subcategory]" id="frm_news_subcategory" class="form-control">
                                     <option value="">Selecciona Subcategoría</option>
+                                    @if($is_new == 0)
+                                        @foreach($dbl_categories as $dbr_category)
+                                            <?php $selected = (!$is_new && ($dbr_category->id == $dbr_post_category->id)  ? 'selected="selected"': '' ); ?>
+                                            <option value="{{$dbr_category->id}}" {{ $selected}}>{{$dbr_category->name}}</option>
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>
                         </div>
@@ -91,7 +97,27 @@
                         </span>                        
                     </div>
                     <div class="row">
-                        <div class="col-md-12" id="preview_image_principal"><ul class="thumbnails list-unstyled"></ul></div>
+                        <div class="col-md-12" id="preview_image_principal">
+                            <ul class="thumbnails list-unstyled">
+                                @if ($is_new == 0)
+                                    @foreach ($dbl_galleries as $dbr_gallery)
+                                        @if ($dbr_gallery->is_principal == 1)
+                                            <li class="col-md-12">
+                                                <div class="thumbnail" style="padding: 0">
+                                                    <div style="padding:4px" class="text-center">
+                                                        <img  src="{{ Config::get('settings.urlupload') . 'noticias/'. $dbr_gallery->image}}">
+                                                    </div>
+                                                    <div class="modal-footer" style="text-align: left; display: none">
+                                                        <button type="button" class="btn btn-danger">Cortar Imagen</button>
+                                                    </div>
+                                                </div>
+                                            </li> 
+                                        @endif
+                                    @endforeach
+                                @endif
+
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-12">
@@ -104,7 +130,26 @@
                     </div>
 
                     <div class="row">                        
-                        <div class="col-lg-12" id="wrapper_gallery"><ul class="thumbnails list-unstyled"></ul></div>
+                        <div class="col-lg-12" id="wrapper_gallery">
+                            <ul class="thumbnails list-unstyled">
+                                @if ($is_new == 0)
+                                    @foreach ($dbl_galleries as $dbr_gallery)
+                                        @if ($dbr_gallery->is_gallery == 1)
+                                            <li class="col-md-3">
+                                                <div class="thumbnail" style="padding: 0">
+                                                    <div style="padding:4px" class="text-center">
+                                                        <img  src="{{ Config::get('settings.urlupload') . 'gallery/pp/'. $dbr_gallery->image}}">
+                                                    </div>
+                                                    <div class="caption">
+                                                        <textarea placeholder="Ingrese Titulo" class="form-control" cols="10" rows="5">{{$dbr_gallery->title}}</textarea>
+                                                    </div>
+                                                </div>
+                                            </li> 
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </ul>
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-info">Guardar</button>
                     <button type="reset" class="btn btn-danger">Cancelar</button>
@@ -122,14 +167,14 @@
                 <div style="padding:4px" class="text-center">
                     <img  src="<%= item.is_principal == true ? item.image.filename : item.image.filename_thumb %>">
                 </div>
-                <% if(item.is_principal == false){ %>
+                <% if(item.is_gallery == true){ %>
                     <div class="caption">
                         <textarea placeholder="Ingrese Titulo" class="form-control" cols="10" rows="5"></textarea>
                     </div>
                 <% } %>
                 <% if(item.is_principal == true){ %>
                     <div class="modal-footer" style="text-align: left">
-                        <button type="reset" class="btn btn-danger">Cortar Imagen</button>
+                        <button type="button" class="btn btn-danger">Cortar Imagen</button>
                     </div>
                 <% } %>
             </div>
