@@ -9,6 +9,11 @@ class Category extends Eloquent {
 		return $this->belongsToMany('Post');
 	}
 
+    public function directorates()
+    {
+        return $this->hasMany('Directorate');
+    }
+
     public function childrenCategories(){
         return $this->hasMany('Category', 'parent_id', 'id');
     }

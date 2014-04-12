@@ -5,12 +5,16 @@ class Helpers {
 	const TYPE_POST_NEWS = 'NEWS';
 	const TYPE_POST_VIDEO = 'VIDEO';
 	const TYPE_POST_GALLERY = 'GALLERY';
+	const TYPE_BINGE_BAR = 'Bar';
+	const TYPE_BINGE_DISCOTECA = 'Discotecas';
+	const TYPE_BINGE_LOUNGES = 'Lounges';
 
 	public static $prefix_table = 'njv_';
 	public static $extension = '.jpg';
 
 	public static function getCategoriesHome(){
 		$dbl_parent_categories = Category::getParentCategoriesHome()->get();
+		$categories = array();
 
 		foreach ($dbl_parent_categories as $dbr_category) {
 			$category = $dbr_category->toArray();
@@ -32,9 +36,13 @@ class Helpers {
 			array('name' => 'Publicaciones', 'class'=>'fa-table', 'url' => '#',
 				'subcategories'=> array(
 						array('name' => 'Noticias', 'url' => url('backend/publicaciones')),
-						array('name' => 'Juerga', 'url' => '#'),
-						array('name' => 'Pichanga', 'url' => '#'),
 						array('name' => 'Fotos', 'url' => '#')
+					)
+			),
+			array('name' => 'Directorio', 'class'=>'fa-table', 'url' => '#',
+					'subcategories'=> array(
+						array('name' => 'Pichanga', 'url' => url('backend/directorio/1/pichanga')),
+						array('name' => 'Juerga', 'url' => url('backend/directorio/2/juerga'))
 					)
 			),
 			array('name' => 'Categorias', 'class'=>'fa-table', 'url' => url('backend/categorias') ),
@@ -51,10 +59,11 @@ class Helpers {
 			'featured_section_standar'	=> array('width' => 612, 'height' => 383),
 			'featured_section_module'	=> array('width' => 252, 'height' => 155),
 			'content' 					=> array('width' => 500, 'height' => 500),
-			'content_thumbnail' 		=> array('width' => 160, 'height' => 160),
 			'gallery' 					=> array('width' => 600, 'height' => 374),
 			'category' 					=> array('width' => 260, 'height' => 378),
-			'category_others' 			=> array('width' => 216, 'height' => 265)
+			'category_thumb' 			=> array('width' => 216, 'height' => 265),
+			'view'					=> array('width' => 300, 'height' => 187),
+			'view_thumb' 			=> array('width' => 160, 'height' => 160)
 	);
 
 	public static function uploadImage($file, $new_name = null ,$path = null, $data_size = array(), $generate_thumbnail = false,$max_size = array(2000, 1024)){
@@ -73,7 +82,7 @@ class Helpers {
 
                 if(self::saveImage($file, $path_upload, $new_name, $data_size)){
                 	if($generate_thumbnail){
-                		self::saveImage($file, $path_upload . "pp/", $new_name, self::$size_images['content_thumbnail']);
+                		self::saveImage($file, $path_upload . "pp/", $new_name, self::$size_images['view_thumb']);
                 		$response['filename_thumb'] = Config::get('settings.urlupload') . $path . 'pp/'. $new_name;
                 	}
 
@@ -102,6 +111,10 @@ class Helpers {
 
 	public static function saveImage($file, $path = null, $name = null, $size = array()){
         $image = Image::make($file->getRealPath());
+
+        if(count($size) == 0){
+        	return false;
+        }
 
         if($image->resize($size['width'], $size['height'], true, true)->save($path . $name)){
         	$image->destroy();
@@ -186,6 +199,12 @@ class Helpers {
 
 		return null;
 
+	}
+
+	public static function getDistrict(){
+		$dbl_district = DB::select("SELECT id, id_city, district, link_uri, place FROM  njv_district ORDER BY district");
+
+		return $dbl_district;
 	}
 
 

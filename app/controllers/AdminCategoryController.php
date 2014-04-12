@@ -7,7 +7,6 @@ class AdminCategoryController extends BaseController {
 		$params= array(Helpers::TYPE_POST_NEWS, Helpers::TYPE_POST_GALLERY, Helpers::TYPE_POST_VIDEO);
 		$dbl_categories = Category::getParentCategories($params)->paginate(15);
 		return View::make('backend.pages.categories_list', array('dbl_categories' => $dbl_categories ));
-
 	}
 
 	public function registerCategory($parent_category = null, $category = null){
@@ -59,11 +58,6 @@ class AdminCategoryController extends BaseController {
 			'name'   => 'required|min:3'
 		);
 
-		$messages = array(
-			'required'        => 'El campo :attribute es obligatorio.',
-			'min'             => 'El campo :attribute no puede tener menos de :min carácteres.'
-		);
-
 		if(!$is_new){
         	if(!empty($parent_category) && !empty($category)){
         		$dbr_category = $category;
@@ -79,7 +73,7 @@ class AdminCategoryController extends BaseController {
 
 		$dbr_category = ($is_new == true ? new Category() : $dbr_category);
 
-		$validator = Validator::make($data_frm_category, $rules, $messages);
+		$validator = Validator::make($data_frm_category, $rules);
 		$response = array();
 
         if ( $validator->fails() ){

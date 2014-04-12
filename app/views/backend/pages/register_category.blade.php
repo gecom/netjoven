@@ -92,12 +92,12 @@
                             </div>
                         @endif
                         <div class="row">
-                            <div class="col-md-12" id="preview_image_principal" style="{{ $dbr_category->image ? '' : 'display:none' }}">
+                            <div class="col-md-12" id="preview_image_principal" style="{{ isset($dbr_category) && $dbr_category->image ? '' : 'display:none' }}">
                                 <ul class="thumbnails list-unstyled">
                                             <li class="col-md-12">
                                                 <div class="thumbnail" style="padding: 0">
                                                     <div style="padding:4px" class="text-center">
-                                                        @if($dbr_category->image)
+                                                        @if(isset($dbr_category) && $dbr_category->image)
                                                             @if ($is_new == 0 &&  !is_null($dbr_category->parent_id) )
                                                                 <?php
                                                                     $filename = $dbr_category->image;
@@ -111,8 +111,6 @@
                                                     </div>
                                                 </div>
                                             </li>
-
-
                                 </ul>
                             </div>
                         </div>

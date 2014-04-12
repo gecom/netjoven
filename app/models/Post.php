@@ -60,7 +60,7 @@ class Post extends Eloquent {
 							Helpers::$prefix_table . 'post.view_index',
 							Helpers::$prefix_table . 'category.name as category_name',
 							Helpers::$prefix_table . 'category.slug as category_slug',
-							DB::raw('(SELECT CONCAT(c1.name, " > " ,'.Helpers::$prefix_table . 'category.name'.', "|", c1.slug) FROM ' . Helpers::$prefix_table . 'category c1 WHERE c1.parent_id IS NULL AND c1.id = '.Helpers::$prefix_table .'category.parent_id) as parent_category'))
+							DB::raw('(SELECT CONCAT(c1.name, " > " ,'.Helpers::$prefix_table . 'category.name'.') FROM ' . Helpers::$prefix_table . 'category c1 WHERE c1.parent_id IS NULL AND c1.id = '.Helpers::$prefix_table .'category.parent_id) as parent_category'))
 					->join( Helpers::$prefix_table . 'category', Helpers::$prefix_table . 'category.id', '=', Helpers::$prefix_table .'post.category_id')
 					->orderBy(Helpers::$prefix_table . 'post.post_at', 'desc');
 

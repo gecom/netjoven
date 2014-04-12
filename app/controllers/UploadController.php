@@ -13,6 +13,30 @@ class UploadController extends BaseController{
         return header('Content-type: application/json') . json_encode($response);
     }
 
+    public function uploadImages($directory_path){
+
+        $file = Input::file('file_image');
+        $new_name = time().'-'.rand(99,999). Helpers::$extension;
+        $data_size = array();
+
+        switch ($directory_path) {
+            case 'agenda':
+                if(Input::get('is_gallery')){
+                     $data_size = Helpers::$size_images['gallery'];
+                }
+
+                if(Input::get('is_principal')){
+                    $data_size = Helpers::$size_images['view'];
+                }
+                break;
+            default:
+                break;
+        }
+
+        $response = Helpers::uploadImage($file, $new_name, $directory_path . '/', $data_size);
+        return header('Content-type: application/json') . json_encode($response);
+    }
+
     public function uploadImagePrincipal(){
 
         $file = Input::file('file_image');

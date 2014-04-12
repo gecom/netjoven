@@ -51,7 +51,7 @@ $(function(){
 				var arr = response.errors;
 				$.each(arr, function(index, value){
 					if (value.length != 0){
-						message += value +'<br/>';
+						message += value +"\n";
 					}
 				});
 
