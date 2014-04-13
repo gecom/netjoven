@@ -1,12 +1,25 @@
-<?php 
+<?php
 
 class Tag extends Eloquent {
+
 	protected $table =  'njv_tag';
+	public $timestamps = false;
 
     public function posts()
     {
         return $this->belongsToMany('Post');
     }
+
+    public function setSlugAttribute($value){
+
+		$slug = Str::slug($value);
+
+		$slugCount = count( $this->whereRaw("slug REGEXP '^{$slug}(-[0-9]*)?$'")->get() );
+
+		$slugFinal = ($slugCount > 0) ? "{$slug}-{$slugCount}" : $slug;
+
+		$this->attributes['slug'] = $slugFinal;
+	}
 
     public static function getTagByPostId($post_id)
     {
@@ -19,6 +32,8 @@ class Tag extends Eloquent {
 
 		return $dbr_tag;
     }
+
+
 
 }
 

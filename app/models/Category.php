@@ -42,10 +42,11 @@ class Category extends Eloquent {
         return $dbl_categories;
     }
 
-    public static function getParentCategoryById($children_id){
+    public static function getParentCategoryById($parent_id){
 
 		$dbr_parent_category = (new Category())
-		->where('id' , '=', $children_id)
+		->where('id' , '=', $parent_id)
+        ->where('parent_id')
 		->first();
 
 		return $dbr_parent_category;

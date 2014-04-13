@@ -8,6 +8,9 @@ class Helpers {
 	const TYPE_BINGE_BAR = 'Bar';
 	const TYPE_BINGE_DISCOTECA = 'Discotecas';
 	const TYPE_BINGE_LOUNGES = 'Lounges';
+	const TYPE_VIDEO_YOUTUBE = 'Youtube';
+	const TYPE_VIDEO_DAILYMOTION = 'Dailymotion';
+
 
 	public static $prefix_table = 'njv_';
 	public static $extension = '.jpg';
@@ -25,6 +28,18 @@ class Helpers {
 
 		return $categories;
 
+	}
+
+	public static function getTagsByPost($post){
+
+		$dbl_post = $post->tags()->get();
+		$data_tags = array();
+
+		foreach ($dbl_post as $dbr_post) {
+			$data_tags[] = $dbr_post->tag;
+		}
+
+		return $data_tags;
 	}
 
 	public static function sidebarBackend(){
@@ -198,18 +213,76 @@ class Helpers {
 		}
 
 		return null;
+	}
 
+	public static function getPathImage($name, $path){
+
+		$filename = Config::get('settings.upload') . $path . DIRECTORY_SEPARATOR . $name;
+
+		if(file_exists($filename)){
+			return $filename;
+		}
+
+		return false;
+	}
+
+	public static function prepareContent($content, $category_id = null){
+		preg_match_all("#\[tag\](.*?)\[/tag\]#si", $content , $matches);
+
+		foreach($matches[1] as $value){
+			$url = '';
+			$pre_replace = '[tag='.$url.']'.$value.'[/tag]';
+			$content =  preg_replace("#\[tag\]$value\[/tag\]#si", $pre_replace , $content);
+		}
+
+		return $content;
+	}
+
+	public static function getTagIds($data_tags){
+
+		$data_tag_ids = array();
+		foreach ($data_tags as $tag) {
+			$tag = trim($tag);
+			$dbr_tag = Tag::where('slug',Str::slug($tag))->first();
+
+			if(!$dbr_tag){
+				$dbr_tag = new Tag();
+				$dbr_tag->tag = $tag;
+				$dbr_tag->slug = $tag;
+				$dbr_tag->save();
+			}
+
+			$data_tag_ids[] = $dbr_tag->id;
+
+		}
+
+		return $data_tag_ids;
+
+	}
+
+	public static function getPostGalleryByPost($post, $where = array('is_principal', 1)){
+ 		$dbl_post_gallery = $post->galleries()->where($where[0],$where[1])->get();
+
+ 		$data_post_gallery = array();
+		foreach ($dbl_post_gallery as $dbr_post_gallery) {
+			$file_exists_image = Helpers::getPathImage($dbr_post_gallery->image, 'noticias');
+
+			$data_post_gallery[sha1_file($file_exists_image)] = $dbr_post_gallery;
+		}
+
+		return $data_post_gallery;
 	}
 
 	public static function getDistrict(){
 		$dbl_district = DB::select("SELECT id, id_city, district, link_uri, place FROM  njv_district ORDER BY district");
-
 		return $dbl_district;
 	}
 
 
-
-
+	public static function getTagByKeyword($keyword, $limit){
+		$dbl_tags = DB::select("SELECT tag FROM njv_tag WHERE tag LIKE '%".$keyword."%' LIMIT $limit");
+		return $dbl_tags;
+	}
 
 
 }

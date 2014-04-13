@@ -57,11 +57,11 @@
                 </div>
 
                 <div class="col-lg-12">
-                	<a href="#" class="btn btn-primary pull-right"><b>+</b> Agregar Nueva Noticia</a>
+                	<a href="{{ route('backend.register.new')}}" class="btn btn-primary pull-right"><b>+</b> Agregar Nueva Noticia</a>
                 </div>
-                <div class="show-grid col-lg-12">                	
+                <div class="show-grid col-lg-12">
 					<table class="table table-striped table-bordered table-hover dataTable no-footer">
-						<thead>  							
+						<thead>
 							<tr>
 								<th class="col-md-3">Titulo</th>
 								<th class="col-md-3" >Categoria</th>
@@ -80,12 +80,12 @@
 									@if($tags)
 										@foreach($tags as $tag)
 											<?php $data_tags[] = $tag->tag; ?>
-										@endforeach			
+										@endforeach
 									@endif
 									<td>{{ implode( ", ",$data_tags)}}</td>
 									<td>{{$dbr_post->post_at}}</td>
 									<td class="text-center">
-										<a href="{{  route('regiter_post_edit', array('news_id'=> $dbr_post->id)); }}" class="btn btn-primary btn-xs" ><span class="glyphicon glyphicon-file"></span> Editar</a>
+										<a href="{{ route('backend.register.edit', array('news_id'=> $dbr_post->id)); }}" class="btn btn-primary btn-xs" ><span class="glyphicon glyphicon-file"></span> Editar</a>
 										<a href="#" class="btn btn-success btn-xs" ><span class="glyphicon glyphicon-pencil"></span> Destacar</a>
 										<a href="#" class="btn btn-success btn-xs" ><span class="glyphicon glyphicon-pencil"></span> Copiar</a>
 									</td>

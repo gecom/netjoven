@@ -12,7 +12,7 @@ class Post extends Eloquent {
 
 	public function tags()
     {
-        return $this->belongsToMany('Tag');
+        return $this->belongsToMany('Tag', 'njv_post_tag');
     }
 
     public function galleries()
@@ -28,6 +28,22 @@ class Post extends Eloquent {
 
         return String::date($date);
     }
+
+    public function setTagsAttribute($tag_ids)
+    {
+        $this->tags()->sync($tag_ids, true);
+    }
+
+	public function setSlugAttribute($value){
+
+		$slug = Str::slug($value);
+
+		$slugCount = count( $this->whereRaw("slug REGEXP '^{$slug}(-[0-9]*)?$'")->get() );
+
+		$slugFinal = ($slugCount > 0) ? "{$slug}-{$slugCount}" : $slug;
+
+		$this->attributes['slug'] = $slugFinal;
+	}
 
     public static function getPostById($post_id)
     {

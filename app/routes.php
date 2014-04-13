@@ -48,17 +48,16 @@ Route::group(array('prefix' => 'backend'), function()
     Route::group(array('before' => 'auth_admin'), function()
     {
 
-
         Route::get('/', function() {
         return View::make('backend.pages.home');
         });
 
         /******Registro de Notas********/
         Route::get('/publicaciones', array('as' => 'list_post', 'uses' => 'AdminNewsController@listNews' ));
-        Route::get('/publicaciones/nota/{post}/editar/', array('as' => 'regiter_post_edit', 'uses' => 'AdminNewsController@news' ));
-        Route::post('/publicaciones/nota/{post}/editar', array('as' => 'save_news_edit', 'uses' => 'AdminNewsController@saveNews' ));
-        Route::get('/publicaciones/nota/nuevo', array('as' => 'regiter_post_new', 'uses' => 'AdminNewsController@news' ));
-        Route::post('/publicaciones/nota/nuevo', array('as' => 'save_news_create', 'uses' => 'AdminNewsController@saveNews' ));
+        Route::get('/publicaciones/nota/{post}/editar/', array('as' => 'backend.register.edit', 'uses' => 'AdminNewsController@news' ));
+        Route::post('/publicaciones/nota/{post}/editar', array('as' => 'backend.register.save.edit', 'uses' => 'AdminNewsController@saveNews' ));
+        Route::get('/publicaciones/nota/nuevo', array('as' => 'backend.register.new', 'uses' => 'AdminNewsController@news' ));
+        Route::post('/publicaciones/nota/nuevo', array('as' => 'backend.register.save.new', 'uses' => 'AdminNewsController@saveNews' ));
 
         /*******Registro de categorias*******/
         Route::get('/categorias', array('as' => 'list_categories', 'uses' => 'AdminCategoryController@listCategories' ));
@@ -82,6 +81,7 @@ Route::group(array('prefix' => 'backend'), function()
 
         /*******Autocompletar de categorias*******/
         Route::post('/autocompletar_categoria', array('as' => 'autocomplete_category', 'uses' => 'AdminNewsController@autoCompleteCategory' ));
+        Route::get('/autocompletar_tag', array('as' => 'autocomplete.tag', 'uses' => 'AdminNewsController@autoCompleteTags' ));
 
         /*******Subir y cortar imagenes*******/
         Route::post('/upload_file_gallery',array('as'=>'upload','uses'=>'UploadController@uploadGallery'));
@@ -90,6 +90,11 @@ Route::group(array('prefix' => 'backend'), function()
 
         Route::post('/upload_file_image/{directory_path}',array('as'=>'upload_file_image','uses'=>'UploadController@uploadImages'));
         Route::post('/cortar_imagen',array('as'=>'crop_image','uses'=>'UploadController@cropImage'));
+
+        Route::get('/elfinder', 'Barryvdh\Elfinder\ElfinderController@showIndex');
+        Route::any('/elfinder/connector', 'Barryvdh\Elfinder\ElfinderController@showConnector');
+        Route::get('/elfinder/tinymce', 'Barryvdh\Elfinder\ElfinderController@showTinyMCE4');
+
     });
 
     Route::get('/login', 'UserController@login');
