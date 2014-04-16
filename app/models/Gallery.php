@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class Gallery extends Eloquent {
 
@@ -9,7 +9,14 @@ class Gallery extends Eloquent {
 		return $this->belongsTo('Post');
 	}
 
-}	
+	public function scopeGetImageFeaturedByPostId($query, $post_id)
+	{
+		return $query
+				->where('post_id', '=', $post_id)
+				->where('is_principal','=', 1);
+	}
+
+}
 
 
 ?>

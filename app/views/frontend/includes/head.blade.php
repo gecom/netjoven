@@ -3,21 +3,19 @@
 <meta charset="utf-8" />
 <title>
 	@section('title')
-	Laravel 4 Sample Site
+		Netjoven
 	@show
 </title>
-<meta name="keywords" content="" />
-<meta name="author" content="" />
-<meta name="description" content="" />
 
 <!-- Mobile Specific Metas
 ================================================== -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <!-- CSS
 ================================================== -->
-<!--<link href="{{{ asset('assets/css/bootstrap.min.css') }}}" rel="stylesheet">-->
+
 {{ HTML::style('assets/css/site/bootstrap.min.css')}}
+{{ HTML::style('http://fonts.googleapis.com/css?family=Open+Sans:400,300,700')}}
 {{ HTML::style('assets/css/site/style.css')}}
 
 <style>

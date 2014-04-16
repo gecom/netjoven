@@ -1,23 +1,36 @@
 color_lila = #9F4180
+box_shadow = 1px 1px 4px 0 #6d6d6d
+box_shadow_inset = inset 0px 7px 5px -6px #404040
+
 border-radius(n)
   -webkit-border-radius n
   -moz-border-radius n
   border-radius n
 
 box-shadow()
-  -webkit-box-shadow arguments 
-  -moz-box-shadow arguments 
-  box-shadow arguments 
+  -webkit-box-shadow box_shadow 
+  -moz-box-shadow box_shadow 
+  box-shadow box_shadow 
+
+shadow-inset()
+  -webkit-box-shadow  box_shadow_inset 
+  -moz-box-shadow  box_shadow_inset 
+  box-shadow  box_shadow_inset 
 
 opacity(n)
       opacity n
       if support-for-ie
         filter unquote('progid:DXImageTransform.Microsoft.Alpha(Opacity=' + round(n * 100) + ')')
 
+
+html
+	font-size 14px
+
 body
 	background #e2e2e2
-	font-size 16px
-	font-family 'Myriad Pro Light'
+	font-size 1em
+	font-family 'Open Sans', sans-serif
+	font-weight 300
 	color #6D6D6D
 
 ul, li
@@ -25,20 +38,21 @@ ul, li
 	padding 0
 	list-style none
 
+a
+	color #6d6d6d
+
 header
 	background-image url('../images/bg_banner.png')
-	background-color color_lila
 	background-repeat no-repeat
-	height 93px
+	height 94px
 	width 960px
-	box-shadow 0px 1px 5px 0px #353535
-	position relative
+	box-shadow()
 	z-index 1
 
 	.row
 		margin 0
 
-	.col-md-6
+	.col-xs-6
 		padding 0
 
 	#logo 
@@ -79,7 +93,7 @@ header
 			left 12px
 			width 174px
 			height 18px
-			top 4px
+			top 2px
 			font-size 1em
 			line-height 18px
 
@@ -102,26 +116,29 @@ header
 		vertical-align top
 		margin 20px 0 0
 
-		li 				
-			display inline-block
-			width 46px
-			margin 0 7px
-			text-align center
-			font-size 0.85em
-			color #fff
+		ul
+			font-size 0
 
-			a 
-				height 36px
-				width 36px
+			li 				
 				display inline-block
-				background-image url('../images/sprite.png')
+				width 46px
+				margin 0 7px
+				text-align center
+				font-size 0.85rem
+				color #fff
 
-			.tw
-				background-position -4px -90px	
-			.fb
-				background-position -67px -90px				
-			.gp
-				background-position -129px -90px	
+				a 
+					height 36px
+					width 36px
+					display inline-block
+					background-image url('../images/sprite.png')
+
+				.tw
+					background-position -4px -90px	
+				.fb
+					background-position -67px -90px				
+				.gp
+					background-position -129px -90px	
 
 #main_nav
 	width 960px
@@ -131,14 +148,17 @@ header
 
 	.menu
 		margin-right 11px
+		font-size 0
+		position relative
 
-		li 
+		.li_menu 
 			margin-left 4px
 			display inline-block
 			height 35px
 			border-radius(0 0 10px 10px)
+			font-size 1rem			
 
-			a
+			>a
 				padding 0 8px 
 				display block
 				height 32px
@@ -146,17 +166,88 @@ header
 				font-size 1em
 				margin-top 5px			
 			
-		li:hover, li.active
-			background-color color_lila
-			height 31px
-			background-image url('../images/sprite_fondos.png')
-			background-position 0 -37px
-			background-repeat repeat-x
+			&:hover
+			&.active
+				height 31px
+				background-image url('../images/sprite_fondos.png')
+				background-position 0 -37px
+				background-repeat repeat-x
 
-			a
-			    text-decoration none
-			    color #fff
-	
+				a
+				    text-decoration none
+				    color #fff
+
+			.dropdown
+				background-color #5b5b5b
+				position absolute
+				top 35px
+				left 10px
+				padding-bottom 8px
+				width 960px
+				z-index 999
+				overflow hidden
+				border-top 1px solid #e0e0e0
+
+				ul 
+					width 203px
+					padding-top 32px
+					float left
+					li
+						display block						
+						a 
+							height 20px
+							width 100%
+							display block
+							line-height 20px
+							text-align center
+						
+
+				.videos_drop					
+					width 751px
+					background-color #fff
+					float left
+					border-radius(10px)
+					margin-top -10px
+					padding-top 25px
+					padding-bottom 18px
+					text-align center
+
+					
+					.video_item
+						width 158px
+						display inline-block
+						margin-left 13px
+
+						&:first-child
+							margin-left 0						
+						figure
+							width 158px
+							height 100px
+							position relative
+
+							img
+								width 100%
+								height auto
+							
+							.play 
+								background-image: url("../images/sprite.png");
+								background-position: -71px -180px;
+								background-repeat: no-repeat;
+								width: 38px;
+								height: 38px;
+								display: block;
+								position: absolute;
+								border-radius(19px)
+								box-shadow()
+								top 33px
+								left 50%
+								margin-left -19px
+								
+
+						.description
+							width 158px 
+							line-height 1.3em
+
 	.user_options
 		height 42px
 		border-bottom 1px solid #d8d8d8
@@ -165,7 +256,8 @@ header
 
 		.view_options	
 			text-align left
-			margin 0 0 0 10px	
+			margin 0 0 0 10px
+			font-size 0	
 
 			li 
 				display inline-block
@@ -173,16 +265,25 @@ header
 				padding-top 6px
 				height 42px
 				vertical-align top
+				font-size 1rem
+
+				&.v1
+				&.v2
+				&.v3
+					margin-top 6px
+					padding 0
+					height 29px
+					background-color #a5a5a5
 
 				a 
 					width 28px
 					height 29px
-					display inline-block
-					background-color #a5a5a5
+					display inline-block					
 					vertical-align top
 					background-image url('../images/sprite.png')
-				a:hover, .active
-					background-color color_lila
+										
+			
+					
 			.v1 a 
 				background-position -58px -142px
 			.v2 a 
@@ -197,7 +298,7 @@ header
 
 				a 
 					width auto
-					background none
+					background none!important
 					color #6D6D6D
 
 					span
@@ -209,12 +310,13 @@ header
 						height 38px
 						width 38px
 						border-radius(20px)
-						background-color color_lila
 						background-image url('../images/sprite.png')
 						background-position -186px -93px
 						display inline-block
 						vertical-align top
 						margin-top 2px
+						overflow hidden
+
 				a:hover
 					background-color #F1F1F1
 			
@@ -225,32 +327,214 @@ header
 				margin-right 8px
 
 				a
-					background-color color_lila
 					background-position -192px -142px
+
+	&.menu_fixed
+		position fixed 
+		top 0
+		z-index 1000
+		background #383838 url('../images/sprite.png') -96px -369px no-repeat
+
+		.user_options
+			display none
+
+		.li_menu
+			&:hover
+			&.active
+				height 35px
+			>a 
+				color #fff
+				padding-top 8px
+				margin-top 0
+
+		.menu
+			height 40px
+			float left
+			width 870px
+
+		.options_menu_fixed
+			display block!important
+			margin-right 7px
+			width 72px
+			float left
+
+			li 
+				margin-left 4px
+				display inline-block
+				position relative
+
+				&:first-child
+					margin-left 0
+				a 
+					width 32px
+					height 32px
+					display block
+					background url('../images/sprite.png') 
+					margin-top 5px
+					
+					&.search
+						background-position -4px -375px
+						-webkit-border-top-left-radius: 5px;
+						-webkit-border-top-right-radius: 5px;
+						-moz-border-radius-topleft: 5px;
+						-moz-border-radius-topright: 5px;
+						border-top-left-radius: 5px;
+						border-top-right-radius: 5px;
+						height 37px
+						margin-bottom -5px
+					&.config
+						background-position -41px -370px
+						-webkit-border-bottom-right-radius: 5px
+						-webkit-border-bottom-left-radius: 5px
+						-moz-border-radius-bottomright: 5px
+						-moz-border-radius-bottomleft: 5px
+						border-bottom-right-radius: 5px
+						border-bottom-left-radius: 5px
+						margin-top 0
+						padding-top 37px
+				&.active
+					background color_lila
+				.search_box
+					width 288px
+					height 38px
+					position absolute
+					top 42px
+					left -256px
+					-webkit-border-bottom-right-radius: 10px;
+					-webkit-border-bottom-left-radius: 10px;
+					-moz-border-radius-bottomright: 10px;
+					-moz-border-radius-bottomleft: 10px;
+					border-bottom-right-radius: 10px;
+					border-bottom-left-radius: 10px;
+
+					.bg_search
+						background-color: #000;
+						width: 213px;
+						height: 26px;
+						opacity(.2)
+						position absolute
+						top 4px
+						left 36px
+						border-radius(13px)
+					input
+						border: 0;
+						color: #fff;
+						background: none;
+						position: absolute;
+						z-index: 10;
+						outline: 0;
+						left: 50px;
+						width: 174px;
+						height: 18px;
+						top: 5px;
+						font-size: 1em;
+						line-height: 18px;
+
+
+
+
+
+
+
+.destacado
+	padding 10px 10px 40px 10px
+	background #fff
+	border-bottom 1px solid #d8d8d8
+	width 960px
+	margin-bottom 14px
+
+	.image_destacado
+		box-shadow()
+		width 935px
+		height 393px
+		position relative
+
+		.txt 
+			position absolute
+			left 0
+			bottom 28px
+			height 105px
+			border-bottom 1px solid #000
+			color #fff
+			font-size 1.85em
+			font-weight 700
+			text-align center
+			width 100%
+			padding-top 20px
+
+		.link
+			left 0
+			bottom 4px
+			position absolute
+			width 100%
+			text-align right
+			padding-right 7px
+
+			a
+				color #fff
+
+			span
+				width 22px
+				height 22px
+				border-radius(11px)
+				display inline-block
+				text-align center
+				margin-left 3px
 
 #banner
 	padding 10px 10px 40px 10px
 	background #fff
 	border-bottom 1px solid #d8d8d8
 	width 960px
+	font-size 0
+	margin-bottom 14px
+
+	img 
+		width 100%
+		height 100%
 
 	.left_banner
 		width 300px
 		margin-right 15px
 		display inline-block
 		vertical-align top
+		font-size 1rem
+		
+		.monster_box
+			width 300px
+			height 618px
+			box-shadow()
+			padding 9px 0
 
 		.p1
-			box-shadow 1px 2px 7px 0px #5f5f5f
+			box-shadow()
 		.p2
 			margin-top 14px
-			box-shadow 1px 2px 7px 0px #5f5f5f
+			box-shadow()
 
 	.right_banner
+		font-size 1rem
 		width 625px
 		display inline-block
-		vertical-align top
-		box-shadow 1px 2px 7px 0px #5f5f5f
+		vertical-align top		
+
+		.slider
+			box-shadow()
+
+		.p1			
+			width 298px
+			height 165px
+			margin-top 20px
+			box-shadow()
+			display inline-block
+			margin-right 25px
+			
+		.fb			
+			margin-top 20px
+			width 298px
+			height 165px
+			box-shadow()
+			display inline-block
 
 		.paginate
 			height 34px
@@ -259,13 +543,12 @@ header
 #news
 	background #fff
 	width 960px
-	margin-top 14px
+	margin-bottom 14px
 	border-top 1px solid #d8d8d8
 	padding 28px 10px 0
 
 	.title_news
 		height 32px
-		color color_lila
 		font-size 2.25em
 		text-align center
 		line-height 38px
@@ -273,117 +556,168 @@ header
 	.option_news
 		margin-top 15px
 		height 32px
+		font-size 0
 
 		li 
 			display inline-block
 			vertical-align top
-			font-size 0.95em
+			font-size 0.95rem
 
-			a
-				color #6d6d6d
+			a				
 				margin 0 8px 0
 				display inline-block
 				vertical-align top
 
 			a:hover, .active
-				color color_lila
 				text-decoration none
 
 			.circle
 				display inline-block
-				background color_lila
 				height 6px
 				width 6px
 				border-radius(3px)				
 				vertical-align top
-				margin-top 9px
+				margin-top 7px
 
 		li:first-child .circle
 			display none
 
-	article
-		width 300px
-		display inline-block
-		vertical-align top		
-		box-shadow 1px 1px 4px 0px #6d6d6d
-		margin 0 0 20px 20px
-
-		.media 
-			height 178px
+	.list_articles
+		 
+		font-size 0
+		padding-bottom 10px
+		
+		article
 			width 300px
-			display block
-			padding 10px 10px 0
-			position relative
-			overflow hidden
+			display inline-block
+			vertical-align top		
+			box-shadow()
+			margin 0 0 20px 20px
+			font-size 1rem
+			
+			.add_in_news 
+				width 300px
+				height 250px
+				background-color #333
+				margin 20px 0
 
-			.play_video
-				background-color color_lila
-				background-image url('../images/sprite.png') 
-				background-position -71px -180px
-				background-repeat no-repeat
-				width 38px
-				height 38px
+			.media 
+				height 187px
+				width 300px
 				display block
-				position absolute
-				top 70px
-				left 131px
-				border-radius(19px)
-				opacity(0.7)
-				box-shadow 1px 1px 4px 0px #6d6d6d
-				z-index 10
+				position relative
+				overflow hidden
 
-			.exclusive_label
-				width 140px
-				height 140px
-				border-radius (70px)	
-				position absolute	
-				background-color color_lila
-				box-shadow 1px 1px 4px 0px #6d6d6d
-				color #fff
-				font-size 1.1em
-				top -109px 
-				left -9px
-				padding 109px 0 0 39px
-				opacity(0.7)
+				img
+					width 100%
+					height auto
 
-		.text 
-			height 77px 
-			font-size 1.1em
-			line-height 21px
-			padding 10px 10px 5px
-		.opt
-			height 27px
-			background-color #e2e2e2
-			width 300px
-			padding 0 10px
+				.play_video
+					background-image url('../images/sprite.png') 
+					background-position -71px -180px
+					background-repeat no-repeat
+					width 38px
+					height 38px
+					display block
+					position absolute
+					top 70px
+					left 131px
+					border-radius(19px)
+					opacity(0.8)
+					box-shadow()
+					z-index 10
 
-			li 
-				display inline-block
-				vertical-align top
-				font-size 0.8em
+				.exclusive_label
+					width 140px
+					height 140px
+					border-radius (70px)	
+					position absolute	
+					box-shadow()
+					color #fff
+					font-size 1.1em
+					top -109px 
+					left -9px
+					padding 109px 0 0 39px
+					opacity(0.7)
 
-				a 
-					color #6D6D6D
+			.text 
+				height 77px 
+				font-size 1.2em
+				line-height 21px
+				padding 10px 10px 5px
+			.opt
+				height 27px
+				background-color #e2e2e2
+				width 300px
+				padding 0 10px
+				
+				ul
+					font-size 0
+					li 
+						display inline-block
+						vertical-align top
+						font-size 0.8rem
+
+						a 
+							color #6D6D6D
+					.e1
+						width 127px
+						padding-top 8px
+					.e2 a, .e4 a
+						width 28px
+						height 20px
+						background url('../images/sprite.png') 0 -191px
+						display block
+						margin-top 4px
+					.e4 a
+						background-position -41px -191px
+					.e3
+						padding 8px 20px 0 0
+						background url('../images/sprite.png') 110px -216px
+						width 125px
+						text-align right
+						background-repeat no-repeat
+
+			&:nth-child(3n+1)
+				margin-left 0 
+
+	.list_mode
+		article
+			width 457px
+			margin-left 26px
+
+			
+			&:nth-child(3n+1)
+				margin-left 26px
+			&:nth-child(odd)
+				margin-left 0
+
+			.media
+				width 194px 
+				height 120px
+				float left
+			.text
+				width 263px
+				float left
+				height 93px
+			.opt
+				width 263px
+				float left
 			.e1
-				width 127px
-				padding-top 8px
-			.e2 a, .e4 a
-				width 28px
-				height 20px
-				background url('../images/sprite.png') 0 -191px
-				display block
-				margin-top 4px
-			.e4 a
-				background-position -41px -191px
+				width 105px!important
 			.e3
-				padding 8px 20px 0 0
-				background url('../images/sprite.png') 110px -216px
-				width 125px
-				text-align right
-				background-repeat no-repeat
+				width 110px!important
+				background-position 95px -217px!important
+	
+	.include_add
+		article
+			&:last-child
+				margin-left 26px
+			.add_in_news
+				height 240px
+				text-align center
+				margin 10px auto
 
-	article:nth-child(3n+1)
-		margin-left 0 
 
 	.paginate
 		border-bottom 1px solid #d8d8d8
@@ -393,33 +727,36 @@ header
 		margin-right -10px
 		padding 9px 15px 0 0 
 		text-align right
-
-		li 
-			display inline-block
-			width 16px
-			height 16px
-			border-radius(8px)
-			text-align center
-			line-height 17px
-
-			a 
-				font-size 0.9em
+		ul
+			font-size 0
+			li 
 				display inline-block
-				color #6d6d6d
-				line-height auto
-								
-		li:hover, .active			
-			background-color color_lila			
+				width 16px
+				height 16px
+				border-radius(8px)
+				text-align center
+				line-height 15px
+				font-size 1rem
+				margin-left 2px
 
-			a
-				color #fff
-				text-decoration none
+				a 
+					font-size 0.9em
+					display inline-block
+					color #6d6d6d
+					line-height auto
+									
+			li:hover, .active			
+
+				a
+					color #fff
+					text-decoration none
 #big_banner
 	width 960px
 	height 90px
 	margin 14px 0
 	display block
-	background-color #ccc
+	background-color #5d5d5d
+	text-align center
 
 #videos
 	margin-bottom 14px
@@ -428,11 +765,13 @@ header
 	padding 10px 10px 40px
 	border-bottom 1px solid #d8d8d8
 	border-top 1px solid #d8d8d8
+	font-size 0
 
 	.left_video
 		width 604px
 		display inline-block
 		vertical-align top
+		font-size 1rem
 
 		.video_paginate
 			text-align center
@@ -442,31 +781,40 @@ header
 		width 320px
 		display inline-block
 		vertical-align top
+		font-size 1rem
 
 		.playing
-			text-align right
-			padding-right 5px
-			padding-top 5px
-		.release_date
 			text-align center
-			font-size 1.1em
+			padding-right 31px
+			padding-left 23px
+			background url('../images/module-cine.jpg') no-repeat
+			height 411px
+			position relative
+			margin-left 5px
 
-			a
-				background-color color_lila
-				height 22px 
-				padding 0 10px
-				display inline-block
-				color #fff
-				border-radius(11px)
-				margin-left 5px
-			a:hover
-				text-decoration none
+			.release_date
+				text-align center
+				font-size 1.1em
+				position absolute
+				width 83%
+				bottom 8px
+
+
+				a
+					height 22px 
+					padding 0 10px
+					display inline-block
+					color #fff
+					border-radius(11px)
+					margin-left 5px
+				a:hover
+					text-decoration none
 	
 	.video_title
-		font-size 1.8em
+		font-size 1.9em
 		text-align center
 		line-height 30px 
-		height 30px
+		height 38px
 #ads	
 	width 960px
 	margin-bottom 14px
@@ -474,12 +822,18 @@ header
 	border-bottom 1px solid #d8d8d8
 	border-top 1px solid #d8d8d8
 	background-color #fff
+	font-size 0
+
+	img 
+		width 100%
+		height 100%
 
 	.item
 		width 216px
 		display inline-block
 		vertical-align top
 		margin-left 24px	
+		font-size 1.1rem
 
 		.add_title
 			font-size 1.4em
@@ -488,7 +842,7 @@ header
 			text-align center 
 
 		.add_content				
-			box-shadow 1px 2px 7px 0px #5f5f5f
+			box-shadow()
 
 			.link
 				height 27px
@@ -504,7 +858,6 @@ header
 						height 22px
 						border-radius(11px)
 						margin-left 7px
-						background-color color_lila
 						display inline-block
 						color #fff
 						text-align center
@@ -516,53 +869,58 @@ header
 footer
 	margin 14px 0 40px 0
 	width 960px
-	background-color #fff
 	border-top 1px solid #d8d8d8
-	font-family 'Myriad Pro'
+	font-family 'Open Sans', sans-serif
+	font-weight 400
 	color #5b5b5b
+	background  url('../images/sombra_footer.png') no-repeat 0 bottom
+	padding-bottom 22px
 
 	.sponsors
 		border-bottom 1px solid #d8d8d8
 		border-top 1px solid #d8d8d8
+		background-color #fff
 
 	.footer_rights
 		height 25px
 		font-size 0.75em
 		text-align center
 		line-height 25px
+		background-color #fff
 
 	#footer_nav
 		text-align center
+		background-color #fff
+		
+		ul
+			font-size 0
 
-		li
-			display inline-block
-			vertical-align top
-			font-size 0.85em
-			line-height 40px
+			li
+				display inline-block
+				vertical-align top
+				font-size 0.85rem
+				line-height 40px
 
-			a
-				color #6d6d6d
+				a
+					
+					.icon
+						display inline-block
+						width 6px
+						height 6px
+						border-radius(3px)
+						margin 17px 5px 0
+						vertical-align top
 
-				.icon
-					display inline-block
-					width 6px
-					height 6px
-					border-radius(3px)
-					margin 17px 5px 0
-					background-color color_lila 
-					vertical-align top
+				a:hover
+					text-decoration none
 
-			a:hover
-				text-decoration none
-				color color_lila
-
-		li:first-child .icon
-			display none
+				&:first-child .icon
+					display none
 	
 	.search_footer
-		height 50px
+		background-color #fff
+		height 70px
 		text-align center
-		margin-bottom 20px
 
 		label 
 			font-weight 400
@@ -600,53 +958,57 @@ footer
 				margin-top 2px
 
 	.footer_social
+		background-color #fff
 		padding-left 45px
 		width 634px
 		vertical-align top
-		display inline-block
-
-		li 
-			width 145px
-			vertical-align top
-			display inline-block
-			text-align right
-			color #5b5b5b
-			font-size 0.85em
-
-			a
-				display inline-block
-				width 40px
-				height 40px
-				background url('../images/sprite.png')
-			.d1
-				display inline-block
-				margin-right 10px
+		float left
+		
+		ul
+			font-size 0
+			li 
+				width 145px
 				vertical-align top
-				margin-top 9px
-		.fb a
-			background-position 0 -291px
-		.fb a:hover
-			background-position 0 -249px
-		.tw a 
-			background-position -46px -291px
-		.tw a:hover
-			background-position -46px -249px
-		.gp a
-			background-position -95px -289px
-		.gp a:hover
-			background-position -95px -247px
+				display inline-block
+				text-align right
+				color #5b5b5b
+				font-size 0.85rem
+
+				a
+					display inline-block
+					width 40px
+					height 40px
+					background url('../images/sprite.png')
+				.d1
+					display inline-block
+					margin-right 10px
+					vertical-align top
+					margin-top 9px
+			.fb a
+				background-position 0 -291px
+			.fb a:hover
+				background-position 0 -249px
+			.tw a 
+				background-position -46px -291px
+			.tw a:hover
+				background-position -46px -249px
+			.gp a
+				background-position -95px -289px
+			.gp a:hover
+				background-position -95px -247px
 	.tags
 		font-size 0.75em
 		text-align center
 		padding 13px 0 25px 0
 		line-height 15px
+		background-color #fff
 
 	.footer_devices
 		width 326px
 		vertical-align top
-		display inline-block
+		float left
 		padding 12px 0 0 18px
-		
+		background-color #fff
 
 		span
 			line-height 17px
@@ -660,3 +1022,1059 @@ footer
 			width 84px
 			height 73px
 			margin-left 8px
+
+.custom_color_bg
+	background-color color_lila
+
+.custom_color_text
+	color color_lila!important
+
+#bottom_responsive
+	height 86px
+	display none
+	width 768px
+
+	.paginate
+		height 51px
+		border-top 1px solid #d8d8d8
+		text-align center
+		width 100%
+		background-color #fff
+		width 690px
+		margin 0 auto
+		ul
+			margin-top 16px
+
+			li
+				display inline-block
+				margin 0 2px
+				border-radius(8px)
+				overflow hidden
+
+				a 
+					width 16px
+					height 16px
+					display block
+					border-radius(8px)
+
+	.go_top
+		height 35px
+		background-color #8d8d8d
+		width 768px
+		text-align right
+		a 
+			background url('../images/sprite.png') -127px -417px
+			width 36px
+			height 28px
+			display inline-block
+			margin-right 20px
+			margin-top 7px
+
+#add_and_plugin_fb
+	width 690px
+	margin 0 auto 14px	
+	background #fff
+	text-align center
+	padding 15px 0 44px
+	border-top 1px solid #d8d8d8
+	border-bottom 1px solid #d8d8d8
+	display none
+	.add
+		display inline-block
+		vertical-align top
+		margin-right 21px
+	.plugin_fb	
+		display inline-block
+		vertical-align top
+		box-shadow()
+				
+
+
+@media screen and (max-width:800px)
+
+	.container
+		width 768px
+		margin 0 auto
+		padding 0
+	header
+		overflow hidden
+		width 768px
+		.social
+		.search
+			display none
+	#main_nav
+		width 768px
+
+		&.menu_fixed
+			
+			.options_menu_fixed
+			.menu
+				display none!important
+			
+			.search_box
+				display none
+				position absolute!important
+				top 25px
+				right 34px
+				background-color #3a3a3a
+				width 248px!important
+				height 31px!important
+				-webkit-border-bottom-right-radius: 10px;
+				-webkit-border-bottom-left-radius: 10px;
+				-moz-border-radius-bottomright: 10px;
+				-moz-border-radius-bottomleft: 10px;
+				border-bottom-right-radius: 10px;
+				border-bottom-left-radius: 10px;
+
+				.bg_search
+					top 7px!important
+				input
+					margin-top 4px!important
+
+
+			.circles
+				display block!important
+				float left
+				width 666px
+				background url('../images/sprite.png') center -598px no-repeat
+				height 24px
+			.search
+				display block!important
+				float left
+				background-position -4px -377px!important
+				&.active 
+					background-color #3a3a3a
+
+			
+		.menu_desktop
+			display none
+		.menu_responsive
+			display block!important	
+
+			.menu						
+				margin-left 10px
+				text-align left
+			.options 
+				height 25px
+				background-color #5d5d5d
+				margin 0 10px
+				position relative
+				
+				.showing_config
+					position absolute
+					background-color #3a3a3a
+					top 25px
+					left 0
+					width 100%
+					z-index 900
+					-webkit-border-bottom-right-radius: 10px;
+					-webkit-border-bottom-left-radius: 10px;
+					-moz-border-radius-bottomright: 10px;
+					-moz-border-radius-bottomleft: 10px;
+					border-bottom-right-radius: 10px;
+					border-bottom-left-radius: 10px;
+					overflow hidden
+
+					.welcome
+						color #8C8C8C
+						height 40px
+						padding 0 0 0 14px
+						line-height 40px
+						text-align left
+					.pick_color
+						border-top 1px solid #3d3d3d
+						width 100%
+						background-color #353535
+						padding-left 14px
+						text-align left
+						font-size 0.9em
+
+						.t1
+							display block
+							text-align left
+							color #cfcfcf
+							padding 3px 0 1px				
+						ul
+							width 100%
+							text-align left
+							
+							li 
+								display inline-block
+								border-radius(10px)
+								overflow hidden
+								margin-right 7px
+								a 
+									background none
+									width 20px
+									height 20px
+									display block
+						
+						.t2
+							display inline-block							
+							color #cfcfcf
+							padding 5px 0
+							text-align left
+
+						.save
+						.cancel
+							background url('../images/sprite.png')
+							display inline-block							
+							width 21px
+							height 21px
+							float right
+							margin-right 7px
+							margin-top 4px
+						.save
+							background-position -3px -499px
+						.cancel
+							background-position -33px -499px
+							margin-right 16px
+					.share
+						height 56px 
+						border-top 1px solid #3d3d3d
+						width 100%
+						background-color #353535
+						text-align left
+						font-size 0.9em
+
+						span
+							display inline-block
+							padding  17px 0 0 15px
+							color #cfcfcf
+
+						a 
+							float right 
+							color #cfcfcf
+							text-decoration none
+							margin-right 2px
+							text-align center
+							width 42px
+							height 45px
+							margin-top 5px
+							text-align center
+							background none
+							font-size 11px
+							display inline-block
+							
+							span
+								width 32px
+								height 29px
+								display inline-block
+								background url('../images/sprite.png')
+
+						.fb
+							span
+								background-position 3px -461px
+
+						.tw
+							span
+								background-position -35px -461px
+
+						.gp
+							margin-right 8px
+							span
+								background-position -71px -461px
+					.change
+						height 47px 
+						width 100%
+						padding-left 15px
+						color #cfcfcf
+						text-align left
+						font-size 0.85em
+
+						span
+							display inline-block
+							padding-top 13px
+						a 
+							float right
+							width 25px
+							height 25px
+							display inline-block
+							margin-right 15px
+							margin-top 10px
+							background url('../images/sprite.png')
+							&.v3
+								background-position -144px -509px
+							&.v2
+								margin-right 6px
+								background-position -113px -509px
+
+
+								
+				.showing_menu
+					position absolute
+					background-color #3a3a3a
+					top 25px
+					left 0
+					width 100%
+					z-index 900
+					padding-top 20px
+					-webkit-border-bottom-right-radius: 10px;
+					-webkit-border-bottom-left-radius: 10px;
+					-moz-border-radius-bottomright: 10px;
+					-moz-border-radius-bottomleft: 10px;
+					border-bottom-right-radius: 10px;
+					border-bottom-left-radius: 10px;
+					overflow hidden
+					
+					.opt_menu 
+						width 100%
+						line-height 24px
+						background-color #353535
+						border-top 1px solid #3d3d3d
+						height 24px
+
+						&:last-child
+							height 43px
+							background-color #3a3a3a
+							color #cfcfcf
+							line-height 43px
+							padding-left 15px
+							text-align left
+
+							a 
+								height 30px
+								width 29px
+								display inline-block
+								margin-right 8px
+								margin-top 6px
+								background url('../images/sprite.png') no-repeat 
+								float right
+								&.fb
+									background-position -1px -461px
+									&:hover
+										background-position -108px -461px	
+								&.tw
+									background-position -37px -461px
+									&:hover
+										background-position -144px -461px
+								&.gp
+									background-position -73px -461px
+									&:hover
+										background-position -180px -461px
+						
+						a
+							height 24px
+							width 100%
+							display block
+							color #cfcfcf
+							background none
+							text-align left
+							padding-left 15px
+							font-size 0.9em
+							background-image url('../images/sprite.png')
+							background-repeat no-repeat
+							background-position right -568px
+
+				
+
+				.search_box
+					width 700px
+					float left
+				a 
+					width 34px
+					height 25px
+					display block
+					float left
+					background url('../images/sprite.png')
+					padding 0 5px 0
+					
+					&.show_menu
+						background-position -175px -416px
+						&.active
+							background-color #3d3d3d
+					&.config
+						background-position -40px -377px
+						&.active
+							background-color #3d3d3d
+					&:hover
+						background-color #3d3d3d
+				
+				.search_box
+					position relative
+					text-align center
+					
+					.bg_search
+						width 179px
+						height 17px
+						background-color: #000;					
+						opacity(.2)
+						position absolute
+						top 4px
+						left 50%
+						margin-left -90px
+						border-radius(13px)
+
+					input
+						border 0
+						background none
+						color #fff
+						outline 0
+						height 18px
+						margin-top 1px
+
+		.user_options
+			display none
+	footer
+		display none
+
+	#banner
+		display none
+	#news
+		width 768px
+		margin 0  auto 14px
+		background-color #e2e2e2
+		padding-top 0
+		.paginate
+			display none
+		.option_news
+			display none
+		.title_news
+			text-align left
+			width 690px
+			margin 0 auto
+			background-color #fff
+			padding 10px 10px 0
+			height 60px
+		.list_articles
+			width 690px
+			margin 0 auto
+			background-color #fff
+			text-align center			
+
+			article
+				&:nth-child(3n+1)
+					margin-left 20px
+				&:nth-child(odd)
+					margin-left 0
+				.media
+					.exclusive_label
+						padding-left 10px
+									
+			.opt
+				text-align left
+						
+
+		.list_mode
+			article
+				width 301px!important
+				height 98px!important
+				margin-left 20px
+				&:nth-child(3n+1)
+					margin-left 20px
+				&:nth-child(odd)
+					margin-left 0!important
+
+				.media
+					width 116px
+					height 71px
+					.play_video
+						top 16px
+						left 40px
+					
+				.text
+					width 185px
+					height 71px
+					padding-top 4px
+					text-align left
+				.opt
+					width 301px
+					text-align left
+					.e1
+						width 126px!important
+					.e3
+						margin-left 17px
+			.adding
+				display none
+		.no_title
+			padding-top 25px
+
+
+	#big_banner
+		width 690px
+		margin 0 auto 14px
+		background-color #fff
+		padding-top 0
+		border-bottom: 1px solid #d8d8d8;
+		border-top: 1px solid #d8d8d8;
+		text-align center
+		padding-top 20px
+
+		&.fullbanner
+			margin-bottom 0
+
+	#videos 
+		display none
+
+	#ads
+		width 690px
+		text-align center
+		margin 0 auto 14px
+
+		.item
+			width 140px
+
+	#bottom_responsive
+		display block
+	
+	
+
+	.destacado
+		width: 768px;
+		padding: 0;
+		margin-bottom: 0;
+
+		.image_destacado
+			height: auto;
+			width: 768px;
+			.txt
+				position relative
+				color #727171
+				height auto
+				border none
+				padding 20px 10px
+				color #727171
+				bottom 0
+			img
+				width 100%
+				height auto
+			.link
+				display none		
+
+	#add_and_plugin_fb
+		display block
+
+
+@media screen and (max-width:400px)
+
+	.container
+	header
+	#main_nav
+		width 320px
+
+	#main_nav
+		
+		.menu_responsive
+			.menu						
+				margin-left 0
+				text-align center
+			.options 				
+				
+				.search_box
+					width 252px
+				.circles
+					width 216px
+
+
+	#news
+		width 320px
+		padding 0
+		overflow hidden
+
+		.list_articles
+			width 320px
+			article
+				margin 0 0 20px
+
+				&:nth-child(3n+1)
+					margin-left 0
+
+
+
+	#big_banner
+		width 320px
+		padding-top 0
+		height auto
+
+		img
+			width 100%
+			height 250px
+
+	#ads
+		width 320px
+		padding-bottom 20px
+
+		.item
+			margin-left 20px
+			margin-bottom 20px
+
+			&:nth-child(odd)
+				margin-left 0
+
+			.add_title
+				display none
+
+	#bottom_responsive 
+		height: 65px;
+		.paginate
+			margin 0
+			width 320px
+			height 32px 
+
+			ul
+				margin-top 8px
+
+		.go_top
+			width 320px
+			height 26px
+
+			a 
+				margin-top 1px
+				margin-right 10px
+	
+	.destacado
+		width: 320px;
+		
+
+		.image_destacado
+			width: 320px;
+
+			.txt
+				font-size 1em
+
+	#add_and_plugin_fb
+		display none
+
+.close_popup	
+	//background-color #3D3D3D
+	width 18px
+	height 18px
+	border-radius(9px)
+	position absolute
+	right 0
+	top 0
+
+	a 
+		width 18px
+		height 18px
+		border-radius(9px)
+		display block
+		color #CECECE
+		text-align center
+		text-decoration none
+
+
+#popup_login
+	
+	padding 19px
+	position relative
+	width 359px
+
+	.options_login
+		background-color #3a3a3a		
+		width 321px
+		border-radius(10px)
+		overflow hidden
+
+		.welcome
+			color #8C8C8C
+			height 40px
+			padding 0 0 0 14px
+			line-height 40px
+			text-align left
+			.user_av
+				background url('../images/sprite.png') -71px -497px no-repeat
+				float right
+				margin-right 15px
+				width 21px
+				height 21px
+				display block
+				margin-top 10px
+
+		.pick_color
+			border-top 1px solid #3d3d3d
+			width 100%
+			background-color #353535
+			padding-left 14px
+			text-align left
+			font-size 0.9em
+
+			.t1
+				display block
+				text-align left
+				color #cfcfcf
+				padding 3px 0 1px				
+			ul
+				width 100%
+				text-align left
+				
+				li 
+					display inline-block
+					border-radius(10px)
+					overflow hidden
+					margin-right 7px
+					a 
+						background none
+						width 20px
+						height 20px
+						display block
+			
+			.t2
+				display inline-block							
+				color #cfcfcf
+				padding 5px 0
+				text-align left
+
+			.save
+			.cancel
+				background url('../images/sprite.png')
+				display inline-block							
+				width 21px
+				height 21px
+				float right
+				margin-right 7px
+				margin-top 4px
+			.save
+				background-position -3px -499px
+				&:hover
+					background-position -3px -523px
+			.cancel
+				background-position -33px -499px
+				margin-right 16px
+				&:hover
+					background-position -35px -523px
+		.share
+			height 56px 
+			border-top 1px solid #3d3d3d
+			width 100%
+			background-color #353535
+			text-align left
+			font-size 0.9em
+
+			span
+				display inline-block
+				padding  17px 0 0 15px
+				color #cfcfcf
+
+			a 
+				float right 
+				color #cfcfcf
+				text-decoration none
+				margin-right 2px
+				text-align center
+				width 42px
+				height 45px
+				margin-top 5px
+				text-align center
+				background none
+				font-size 11px
+				display inline-block
+				
+				span
+					width 32px
+					height 29px
+					display inline-block
+					background url('../images/sprite.png')
+
+			.fb
+				span
+					background-position 3px -461px
+					&:hover
+						background-position -104px -461px
+
+			.tw
+				span
+					background-position -35px -461px
+					&:hover
+						background-position -142px -461px
+
+			.gp
+				margin-right 8px
+				span
+					background-position -71px -461px
+					&:hover
+						background-position -178px -461px
+
+		.change
+			height 47px 
+			width 100%
+			padding-left 15px
+			color #cfcfcf
+			text-align left
+			font-size 0.85em
+
+			span
+				display inline-block
+				padding-top 13px
+			a 
+				float right
+				width 25px
+				height 25px
+				display inline-block
+				margin-right 15px
+				margin-top 10px
+				background url('../images/sprite.png')
+				&.v3
+					background-position -207px -509px
+					&:hover
+						background-position -144px -509px
+				&.v2
+					margin-right 6px
+					background-position -176px -509px
+					&:hover
+						background-position -113px -509px
+
+#popup_usuario_no_registrado	
+	padding 19px
+	position relative
+	width 364px
+
+	.message
+		border-radius(10px)
+		border 1px solid #e1e1e1
+		background #fff
+		width 326px
+		text-align center
+		padding-top 10px
+		overflow hidden 
+		.no_user
+			display inline-block
+			width 41px
+			height 41px
+			background url('../images/sprite.png') -189px -291px no-repeat
+		.red 
+			color #CE3038
+		.share
+			width 324px
+			height 45px
+			background-color #f1f1f1
+			padding-top 6px
+			margin-top 10px
+			a
+				background url('../images/sprite.png') -189px -291px no-repeat
+				width 32px
+				height 31px
+				display inline-block
+				margin 0 4px
+				&.fb
+					background-position 3px -461px
+					&:hover
+						background-position -104px -461px
+				&.tw 
+					background-position -35px -461px
+					&:hover
+						background-position -142px -461px
+				&.gp
+					background-position -71px -461px
+					&:hover
+						background-position -178px -461px
+
+
+			
+
+#popup_usuario_logueado
+	width 504px
+	padding 19px
+	position relative
+
+	.message
+		width 466px
+		background #fff
+		text-align center
+		padding-top 10px
+		border 1px solid #e1e1e1
+		border-radius(10px)
+		overflow hidden
+
+		figure
+			border-radius(20px)
+			margin-top 10px
+			overflow hidden
+			width 40px
+			height 40px
+			display inline-block
+		.f1
+			font-size 1.5em
+		.f2 
+			font-size 0.9em
+		.f3
+			font-size 1.35em
+		.share
+			height 65px
+			padding-top 7px
+			background-color #f1f1f1
+			font-size 0.80em
+			line-height 1.1em
+			.f4 
+				width 21px
+				height 21px
+				display inline-block
+				margin-top 5px
+				background url('../images/sprite.png') -198px -339px no-repeat
+
+
+#popup_personaliza_pagina
+	padding 19px
+	position relative
+	width 525px
+	.message
+		width 487px
+		background #fff
+		text-align center
+		padding-top 10px
+		border-radius(10px)
+		border 1px solid #e1e1e1
+		overflow hidden
+		
+		.opt_2
+		.opt_3
+		.opt_1
+			display: inline-block;
+			width: 29px;
+			height: 29px;
+			background: url('../images/sprite.png') -175px -509px
+			margin-top 15px
+			margin-bottom 2px
+		.opt_3
+			background-position -204px -509px
+		.opt_1
+			background-position -147px -335px
+		
+		.view
+			width 300px
+			display inline-block
+			vertical-align top		
+			box-shadow()
+			margin 0 0 20px 0
+			font-size 1rem
+
+			.media 
+				height 187px
+				width 300px
+				display block
+				position relative
+				overflow hidden
+
+				img
+					width 100%
+					height auto
+			.text 
+				height 77px 
+				font-size 1.2em
+				line-height 21px
+				padding 10px 10px 5px
+				text-align left
+			.opt
+				height 27px
+				background-color #e2e2e2
+				width 300px
+				padding 0 10px
+				text-align left
+				
+				ul
+					font-size 0
+					li 
+						display inline-block
+						vertical-align top
+						font-size 0.8rem
+
+						a 
+							color #6D6D6D
+					.e1
+						width 127px
+						padding-top 8px
+					.e2 a, .e4 a
+						width 28px
+						height 20px
+						background url('../images/sprite.png') 0 -191px
+						display block
+						margin-top 4px
+					.e4 a
+						background-position -41px -191px
+					.e3
+						padding 8px 20px 0 0
+						background url('../images/sprite.png') 110px -216px
+						width 125px
+						text-align right
+						background-repeat no-repeat
+
+			
+		
+		
+			&.view_3	
+				width 457px
+
+				.media
+					width 194px 
+					height 120px
+					float left
+				.text
+					width 263px
+					float left
+					height 93px
+				.opt
+					width 263px
+					float left
+				.e1
+					width 105px!important
+				.e3
+					width 110px!important
+					background-position 95px -217px!important
+
+
+
+
+		.save_cancel_opt
+			height 35px
+			background-color #f1f1f1
+			font-size 0.95em
+			padding-top 7px
+
+			.cancel
+				float left
+				margin-left 20px	
+				span
+					margin-right 10px
+					background-position -34px -499px
+					float left
+				&:hover
+					text-decoration none
+			.save
+				float right
+				margin-right 20px
+				span
+					margin-left 10px
+					background-position -4px -499px
+					float right
+				&:hover
+					text-decoration none
+			span
+				width 20px
+				height 21px				
+				background url('../images/sprite.png') no-repeat
+			
+
+		.f1
+			font-size 1.5em
+		.f2
+			display inline-block
+			text-align left
+			padding 0 20px
+			line-height 1.3em
+			.f3
+				color #EF8535
+		.f4
+			font-size 0.85em
+			padding 10px 0 5px
+			display inline-block
+		.f5
+			font-size 1.2em
+			display inline-block
+			margin-bottom 10px
+			text-align center
+		.congrats
+			color #EF8535
+			font-size 1.9em
+			display inline-block
+		.share
+			height 65px
+			padding-top 7px
+			background-color #f1f1f1
+			font-size 0.80em
+			line-height 1.1em
+			.f6 
+				width 21px
+				height 21px
+				display inline-block
+				margin-top 5px
+				background url('../images/sprite.png') -198px -339px no-repeat

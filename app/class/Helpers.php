@@ -212,7 +212,7 @@ class Helpers {
 			return $url;
 		}
 
-		return null;
+		return Config::get('settings.urlupload') . 'images_default' . '/' . 'netjoven_default.jpg';
 	}
 
 	public static function getPathImage($name, $path){

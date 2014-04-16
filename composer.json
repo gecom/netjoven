@@ -6,7 +6,10 @@
 	"require": {
 		"laravel/framework": "4.1.*",
 		"intervention/image": "1.*",
-		"barryvdh/laravel-elfinder": "dev-master"
+		"barryvdh/laravel-elfinder": "dev-master",
+		"jenssegers/agent": "*",
+		"thujohn/twitter": "dev-master",
+		"desmart/pagination": "1.1.*"
 	},
 	"autoload": {
 		"classmap": [

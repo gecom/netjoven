@@ -1,53 +1,35 @@
-<article >
-    <div class="media"></div>
-    <div class="text">Peoples Choice 2014: The Walking Dead vence como Drama de TV Favorito</div>
-    <div class="opt">
-        <ul>
-            <li class="e1"><a href="#">+Espectáculos</a></li><li class="e2"><a href="#"></a></li><li class="e3">Hace 10 min.</li>
-        </ul>
-    </div>
-</article><article >
-    <div class="media"></div>
-    <div class="text">PSY graba canción con Steven Tyler</div>
-    <div class="opt">
-        <ul>
-            <li class="e1"><a href="#">+K-pop</a></li><li class="e2"><a href="#"></a></li><li class="e3">Hace 10 min.</li>
-        </ul>
-    </div>
-</article><article >
-    <div class="media">
-        <div class="exclusive_label">Exclusivo</div>
-    </div>
-    <div class="text">Justin Bieber y Selena Gomez disfrutaron un romántico camping</div>
-    <div class="opt">
-        <ul>
-            <li class="e1"><a href="#">+Espectáculos</a></li><li class="e2"><a href="#"></a></li><li class="e3">Hace 10 min.</li>
-        </ul>
-    </div>
-</article><article >
-    <div class="media"></div>
-    <div class="text">Arquero de Bayern Munich fue el mejor del 2013 según la IFFHS</div>
-    <div class="opt">
-        <ul>
-            <li class="e1"><a href="#">+Deportes</a></li><li class="e2"><a href="#"></a></li><li class="e3">Hace 10 min.</li>
-        </ul>
-    </div>
-</article><article >
-    <div class="media">
-        <a class="play_video" href="#"></a>
-    </div>
-    <div class="text">Real Madrid vs Osasuna: En vivo 3:30 p.m. por DirecTV Copa del Rey Fotos</div>
-    <div class="opt">
-        <ul>
-            <li class="e1"><a href="#">+Deportes</a></li><li class="e4"><a href="#"></a></li><li class="e3">Hace 10 min.</li>
-        </ul>
-    </div>
-</article><article >
-    <div class="media"></div>
-    <div class="text">Miley Cyrus se divierte junto a Snoop Dogg - Fotos</div>
-    <div class="opt">
-        <ul>
-            <li class="e1"><a href="#">+Espectáculos</a></li><li class="e4"><a href="#"></a></li><li class="e3">Hace 10 min.</li>
-        </ul>
-    </div>
-</article>
+<div class="title_news custom_color_text">Últimas noticias</div>
+<ul class="option_news">
+    <li><span class="circle custom_color_bg"></span><a href="#" class="active custom_color_text">Ultimas</a></li>
+    <li><span class="circle custom_color_bg"></span><a href="#">People's Choice Awards</a></li>
+    <li><span class="circle custom_color_bg"></span><a href="#">MTV EMA 2013</a></li>
+    <li><span class="circle custom_color_bg"></span><a href="#">Rafael Nadal en Lima</a></li>
+    <li><span class="circle custom_color_bg"></span><a href="#">Representantes de lo Nuestro</a></li>
+    <li><span class="circle custom_color_bg"></span><a href="#">Miembros de mesa</a></li>
+    <li><span class="circle custom_color_bg"></span><a href="#">Elecciones 2013</a></li>
+</ul>
+<div class="list_articles">
+    @foreach ($dbl_last_post as $dbr_last_post)
+        <article >
+            <div class="media">
+                @if($dbr_last_post->type == Helpers::TYPE_POST_VIDEO)
+                    <a href="#" class="play_video custom_color_bg"></a>
+                @endif
+                <img src="{{Helpers::getImage(Gallery::getImageFeaturedByPostId($dbr_last_post->id)->first()->image, 'noticias')}}" />
+            </div>
+            <div class="text">{{$dbr_last_post->title}}</div>
+            <div class="opt">
+                <ul>
+                    <li class="e1"><a href="#">+{{ Category::getParentCategoryById($dbr_last_post->category_parent_id)->name}}</a></li>
+                    <li class="{{($dbr_last_post->type == Helpers::TYPE_POST_GALLERY ? 'e4' : 'e2')}}"><a href="#"></a></li>
+                    <li class="e3">{{ Helpers::intervalDate($dbr_last_post->post_at, date('Y-m-d'))}}</li>
+                </ul>
+            </div>
+        </article>
+    @endforeach
+</div>
+<div class="paginate">
+
+
+    {{$dbl_last_post->links('frontend.pages.home.paginator')}}
+</div>

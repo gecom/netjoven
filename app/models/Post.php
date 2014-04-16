@@ -62,7 +62,7 @@ class Post extends Eloquent {
 	public static function getPost($params = array())
 	{
 
-		$params_default = array('type' => array("NEWS", "VIDEOS"), 'show_not_featured' => false, 'view_index' => false,'show_limit' => false);
+		$params_default = array('type' => array("NEWS", "VIDEOS"), 'with_post_at' => false ,'category_id' => null, 'show_not_featured' => false, 'view_index' => false,'show_limit' => false);
 		$params = array_merge($params_default, $params);
 
 		$post = (new Post())
@@ -74,6 +74,8 @@ class Post extends Eloquent {
 							Helpers::$prefix_table . 'post.status',
 							Helpers::$prefix_table . 'post.post_at',
 							Helpers::$prefix_table . 'post.view_index',
+							Helpers::$prefix_table . 'category.id as category_id',
+							Helpers::$prefix_table . 'category.parent_id as category_parent_id',
 							Helpers::$prefix_table . 'category.name as category_name',
 							Helpers::$prefix_table . 'category.slug as category_slug',
 							DB::raw('(SELECT CONCAT(c1.name, " > " ,'.Helpers::$prefix_table . 'category.name'.') FROM ' . Helpers::$prefix_table . 'category c1 WHERE c1.parent_id IS NULL AND c1.id = '.Helpers::$prefix_table .'category.parent_id) as parent_category'))
@@ -85,11 +87,19 @@ class Post extends Eloquent {
 		}
 
 		if(is_numeric($params['view_index'])){
-			$post->whereIn(Helpers::$prefix_table . 'post.view_index', $params['view_index']);
+			$post->where(Helpers::$prefix_table . 'post.view_index', '=', $params['view_index']);
 		}
 
 		if($params['show_not_featured'] == true){
-			$post->whereIn(Helpers::$prefix_table . 'post.id', DB::table('njv_post_featured')->lists('post_id'));
+			//$post->whereIn(Helpers::$prefix_table . 'post.id', DB::table('njv_post_featured')->lists('post_id'));
+		}
+
+		if(!empty($params['category_id'])){
+			$post->where(Helpers::$prefix_table . 'post.category_id', '=', $params['category_id']);
+		}
+
+		if($params['with_post_at'] == true){
+			$post->where(Helpers::$prefix_table . 'post.post_at', '<=', DB::raw("NOW()"));
 		}
 
 		if(is_array($params['show_limit']) && count($params['show_limit'])){

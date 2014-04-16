@@ -38,7 +38,7 @@ Route::pattern('directory_path', '[a-z]+');
 View::share('dbl_categories_home', Helpers::getCategoriesHome());
 
 Route::get('/', array('as' => 'home', 'uses' => 'FrontEndHomeController@home' ));
-
+Route::get('/noticias/page/{page}', array('as' => 'home_pagination', 'uses' => 'FrontEndHomeController@home' ));
 
 Route::group(array('prefix' => 'backend'), function()
 {

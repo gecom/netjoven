@@ -95,7 +95,7 @@ return array(
 		'Illuminate\Log\LogServiceProvider',
 		'Illuminate\Mail\MailServiceProvider',
 		'Illuminate\Database\MigrationServiceProvider',
-		'Illuminate\Pagination\PaginationServiceProvider',
+		'DeSmart\Pagination\PaginationServiceProvider',
 		'Illuminate\Queue\QueueServiceProvider',
 		'Illuminate\Redis\RedisServiceProvider',
 		'Illuminate\Remote\RemoteServiceProvider',
@@ -108,6 +108,8 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Intervention\Image\ImageServiceProvider',
 		'Barryvdh\Elfinder\ElfinderServiceProvider',
+		'Jenssegers\Agent\AgentServiceProvider',
+		'Thujohn\Twitter\TwitterServiceProvider',
 
 	),
 
@@ -175,6 +177,8 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 		'Image'			  => 'Intervention\Image\Facades\Image',
+		'Agent'           => 'Jenssegers\Agent\Facades\Agent',
+		'Twitter' 		  => 'Thujohn\Twitter\TwitterFacade',
 
 	),
 
