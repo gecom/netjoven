@@ -20,6 +20,11 @@ class Post extends Eloquent {
         return $this->hasMany('Gallery');
     }
 
+    public function featuredPosts()
+    {
+        return $this->hasMany('PostFeatured');
+    }
+
 	public function post_at($date=null)
     {
         if(is_null($date)) {
@@ -74,6 +79,8 @@ class Post extends Eloquent {
 							Helpers::$prefix_table . 'post.status',
 							Helpers::$prefix_table . 'post.post_at',
 							Helpers::$prefix_table . 'post.view_index',
+							Helpers::$prefix_table . 'post.id_video',
+							Helpers::$prefix_table . 'post.type_video',
 							Helpers::$prefix_table . 'category.id as category_id',
 							Helpers::$prefix_table . 'category.parent_id as category_parent_id',
 							Helpers::$prefix_table . 'category.name as category_name',

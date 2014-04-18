@@ -5,9 +5,80 @@ class AdminNewsController extends BaseController {
 
     public function listNews()
     {
-        $params['type'] = array('NEWS');
+        $params['type'] = array(Helpers::TYPE_POST_VIDEO, Helpers::TYPE_POST_NEWS, Helpers::TYPE_POST_GALLERY);
         $dbl_post = Post::getPost($params)->paginate(15);
         return View::make('backend.pages.post_list', array('dbl_post' => $dbl_post ));
+    }
+
+    public function newsFeatured($post){
+        $params['title_content'] = 'Destacar ' . $post->title;
+        $params['data_type_featured'] = Helpers::$type_featured_post;
+        $params['dbl_post'] = $post;
+        $params['dbl_post_featured'] = PostFeatured::getFeaturedActiveByPostId($post->id)->first();
+
+        return View::make('backend.pages.post_featured', $params);
+    }
+
+    public function saveFeatured($post){
+
+        $data_frm_news = Input::get('frm_post_featured');
+
+        $rules = array(
+            'title'         => 'required|min:3',
+            'post_at'       => 'required|before:expired_at',
+            'expired_at'    => 'required',
+            'image'         => 'required'
+        );
+
+        $data_frm_news['post_at'] = Helpers::changeToMysql( $data_frm_news['post_at']);
+        $data_frm_news['expired_at'] = Helpers::changeToMysql( $data_frm_news['expired_at']);
+
+         $dbr_post_featured = PostFeatured::getFeaturedActiveByPostId($post->id)->first();
+
+         if(!$dbr_post_featured){
+            $rules['type'] = 'required';
+         }
+
+         $validator = Validator::make($data_frm_news, $rules);
+
+        if ( $validator->fails() ){
+            if(Request::ajax()){
+                $response['success'] = false;
+                $response['errors'] =  $validator->getMessageBag()->toArray();
+            } else{
+                return Redirect::back()->withInput()->withErrors($validator);
+            }
+        }else{
+
+            $dbr_post_featured = ($dbr_post_featured ? $dbr_post_featured : new PostFeatured());
+
+            if( isset($data_frm_news['type'])){
+                $dbr_post_featured->type = $data_frm_news['type'];
+            }
+
+            $dbr_post_featured->title = $data_frm_news['title'];
+            $dbr_post_featured->post_at = $data_frm_news['post_at'];
+            $dbr_post_featured->expired_at = $data_frm_news['expired_at'];
+            $dbr_post_featured->image = $data_frm_news['image'];
+            $dbr_post_featured->post_id = $post->id;
+
+            try {
+                if($dbr_post_featured->save()){
+                    $response['success'] = true;
+                    $response['message'] =  'La nota se destaco satisfactoriamente';
+                    $response['redirect'] = route('backend.post.list');
+                }else{
+                    $response['success'] = false;
+                    $response['errors'] =  ['Error: Hubo un error al registrar la nota como destacada'];
+                }
+
+            } catch (Exception $e) {
+                $response['success'] = false;
+                $response['errors'] =  ['Error:' . $e->getMessage()];
+            }
+        }
+
+        return Response::json($response);
     }
 
     public function news($post = null)
@@ -19,7 +90,7 @@ class AdminNewsController extends BaseController {
         }
 
     	$params['dbl_parent_categories'] = Category::getParentCategories()->get();
-        $params['data_type_video'] = array('Y' => Helpers::TYPE_VIDEO_YOUTUBE, 'D' => Helpers::TYPE_VIDEO_DAILYMOTION);
+        $params['data_type_video'] = Helpers::$type_video;
 
         if(!$is_new){
             $params['dbr_post_category'] = $dbr_post_category = $post->category()->first();
@@ -54,9 +125,8 @@ class AdminNewsController extends BaseController {
             'keywords'       => 'required',
         );
 
-
         if(!empty($data_frm_news['type_video'])){
-            $rules['id_video'] = $data_frm_news['id_video'];
+            $rules['id_video'] = 'required';
         }
 
         $validator = Validator::make($data_frm_news, $rules);
@@ -77,10 +147,14 @@ class AdminNewsController extends BaseController {
                     $post->slug = $data_frm_news['title'];
                 }
 
-                if(!empty($data_frm_news['type_video']) && !empty($data_frm_news['id_video'])){
-                    $post->type = Helpers::TYPE_POST_VIDEO;
-                }else{
-                    $post->type = Helpers::TYPE_POST_NEWS;
+                if($is_new == true){
+                    if(!empty($data_frm_news['type_video']) && !empty($data_frm_news['id_video'])){
+                        $post->type = Helpers::TYPE_POST_VIDEO;
+                        $post->type_video =  $data_frm_news['type_video'];
+                        $post->id_video =  $data_frm_news['id_video'];
+                    }else{
+                        $post->type = Helpers::TYPE_POST_NEWS;
+                    }
                 }
 
                 if(isset($data_frm_news['twitter'])){
@@ -111,8 +185,6 @@ class AdminNewsController extends BaseController {
                 $post->summary = $data_frm_news['summary'];
                 $post->category_id = $data_frm_news['subcategory'];
                 $data_image_principal = !empty($data_frm_news['image_principal']) ? array(json_decode($data_frm_news['image_principal'], true)) : array();
-                //$data_gallery = $data_frm_news['gallery'] ? json_decode($data_frm_news['gallery'],true) : array();
-                //$data_images = array_merge($data_image_principal, $data_gallery);
 
                 try {
                     if($post->save()){
@@ -145,6 +217,40 @@ class AdminNewsController extends BaseController {
     }
 
 
+    public function saveNewsGallery($post){
+
+        $data_frm_news_gallery = Input::get('frm_news_gallery');
+
+        if(!count($data_frm_news_gallery) && !isset($data_frm_news_gallery['name'])){
+            throw new Exception("Registre al menos una imagen", 1);
+        }
+
+        $data_gallery_filename = $data_frm_news_gallery['name'];
+        $data_images = array();
+
+        foreach ($data_gallery_filename as $key_filename => $filename) {
+            $data_images[] = array(
+                    'image' => array('name' => $filename, 'title' => $data_frm_news_gallery['title'][$key_filename] ),
+                    'is_gallery' => 1
+                );
+        }
+
+        try {
+            $post->type = Helpers::TYPE_POST_GALLERY;
+            $post->save();
+            $this->saveGalleryByPost($data_images, $post);
+            $response['success'] = true;
+            $response['message'] =  'Galeria guardada satisfactoriamente';
+        } catch (Exception $e) {
+            $response['success'] = false;
+            $response['errors'] =  ['Error:' . $e->getMessage()];
+        }
+
+        return Response::json($response);
+
+    }
+
+
     public function saveGalleryByPost($data_images, $post){
 
         if(count($data_images)){
@@ -160,12 +266,20 @@ class AdminNewsController extends BaseController {
 
                     $dbr_post_gallery->is_principal = $image['is_principal'];
                 }else{
-                    $dbr_post_gallery = new Gallery();
+
+                    $dbr_post_gallery = $post->galleries()->where('is_gallery', 1)->where('image', $image['image']['name'])->first();
+                    $dbr_post_gallery = ($dbr_post_gallery ? $dbr_post_gallery :new Gallery());
                 }
 
-                $dbr_post_gallery->image = $image['image']['name'];
-                $dbr_post_gallery->thumbnail_one = $image['image']['name'];
-                $dbr_post_gallery->thumbnail_two = $image['image']['name'];
+                if(!$dbr_post_gallery->image){
+                    $dbr_post_gallery->image = $image['image']['name'];
+                    $dbr_post_gallery->thumbnail_one = $image['image']['name'];
+                    $dbr_post_gallery->thumbnail_two = $image['image']['name'];
+                }
+
+                if($image['image']['title']){
+                     $dbr_post_gallery->title = $image['image']['title'];
+                }
 
                 if(isset($image['is_gallery'])){
                     $dbr_post_gallery->is_gallery = 1;

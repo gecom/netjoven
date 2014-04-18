@@ -18,6 +18,7 @@ class UploadController extends BaseController{
         $file = Input::file('file_image');
         $new_name = time().'-'.rand(99,999). Helpers::$extension;
         $data_size = array();
+        $with_thumb = false;
 
         switch ($directory_path) {
             case 'agenda':
@@ -29,12 +30,27 @@ class UploadController extends BaseController{
                     $data_size = Helpers::$size_images['view'];
                 }
                 break;
-            default:
-                break;
+            case 'featured':
+                $type_featured = Input::get('type_featured');
+                $with_thumb = true;
+
+                if($type_featured == Helpers::TYPE_POST_SUPER_FEATURED){
+                    $data_size = Helpers::$size_images['featured'];
+                }
+
+                if($type_featured == Helpers::TYPE_POST_SLIDER_FEATURED){
+                    $data_size = Helpers::$size_images['featured_slider'];
+                }
+
+                if($type_featured == Helpers::TYPE_POST_SECTION_FEATURED || $type_featured == Helpers::TYPE_POST_SUBSECTION_FEATURED ){
+                    $data_size = Helpers::$size_images['featured_section_standar'];
+                }
         }
 
-        $response = Helpers::uploadImage($file, $new_name, $directory_path . '/', $data_size);
-        return header('Content-type: application/json') . json_encode($response);
+        $response = Helpers::uploadImage($file, $new_name, $directory_path . '/', $data_size, $with_thumb);
+
+        return Response::json($response);
+        //return header('Content-type: application/json') . json_encode($response);
     }
 
     public function uploadImagePrincipal(){

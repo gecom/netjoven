@@ -9,7 +9,8 @@
 		"barryvdh/laravel-elfinder": "dev-master",
 		"jenssegers/agent": "*",
 		"thujohn/twitter": "dev-master",
-		"desmart/pagination": "1.1.*"
+		"desmart/pagination": "1.1.*",
+		"intervention/imagecache": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

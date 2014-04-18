@@ -4,7 +4,7 @@
 
 class UserController extends BaseController {
 
-   
+
 
 
     /**
@@ -35,7 +35,7 @@ class UserController extends BaseController {
         );
 
 
-        if (Auth::attempt($input)) {    
+        if (Auth::attempt($input)) {
            return Redirect::to('backend')->with('message', 'You are now logged in!');
         } else {
 
@@ -59,5 +59,5 @@ class UserController extends BaseController {
     return Redirect::to('backend/login')->with('success', 'Logged out with success!');
     }
 
-   
+
 }

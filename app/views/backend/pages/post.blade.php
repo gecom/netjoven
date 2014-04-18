@@ -21,13 +21,13 @@
         <div class="row">
              <div class="col-lg-12">
                 <ul id="myTab" class="nav nav-tabs">
-                    <li class="active"><a href="#register_publication" data-toggle="tab">Registrar</a></li>
-                    <li><a href="#register_publication_gallery" data-toggle="tab">Registrar Galeria</a></li>
+                    <li id="body_tabHeaderPost" class="active"><a id="body_lnkHeaderPost" href="#register_publication" data-toggle="tab">Registrar</a></li>
+                    <li id="body_tabHeaderImages" class="{{($is_new ? 'disabled' : '')}}"><a id="body_lnkHeaderImages" href="#register_publication_gallery" data-toggle="tab">Registrar Galeria</a></li>
                 </ul>
 
                 <!-- Tab panes -->
                 <div class="tab-content" style="padding-top: 20px;">
-                    <div class="tab-pane fade in active" id="register_publication">
+                    <div class="tab-pane active" id="register_publication">
                         <form id="frm_news_register" enctype="multipart/form-data" accept-charset="UTF-8" method="post" action="{{ ($is_new == true ? route('backend.register.save.new') : route('backend.register.save.edit', array('news_id'=> $dbr_post->id))) }}"  autocomplete="off">
                             <div class="col-lg-7">
                                 {{ Form::hidden('frm_news[is_new]', ($is_new ? 1 : 0) , array('id' => 'frm_is_new')) }}
@@ -71,6 +71,7 @@
                                             <select name="frm_news[type_video]" id="frm_news_type_video" class="form-control">
                                                 <option value="">Selecciona Tipo Video</option>
                                                 @foreach($data_type_video as $key_video => $type_video)
+                                                    <?php $selected = (!$is_new && ($dbr_post->type_video == $key_video)  ? 'selected="selected"': '' ); ?>
                                                     <option value="{{$key_video}}" {{ $selected}}>{{$type_video}}</option>
                                                 @endforeach
                                             </select>
@@ -78,7 +79,7 @@
                                     </div>
                                     <div class="col-lg-6 pull-right">
                                         {{ Form::label('frm_news_id_video', 'ID Video') }}
-                                        {{ Form::text('frm_news[id_video]', null, array('id' => 'frm_news_id_video', 'placeholder' => 'Ingrese codigo video', 'class' => 'form-control')) }}
+                                        {{ Form::text('frm_news[id_video]', ($is_new ? null: $dbr_post->id_video), array('id' => 'frm_news_id_video', 'placeholder' => 'Ingrese codigo video', 'class' => 'form-control')) }}
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -168,36 +169,44 @@
                         </form>
 
                     </div>
-                    <div class="tab-pane fade" id="register_publication_gallery">
-                        <div class="form-group">
-                            <span class="btn btn-success fileinput-button">
-                                <i class="glyphicon glyphicon-plus"></i>
-                                <span>Subir Galeria</span>
-                                <input id="fileupload_gallery" type="file" name="file_image" multiple />
-                            </span>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12" id="wrapper_gallery">
-                                <ul class="thumbnails list-unstyled">
-                                    @if ($is_new == 0)
-                                        @foreach ($dbl_galleries as $dbr_gallery)
-                                            @if ($dbr_gallery->is_gallery == 1)
-                                                <li class="col-md-3">
-                                                    <div class="thumbnail" style="padding: 0">
-                                                        <div style="padding:4px" class="text-center">
-                                                            <img  src="{{ Config::get('settings.urlupload') . 'gallery/pp/'. $dbr_gallery->image}}">
-                                                        </div>
-                                                        <div class="caption">
-                                                            <textarea placeholder="Ingrese Titulo" class="form-control" cols="10" rows="5">{{$dbr_gallery->title}}</textarea>
-                                                        </div>
-                                                    </div>
-                                                </li>
+                    <div class="tab-pane" id="register_publication_gallery">
+                        @if(!$is_new)
+                        <form id="frm_directory_publication_gallery" action="{{route('backend.register.save.gallery', array($dbr_post->id))}}" enctype="multipart/form-data" accept-charset="UTF-8" method="post"  autocomplete="off">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <span class="btn btn-success fileinput-button">
+                                    <i class="glyphicon glyphicon-plus"></i>
+                                    <span>Subir Galeria</span>
+                                    <input id="fileupload_gallery" type="file" name="file_image" multiple />
+                                    </span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12" id="wrapper_gallery">
+                                        <ul class="thumbnails list-unstyled">
+                                            @if ($is_new == 0)
+                                                @foreach ($dbl_galleries as $dbr_gallery)
+                                                    @if ($dbr_gallery->is_gallery == 1)
+                                                        <li class="col-md-3">
+                                                            <div class="thumbnail" style="padding: 0">
+                                                                <div style="padding:4px" class="text-center">
+                                                                    <img  src="{{ Config::get('settings.urlupload') . 'gallery/pp/'. $dbr_gallery->image}}">
+                                                                </div>
+                                                                <div class="caption">
+                                                                    <textarea placeholder="Ingrese Titulo" class="form-control" name="frm_news_gallery[title][]" cols="10" rows="5">{{$dbr_gallery->title}}</textarea>
+                                                                    <input type="hidden" value="{{$dbr_gallery->image}}" name="frm_news_gallery[name][]" />
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    @endif
+                                                @endforeach
                                             @endif
-                                        @endforeach
-                                    @endif
-                                </ul>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-info">Guardar Galeria</button>
                             </div>
-                        </div>
+                        </form>
+                        @endif
                     </div>
                 </div>
              </div>
@@ -215,7 +224,8 @@
                 </div>
                 <% if(item.is_gallery == true){ %>
                     <div class="caption">
-                        <textarea placeholder="Ingrese Titulo" class="form-control" cols="10" rows="5"></textarea>
+                        <textarea placeholder="Ingrese Titulo" name="frm_news_gallery[title][]" class="form-control" cols="10" rows="5"></textarea>
+                        <input type="hidden" value="<%= item.image.name %>"  name="frm_news_gallery[name][]" />
                     </div>
                 <% } %>
                 <% if(item.is_principal == true){ %>
@@ -240,5 +250,6 @@
     {{ HTML::script('assets/js/underscore.js'); }}
     {{ HTML::script('assets/js/typeahead/typeahead.js'); }}
     {{ HTML::script('assets/js/tagsinput/bootstrap-tagsinput.js'); }}
+    {{ HTML::script('assets/js/bootstrap-disabled-tabclick.js'); }}
     {{ HTML::script('assets/js/backend/news.js'); }}
 @stop

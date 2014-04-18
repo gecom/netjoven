@@ -14,49 +14,6 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-lg-12">
-                    <form role="form">
-
-						<div class="col-lg-4">
-							<div class="form-group">
-								<label>Text Input</label>
-								<input class="form-control">
-								<p class="help-block">Example block-level help text here.</p>
-							</div>
-						</div>
-
-						<div class="col-lg-4">
-							<div class="form-group">
-								<label>Selects</label>
-								<select class="form-control">
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
-									<option>4</option>
-									<option>5</option>
-								</select>
-							</div>
-						</div>
-						<div class="col-lg-4">
-							<div class="form-group">
-								<label>Selects</label>
-								<select class="form-control">
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
-									<option>4</option>
-									<option>5</option>
-								</select>
-							</div>
-						</div>
-						<div class="col-lg-12">
-							<button type="submit" class="btn btn-default">Buscar</button>
-							<button type="reset" class="btn btn-default">Reset</button>
-						</div>
-
-                    </form>
-                </div>
-
-                <div class="col-lg-12">
                 	<a href="{{ route('backend.register.new')}}" class="btn btn-primary pull-right"><b>+</b> Agregar Nueva Noticia</a>
                 </div>
                 <div class="show-grid col-lg-12">
@@ -65,8 +22,9 @@
 							<tr>
 								<th class="col-md-3">Titulo</th>
 								<th class="col-md-3" >Categoria</th>
-								<th class="col-md-3">Tags</th>
-								<th class="col-md-2" >Fec. Creación</th>
+								<th class="col-md-2">Tags</th>
+								<th class="col-md-2" >Fec. Publicación</th>
+								<th class="col-md-1" >Destacado</th>
 								<th class="col-md-4" class="text-center">Acciones</th>
 							</tr>
 						</thead>
@@ -83,11 +41,16 @@
 										@endforeach
 									@endif
 									<td>{{ implode( ", ",$data_tags)}}</td>
-									<td>{{$dbr_post->post_at}}</td>
+									<td>{{Helpers::getDateFormat($dbr_post->post_at)}}</td>
+									<?php
+										$dbr_post_featured = PostFeatured::getFeaturedActiveByPostId($dbr_post->id)->first();
+										$post_featured = ($dbr_post_featured ? 'Si': 'No');
+									?>
+									<td>{{ $post_featured }}</td>
 									<td class="text-center">
-										<a href="{{ route('backend.register.edit', array('news_id'=> $dbr_post->id)); }}" class="btn btn-primary btn-xs" ><span class="glyphicon glyphicon-file"></span> Editar</a>
-										<a href="#" class="btn btn-success btn-xs" ><span class="glyphicon glyphicon-pencil"></span> Destacar</a>
-										<a href="#" class="btn btn-success btn-xs" ><span class="glyphicon glyphicon-pencil"></span> Copiar</a>
+										<a href="{{ route('backend.register.edit', array($dbr_post->id)); }}" class="btn btn-primary btn-xs" ><span class="glyphicon glyphicon-pencil"></span> Editar</a>
+										<a href="{{ route('backend.register.featured', array($dbr_post->id) )}}" class="btn btn-success btn-xs" ><span class="glyphicon glyphicon-ok-sign"></span> Destacar</a>
+										<a href="#" class="btn btn-success btn-xs" ><span class="glyphicon glyphicon-file"></span> Copiar</a>
 									</td>
 								</tr>
 							@endforeach

@@ -110,6 +110,7 @@ return array(
 		'Barryvdh\Elfinder\ElfinderServiceProvider',
 		'Jenssegers\Agent\AgentServiceProvider',
 		'Thujohn\Twitter\TwitterServiceProvider',
+		'Intervention\Image\ImageServiceProvider',
 
 	),
 
@@ -179,6 +180,7 @@ return array(
 		'Image'			  => 'Intervention\Image\Facades\Image',
 		'Agent'           => 'Jenssegers\Agent\Facades\Agent',
 		'Twitter' 		  => 'Thujohn\Twitter\TwitterFacade',
+		'Image' 		  => 'Intervention\Image\Facades\Image',
 
 	),
 

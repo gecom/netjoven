@@ -5,15 +5,34 @@ class Helpers {
 	const TYPE_POST_NEWS = 'NEWS';
 	const TYPE_POST_VIDEO = 'VIDEO';
 	const TYPE_POST_GALLERY = 'GALLERY';
+
 	const TYPE_BINGE_BAR = 'Bar';
 	const TYPE_BINGE_DISCOTECA = 'Discotecas';
 	const TYPE_BINGE_LOUNGES = 'Lounges';
-	const TYPE_VIDEO_YOUTUBE = 'Youtube';
-	const TYPE_VIDEO_DAILYMOTION = 'Dailymotion';
+
+	const TYPE_VIDEO_YOUTUBE = 'Y';
+	const TYPE_VIDEO_DAILYMOTION = 'D';
+
+	const TYPE_POST_SUPER_FEATURED = 'S';
+	const TYPE_POST_SLIDER_FEATURED = 'SL';
+	const TYPE_POST_SECTION_FEATURED = 'SE';
+	const TYPE_POST_SUBSECTION_FEATURED = 'SSE';
 
 
 	public static $prefix_table = 'njv_';
 	public static $extension = '.jpg';
+
+	public static $type_video = array(
+		self::TYPE_VIDEO_YOUTUBE => 'Yotube',
+		self::TYPE_VIDEO_DAILYMOTION => 'Dailymotion'
+	);
+
+	public static $type_featured_post = array(
+		self::TYPE_POST_SUPER_FEATURED => 'Super Destacado',
+		self::TYPE_POST_SLIDER_FEATURED => 'Destacado Slider',
+		self::TYPE_POST_SECTION_FEATURED => 'Destacado Sección',
+		self::TYPE_POST_SUBSECTION_FEATURED => 'Destacado Subsección'
+	);
 
 	public static function getCategoriesHome(){
 		$dbl_parent_categories = Category::getParentCategoriesHome()->get();
@@ -69,16 +88,16 @@ class Helpers {
 
 
 	public static $size_images = array(
-			'featured' 					=> array('width' => 1212, 'height' => 399),
-			'featured_principal' 		=> array('width' => 623, 'height' => 398),
+			'featured' 					=> array('width' => 935, 'height' => 393),
+			'featured_slider' 			=> array('width' => 623, 'height' => 398),
 			'featured_section_standar'	=> array('width' => 612, 'height' => 383),
-			'featured_section_module'	=> array('width' => 252, 'height' => 155),
+			'featured_section_module'	=> array('width' => 250, 'height' => 155),
 			'content' 					=> array('width' => 500, 'height' => 500),
 			'gallery' 					=> array('width' => 600, 'height' => 374),
 			'category' 					=> array('width' => 260, 'height' => 378),
 			'category_thumb' 			=> array('width' => 216, 'height' => 265),
-			'view'					=> array('width' => 300, 'height' => 187),
-			'view_thumb' 			=> array('width' => 160, 'height' => 160)
+			'view'						=> array('width' => 300, 'height' => 187),
+			'view_thumb' 				=> array('width' => 160, 'height' => 160)
 	);
 
 	public static function uploadImage($file, $new_name = null ,$path = null, $data_size = array(), $generate_thumbnail = false,$max_size = array(2000, 1024)){
@@ -102,26 +121,24 @@ class Helpers {
                 	}
 
                     $response['message'] = 'Imagen subida satisfactoriamente';
-                    $response['success'] = 1;
+                    $response['success'] = true;
                     $response['filename'] = Config::get('settings.urlupload') . $path . $new_name;
                     $response['name'] = $new_name;
 
                 }else {
-                    $response['message'] = 'Upload Fail: Unknown error occurred!';
-                    $response['success'] = 0;
+                    $response['errors'] = ['Upload Fail: Unknown error occurred!'];
+                    $response['success'] = false;
                 }
             }else {
-                $response['message'] = 'Upload Fail: Unsupported file format or It is too large to upload!';
-                $response['success'] = 0;
+                $response['errors'] = ['Upload Fail: Unsupported file format or It is too large to upload!'];
+                $response['success'] = false;
             }
         }else {
-            $response['message'] = 'Bad request!';
-            $response['success'] = 0;
+            $response['errors'] = ['Bad request!'];
+            $response['success'] = false;
         }
 
         return $response;
-
-
 	}
 
 	public static function saveImage($file, $path = null, $name = null, $size = array()){
@@ -176,6 +193,24 @@ class Helpers {
 		return $time;
 	}
 
+	public static function getThumbnailYoutubeByIdVideo($id_video, $quality = 'default')
+	{
+		return 'http://img.youtube.com/vi/' . $id_video . '/' . $quality . '.jpg';
+	}
+
+	public static function getDateFormat($date, $format = 'd/m/Y H:i')
+	{
+		$date = date_create($date);
+		return date_format($date, $format);
+	}
+
+	public static function changeToMysql($date)
+	{
+		$date_format = date_parse_from_format ( 'd/m/Y H:i' , $date );
+
+		return $date_format['year'] .'/'.$date_format['month'].'/'.$date_format['day'] . ' '. $date_format['hour'] .':'.$date_format['minute'];
+	}
+
 	/**
 	*  retorna la direccion IP de la PC cliente.
 	*/
@@ -207,9 +242,13 @@ class Helpers {
 
 
 	public static function getImage($name, $path){
-		$url = Config::get('settings.urlupload') . $path . '/' . $name;
-		if(self::urlExists($url)){
-			return $url;
+
+		if(!empty($name)){
+			$url = Config::get('settings.urlupload') . $path . '/' . $name;
+
+			if(self::urlExists($url)){
+				return $url;
+			}
 		}
 
 		return Config::get('settings.urlupload') . 'images_default' . '/' . 'netjoven_default.jpg';
