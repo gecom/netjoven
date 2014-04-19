@@ -16,6 +16,15 @@ class PostFeatured extends Eloquent {
 				->orderBy('id', 'desc');
 	}
 
+
+	public function scopeGetLastFeaturedSuper($query)
+	{
+		return $query
+				->where('expired_at','>=', DB::raw("NOW()"))
+				->where('type', '=', Helpers::TYPE_POST_SUPER_FEATURED)
+				->orderBy('id', 'desc');
+	}
+
 }
 
 ?>

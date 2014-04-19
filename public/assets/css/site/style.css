@@ -66,8 +66,8 @@ header .social ul li .gp{background-position:-129px -90px}
 #main_nav.menu_fixed .options_menu_fixed li .search_box .bg_search{background-color:#000;width:213px;height:26px;opacity:.2;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=20);position:absolute;top:4px;left:36px;-webkit-border-radius:13px;-moz-border-radius:13px;border-radius:13px}
 #main_nav.menu_fixed .options_menu_fixed li .search_box input{border:0;color:#fff;background:none;position:absolute;z-index:10;outline:0;left:50px;width:174px;height:18px;top:5px;font-size:1em;line-height:18px}
 .destacado{padding:10px 10px 40px 10px;background:#fff;border-bottom:1px solid #d8d8d8;width:960px;margin-bottom:14px;}
-.destacado .image_destacado{-webkit-box-shadow:1px 1px 4px 0 #6d6d6d;-moz-box-shadow:1px 1px 4px 0 #6d6d6d;box-shadow:1px 1px 4px 0 #6d6d6d;width:935px;height:393px;position:relative;}
-.destacado .image_destacado .txt{position:absolute;left:0;bottom:28px;height:105px;border-bottom:1px solid #000;color:#fff;font-size:1.85em;font-weight:700;text-align:center;width:100%;padding-top:20px}
+.destacado .image_destacado{-webkit-box-shadow:1px 1px 4px 0 #6d6d6d;-moz-box-shadow:1px 1px 4px 0 #6d6d6d;box-shadow:1px 1px 4px 0 #6d6d6d;width:935px;height:393px;position:relative;text-align:center;}
+.destacado .image_destacado .txt{position:absolute;left:0;bottom:28px;min-height:60px;border-bottom:1px solid #000;color:#fff;font-size:1.85em;font-weight:700;text-align:center;width:100%;padding-top:20px}
 .destacado .image_destacado .link{left:0;bottom:4px;position:absolute;width:100%;text-align:right;padding-right:7px;}
 .destacado .image_destacado .link a{color:#fff}
 .destacado .image_destacado .link span{width:22px;height:22px;-webkit-border-radius:11px;-moz-border-radius:11px;border-radius:11px;display:inline-block;text-align:center;margin-left:3px}

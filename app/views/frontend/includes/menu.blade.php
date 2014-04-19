@@ -8,12 +8,12 @@
                         <div style="display:none" class="dropdown">
                             <ul>
                                 @foreach ($dbr_category_home['children_category'] as $key_children => $children_category)
-                                    <li><a href="#"  class="{{ $key_children == 0 ? 'active custom_color_bg' : ''}}">{{$children_category['name']}}</a></li>
+                                    <li id="{{$children_category['id']}}" ><a href="#" >{{$children_category['name']}}</a></li>
                                 @endforeach
                             </ul>
                             <?php $i = 0; ?>
                             @foreach ($dbr_category_home['children_category'] as $key_children => $children_category)
-                                <div class="videos_drop" parent_id ="{{$children_category['id']}}" style="display:{{ $key_children==0 ? 'block' : 'none'}}">
+                                <div class="videos_drop" id ="children_category_{{$children_category['id']}}" style="display:none">
                                     <?php
                                         $params['view_index'] = 1;
                                         $params['category_id'] = $children_category['id'];
@@ -137,7 +137,7 @@
         <ul class="options_menu_fixed" style="display:none">
             <li><a href="#" class="search custom_color_bg"></a>
                 <div class="search_box custom_color_bg" style="display:none">
-                    <input type="text" value="Buscar...">
+                    <input type="text" placeholder="Buscar..." />
                     <div class="bg_search"></div>
                 </div>
             </li>

@@ -36,7 +36,7 @@
 Fifa  /  Guardaespaldas,  /   Justin Bieber En Buenos Aires  /  Fifa  /  Guardaespaldas
             </div>
             <div class="sponsors">
-                <img src="{{asset('assets/images/sponsors.jpg');}}">
+                <img src="{{asset('assets/images/sponsors.jpg')}}">
             </div>
             <div class="footer_rights">
                 ©Copyright Grupo Emprendedor de Comunicaciones. Derechos Reservados: Prohibida su reproducción sin autorización. / Calle Arica 115 oficina 504

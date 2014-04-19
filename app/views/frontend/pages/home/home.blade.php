@@ -1,6 +1,11 @@
 @extends('frontend.layouts.default')
 
 @section('content')
+        @if($dbl_last_post_featured_super)
+            <section class="destacado">
+                @include('frontend.pages.home.featured_super')
+            </section>
+        @endif
         <section id="banner">
             @include('frontend.pages.home.banner')
         </section>
