@@ -18,6 +18,8 @@
 {{ HTML::style('http://fonts.googleapis.com/css?family=Open+Sans:400,300,700')}}
 {{ HTML::style('assets/css/site/style.css')}}
 {{ HTML::style('assets/css/site/custom_default.css')}}
+@section('css')
+@show
 
 <style>
 	@section('styles')

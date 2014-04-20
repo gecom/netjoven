@@ -17,12 +17,18 @@ class PostFeatured extends Eloquent {
 	}
 
 
-	public function scopeGetLastFeaturedSuper($query)
+	public function scopeGetFeaturedPost($query, $type_featured)
 	{
 		return $query
 				->where('expired_at','>=', DB::raw("NOW()"))
-				->where('type', '=', Helpers::TYPE_POST_SUPER_FEATURED)
+				->where('post_at','<=', DB::raw("NOW()"))
+				->where('type', '=', $type_featured)
 				->orderBy('id', 'desc');
+	}
+
+	public function scopeGetFeaturedSlider($query)
+	{
+
 	}
 
 }

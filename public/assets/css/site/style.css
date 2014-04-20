@@ -121,7 +121,7 @@ header .social ul li .gp{background-position:-129px -90px}
 #news .paginate ul{font-size:0;}
 #news .paginate ul li{display:inline-block;width:16px;height:16px;-webkit-border-radius:8px;-moz-border-radius:8px;border-radius:8px;text-align:center;line-height:15px;font-size:1rem;margin-left:2px;}
 #news .paginate ul li a{font-size:.9em;display:inline-block;color:#6d6d6d;line-height:auto}
-#news .paginate ul li:hover a,#news .paginate ul .active a{color:#fff;text-decoration:none}
+#news .paginate ul li:hover a,#news .paginate ul .active span{color:#fff;text-decoration:none}
 #big_banner{width:960px;height:90px;margin:14px 0;display:block;background-color:#5d5d5d;text-align:center}
 #videos{margin-bottom:14px;width:960px;background-color:#fff;padding:10px 10px 40px;border-bottom:1px solid #d8d8d8;border-top:1px solid #d8d8d8;font-size:0;}
 #videos .left_video{width:604px;display:inline-block;vertical-align:top;font-size:1rem;}

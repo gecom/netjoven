@@ -67,7 +67,7 @@ class Post extends Eloquent {
 	public static function getPost($params = array())
 	{
 
-		$params_default = array('type' => array("NEWS", "VIDEOS"), 'with_post_at' => false ,'category_id' => null, 'show_not_featured' => false, 'view_index' => false,'show_limit' => false);
+		$params_default = array('type' => array("NEWS", "VIDEOS"), 'display' => null,'with_post_at' => false ,'category_id' => null, 'show_not_featured' => false, 'view_index' => false,'show_limit' => false);
 		$params = array_merge($params_default, $params);
 
 		$post = (new Post())
@@ -95,6 +95,10 @@ class Post extends Eloquent {
 
 		if(is_numeric($params['view_index'])){
 			$post->where(Helpers::$prefix_table . 'post.view_index', '=', $params['view_index']);
+		}
+
+		if(is_numeric($params['display'])){
+			$post->where(Helpers::$prefix_table . 'post.display', '=', $params['display']);
 		}
 
 		if($params['show_not_featured'] == true){

@@ -1,5 +1,13 @@
 $(document).ready(function(){
 
+
+	$('.bxslider').bxSlider({
+		mode: 'fade',
+		captions: true,
+		auto : true,
+		hideControlOnEnd : false
+	});
+
 	$(document).scroll(function() {
 		var scrolledHeight = $(document).scrollTop(), $main_nav = $("#main_nav");
 

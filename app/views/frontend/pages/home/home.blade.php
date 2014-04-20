@@ -1,5 +1,9 @@
 @extends('frontend.layouts.default')
 
+@section('css')
+    {{ HTML::style('assets/css/bxslider/jquery.bxslider.css')}}
+@stop
+
 @section('content')
         @if($dbl_last_post_featured_super)
             <section class="destacado">
@@ -44,4 +48,5 @@
 @stop
 
 @section('js')
+    {{ HTML::script('assets/js/bxslider/jquery.bxslider.min.js'); }}
 @stop
