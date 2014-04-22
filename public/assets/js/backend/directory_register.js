@@ -121,9 +121,12 @@ $(function(){
 			if(response.success == true){
 				message = response.message;
 
-				if(response.redirect){
-					window.location.href = response.redirect;
-				}
+				setTimeout(function(){
+					if(response.redirect){
+						window.location.href = response.redirect;
+					}
+				}, 700)
+
 			}else{
 				is_error = true;
 				var arr = response.errors;

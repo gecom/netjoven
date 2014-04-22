@@ -147,13 +147,11 @@
 
 </div>
 <div class="row user_options">
-
-    <ul class="view_options">
-        <li class="v1" ><a class="active custom_color_bg" href="#" ></a></li>
-        <li class="v2"><a href="#"></a></li>
-        <li class="v3"><a href="#"></a></li>
+    <ul id="view_options" class="view_options">
+        <li data-type="{{Helpers::TYPE_MODULE_ESTANDAR}}" class="v1" ><a class="active custom_color_bg" href="#" ></a></li>
+        <li data-type="{{Helpers::TYPE_MODULE_MODULAR}}" class="v2"><a href="#"></a></li>
+        <li data-type="{{Helpers::TYPE_MODULE_LISTADO}}" class="v3"><a href="#"></a></li>
         <li class="v4"><a href="#"><span>Iniciar Sesión</span><div class="icon_v4 custom_color_bg"></div></a></li>
         <li class="v5"><a href="#" class="active custom_color_bg"></a></li>
     </ul>
-
 </div>

@@ -18,6 +18,9 @@ class Helpers {
 	const TYPE_POST_SECTION_FEATURED = 'SE';
 	const TYPE_POST_SUBSECTION_FEATURED = 'SSE';
 
+	const TYPE_MODULE_ESTANDAR = 'E';
+	const TYPE_MODULE_MODULAR = 'M';
+	const TYPE_MODULE_LISTADO = 'L';
 
 	public static $prefix_table = 'njv_';
 	public static $extension = '.jpg';
@@ -70,6 +73,10 @@ class Helpers {
 			array('name' => 'Publicaciones', 'class'=>'fa-table', 'url' => '#',
 				'subcategories'=> array(
 						array('name' => 'Noticias', 'url' => url('backend/publicaciones')),
+						array('name' => 'Videos', 'url' => '#'),
+						array('name' => 'Fail en Redes', 'url' => '#'),
+						array('name' => 'Cartelera', 'url' => '#'),
+						array('name' => 'Blogs', 'url' => '#'),
 						array('name' => 'Fotos', 'url' => '#')
 					)
 			),
@@ -80,6 +87,7 @@ class Helpers {
 					)
 			),
 			array('name' => 'Categorias', 'class'=>'fa-table', 'url' => url('backend/categorias') ),
+			array('name' => 'Temas del Día', 'class'=>'fa-table', 'url' => url('backend/temas_del_dia') ),
 			array('name' => 'Usuarios', 'class'=>'fa-wrench', 'url' => '#' )
 		);
 
@@ -96,6 +104,7 @@ class Helpers {
 			'gallery' 					=> array('width' => 600, 'height' => 374),
 			'category' 					=> array('width' => 260, 'height' => 378),
 			'category_thumb' 			=> array('width' => 216, 'height' => 265),
+			'video'						=> array('width' => 500, 'height' => 300),
 			'view'						=> array('width' => 300, 'height' => 187),
 			'view_thumb' 				=> array('width' => 160, 'height' => 160)
 	);

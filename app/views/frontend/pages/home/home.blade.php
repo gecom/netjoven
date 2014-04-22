@@ -13,7 +13,7 @@
         <section id="banner">
             @include('frontend.pages.home.banner')
         </section>
-        <section id="news">
+        <section id="news" class="v_news">
             @include('frontend.pages.home.latest_news')
         </section>
         <section id="big_banner">
@@ -41,7 +41,11 @@
                 </div>
 
         </section>
-
+        <section id="news_two" class="v_news" style="display:block">
+            @if ($type_module == Helpers::TYPE_MODULE_LISTADO || $type_module == Helpers::TYPE_MODULE_MODULAR)
+                @include('frontend.pages.home.more_news')
+            @endif
+        </section>
         <section id="ads">
             @include('frontend.pages.home.other_sections')
         </section>

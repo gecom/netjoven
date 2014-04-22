@@ -5,7 +5,7 @@ class AdminNewsController extends BaseController {
 
     public function listNews()
     {
-        $params['type'] = array(Helpers::TYPE_POST_VIDEO, Helpers::TYPE_POST_NEWS, Helpers::TYPE_POST_GALLERY);
+        $params['type'] = array(Helpers::TYPE_POST_NEWS);
         $dbl_post = Post::getPost($params)->paginate(15);
         return View::make('backend.pages.post_list', array('dbl_post' => $dbl_post ));
     }
@@ -277,7 +277,7 @@ class AdminNewsController extends BaseController {
                     $dbr_post_gallery->thumbnail_two = $image['image']['name'];
                 }
 
-                if($image['image']['title']){
+                if(isset($image['image']['title'])){
                      $dbr_post_gallery->title = $image['image']['title'];
                 }
 

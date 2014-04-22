@@ -20,6 +20,7 @@ Route::model('directorate', 'Directorate');
 Route::model('category', 'Category');
 Route::model('parent_category', 'Category');
 Route::model('directory_publication', 'DirectoryPublication');
+Route::model('theme_day', 'ThemeDay');
 
 
 
@@ -33,12 +34,18 @@ Route::pattern('parent_category', '[0-9]+');
 Route::pattern('directorate', '[0-9]+');
 Route::pattern('directory_publication', '[0-9]+');
 Route::pattern('directory_path', '[a-z]+');
+Route::pattern('theme_day', '[a-z]+');
 
 
 View::share('dbl_categories_home', Helpers::getCategoriesHome());
 
 Route::get('/', array('as' => 'home', 'uses' => 'FrontEndHomeController@home' ));
 Route::get('/noticias/page/{page}', array('as' => 'home_pagination', 'uses' => 'FrontEndHomeController@home' ));
+
+/*******Cambiar tipo de vista*******/
+
+Route::post('/cambiar_tipo_vista', array('as' => 'frontend.change_view', 'uses' => 'FrontEndHomeController@home' ));
+
 
 Route::group(array('prefix' => 'backend'), function()
 {
@@ -81,6 +88,11 @@ Route::group(array('prefix' => 'backend'), function()
         Route::get('/directorio/{directorate}/{slug?}/nuevo', array('as' => 'backend.directory.new', 'uses' => 'AdminDirectoryController@directoryPublicationEdit' ));
         Route::post('/directorio/{directorate}/{slug?}/nuevo', array('as' => 'backend.directory.save_new', 'uses' => 'AdminDirectoryController@directoryPublicationSave' ));
         Route::post('/directorio/{directorate}/{slug?}/{directory_publication}/guardar_imagen', array('as' => 'backend.directory.save_images', 'uses' => 'AdminDirectoryController@directoryPublicationImageSave' ));
+
+        /*******Temas del día*******/
+        Route::get('/temas_del_dia', array('as' => 'backend.theme_day.list', 'uses' => 'AdminThemeDayController@listThemeDay' ));
+        Route::get('/temas_del_dia/nuevo', array('as' => 'backend.theme_day.register_new', 'uses' => 'AdminThemeDayController@registerThemeDay' ));
+        Route::post('/temas_del_dia/nuevo', array('as' => 'backend.theme_day.save_new', 'uses' => 'AdminThemeDayController@saveRegisterThemeDay' ));
 
         /*******Autocompletar de categorias*******/
         Route::post('/autocompletar_categoria', array('as' => 'autocomplete_category', 'uses' => 'AdminNewsController@autoCompleteCategory' ));

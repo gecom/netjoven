@@ -8,6 +8,21 @@ $(document).ready(function(){
 		hideControlOnEnd : false
 	});
 
+	$('.v1,.v2, .v3', '#view_options').on('click', function(e){
+		e.preventDefault();
+		var $this = $(this);
+
+		$.ajax({
+			url: '/cambiar_tipo_vista' ,
+			type:'post',
+			dataType:'json',
+			data: {type:$this.data('type')}
+		}).done(function(response){
+			console.log(response);
+		});
+
+	})
+
 	$(document).scroll(function() {
 		var scrolledHeight = $(document).scrollTop(), $main_nav = $("#main_nav");
 

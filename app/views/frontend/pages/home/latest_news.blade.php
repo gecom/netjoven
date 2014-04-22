@@ -1,14 +1,14 @@
 <div class="title_news custom_color_text">Últimas noticias</div>
-<ul class="option_news">
-    <li><span class="circle custom_color_bg"></span><a href="#" class="active custom_color_text">Ultimas</a></li>
-    <li><span class="circle custom_color_bg"></span><a href="#">People's Choice Awards</a></li>
-    <li><span class="circle custom_color_bg"></span><a href="#">MTV EMA 2013</a></li>
-    <li><span class="circle custom_color_bg"></span><a href="#">Rafael Nadal en Lima</a></li>
-    <li><span class="circle custom_color_bg"></span><a href="#">Representantes de lo Nuestro</a></li>
-    <li><span class="circle custom_color_bg"></span><a href="#">Miembros de mesa</a></li>
-    <li><span class="circle custom_color_bg"></span><a href="#">Elecciones 2013</a></li>
-</ul>
-<div class="list_articles">
+@if (count($dbl_theme_day))
+    <ul class="option_news">
+            <li><strong><span class="circle custom_color_bg"></span>Temas del Día</strong></li>
+        @foreach ($dbl_theme_day as $dbr_theme_day)
+            <li><span class="circle custom_color_bg"></span><a href="#">{{$dbr_theme_day->name}}</a></li>
+        @endforeach
+    </ul>
+@endif
+
+<div class="list_articles {{($type_module == Helpers::TYPE_MODULE_LISTADO ? 'list_mode' : '')}}">
     @foreach ($dbl_last_post as $dbr_last_post)
         <article >
             <div class="media">
@@ -38,8 +38,11 @@
         </article>
     @endforeach
 </div>
-<div class="paginate">
+
+@if ($type_module == Helpers::TYPE_MODULE_ESTANDAR)
+        <div class="paginate">
+ver mas
+    </div>
+@endif
 
 
-    {{$dbl_last_post->links('frontend.pages.home.paginator')}}
-</div>

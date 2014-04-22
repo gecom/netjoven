@@ -26,11 +26,6 @@ class PostFeatured extends Eloquent {
 				->orderBy('id', 'desc');
 	}
 
-	public function scopeGetFeaturedSlider($query)
-	{
-
-	}
-
 }
 
 ?>

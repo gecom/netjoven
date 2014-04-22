@@ -10,7 +10,9 @@
 		"jenssegers/agent": "*",
 		"thujohn/twitter": "dev-master",
 		"desmart/pagination": "1.1.*",
-		"intervention/imagecache": "dev-master"
+		"intervention/imagecache": "dev-master",
+		"gigablah/sphinxphp": "dev-master",
+		"scalia/sphinxsearch": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
