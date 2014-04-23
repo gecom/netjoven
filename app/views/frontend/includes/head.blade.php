@@ -17,7 +17,10 @@
 {{ HTML::style('assets/css/site/bootstrap.min.css')}}
 {{ HTML::style('http://fonts.googleapis.com/css?family=Open+Sans:400,300,700')}}
 {{ HTML::style('assets/css/site/style.css')}}
+{{ HTML::style('assets/css/bootstrap_modal/bootstrap-modal-bs3patch.css')}}
+{{ HTML::style('assets/css/bootstrap_modal/bootstrap-modal.css')}}
 {{ HTML::style('assets/css/site/custom_default.css')}}
+
 @section('css')
 @show
 

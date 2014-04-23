@@ -1,3 +1,10 @@
+<?php
+
+    if(Cookie::has('type_module')){
+        $type_module = Cookie::get('type_module');
+    }
+?>
+
 <div class="row">
         <ul class="menu menu_desktop">
             <li class="li_menu active custom_color_bg"><a href="#" >INICIO</a></li>
@@ -148,9 +155,9 @@
 </div>
 <div class="row user_options">
     <ul id="view_options" class="view_options">
-        <li data-type="{{Helpers::TYPE_MODULE_ESTANDAR}}" class="v1" ><a class="active custom_color_bg" href="#" ></a></li>
-        <li data-type="{{Helpers::TYPE_MODULE_MODULAR}}" class="v2"><a href="#"></a></li>
-        <li data-type="{{Helpers::TYPE_MODULE_LISTADO}}" class="v3"><a href="#"></a></li>
+        <li data-type="{{Helpers::TYPE_MODULE_ESTANDAR}}" class="v1" ><a class="{{$type_module == Helpers::TYPE_MODULE_ESTANDAR ? 'active custom_color_bg' : ''}}" href="#" ></a></li>
+        <li data-type="{{Helpers::TYPE_MODULE_MODULAR}}" class="v2"><a class="{{$type_module == Helpers::TYPE_MODULE_MODULAR ? 'active custom_color_bg' : ''}}" href="#"></a></li>
+        <li data-type="{{Helpers::TYPE_MODULE_LISTADO}}" class="v3"><a class="{{$type_module == Helpers::TYPE_MODULE_LISTADO ? 'active custom_color_bg' : ''}}" href="#"></a></li>
         <li class="v4"><a href="#"><span>Iniciar Sesión</span><div class="icon_v4 custom_color_bg"></div></a></li>
         <li class="v5"><a href="#" class="active custom_color_bg"></a></li>
     </ul>

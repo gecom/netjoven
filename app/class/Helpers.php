@@ -37,6 +37,12 @@ class Helpers {
 		self::TYPE_POST_SUBSECTION_FEATURED => 'Destacado Subsección'
 	);
 
+	public static $type_module_status = array(
+		self::TYPE_MODULE_ESTANDAR => 'Estandar',
+		self::TYPE_MODULE_MODULAR => 'Modular',
+		self::TYPE_MODULE_LISTADO => 'Listado',
+	);
+
 	public static function getCategoriesHome(){
 		$dbl_parent_categories = Category::getParentCategoriesHome()->get();
 		$categories = array();

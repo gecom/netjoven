@@ -32,11 +32,13 @@
             </div>
         </div>
 
+        <div id="ajax-modal" class="modal fade" tabindex="-1" style="display: none;"></div>
+
         {{ HTML::script('assets/js/jquery.js'); }}
         {{ HTML::script('assets/js/bootstrap.min.js'); }}
+        {{ HTML::script('assets/js/bootstrap_modal/bootstrap-modal.js'); }}
+        {{ HTML::script('assets/js/bootstrap_modal/bootstrap-modalmanager.js'); }}
         {{ HTML::script('assets/js/fn/home.js'); }}
-        {{ HTML::script('assets/js/bootstrap-hover-dropdown.js'); }}
-
 
         @section('js')
         @show

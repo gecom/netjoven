@@ -42,10 +42,11 @@ View::share('dbl_categories_home', Helpers::getCategoriesHome());
 Route::get('/', array('as' => 'home', 'uses' => 'FrontEndHomeController@home' ));
 Route::get('/noticias/page/{page}', array('as' => 'home_pagination', 'uses' => 'FrontEndHomeController@home' ));
 
+
 /*******Cambiar tipo de vista*******/
 
-Route::post('/cambiar_tipo_vista', array('as' => 'frontend.change_view', 'uses' => 'FrontEndHomeController@home' ));
-
+Route::get('/cambiar_tipo_vista/{type_module}', array('as' => 'frontend.change_view', 'uses' => 'FrontEndHomeController@changeTypeModule' ));
+Route::post('/cambiar_tipo_vista/{type_module}', array('as' => 'frontend.save.change_view', 'uses' => 'FrontEndHomeController@saveTypeModule' ));
 
 Route::group(array('prefix' => 'backend'), function()
 {
