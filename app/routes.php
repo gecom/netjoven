@@ -35,12 +35,15 @@ Route::pattern('directorate', '[0-9]+');
 Route::pattern('directory_publication', '[0-9]+');
 Route::pattern('directory_path', '[a-z]+');
 Route::pattern('theme_day', '[a-z]+');
+Route::pattern('slug', '[a-z0-9-]+');
 
 
 View::share('dbl_categories_home', Helpers::getCategoriesHome());
 
-Route::get('/', array('as' => 'home', 'uses' => 'FrontEndHomeController@home' ));
-Route::get('/noticias/page/{page}', array('as' => 'home_pagination', 'uses' => 'FrontEndHomeController@home' ));
+Route::get('/', array('as' => 'home', 'uses' => 'FrontendHomeController@home' ));
+Route::get('/noticias/page/{page}', array('as' => 'home_pagination', 'uses' => 'FrontendHomeController@home' ));
+Route::get('{slug}', array('as' => 'frontend.section.list', 'uses' => 'FrontendSectionController@listSection' ));
+Route::get('{slug}/{page}', array('as' => 'frontend.section.pagination', 'uses' => 'FrontendSectionController@listSection' ));
 
 
 /*******Cambiar tipo de vista*******/

@@ -1,10 +1,4 @@
-<?php
-
-    if(Cookie::has('type_module')){
-        $type_module = Cookie::get('type_module');
-    }
-?>
-
+<?php $type_module = Helpers::getTypeModule(); ?>
 <div class="row">
         <ul class="menu menu_desktop">
             <li class="li_menu active custom_color_bg"><a href="#" >INICIO</a></li>

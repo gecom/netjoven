@@ -28,20 +28,20 @@
 ?>
 <ul>
 	@if ($paginator->getCurrentPage() > 1)
-	   <li><a href="{{route( 'home_pagination', $paginator->getCurrentPage()-1 ) }}">&lt;</a></li>
+	   <li><a href="{{$paginator->getUrl($paginator->getCurrentPage()+1) }}">&lt;</a></li>
 	@endif
 
 	@for ($page = $start; $page <= $end; $page++)
 		@if ($paginator->getCurrentPage() == $page)
 			<li class="active custom_color_bg"><span>{{$page}}</span></li>
 		@else
-			<li><a href="{{route('home_pagination', $page) }}">{{$page}}</a></li>
+			<li><a href="{{$paginator->getUrl($page) }}">{{$page}}</a></li>
 		@endif
 	@endfor
 
 
 	@if ($paginator->getCurrentPage() < $paginator->getLastPage())
-		<li><a href="{{route( 'home_pagination', $paginator->getCurrentPage()+1 ) }}">&gt;</a></li>
+		<li><a href="{{$paginator->getUrl($paginator->getCurrentPage()+1)}}">&gt;</a></li>
 	@endif
 </ul>
 <?php endif; ?>

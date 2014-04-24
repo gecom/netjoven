@@ -106,7 +106,11 @@ class Post extends Eloquent {
 		}
 
 		if(!empty($params['category_id'])){
-			$post->where(Helpers::$prefix_table . 'post.category_id', '=', $params['category_id']);
+			if(is_array($params['category_id']) && count($params['category_id']) > 0){
+				$post->whereIn(Helpers::$prefix_table . 'post.category_id', $params['category_id']);
+			}else{
+				$post->where(Helpers::$prefix_table . 'post.category_id', '=', $params['category_id']);
+			}
 		}
 
 		if($params['with_post_at'] == true){

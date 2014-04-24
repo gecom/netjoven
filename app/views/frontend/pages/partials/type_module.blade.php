@@ -58,7 +58,7 @@
 
 		<div class="share msg-confirm" style="display:none">
 			¡Gracias por personalizar tu interfaz de netjoven.pe!<br>
-			<span data-dismiss="modal" class="f6"></span>
+			<span data-dismiss="modal" id="close_type_module" class="f6"></span>
 		</div>
 	</div>
 </div>

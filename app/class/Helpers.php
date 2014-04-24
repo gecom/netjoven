@@ -338,6 +338,18 @@ class Helpers {
 		return $dbl_tags;
 	}
 
+	public static function getTypeModule(){
+		if(Auth::check()){
+			return self::TYPE_MODULE_ESTANDAR;
+		}else{
+			if(Cookie::has('type_module')){
+				return Cookie::get('type_module');
+			}else{
+				return self::TYPE_MODULE_ESTANDAR;
+			}
+		}
+	}
+
 
 }
 

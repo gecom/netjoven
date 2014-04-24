@@ -1,6 +1,6 @@
 <?php
 
-class FrontEndHomeController extends BaseController {
+class FrontendHomeController extends BaseController {
 
 
 	public function home($type_module = null){
@@ -80,9 +80,14 @@ class FrontEndHomeController extends BaseController {
 
 		$cookie = Cookie::forever('type_module', $type_module);
 
-		$data = $this->getPostByTypeModule($type_module);
+		$response['success'] = true;
+		$response['type_module'] = $type_module;
+		$response['message'] = 'Tus cambios se realizaron con éxito';
+		return Response::json($response)->withCookie($cookie);
 
-		$params_template['dbl_theme_day'] = ThemeDay::getThemeDay()->get();
+		//$data = $this->getPostByTypeModule($type_module);
+
+		/*$params_template['dbl_theme_day'] = ThemeDay::getThemeDay()->get();
 		$params_template['dbl_last_post'] = $data['dbl_last_post'];
 		$params_template['type_module'] = $type_module;
 
@@ -93,11 +98,7 @@ class FrontEndHomeController extends BaseController {
 			$params_template['dbl_more_post'] = $data['dbl_more_post'];
 			$params_template['type_module'] = $type_module;
 			$response['template_more_post'] = View::make('frontend.pages.home.more_news',$params_template)->render();
-		}
-
-		$response['type_module'] = $type_module;
-		$response['message'] = 'Tus cambios se realizaron con éxito';
-		return Response::json($response)->withCookie($cookie);
+		}*/
 
 	}
 

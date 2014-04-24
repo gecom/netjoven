@@ -53,4 +53,5 @@
 
 @section('js')
     {{ HTML::script('assets/js/bxslider/jquery.bxslider.min.js'); }}
+    {{ HTML::script('assets/js/fn/home.js'); }}
 @stop

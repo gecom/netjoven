@@ -38,7 +38,7 @@
         {{ HTML::script('assets/js/bootstrap.min.js'); }}
         {{ HTML::script('assets/js/bootstrap_modal/bootstrap-modal.js'); }}
         {{ HTML::script('assets/js/bootstrap_modal/bootstrap-modalmanager.js'); }}
-        {{ HTML::script('assets/js/fn/home.js'); }}
+        {{ HTML::script('assets/js/fn/main.js'); }}
 
         @section('js')
         @show
