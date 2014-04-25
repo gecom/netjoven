@@ -20,7 +20,7 @@
             <div class="text">{{$dbr_more_post->title}}</div>
             <div class="opt">
                 <ul>
-                    <li class="e1"><a href="#">+{{ Category::getParentCategoryById($dbr_more_post->category_parent_id)->name}}</a></li>
+                    <li class="e1"><a href="{{route('frontend.section.list', array($dbr_more_post->category_slug))}}">+{{ $dbr_more_post->category_name}}</a></li>
                     <li class="{{($dbr_more_post->type == Helpers::TYPE_POST_GALLERY ? 'e4' : 'e2')}}"><a href="#"></a></li>
                     <li class="e3">{{ Helpers::intervalDate($dbr_more_post->post_at, date('Y-m-d H:i:s'))}}</li>
                 </ul>
@@ -29,7 +29,5 @@
     @endforeach
 </div>
 
-        <div class="paginate">
-ver mas
-    </div>
+<div class="paginate">ver mas</div>
 

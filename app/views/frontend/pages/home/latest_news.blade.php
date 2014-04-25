@@ -10,6 +10,7 @@
 
 <div class="list_articles {{($type_module == Helpers::TYPE_MODULE_LISTADO ? 'list_mode' : '')}}">
     @foreach ($dbl_last_post as $dbr_last_post)
+        <?php  ?>
         <article >
             <div class="media">
                 @if($dbr_last_post->type == Helpers::TYPE_POST_VIDEO || !empty($dbr_last_post->id_video) )
@@ -30,7 +31,7 @@
             <div class="text">{{$dbr_last_post->title}}</div>
             <div class="opt">
                 <ul>
-                    <li class="e1"><a href="#">+{{ Category::getParentCategoryById($dbr_last_post->category_parent_id)->name}}</a></li>
+                    <li class="e1"><a href="{{route('frontend.section.list', array($dbr_last_post->category_slug))}}">+{{ $dbr_last_post->category_name}}</a></li>
                     <li class="{{($dbr_last_post->type == Helpers::TYPE_POST_GALLERY ? 'e4' : 'e2')}}"><a href="#"></a></li>
                     <li class="e3">{{ Helpers::intervalDate($dbr_last_post->post_at, date('Y-m-d H:i:s'))}}</li>
                 </ul>

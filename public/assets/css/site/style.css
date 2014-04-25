@@ -66,7 +66,7 @@ header .social ul li .gp{background-position:-129px -90px}
 #main_nav.menu_fixed .options_menu_fixed li .search_box .bg_search{background-color:#000;width:213px;height:26px;opacity:.2;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=20);position:absolute;top:4px;left:36px;-webkit-border-radius:13px;-moz-border-radius:13px;border-radius:13px}
 #main_nav.menu_fixed .options_menu_fixed li .search_box input{border:0;color:#fff;background:none;position:absolute;z-index:10;outline:0;left:50px;width:174px;height:18px;top:5px;font-size:1em;line-height:18px}
 .destacado{padding:10px 10px 40px 10px;background:#fff;border-bottom:1px solid #d8d8d8;width:960px;margin-bottom:14px;}
-.destacado .image_destacado{-webkit-box-shadow:1px 1px 4px 0 #6d6d6d;-moz-box-shadow:1px 1px 4px 0 #6d6d6d;box-shadow:1px 1px 4px 0 #6d6d6d;width:935px;height:393px;position:relative;text-align:center;}
+.destacado .image_destacado{-webkit-box-shadow:1px 1px 4px 0 #6d6d6d;-moz-box-shadow:1px 1px 4px 0 #6d6d6d;box-shadow:1px 1px 4px 0 #6d6d6d;width:935px;height:393px;position:relative;text-align: center}
 .destacado .image_destacado .txt{position:absolute;left:0;bottom:28px;min-height:60px;border-bottom:1px solid #000;color:#fff;font-size:1.85em;font-weight:700;text-align:center;width:100%;padding-top:20px}
 .destacado .image_destacado .link{left:0;bottom:4px;position:absolute;width:100%;text-align:right;padding-right:7px;}
 .destacado .image_destacado .link a{color:#fff}
@@ -121,7 +121,7 @@ header .social ul li .gp{background-position:-129px -90px}
 .v_news .paginate ul{font-size:0;}
 .v_news .paginate ul li{display:inline-block;width:16px;height:16px;-webkit-border-radius:8px;-moz-border-radius:8px;border-radius:8px;text-align:center;line-height:15px;font-size:1rem;margin-left:2px;}
 .v_news .paginate ul li a{font-size:.9em;display:inline-block;color:#6d6d6d;line-height:auto}
-.v_news .paginate ul li:hover a,.v_news .paginate ul .active span{color:#fff;text-decoration:none}
+.v_news .paginate ul li:hover a,.v_news .paginate ul .active a{color:#fff;text-decoration:none}
 #big_banner{width:960px;height:90px;margin:14px 0;display:block;background-color:#5d5d5d;text-align:center}
 #videos{margin-bottom:14px;width:960px;background-color:#fff;padding:10px 10px 40px;border-bottom:1px solid #d8d8d8;border-top:1px solid #d8d8d8;font-size:0;}
 #videos .left_video{width:604px;display:inline-block;vertical-align:top;font-size:1rem;}
@@ -403,6 +403,95 @@ footer .footer_devices .fd2{background:url("/../assets/images/sprite.png") -144p
 #portada_espectaculos .paginate ul li{display:inline-block;width:16px;height:16px;-webkit-border-radius:8px;-moz-border-radius:8px;border-radius:8px;text-align:center;line-height:15px;font-size:1rem;margin-left:2px;}
 #portada_espectaculos .paginate ul li a{font-size:.9em;display:inline-block;color:#6d6d6d;line-height:auto}
 #portada_espectaculos .paginate ul li:hover a,#portada_espectaculos .paginate ul .active a{color:#fff;text-decoration:none}
+#notes{width:960px;background:#fff;padding-top:15px;font-size:0;overflow:hidden}
+.left_notes{width:300px;display:inline-block;vertical-align:top;margin:0 26px 0 9px;font-size:1rem;}
+.left_notes .monster_box{width:300px;height:618px;-webkit-box-shadow:1px 1px 4px 0 #6d6d6d;-moz-box-shadow:1px 1px 4px 0 #6d6d6d;box-shadow:1px 1px 4px 0 #6d6d6d;padding:9px 0;margin-bottom:15px}
+.left_notes .add{width:300px;height:290px;padding:20px 0;-webkit-box-shadow:1px 1px 4px 0 #6d6d6d;-moz-box-shadow:1px 1px 4px 0 #6d6d6d;box-shadow:1px 1px 4px 0 #6d6d6d;margin-bottom:15px;}
+.left_notes .add img{width:100%;height:auto}
+.left_notes .mas_visto{-webkit-box-shadow:1px 1px 4px 0 #6d6d6d;-moz-box-shadow:1px 1px 4px 0 #6d6d6d;box-shadow:1px 1px 4px 0 #6d6d6d;}
+.left_notes .mas_visto .tab{height:26px;font-size:1.3em;padding-left:11px;background:#e3e3e3 url("/../assets/images/sprite.png") 256px -639px no-repeat}
+.left_notes .mas_visto .list .item{padding:7px 0 7px 11px;width:300px;font-size:0;border-bottom:1px solid #d9d9d9;}
+.left_notes .mas_visto .list .item figure{vertical-align:top;display:inline-block;font-size:1rem;}
+.left_notes .mas_visto .list .item figure img{width:120px;height:74px}
+.left_notes .mas_visto .list .item .des{width:162px;vertical-align:top;display:inline-block;font-size:1rem;padding-left:7px;height:74px}
+.left_notes .mas_visto .list .item:nth-child(even){background-color:#f1f1f1}
+.left_notes .mas_visto .pagine{height:49px;text-align:center}
+.left_notes .plugin_fb{width:300px;-webkit-box-shadow:1px 1px 4px 0 #6d6d6d;-moz-box-shadow:1px 1px 4px 0 #6d6d6d;box-shadow:1px 1px 4px 0 #6d6d6d;margin:15px 0}
+.left_notes #ads{width:300px;border:0;padding:0;}
+.left_notes #ads .item{width:140px;margin-left:20px;margin-bottom:20px;}
+.left_notes #ads .item:nth-child(odd){margin-left:0}
+.right_notes{width:600px;display:inline-block;vertical-align:top;font-size:1rem;float:right;margin-right:25px;}
+.right_notes .group_title{font-size:2.8em;line-height:30px}
+.right_notes .title_nota{font-size:1.9em;margin-top:5px}
+.right_notes .image .opt{height:27px;background-color:#e2e2e2;width:100%;padding:0 10px;text-align:left;margin-top:30px;}
+.right_notes .image .opt ul{font-size:0;}
+.right_notes .image .opt ul li{display:inline-block;vertical-align:top;font-size:.8rem;}
+.right_notes .image .opt ul li a{color:#6d6d6d}
+.right_notes .image .opt ul .e1{width:274px;padding-top:8px}
+.right_notes .image .opt ul .e2 a,.right_notes .image .opt ul .e4 a{width:28px;height:20px;background:url("/../assets/images/sprite.png") 0 -191px;display:block;margin-top:4px}
+.right_notes .image .opt ul .e4 a{background-position:-41px -191px}
+.right_notes .image .opt ul .e3{padding:8px 20px 0 0;background:url("/../assets/images/sprite.png") 261px -217px;width:276px;text-align:right;background-repeat:no-repeat}
+.right_notes .image .gallery{position:relative;}
+.right_notes .image .gallery a{position:absolute;width:38px;height:38px;display:block;-webkit-border-radius:19px;-moz-border-radius:19px;border-radius:19px;background:url("/../assets/images/sprite.png");top:50%;margin-top:-19px;opacity:.7;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=70);}
+.right_notes .image .gallery a.next{background-position:-200px -637px;left:0}
+.right_notes .image .gallery a.prev{background-position:-157px -637px;right:0}
+.right_notes .image figure{width:600px;}
+.right_notes .image figure img{width:100%;height:auto}
+.right_notes .text_note{font-size:1.13em;margin-top:15px}
+.right_notes .author{font-size:.88em;text-align:center;margin-top:25px;}
+.right_notes .author span{height:8px;width:8px;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;display:inline-block;margin-right:7px;margin-top:2px}
+.right_notes .social{text-align:center;padding:15px 0;border-top:1px solid #d9d9d9;border-bottom:1px solid #d9d9d9}
+.right_notes .tags{font-size:.88em;text-align:center;padding:5px 0 22px;}
+.right_notes .tags span{font-size:1.14em;font-weight:700}
+.right_notes .action{text-align:center;}
+.right_notes .action .btn_volver{text-align:center;margin:0 auto;padding:0 18px;font-size:1.2em;color:#fff;display:inline-block;-webkit-border-radius:12px;-moz-border-radius:12px;border-radius:12px;text-decoration:none}
+.right_notes .buscar_otro{border-bottom:1px solid #d9d9d9;padding-bottom:6px;}
+.right_notes .buscar_otro .tit{font-size:2em;text-align:center}
+.right_notes .buscar_otro .box_form{background-color:#ececec;height:40px;border-bottom:1px solid #bababa;}
+.right_notes .buscar_otro .box_form select{display:inline-block;margin-left:50px;margin-right:142px;height:28px;width:162px;border:1px solid #a5a5a5;vertical-align:top;margin-top:5px}
+.right_notes .buscar_otro .box_form .box_search{display:inline-block;background:#bdbdbd;width:213px;height:26px;-webkit-border-radius:13px;-moz-border-radius:13px;border-radius:13px;vertical-align:top;margin-top:6px;}
+.right_notes .buscar_otro .box_form .box_search .ipt{background:none;border:0;height:20px;padding-left:20px;width:172px;margin-left:5px}
+.right_notes .buscar_otro .box_form .box_search .btn{background:url("/../assets/images/sprite.png") -1px -146px;height:26px}
+#horoscopo_resultados{width:960px;background:#fff;font-size:0;overflow:hidden;}
+#horoscopo_resultados .big_title{height:50px;border-bottom:1px solid #d8d8d8;margin-bottom:10px;text-align:center;line-height:50px;font-size:2.4rem}
+#horoscopo_resultados .paginate{border-top:1px solid #d8d8d8;height:40px;padding:9px 15px 0 0;text-align:right;margin-top:10px;width:100%;float:left;}
+#horoscopo_resultados .paginate ul{font-size:0;}
+#horoscopo_resultados .paginate ul li{display:inline-block;width:16px;height:16px;-webkit-border-radius:8px;-moz-border-radius:8px;border-radius:8px;text-align:center;line-height:15px;font-size:1rem;margin-left:2px;}
+#horoscopo_resultados .paginate ul li a{font-size:.9em;display:inline-block;color:#6d6d6d;line-height:auto}
+#horoscopo_resultados .paginate ul li:hover a,#horoscopo_resultados .paginate ul .active a{color:#fff;text-decoration:none}
+#horoscopo_resultados .right_horoscopo{width:600px;display:inline-block;vertical-align:top;font-size:1rem;float:right;margin-right:24px;}
+#horoscopo_resultados .right_horoscopo .list_articles{font-size:0;padding-bottom:10px;padding-top:10px;}
+#horoscopo_resultados .right_horoscopo .list_articles article{width:600px;display:inline-block;vertical-align:top;-webkit-box-shadow:1px 1px 4px 0 #6d6d6d;-moz-box-shadow:1px 1px 4px 0 #6d6d6d;box-shadow:1px 1px 4px 0 #6d6d6d;margin:0 0 20px 0;font-size:1rem;}
+#horoscopo_resultados .right_horoscopo .list_articles article .add_in_news{width:406px;height:250px;background-color:#333;margin:20px 0}
+#horoscopo_resultados .right_horoscopo .list_articles article .media{height:120px;width:194px;float:left;position:relative;overflow:hidden;}
+#horoscopo_resultados .right_horoscopo .list_articles article .media img{width:100%;height:auto}
+#horoscopo_resultados .right_horoscopo .list_articles article .media .play_video{background-image:url("/../assets/images/sprite.png");background-position:-71px -180px;background-repeat:no-repeat;width:38px;height:38px;display:block;position:absolute;top:50%;left:50%;margin-left:-19px;margin-top:-19px;-webkit-border-radius:19px;-moz-border-radius:19px;border-radius:19px;opacity:.8;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=80);-webkit-box-shadow:1px 1px 4px 0 #6d6d6d;-moz-box-shadow:1px 1px 4px 0 #6d6d6d;box-shadow:1px 1px 4px 0 #6d6d6d;z-index:10}
+#horoscopo_resultados .right_horoscopo .list_articles article .media .exclusive_label{width:140px;height:140px;-webkit-border-radius:70px;-moz-border-radius:70px;border-radius:70px;position:absolute;-webkit-box-shadow:1px 1px 4px 0 #6d6d6d;-moz-box-shadow:1px 1px 4px 0 #6d6d6d;box-shadow:1px 1px 4px 0 #6d6d6d;color:#fff;font-size:1.1em;top:-109px;left:-9px;padding:109px 0 0 39px;opacity:.7;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=70)}
+#horoscopo_resultados .right_horoscopo .list_articles article .text{height:93px;font-size:1.3em;line-height:1.35em;padding:10px 10px 5px;width:406px;float:left}
+#horoscopo_resultados .right_horoscopo .list_articles article .opt{height:27px;background-color:#e2e2e2;width:406px;padding:0 10px;float:left;}
+#horoscopo_resultados .right_horoscopo .list_articles article .opt ul{font-size:0;}
+#horoscopo_resultados .right_horoscopo .list_articles article .opt ul li{display:inline-block;vertical-align:top;font-size:.8rem;}
+#horoscopo_resultados .right_horoscopo .list_articles article .opt ul li a{color:#6d6d6d}
+#horoscopo_resultados .right_horoscopo .list_articles article .opt ul .e1{width:180px;padding-top:8px}
+#horoscopo_resultados .right_horoscopo .list_articles article .opt ul .e2 a,#horoscopo_resultados .right_horoscopo .list_articles article .opt ul .e4 a{width:28px;height:20px;background:url("/../assets/images/sprite.png") 0 -191px;display:block;margin-top:4px}
+#horoscopo_resultados .right_horoscopo .list_articles article .opt ul .e4 a{background-position:-41px -191px}
+#horoscopo_resultados .right_horoscopo .list_articles article .opt ul .e3{padding:8px 20px 0 0;background:url("/../assets/images/sprite.png") 160px -216px;width:175px;text-align:right;background-repeat:no-repeat}
+#horoscopo_resultados .left_horoscopo{width:300px;display:inline-block;vertical-align:top;margin:0 26px 0 10px;font-size:1rem;}
+#horoscopo_resultados .left_horoscopo .monster_box{width:300px;height:618px;-webkit-box-shadow:1px 1px 4px 0 #6d6d6d;-moz-box-shadow:1px 1px 4px 0 #6d6d6d;box-shadow:1px 1px 4px 0 #6d6d6d;padding:9px 0;margin-bottom:15px}
+#horoscopo_resultados .left_horoscopo .add{width:300px;height:290px;padding:20px 0;-webkit-box-shadow:1px 1px 4px 0 #6d6d6d;-moz-box-shadow:1px 1px 4px 0 #6d6d6d;box-shadow:1px 1px 4px 0 #6d6d6d;margin-bottom:15px;}
+#horoscopo_resultados .left_horoscopo .add img{width:100%;height:auto}
+#horoscopo_resultados .left_horoscopo .mas_visto{-webkit-box-shadow:1px 1px 4px 0 #6d6d6d;-moz-box-shadow:1px 1px 4px 0 #6d6d6d;box-shadow:1px 1px 4px 0 #6d6d6d;}
+#horoscopo_resultados .left_horoscopo .mas_visto .tab{height:26px;font-size:1.3em;padding-left:11px;background:#e3e3e3 url("/../assets/images/sprite.png") 256px -639px no-repeat}
+#horoscopo_resultados .left_horoscopo .mas_visto .list .item{padding:7px 0 7px 11px;width:300px;font-size:0;border-bottom:1px solid #d9d9d9;}
+#horoscopo_resultados .left_horoscopo .mas_visto .list .item figure{vertical-align:top;display:inline-block;font-size:1rem;}
+#horoscopo_resultados .left_horoscopo .mas_visto .list .item figure img{width:120px;height:74px}
+#horoscopo_resultados .left_horoscopo .mas_visto .list .item .des{width:162px;vertical-align:top;display:inline-block;font-size:1rem;padding-left:7px;height:74px}
+#horoscopo_resultados .left_horoscopo .mas_visto .list .item:nth-child(even){background-color:#f1f1f1}
+#horoscopo_resultados .left_horoscopo .mas_visto .pagine{height:49px;text-align:center}
+#horoscopo_resultados .left_horoscopo .plugin_fb{width:300px;-webkit-box-shadow:1px 1px 4px 0 #6d6d6d;-moz-box-shadow:1px 1px 4px 0 #6d6d6d;box-shadow:1px 1px 4px 0 #6d6d6d;margin:15px 0}
+#horoscopo_resultados .left_horoscopo #ads{width:300px;border:0;padding:0;}
+#horoscopo_resultados .left_horoscopo #ads .item{width:140px;margin-left:20px;margin-bottom:20px;}
+#horoscopo_resultados .left_horoscopo #ads .item:nth-child(odd){margin-left:0}
 @media screen and (max-width:1000px){.container{width:768px;margin:0 auto;padding:0}
 header{overflow:hidden;width:768px;}
 header .social,header .search{display:none}
@@ -544,6 +633,37 @@ footer{display:none}
 .view_3 .features{text-align:center}
 .view_3 .more_news_v2 .news:nth-child(3n+1),.view_3 .more_news_v2 .news:nth-child(2n+1),.view_3 .more_news_v2 .news:first-child{margin:0 !important}
 .view_3 .more_news_v2 .news:nth-child(even){margin:50px !important}
+#notes{width:690px;overflow:hidden;margin:0 auto 14px;}
+#notes .add,#notes #ads,#notes .plugin_fb,#notes .monster_box{display:none}
+#notes .left_notes{width:690px}
+#notes .mas_visto .tab{background-position:529px -734px}
+#notes .right_notes{width:690px;padding-bottom:10px;float:none;}
+#notes .right_notes figure{width:690px}
+#notes .right_notes .text_note{padding-left:10px;padding-right:10px;padding-bottom:10px}
+#notes .right_notes .group_title,#notes .right_notes .title_nota{padding-left:10px;padding-right:10px}
+#notes .right_notes .image .opt ul .e1{width:317px}
+#notes .right_notes .image .opt ul .e3{width:322px;background-position:306px -217px}
+#notes .mas_visto{width:600px;margin:0 auto;margin-top:40px;margin-bottom:20px;}
+#notes .mas_visto .list{overflow:hidden;}
+#notes .mas_visto .list .item{float:left;}
+#notes .mas_visto .list .item:nth-child(even){border-left:1px solid #d9d9d9;background:none}
+#notes .mas_visto .list .item.bg_class{background-color:#f1f1f1}
+#horoscopo_resultados{width:690px;overflow:hidden;margin:0 auto 14px;}
+#horoscopo_resultados .add,#horoscopo_resultados #ads,#horoscopo_resultados .plugin_fb,#horoscopo_resultados .monster_box{display:none}
+#horoscopo_resultados .left_horoscopo{width:690px;}
+#horoscopo_resultados .left_horoscopo .mas_visto .tab{background-position:529px -734px}
+#horoscopo_resultados .right_horoscopo{width:690px;padding-bottom:10px;float:none;text-align:center;}
+#horoscopo_resultados .right_horoscopo article{text-align:left;}
+#horoscopo_resultados .right_horoscopo article figure{width:690px}
+#horoscopo_resultados .right_horoscopo article .text_note{padding-left:10px;padding-right:10px;text-align:left;padding-bottom:10px}
+#horoscopo_resultados .right_horoscopo article .group_title,#horoscopo_resultados .right_horoscopo article .title_nota{padding-left:10px;padding-right:10px}
+#horoscopo_resultados .right_horoscopo article .image .opt ul .e1{width:317px}
+#horoscopo_resultados .right_horoscopo article .image .opt ul .e3{width:322px;background-position:306px -217px}
+#horoscopo_resultados .mas_visto{width:600px;margin:0 auto;margin-top:40px;margin-bottom:20px;}
+#horoscopo_resultados .mas_visto .list{overflow:hidden;}
+#horoscopo_resultados .mas_visto .list .item{float:left;}
+#horoscopo_resultados .mas_visto .list .item:nth-child(even){border-left:1px solid #d9d9d9;background:none}
+#horoscopo_resultados .mas_visto .list .item.bg_class{background-color:#f1f1f1}
 }@media screen and (max-width:480px){.container,header,#main_nav{width:320px}
 #main_nav .menu_responsive .menu{margin-left:0;text-align:center}
 #main_nav .menu_responsive .options .search_box{width:252px}
@@ -553,7 +673,7 @@ footer{display:none}
 .v_news .list_articles article{margin:0 0 20px;}
 .v_news .list_articles article:nth-child(3n+1){margin-left:0}
 #big_banner{width:320px;padding-top:0;height:auto;}
-#big_banner img{width:100%;height:250px}
+#big_banner img{width:100%}
 #ads{width:320px;padding-bottom:20px;}
 #ads .item{margin-left:20px;margin-bottom:20px;}
 #ads .item:nth-child(odd){margin-left:0}
@@ -610,4 +730,30 @@ footer{display:none}
 #portada_espectaculos.view_3 .news .opt .e1{width:122px !important}
 #portada_espectaculos.view_3 .news .opt .e4 a{background-position:-41px -191px}
 #portada_espectaculos.view_3 .news .opt .e3{background-position:111px -217px;width:126px !important}
+#notes{width:320px;}
+#notes .right_notes{width:320px;}
+#notes .right_notes .buscar_otro{display:none}
+#notes .right_notes figure{width:320px}
+#notes .right_notes .image .opt ul .e1{width:136px}
+#notes .right_notes .image .opt ul .e3{width:134px;background-position:119px -217px}
+#notes .left_notes{width:320px;margin:0}
+#notes .mas_visto{width:300px;}
+#notes .mas_visto .tab{background-position:228px -734px}
+#notes .mas_visto .list .item{float:left;}
+#notes .mas_visto .list .item:nth-child(even){border-left:1px solid #d9d9d9;background:none}
+#notes .mas_visto .list .item.bg_class{background-color:#f1f1f1}
+#horoscopo_resultados{width:320px;}
+#horoscopo_resultados .right_horoscopo{width:320px;}
+#horoscopo_resultados .right_horoscopo .buscar_otro{display:none}
+#horoscopo_resultados .right_horoscopo .list_articles article{width:320px;}
+#horoscopo_resultados .right_horoscopo .list_articles article .media{width:320px;height:auto}
+#horoscopo_resultados .right_horoscopo .list_articles article .text{width:320px}
+#horoscopo_resultados .right_horoscopo .list_articles article .opt ul .e1{width:136px}
+#horoscopo_resultados .right_horoscopo .list_articles article .opt ul .e3{width:134px;background-position:119px -217px}
+#horoscopo_resultados .left_horoscopo{width:320px;margin:0}
+#horoscopo_resultados .mas_visto{width:300px;}
+#horoscopo_resultados .mas_visto .tab{background-position:228px -734px}
+#horoscopo_resultados .mas_visto .list .item{float:left;}
+#horoscopo_resultados .mas_visto .list .item:nth-child(even){border-left:1px solid #d9d9d9;background:none}
+#horoscopo_resultados .mas_visto .list .item.bg_class{background-color:#f1f1f1}
 }
