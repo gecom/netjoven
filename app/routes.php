@@ -22,8 +22,6 @@ Route::model('parent_category', 'Category');
 Route::model('directory_publication', 'DirectoryPublication');
 Route::model('theme_day', 'ThemeDay');
 
-
-
 /** ------------------------------------------
  *  Route constraint patterns
  *  ------------------------------------------
@@ -36,20 +34,6 @@ Route::pattern('directory_publication', '[0-9]+');
 Route::pattern('directory_path', '[a-z]+');
 Route::pattern('theme_day', '[a-z]+');
 Route::pattern('slug', '[a-z0-9-]+');
-
-
-View::share('dbl_categories_home', Helpers::getCategoriesHome());
-
-Route::get('/', array('as' => 'home', 'uses' => 'FrontendHomeController@home' ));
-Route::get('/noticias/page/{page}', array('as' => 'home_pagination', 'uses' => 'FrontendHomeController@home' ));
-Route::get('{slug}', array('as' => 'frontend.section.list', 'uses' => 'FrontendSectionController@listSection' ));
-Route::get('{slug}/{page}', array('as' => 'frontend.section.pagination', 'uses' => 'FrontendSectionController@listSection' ));
-
-
-/*******Cambiar tipo de vista*******/
-
-Route::get('/cambiar_tipo_vista/{type_module}', array('as' => 'frontend.change_view', 'uses' => 'FrontEndHomeController@changeTypeModule' ));
-Route::post('/cambiar_tipo_vista/{type_module}', array('as' => 'frontend.save.change_view', 'uses' => 'FrontEndHomeController@saveTypeModule' ));
 
 Route::group(array('prefix' => 'backend'), function()
 {
@@ -121,3 +105,16 @@ Route::group(array('prefix' => 'backend'), function()
     Route::get('/logout', 'UserController@logout');
 
 });
+
+View::share('dbl_categories_home', Helpers::getCategoriesHome());
+
+Route::get('/', array('as' => 'home', 'uses' => 'FrontendHomeController@home' ));
+Route::get('/noticias/page/{page}', array('as' => 'home_pagination', 'uses' => 'FrontendHomeController@home' ));
+Route::get('{slug}', array('as' => 'frontend.section.list', 'uses' => 'FrontendSectionController@listSection' ));
+Route::get('{slug}/{page}', array('as' => 'frontend.section.pagination', 'uses' => 'FrontendSectionController@listSection' ));
+
+
+/*******Cambiar tipo de vista*******/
+
+Route::get('/cambiar_tipo_vista/{type_module}', array('as' => 'frontend.change_view', 'uses' => 'FrontEndHomeController@changeTypeModule' ));
+Route::post('/cambiar_tipo_vista/{type_module}', array('as' => 'frontend.save.change_view', 'uses' => 'FrontEndHomeController@saveTypeModule' ));
