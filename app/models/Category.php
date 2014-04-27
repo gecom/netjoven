@@ -27,19 +27,11 @@ class Category extends Eloquent {
         return $this->belongsTo('Category','id', 'parent_id');
     }
 
-	public static function getParentCategories($type = Helpers::TYPE_POST_NEWS)
+	public static function getParentCategories()
     {
         $dbl_categories = (new Category())
         ->where('parent_id')
         ->where('status', '=', Status::STATUS_ACTIVO);
-
-        if(is_array($type)){
-            $dbl_categories->whereIn('type', $type);
-        }else{
-            if(!empty($type)){
-                $dbl_categories->where('type', '=', $type);
-            }
-        }
 
         $dbl_categories->orderBy('created_at', 'desc');
 
@@ -56,11 +48,10 @@ class Category extends Eloquent {
 		return $dbr_parent_category;
     }
 
-    public static function getChildrenCategoryByParentId($parent_id, $type = Helpers::TYPE_POST_NEWS){
+    public static function getChildrenCategoryByParentId($parent_id){
 
         $categories = (new Category())
         ->where('status', '=', Status::STATUS_ACTIVO)
-        ->where('type', '=', $type)
 		->where('parent_id','=', $parent_id);
 
         return $categories;
@@ -69,7 +60,6 @@ class Category extends Eloquent {
     public static function getParentCategoriesHome(){
 
         $categories = (new Category())
-        ->whereIn('njv_category.type', array(Helpers::TYPE_POST_NEWS, Helpers::TYPE_POST_VIDEO))
         ->where('njv_category.parent_id')
         ->where('njv_category.is_menu', '=', 1);
 

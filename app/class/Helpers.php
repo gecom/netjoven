@@ -5,6 +5,7 @@ class Helpers {
 	const TYPE_POST_NEWS 		= 'NOTA';
 	const TYPE_POST_VIDEO		= 'VIDEO';
 	const TYPE_POST_CARTELERA  	= 'CARTELERA';
+	const TYPE_POST_HOROSCOPO 	= 'HOROSCOPO';
 	const TYPE_POST_PARANORMAL 	= 'PARANORMAL';
 	const TYPE_POST_JUEGOS     	= 'JUEGOS';
 	const TYPE_POST_BLOGS      	= 'BLOGS';
