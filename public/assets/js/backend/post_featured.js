@@ -39,7 +39,7 @@ var registerPostFeatured = (function(){
 
 $(function(){
 
-	var $frm_post_featured = $('#frm_post_featured'), $frm_post_featured_type = $('#frm_post_featured_type');
+	var $frm_post_featured = $('#frm_post_featured'), $frm_post_featured_type = $('#frm_post_featured_type'), $frm_post_featured_is_video = $('#frm_post_featured_is_video');
 
 	$frm_post_featured.on('submit', function(e){
 		e.preventDefault();
@@ -87,7 +87,13 @@ $(function(){
 
 	registerPostFeatured.uploadImage('#fileupload_principal','/backend/upload_file_image/featured',
 	function(data){
-			data.formData = {type_featured : $frm_post_featured_type.val()}
+			var param_form = {type_featured : $frm_post_featured_type.val()}
+
+			if($frm_post_featured_is_video.length){
+				param_form.is_video = 1;
+			}
+
+			data.formData = param_form;
 	} ,
 	function(response){
 		var message = '', is_error = false;

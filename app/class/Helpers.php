@@ -2,9 +2,13 @@
 
 class Helpers {
 
-	const TYPE_POST_NEWS = 'NEWS';
-	const TYPE_POST_VIDEO = 'VIDEO';
-	const TYPE_POST_GALLERY = 'GALLERY';
+	const TYPE_POST_NEWS 		= 'NOTA';
+	const TYPE_POST_VIDEO		= 'VIDEO';
+	const TYPE_POST_CARTELERA  	= 'CARTELERA';
+	const TYPE_POST_PARANORMAL 	= 'PARANORMAL';
+	const TYPE_POST_JUEGOS     	= 'JUEGOS';
+	const TYPE_POST_BLOGS      	= 'BLOGS';
+	const TYPE_POST_FAIL       	= 'FAIL';
 
 	const TYPE_BINGE_BAR = 'Bar';
 	const TYPE_BINGE_DISCOTECA = 'Discotecas';
@@ -17,6 +21,7 @@ class Helpers {
 	const TYPE_POST_SLIDER_FEATURED = 'SL';
 	const TYPE_POST_SECTION_FEATURED = 'SE';
 	const TYPE_POST_SUBSECTION_FEATURED = 'SSE';
+	const TYPE_VIDEO_FEATURED = 'V';
 
 	const TYPE_MODULE_ESTANDAR = 'E';
 	const TYPE_MODULE_MODULAR = 'M';
@@ -78,8 +83,8 @@ class Helpers {
 			array('name' => 'Administrar Banners', 'class'=>'fa-table', 'url' => '#' ),
 			array('name' => 'Publicaciones', 'class'=>'fa-table', 'url' => '#',
 				'subcategories'=> array(
-						array('name' => 'Noticias', 'url' => url('backend/publicaciones')),
-						array('name' => 'Videos', 'url' => '#'),
+						array('name' => 'Noticias', 'url' => url('backend/publicaciones/' . mb_strtolower(self::TYPE_POST_NEWS))),
+						array('name' => 'Videos', 'url' => url('backend/publicaciones/' . mb_strtolower(self::TYPE_POST_VIDEO))),
 						array('name' => 'Fail en Redes', 'url' => '#'),
 						array('name' => 'Cartelera', 'url' => '#'),
 						array('name' => 'Blogs', 'url' => '#'),
@@ -110,7 +115,7 @@ class Helpers {
 			'gallery' 					=> array('width' => 600, 'height' => 374),
 			'category' 					=> array('width' => 260, 'height' => 378),
 			'category_thumb' 			=> array('width' => 216, 'height' => 265),
-			'video'						=> array('width' => 500, 'height' => 300),
+			'video_featured'			=> array('width' => 500, 'height' => 300),
 			'view'						=> array('width' => 300, 'height' => 187),
 			'view_thumb' 				=> array('width' => 160, 'height' => 160)
 	);

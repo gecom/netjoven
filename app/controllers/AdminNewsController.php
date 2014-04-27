@@ -3,9 +3,9 @@
 class AdminNewsController extends BaseController {
 
 
-    public function listNews()
+    public function listNews($type_post)
     {
-        $params['type'] = array(Helpers::TYPE_POST_NEWS);
+        $params['type'] = array($type_post);
         $dbl_post = Post::getPost($params)->paginate(15);
         return View::make('backend.pages.post_list', array('dbl_post' => $dbl_post ));
     }
@@ -35,7 +35,7 @@ class AdminNewsController extends BaseController {
 
          $dbr_post_featured = PostFeatured::getFeaturedActiveByPostId($post->id)->first();
 
-         if(!$dbr_post_featured){
+         if($post->type == Helpers::TYPE_POST_NEWS && !$dbr_post_featured){
             $rules['type'] = 'required';
          }
 
@@ -54,19 +54,21 @@ class AdminNewsController extends BaseController {
 
             if( isset($data_frm_news['type'])){
                 $dbr_post_featured->type = $data_frm_news['type'];
+            }else{
+                $dbr_post_featured->type = Helpers::TYPE_VIDEO_FEATURED;                
             }
 
-            $dbr_post_featured->title = $data_frm_news['title'];
-            $dbr_post_featured->post_at = $data_frm_news['post_at'];
-            $dbr_post_featured->expired_at = $data_frm_news['expired_at'];
-            $dbr_post_featured->image = $data_frm_news['image'];
-            $dbr_post_featured->post_id = $post->id;
+            $dbr_post_featured->title       =   $data_frm_news['title'];
+            $dbr_post_featured->post_at     =   $data_frm_news['post_at'];
+            $dbr_post_featured->expired_at  =   $data_frm_news['expired_at'];
+            $dbr_post_featured->image       =   $data_frm_news['image'];
+            $dbr_post_featured->post_id     =   $post->id;
 
             try {
                 if($dbr_post_featured->save()){
                     $response['success'] = true;
                     $response['message'] =  'La nota se destaco satisfactoriamente';
-                    $response['redirect'] = route('backend.post.list');
+                    $response['redirect'] = route('backend.post.list', array(mb_strtolower($post->type)));
                 }else{
                     $response['success'] = false;
                     $response['errors'] =  ['Error: Hubo un error al registrar la nota como destacada'];
@@ -81,7 +83,7 @@ class AdminNewsController extends BaseController {
         return Response::json($response);
     }
 
-    public function news($post = null)
+    public function news($type_post, $post = null)
     {
 
         $params['is_new'] = $is_new =  false;

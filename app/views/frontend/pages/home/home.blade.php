@@ -20,12 +20,8 @@
             <img src="images/maq/banner.jpg" alt="">
         </section>
         <section id="videos">
-                <div class="left_video">
-                    <div class="video_title">
-                        Videos
-                    </div>
-                    <div class="video_animation"><img src="images/maq/video.png"></div>
-                    <div class="video_paginate"><img src="images/maq/paginate.jpg" alt=""></div>
+                <div class="left_video">                    
+                    @include('frontend.pages.home.featured_video')
                 </div>
                 <div class="right_video">
                     <div class="video_title">

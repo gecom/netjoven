@@ -9,6 +9,7 @@ class FrontendHomeController extends BaseController {
 
 		$params_template['dbl_last_post_featured_super'] = PostFeatured::GetFeaturedPost(Helpers::TYPE_POST_SUPER_FEATURED)->first();
 		$params_template['dbl_last_post_featured_slider'] = PostFeatured::GetFeaturedPost(Helpers::TYPE_POST_SLIDER_FEATURED)->limit(5)->get();
+		$params_template['dbl_last_post_video_featured'] = PostFeatured::GetFeaturedPost(Helpers::TYPE_VIDEO_FEATURED)->limit(5)->get();
 		$params_template['dbl_theme_day'] = ThemeDay::getThemeDay()->get();
 
 		if(Cookie::has('type_module')){
@@ -24,7 +25,7 @@ class FrontendHomeController extends BaseController {
 
 	protected function getPostByTypeModule($type_module){
 
-		$params['type'] =  array(Helpers::TYPE_POST_NEWS,Helpers::TYPE_POST_VIDEO,Helpers::TYPE_POST_GALLERY);
+		$params['type'] =  array(Helpers::TYPE_POST_NEWS,Helpers::TYPE_POST_VIDEO);
 		$params['view_index'] =  1;
 		$params['with_post_at'] =  true;
 		$params['display'] =  1;

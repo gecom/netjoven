@@ -32,6 +32,9 @@ class UploadController extends BaseController{
                 break;
             case 'featured':
                 $type_featured = Input::get('type_featured');
+                $is_video = Input::get('is_video');
+
+
                 $with_thumb = true;
 
                 if($type_featured == Helpers::TYPE_POST_SUPER_FEATURED){
@@ -45,12 +48,20 @@ class UploadController extends BaseController{
                 if($type_featured == Helpers::TYPE_POST_SECTION_FEATURED || $type_featured == Helpers::TYPE_POST_SUBSECTION_FEATURED ){
                     $data_size = Helpers::$size_images['featured_section_standar'];
                 }
+
+                if($is_video == 1){
+                    $data_size = Helpers::$size_images['video_featured'];
+                }
+                break;
+            case 'noticias':
+                $data_size = Helpers::$size_images['content'];
+                $with_thumb = true;
+                break;
         }
 
         $response = Helpers::uploadImage($file, $new_name, $directory_path . '/', $data_size, $with_thumb);
 
         return Response::json($response);
-        //return header('Content-type: application/json') . json_encode($response);
     }
 
     public function uploadImagePrincipal(){

@@ -163,7 +163,7 @@ $(document).ready(function(){
 		})
 	});
 
-	registerPost.uploadImage('#fileupload_principal','/backend/upload_file', function(response){
+	registerPost.uploadImage('#fileupload_principal','/backend/upload_file_image/noticias', function(response){
 		if(response.result.success == 1){
 			var $wrapper_image_data = $('#images-data').html(), data = {};
 
