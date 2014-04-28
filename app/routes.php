@@ -34,6 +34,8 @@ Route::pattern('directory_publication', '[0-9]+');
 Route::pattern('directory_path', '[a-z]+');
 Route::pattern('theme_day', '[a-z]+');
 Route::pattern('slug', '[a-z0-9-]+');
+Route::pattern('slug_category', '[a-z0-9-]+');
+Route::pattern('keyword', '[a-z0-9-]+');
 Route::pattern('type_post', '[a-z]+');
 
 Route::group(array('prefix' => 'backend'), function()
@@ -107,12 +109,12 @@ Route::group(array('prefix' => 'backend'), function()
 
 });
 
-View::share('dbl_categories_home', Helpers::getCategoriesHome());
-
 Route::get('/', array('as' => 'home', 'uses' => 'FrontendHomeController@home' ));
-Route::get('/noticias/page/{page}', array('as' => 'home_pagination', 'uses' => 'FrontendHomeController@home' ));
+Route::any('/noticias/buscar/{keyword?}', array('as' => 'frontend.post.search', 'uses' => 'FrontendSectionController@searchPost' ));
+Route::any('/noticias/buscar/{keyword?}/{page}', array('as' => 'frontend.post.search.pagination', 'uses' => 'FrontendSectionController@searchPost' ));
 Route::get('{slug}', array('as' => 'frontend.section.list', 'uses' => 'FrontendSectionController@listSection' ));
 Route::get('{slug}/{page}', array('as' => 'frontend.section.pagination', 'uses' => 'FrontendSectionController@listSection' ));
+Route::get('{slug_category}/{post}/{slug}.html', array('as' => 'frontend.post.view', 'uses' => 'FrontendSectionController@viewPost' ));
 
 
 /*******Cambiar tipo de vista*******/

@@ -1,15 +1,25 @@
-<?php $type_module = Helpers::getTypeModule(); ?>
+<?php
+
+$type_module = Helpers::getTypeModule();
+
+if (!Cache::has('dbl_categories_home')){
+    Cache::forever('dbl_categories_home', Helpers::getCategoriesHome());
+}
+
+$dbl_categories_home = Cache::get('dbl_categories_home');
+
+ ?>
 <div class="row">
         <ul class="menu menu_desktop">
-            <li class="li_menu active custom_color_bg"><a href="#" >INICIO</a></li>
+            <li class="li_menu active custom_color_bg"><a href="{{ route('home') }}" >INICIO</a></li>
             @foreach ($dbl_categories_home as $key => $dbr_category_home)
                 <li class="li_menu">
-                    <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown" >{{ mb_strtoupper($dbr_category_home['name']) }}</a>
+                    <a href="{{ route('frontend.section.list', array($dbr_category_home['slug'])) }}" role="button" class="dropdown-toggle" data-toggle="dropdown" >{{ mb_strtoupper($dbr_category_home['name']) }}</a>
                     @if(isset($dbr_category_home['children_category']))
                         <div style="display:none" class="dropdown">
                             <ul>
                                 @foreach ($dbr_category_home['children_category'] as $key_children => $children_category)
-                                    <li id="{{$children_category['id']}}" ><a href="#" >{{$children_category['name']}}</a></li>
+                                    <li id="{{$children_category['id']}}" ><a href="{{ route('frontend.section.list', array($children_category['slug'])) }}" >{{$children_category['name']}}</a></li>
                                 @endforeach
                             </ul>
                             <?php $i = 0; ?>
@@ -24,8 +34,11 @@
                                     @foreach ($dbl_post_category as $dbr_post_category)
                                         <div class="video_item">
                                             <figure>
-                                                <a href="#"><img src="images/maq/vide_item_1.jpg" alt="">
-                                                <div class="play  custom_color_bg"></div></a>
+                                                <a href="#"><img src="{{Helpers::getImage($dbr_post_category->image, 'noticias')}}" alt="{{$dbr_post_category->title}}">
+                                                    @if ($dbr_post_category->type == Helpers::TYPE_POST_VIDEO)
+                                                        <div class="play  custom_color_bg"></div>
+                                                    @endif
+                                                </a>
                                             </figure>
                                             <div class="description">{{ $dbr_post_category->title}}</div>
                                         </div>

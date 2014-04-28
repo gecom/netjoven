@@ -146,14 +146,11 @@ UPDATE njv_post n SET n.category_id = (SELECT category_id_new FROM tmp_category 
 CALL migrate_slug_news('NOTA', 2014);
 CALL migrate_tags_publish(2014);
 
-INSERT INTO njv_comment (post_id, user_id, user_name, user_email, comment,vote, status, created_at) SELECT n.id, c.id_usuario, c.nombre, c.email, c.text, c.votos, if(c.estado = 'valido', 'pbl', 'spn'), c.fecha FROM newscoments c INNER JOIN njv_post n on c.news_id = n.id_old WHERE YEAR(n.created_at) = 2014;
 INSERT INTO njv_post_multimedia (post_id, image, thumbnail_one, thumbnail_two, is_principal) SELECT n.id, imagen, thumbnail, thumbnail2, 1  FROM news_publish p INNER JOIN njv_post n ON p.news_id = n.id_old WHERE YEAR(n.created_at) = 2014;
 
-INSERT INTO njv_post  (id_old, category_id, type, id_youtube, title, slug, content,counter,status, post_at) SELECT id_video, 7, "VIDEO", v, titulo, titulo,coment,visto, 'pbl', tiempo  FROM videos WHERE categoria = 'video';
-INSERT INTO njv_post  (id_old, category_id, type, id_youtube, title, slug, content,counter,status, post_at) SELECT id_video, 8, "VIDEO", v, titulo, titulo,coment,visto, 'pbl', tiempo  FROM videos WHERE categoria = 'recomendados';
+INSERT INTO njv_post  (id_old, category_id, type, id_video, title, slug, content,counter,status, post_at) SELECT id_video, 7, "VIDEO", v, titulo, titulo,coment,visto, 'pbl', tiempo  FROM videos WHERE categoria = 'video';
+INSERT INTO njv_post  (id_old, category_id, type, id_video, title, slug, content,counter,status, post_at) SELECT id_video, 8, "VIDEO", v, titulo, titulo,coment,visto, 'pbl', tiempo  FROM videos WHERE categoria = 'recomendados';
 CALL migrate_slug_news_by_type('VIDEO');
-
-INSERT INTO njv_comment (post_id, user_id, user_name, user_email, comment,vote, status, created_at) SELECT n.id, c.id_usuario, c.nombre, c.email,c.text, c.votos, if(c.estado = 'valido', 'pbl', 'spm'), c.fecha from coments_videos c INNER JOIN njv_post  n ON c.news_id = n.id_youtube;
 
 INSERT INTO njv_post  (id_old, category_id, type, title, slug, content,summary,tags_old, post_at)
 SELECT id_galeria,1, 'GALLERY', titulo, titulo, descp, sumary, tags, creacion FROM galeria WHERE UPPER(cat) = 'AMBOS';

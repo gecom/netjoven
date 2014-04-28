@@ -51,13 +51,13 @@
             <div class="add">
                 <img src="{{asset('assets/images/maq/add_1.png')}}" alt="">
             </div>
-            @include('frontend.pages.section.slider_section')
+            @include('frontend.pages.partials.slider_section')
             <div class="plugin_fb">
                 @include('frontend.pages.partials.likebox')
             </div>
 
         @else
-            @include('frontend.pages.section.slider_section')
+            @include('frontend.pages.partials.slider_section')
 
             @if ($type_module == Helpers::TYPE_MODULE_MODULAR)
                 @include('frontend.pages.partials.news_list', array('dbl_post_view'=> $dbl_post_view2, 'is_section_facebook' => false))

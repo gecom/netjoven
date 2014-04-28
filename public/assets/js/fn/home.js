@@ -2,6 +2,8 @@ $(document).ready(function(){
 
 
 
+
+
 	$('.bxslider').bxSlider({
 		mode: 'fade',
 		captions: true,
@@ -20,7 +22,7 @@ $(document).ready(function(){
 		}
 	});
 
-	var children_id = null;
+	/*var children_id = null;
 
 	$('#main_nav .menu li').hover(function() {
 		var $this = $(this);
@@ -44,7 +46,7 @@ $(document).ready(function(){
 				$('.videos_drop').stop(true, true).hide();
 		}
 
-	});
+	});*/
 
 
 	$("#main_nav .options_menu_fixed .search ").on('click', function(e){

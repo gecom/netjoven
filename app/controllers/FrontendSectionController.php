@@ -31,7 +31,6 @@ class FrontendSectionController extends BaseController {
 
 		$params['display'] 		=  1;
 		$params['category_id'] 	=  $categories_ids;
-		$params['type'] 		=  array($dbr_category->type);
 		$params['with_post_at'] =  true;
 
 		$params_template['type_module'] = $type_module = Helpers::getTypeModule();
@@ -112,6 +111,60 @@ class FrontendSectionController extends BaseController {
 			return View::make('frontend.pages.section.subsection', $params_template);
 		}
 
+	}
+
+	public function searchPost($keyword = null){
+
+		if(empty($keyword)){
+			App::abort(404);
+		}
+
+		$text_search = str_replace("-"," ",$keyword);
+
+		$result = SphinxSearch::search($text_search)
+		->setMatchMode(\Sphinx\SphinxClient::SPH_MATCH_ANY)
+		->setSortMode(\Sphinx\SphinxClient::SPH_SORT_EXTENDED, "post_id DESC")
+		->get();
+
+		$data_post_id = array();
+		$dbl_post = null;
+
+		if($result){
+			if ( ! empty($result["matches"]) ){
+				foreach ($result['matches'] as $matches) {
+					$data_post_id[] = $matches['attrs']['post_id'];
+				}
+			}
+		}
+
+		if(count($data_post_id) > 0){
+			$params['with_post_at'] =  true;
+			$params['id'] =  $data_post_id;
+			$dbl_post = Post::getPost($params)->paginate(12)->route('frontend.post.search.pagination', array($keyword));
+		}
+
+		if(!empty($dbl_post)){
+			$params_template['dbl_post'] = $dbl_post;
+		}else{
+			$params_template['message'] = 'Su búsqueda no produjo ningún resultado';
+		}
+
+		$params_template['meter_likebox'] = array(300, 300);
+		$params_template['title_text_search'] = $text_search;
+
+		return View::make('frontend.pages.search.search', $params_template);
+	}
+
+	public function viewPost($slug_category, $post, $slug){
+
+		$dbr_category = Category::where('slug',$slug_category)->first();
+
+		if(!$dbr_category || !$post || ($post->slug != $slug)){
+			App::abort(404);
+		}
+
+
+		return View::make('frontend.pages.section.post_view');
 	}
 
 }

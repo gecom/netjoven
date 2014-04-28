@@ -34,7 +34,7 @@
 			@include('frontend.pages.partials.news_list', array('dbl_post_view'=> $dbl_post_view2, 'is_section_facebook' => $type_module == Helpers::TYPE_MODULE_MODULAR ? false : true))
 		</div>
 		<div class="features {{ $type_module == Helpers::TYPE_MODULE_MODULAR ? 'subseccion_modular' : 'subseccion_modular_listado'}}">
-			@include('frontend.pages.section.slider_section')
+			@include('frontend.pages.partials.slider_section')
 			@if($type_module == Helpers::TYPE_MODULE_LISTADO)
 				<div class="add">
 					<img src="{{asset('assets/images/maq/add_1.png')}}" alt="">
@@ -51,7 +51,7 @@
 
 	@if ($type_module == Helpers::TYPE_MODULE_ESTANDAR)
 		<div class="features">
-			@include('frontend.pages.section.slider_section')
+			@include('frontend.pages.partials.slider_section')
 		</div>
 		<div class="more_news_v2">
 			@include('frontend.pages.partials.news_list', array('dbl_post_view'=> $dbl_post_view1, 'is_section_facebook' => false))

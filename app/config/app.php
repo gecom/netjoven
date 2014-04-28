@@ -111,6 +111,7 @@ return array(
 		'Jenssegers\Agent\AgentServiceProvider',
 		'Thujohn\Twitter\TwitterServiceProvider',
 		'Intervention\Image\ImageServiceProvider',
+		'Scalia\SphinxSearch\SphinxSearchServiceProvider',
 
 	),
 
@@ -181,6 +182,7 @@ return array(
 		'Agent'           => 'Jenssegers\Agent\Facades\Agent',
 		'Twitter' 		  => 'Thujohn\Twitter\TwitterFacade',
 		'Image' 		  => 'Intervention\Image\Facades\Image',
+		'SphinxSearch' 	  => 'Scalia\SphinxSearch\SphinxSearchFacade',
 
 	),
 
