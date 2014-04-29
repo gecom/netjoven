@@ -357,6 +357,31 @@ class Helpers {
 	}
 
 
+	public static function getStopWords(){// se retiro 'ellas,usa', por ser una marca
+		return array('else', 'mailto', 'substring', 'javascript', 'html', 'htm', 'php', 'asp', 'aspx', 'jsp', 'py', 'https', 'http', 'insert', 'select', 'from', 'where', 'shutdown', 'reboot', 'replace', 'drop', 'delete', 'update', 'un', 'desde', 'cierto', 'una', 'conseguir', 'ciertos', 'unas', 'consigo', 'cierta', 'unos', 'consigue', 'ciertas', 'uno', 'consigues', 'intentar', 'sobre', 'conseguimos', 'intento', 'todo', 'consiguen', 'intenta', 'tambiÃ©n', 'ir', 'intentas', 'tras', 'voy', 'intentamos', 'otro', 'va', 'intentais', 'algÃºn', 'vamos', 'intentan', 'alguno', 'vais', 'dos', 'alguna', 'van', 'bajo', 'algunos', 'vaya', 'arriba', 'algunas', 'gueno', 'encima', 'ser', 'ha', 'usar', 'es', 'tener', 'uso', 'soy', 'tengo', 'usas', 'eres', 'tiene', 'somos', 'tenemos', 'usamos', 'sois', 'teneis', 'usais', 'estoy', 'tienen', 'usan', 'esta', 'el', 'emplear', 'estamos', 'la', 'empleo', 'estais', 'lo', 'empleas', 'estan', 'las', 'emplean', 'como', 'los', 'ampleamos', 'en', 'su', 'empleais', 'para', 'aqui', 'valor', 'atras', 'mio', 'muy', 'porque', 'tuyo', 'era', 'porquÃ©', 'ellos', 'eras', 'estado', 'eramos', 'estaba', 'nos', 'eran', 'ante', 'nosotros', 'modo', 'antes', 'vosotros', 'bien', 'siendo', 'vosotras', 'cual', 'ambos', 'si', 'cuando', 'pero', 'dentro', 'donde', 'por', 'solo', 'mientras', 'poder', 'solamente', 'quien', 'puede', 'saber', 'con', 'puedo', 'sabes', 'entre', 'podemos', 'sabe', 'sin', 'podeis', 'sabemos', 'trabajo', 'pueden', 'sabeis', 'trabajar', 'fui', 'saben', 'trabajas', 'fue', 'ultimo', 'trabaja', 'fuimos', 'largo', 'trabajamos', 'fueron', 'bastante', 'trabajais', 'hacer', 'haces', 'trabajan', 'hago', 'muchos', 'podria', 'hace', 'aquellos', 'podrias', 'hacemos', 'aquellas', 'podriamos', 'haceis', 'sus', 'podrian', 'hacen', 'entonces', 'podriais', 'cada', 'tiempo', 'yo', 'fin', 'verdad', 'aquel', 'incluso', 'VERDADERO', 'primero', 'verdadera', 'y', 'a', 'de', 'contra', 'durante', 'hacia', 'hasta', 'mediante', 'pro', 'segÃºn', 'vÃ­a');
+	}
+
+	public static function cleanStopWords($string){
+		$string = self::extractExtraWhiteSpaces($string);
+		if (trim($string) != '') {
+		  $string = preg_replace('/[^-Ã¡Ã©Ã­óÃºÃ±_@.,\\\s\w\'\"]+/iu', "--", $string); //caracteres que se escapan al alfanumerico
+		}
+
+		$array_string = explode(' ', mb_strtolower($string, 'UTF-8'));
+		$array_string = array_diff($array_string, self::getStopWords());
+
+		return str_replace('--', ' ', implode(' ', $array_string));
+	}
+
+	public static function extractExtraWhiteSpaces($string, $to_upper = false){
+		$string = trim($string);
+		$string = preg_replace('/\s[\s]+/', ' ', $string);
+		if ($to_upper) {
+		$string = mb_strtoupper($string);
+		}
+		return $string;
+	}
+
 }
 
 ?>

@@ -26,7 +26,7 @@
 				@endforeach
 			@endif
 
-			@if ($message)
+			@if (!empty($message))
 				{{$message}}
 			@endif
 
