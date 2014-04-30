@@ -55,7 +55,7 @@ class AdminNewsController extends BaseController {
             if( isset($data_frm_news['type'])){
                 $dbr_post_featured->type = $data_frm_news['type'];
             }else{
-                $dbr_post_featured->type = Helpers::TYPE_VIDEO_FEATURED;                
+                $dbr_post_featured->type = Helpers::TYPE_VIDEO_FEATURED;
             }
 
             $dbr_post_featured->title       =   $data_frm_news['title'];
@@ -103,11 +103,13 @@ class AdminNewsController extends BaseController {
 
         $params['is_new'] = $is_new;
         $params['dbr_post'] = $post;
+        $params['type_post'] = $type_post;
+
     	return View::make('backend.pages.post', $params);
     }
 
 
-    public function saveNews($post = null)
+    public function saveNews($type_post, $post = null)
     {
 
         $data_frm_news = Input::get('frm_news');
@@ -142,7 +144,6 @@ class AdminNewsController extends BaseController {
                     return Redirect::back()->withInput()->withErrors($validator);
                 }
             }else{
-
                 $post->title = $data_frm_news['title'];
 
                 if($is_new == true){
@@ -273,11 +274,9 @@ class AdminNewsController extends BaseController {
                     $dbr_post_gallery = ($dbr_post_gallery ? $dbr_post_gallery :new Gallery());
                 }
 
-                if(!$dbr_post_gallery->image){
-                    $dbr_post_gallery->image = $image['image']['name'];
-                    $dbr_post_gallery->thumbnail_one = $image['image']['name'];
-                    $dbr_post_gallery->thumbnail_two = $image['image']['name'];
-                }
+                $dbr_post_gallery->image = $image['image']['name'];
+                $dbr_post_gallery->thumbnail_one = $image['image']['name'];
+                $dbr_post_gallery->thumbnail_two = $image['image']['name'];
 
                 if(isset($image['image']['title'])){
                      $dbr_post_gallery->title = $image['image']['title'];

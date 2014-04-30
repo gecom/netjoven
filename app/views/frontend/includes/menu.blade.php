@@ -32,9 +32,20 @@ $dbl_categories_home = Cache::get('dbl_categories_home');
                                         $dbl_post_category = Post::getPost($params)->get();
                                     ?>
                                     @foreach ($dbl_post_category as $dbr_post_category)
+                                        <?php $data_url = array($dbr_post_category->parent_category_slug, $dbr_post_category->id, $dbr_post_category->slug); ?>
+                                        <?php
+                                            $dbr_image_featured = Gallery::getImageFeaturedByPostId($dbr_post_category->id)->first();
+                                            $image_featured = ($dbr_image_featured ? $dbr_image_featured->image : null);
+
+                                            if(!empty($dbr_post_category->id_video)){
+                                                $image_featured = Helpers::getThumbnailYoutubeByIdVideo($dbr_post_category->id_video);
+                                            }else{
+                                                $image_featured = Helpers::getImage($image_featured, 'noticias');
+                                            }
+                                        ?>
                                         <div class="video_item">
                                             <figure>
-                                                <a href="#"><img src="{{Helpers::getImage($dbr_post_category->image, 'noticias')}}" alt="{{$dbr_post_category->title}}">
+                                                <a href="{{ route('frontend.post.view', $data_url) }}"><img src="{{$image_featured}}" alt="{{$dbr_post_category->image}}">
                                                     @if ($dbr_post_category->type == Helpers::TYPE_POST_VIDEO)
                                                         <div class="play  custom_color_bg"></div>
                                                     @endif

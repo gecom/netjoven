@@ -15,7 +15,7 @@
 
 <div class="panel panel-default">
     <div class="panel-heading">
-    Editar Noticia
+    Editar {{ strtoupper($type_post) }}
     </div>
     <div class="panel-body">
         <div class="row">
@@ -24,11 +24,18 @@
                     <li id="body_tabHeaderPost" class="active"><a id="body_lnkHeaderPost" href="#register_publication" data-toggle="tab">Registrar</a></li>
                     <li id="body_tabHeaderImages" class="{{($is_new ? 'disabled' : '')}}"><a id="body_lnkHeaderImages" href="#register_publication_gallery" data-toggle="tab">Registrar Galeria</a></li>
                 </ul>
+                <?php
 
+                    if($is_new == true){
+                        $url_post = route('backend.register.save.new');
+                    }else{
+                        $url_post = route('backend.register.save.edit', array($type_post, $dbr_post->id));
+                    }
+                ?>
                 <!-- Tab panes -->
                 <div class="tab-content" style="padding-top: 20px;">
                     <div class="tab-pane active" id="register_publication">
-                        <form id="frm_news_register" enctype="multipart/form-data" accept-charset="UTF-8" method="post" action="{{ ($is_new == true ? route('backend.register.save.new') : route('backend.register.save.edit', array('news_id'=> $dbr_post->id))) }}"  autocomplete="off">
+                        <form id="frm_news_register" enctype="multipart/form-data" accept-charset="UTF-8" method="post" action="{{ $url_post }}"  autocomplete="off">
                             <div class="col-lg-7">
                                 {{ Form::hidden('frm_news[is_new]', ($is_new ? 1 : 0) , array('id' => 'frm_is_new')) }}
                                 {{ Form::hidden('frm_news[image_principal]', null, array('id' => 'frm_news_image_principal')) }}
