@@ -136,6 +136,12 @@ class Post extends Eloquent {
 		return $post;
 	}
 
+	public function scopeUpdateCounterRead($query, $post_id){
+		return $query
+				->where('id', '=', $post_id)
+				->update(array('total_read' => DB::raw('total_read + 1')));
+	}
+
 
 }
 

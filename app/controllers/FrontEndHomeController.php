@@ -32,7 +32,7 @@ class FrontendHomeController extends BaseController {
 
 		$params_template['meter_likebox'] = array(300, 300);
 		$params_template['title_text_search'] = 'Noticias';
-		$params_template['dbl_post'] = $dbl_post;
+		$params_template['dbl_post_search'] = $dbl_post;
 
 		return View::make('frontend.pages.search.search', $params_template);
 	}

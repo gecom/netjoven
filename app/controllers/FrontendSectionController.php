@@ -118,7 +118,7 @@ class FrontendSectionController extends BaseController {
 			App::abort(404);
 		}
 
-		$text_search = str_replace("-"," ",$keyword);
+		$text_search = Helpers::cleanStopWords($keyword);
 
 		$result = SphinxSearch::search($text_search)
 		->setMatchMode(\Sphinx\SphinxClient::SPH_MATCH_EXTENDED2)
@@ -164,7 +164,7 @@ class FrontendSectionController extends BaseController {
 
 		$http_referer = Request::server('HTTP_REFERER');
 
-		if (Cache::has('dbl_post_view_' . $post->id)){
+		if (!Cache::has('dbl_post_view_' . $post->id)){
 
 			$dbr_post = Post::getPostById($post->id);
 			$dbr_post->content = Helpers::bbcodes($dbr_post->content);
@@ -175,6 +175,8 @@ class FrontendSectionController extends BaseController {
 
 			Cache::forever('dbl_post_view_' . $post->id, $params_template);
 		}
+
+		Post::updateCounterRead($post->id);
 
 		$params_template = Cache::get('dbl_post_view_' . $post->id);
 		$params_template['redirect'] = ($http_referer ? $http_referer : route('home')) ;

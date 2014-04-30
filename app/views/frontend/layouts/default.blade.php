@@ -42,5 +42,12 @@
 
         @section('js')
         @show
+
+        <script>
+            @section('script')
+            @show
+        </script>
+        @section('append_html')
+        @show
     </body>
 </html>

@@ -5,12 +5,6 @@
 
 @section('content')
 
-
-<?php
-
-
-
-?>
 <div id="horoscopo_resultados">
 	<div class="big_title custom_color_text">{{$title_text_search}}</div>
 	<div class="right_horoscopo">

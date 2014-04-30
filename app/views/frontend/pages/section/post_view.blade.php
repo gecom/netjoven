@@ -25,13 +25,16 @@
                     <span class="custom_color_bg"></span>Samantha Cervantes / NetJoven
                 </div>
                 <div class="social">
-                    <img src="/assets/images/maq/social.jpg" alt="">
+                    @include('frontend.pages.section.post_button_social')
                 </div>
                 <div class="tags">
                     <span class="custom_color_text">Tags:</span> {{$dbr_post->tags}}
                 </div>
                 <div class="action">
                     <a href="{{$redirect}}" class="btn_volver custom_color_bg">Volver</a>
+                </div>
+                <div class="comment">
+                    @include('frontend.pages.section.post_comment')
                 </div>
             </div>
 
@@ -46,7 +49,6 @@
 
                 <section id="ads">
                     <article class="item">
-
                         <div class="add_content">
                             <figure>
                                 <img src="/assets/images/maq/add1.jpg" alt="">

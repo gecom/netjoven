@@ -35,7 +35,7 @@ Route::pattern('directory_path', '[a-z]+');
 Route::pattern('theme_day', '[a-z]+');
 Route::pattern('slug', '[a-z0-9-]+');
 Route::pattern('slug_category', '[a-z0-9-]+');
-Route::pattern('keyword', '[a-z0-9-]+');
+Route::pattern('keyword', '[a-zaA-Z0-9-\s]+');
 Route::pattern('type_post', '[a-z]+');
 Route::pattern('page', '[0-9]+');
 
