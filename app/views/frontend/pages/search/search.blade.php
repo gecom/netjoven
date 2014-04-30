@@ -5,23 +5,47 @@
 
 @section('content')
 
+
+<?php
+
+
+
+?>
 <div id="horoscopo_resultados">
 	<div class="big_title custom_color_text">{{$title_text_search}}</div>
 	<div class="right_horoscopo">
 		<div class="list_articles">
 
-			@if (!empty($dbl_post))
-				@foreach ($dbl_post as $dbr_post)
+			@if (!empty($dbl_post_search))
+				@foreach ($dbl_post_search as $dbr_post_search)
+					<?php
+						$data_url = array($dbr_post_search->parent_category_slug, $dbr_post_search->id, $dbr_post_search->slug);
+					?>
 					<article>
-						<div class="media"><img alt="{{$dbr_post->title}}" src="{{Helpers::getImage($dbr_post->image, 'noticias')}}"></div>
-						<div class="text">{{$dbr_post->title}}</div>
-						<div class="opt">
-							<ul>
-								<li class="e1"><a href="{{route('frontend.section.list', array($dbr_post->category_slug))}}">+ {{$dbr_post->category_name}}</a></li>
-								<li class="e2"><a href="#"></a></li>
-								<li class="e3">{{ Helpers::intervalDate($dbr_post->post_at, date('Y-m-d H:i:s'))}}</li>
-							</ul>
-						</div>
+						<div class="media">
+				            @if($dbr_post_search->type == Helpers::TYPE_POST_VIDEO || !empty($dbr_post_search->id_video) )
+				                <a href="{{route('frontend.post.view', $data_url)}}" class="play_video custom_color_bg"></a>
+				            @endif
+				            <?php
+				                $dbr_image_featured = Gallery::getImageFeaturedByPostId($dbr_post_search->id)->first();
+				                $image_featured = ($dbr_image_featured ? $dbr_image_featured->image : null);
+
+				                if(!empty($dbr_post_search->id_video)){
+				                    $image_featured = Helpers::getThumbnailYoutubeByIdVideo($dbr_post_search->id_video);
+				                }else{
+				                    $image_featured = Helpers::getImage($image_featured, 'noticias');
+				                }
+				            ?>
+				            <img src="{{$image_featured}}" />
+				        </div>
+				        <div class="text"><a href="{{route('frontend.post.view', $data_url)}}">{{$dbr_post_search->title}}</a></div>
+				        <div class="opt">
+				            <ul>
+				                <li class="e1"><a href="{{route('frontend.section.list', array($dbr_post_search->category_slug))}}">+{{ $dbr_post_search->category_name}}</a></li>
+				                <li class="{{($dbr_post_search->has_gallery == 1 ? 'e4' : 'e2')}}"><a href="{{route('frontend.post.view', $data_url)}}"></a></li>
+				                <li class="e3">{{ Helpers::intervalDate($dbr_post_search->post_at, date('Y-m-d H:i:s'))}}</li>
+				            </ul>
+				        </div>
 					</article>
 				@endforeach
 			@endif
@@ -42,8 +66,8 @@
 		</div>
 	</div>
 	<div class="paginate">
-		@if (!empty($dbl_post))
-			{{$dbl_post->links('frontend.pages.partials.paginator')}}
+		@if (!empty($dbl_post_search))
+			{{$dbl_post_search->links('frontend.pages.partials.paginator')}}
 		@endif
 	</div>
 </div>

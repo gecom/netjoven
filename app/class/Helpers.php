@@ -356,6 +356,28 @@ class Helpers {
 		}
 	}
 
+	public static function  bbcodes($content){
+
+		$pattern[0] = "#\[video\](.*?)\[/video\]#si";
+		$pre_replace[0] = '<div class="videoNoticia">
+		<object width="455" height="344"><param name="movie" value="http://www.youtube.com/v/\1&hl=es&fs=1&showinfo=0&rel=0&"></param><param name="allowFullScreen"
+		value="true"></param><param name="allowscriptaccess" value="always"></param>
+		<param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/\1&hl=es&fs=1&showinfo=0&rel=0&" type="application/x-shockwave-flash"
+		allowscriptaccess="always" wmode="transparent" allowfullscreen="true" width="580" height="350"></embed></object></div><div class="ad-container" id="div_promotion" style="display: block;"></div>';
+
+		$pattern[1] = '#<span style="font-weight: bold;">(.*?)</span>#si';
+		$pre_replace[1] = '<strong>\1</strong>';
+
+		$pattern[2] = '#\[en\=(.*?)\](.*?)\[\/en\]#si';
+		$pre_replace[2] = '<a href="\1" title="\2"><strong class="custom_color_text">\2</strong></a>';
+
+		$pattern[3] = '#\[tag\=(.*?)\](.*?)\[\/tag\]#si';
+		$pre_replace[3] = '<a href="\1" title="\2"><strong class="custom_color_text">\2</strong></a>';
+
+		$content = preg_replace($pattern, $pre_replace,$content);
+		return $content;
+
+	}
 
 	public static function getStopWords(){// se retiro 'ellas,usa', por ser una marca
 		return array('else', 'mailto', 'substring', 'javascript', 'html', 'htm', 'php', 'asp', 'aspx', 'jsp', 'py', 'https', 'http', 'insert', 'select', 'from', 'where', 'shutdown', 'reboot', 'replace', 'drop', 'delete', 'update', 'un', 'desde', 'cierto', 'una', 'conseguir', 'ciertos', 'unas', 'consigo', 'cierta', 'unos', 'consigue', 'ciertas', 'uno', 'consigues', 'intentar', 'sobre', 'conseguimos', 'intento', 'todo', 'consiguen', 'intenta', 'tambiÃ©n', 'ir', 'intentas', 'tras', 'voy', 'intentamos', 'otro', 'va', 'intentais', 'algÃºn', 'vamos', 'intentan', 'alguno', 'vais', 'dos', 'alguna', 'van', 'bajo', 'algunos', 'vaya', 'arriba', 'algunas', 'gueno', 'encima', 'ser', 'ha', 'usar', 'es', 'tener', 'uso', 'soy', 'tengo', 'usas', 'eres', 'tiene', 'somos', 'tenemos', 'usamos', 'sois', 'teneis', 'usais', 'estoy', 'tienen', 'usan', 'esta', 'el', 'emplear', 'estamos', 'la', 'empleo', 'estais', 'lo', 'empleas', 'estan', 'las', 'emplean', 'como', 'los', 'ampleamos', 'en', 'su', 'empleais', 'para', 'aqui', 'valor', 'atras', 'mio', 'muy', 'porque', 'tuyo', 'era', 'porquÃ©', 'ellos', 'eras', 'estado', 'eramos', 'estaba', 'nos', 'eran', 'ante', 'nosotros', 'modo', 'antes', 'vosotros', 'bien', 'siendo', 'vosotras', 'cual', 'ambos', 'si', 'cuando', 'pero', 'dentro', 'donde', 'por', 'solo', 'mientras', 'poder', 'solamente', 'quien', 'puede', 'saber', 'con', 'puedo', 'sabes', 'entre', 'podemos', 'sabe', 'sin', 'podeis', 'sabemos', 'trabajo', 'pueden', 'sabeis', 'trabajar', 'fui', 'saben', 'trabajas', 'fue', 'ultimo', 'trabaja', 'fuimos', 'largo', 'trabajamos', 'fueron', 'bastante', 'trabajais', 'hacer', 'haces', 'trabajan', 'hago', 'muchos', 'podria', 'hace', 'aquellos', 'podrias', 'hacemos', 'aquellas', 'podriamos', 'haceis', 'sus', 'podrian', 'hacen', 'entonces', 'podriais', 'cada', 'tiempo', 'yo', 'fin', 'verdad', 'aquel', 'incluso', 'VERDADERO', 'primero', 'verdadera', 'y', 'a', 'de', 'contra', 'durante', 'hacia', 'hasta', 'mediante', 'pro', 'segÃºn', 'vÃ­a');

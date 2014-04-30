@@ -41,7 +41,7 @@ class Category extends Eloquent {
     public static function getParentCategoryById($parent_id){
 
 		$dbr_parent_category = (new Category())
-		->where('id' , '=', $parent_id)
+		->where('id','=', $parent_id)
         ->where('parent_id')
 		->first();
 

@@ -11,7 +11,7 @@
 		"thujohn/twitter": "dev-master",
 		"desmart/pagination": "1.1.*",
 		"intervention/imagecache": "dev-master",
-		"gigablah/sphinxphp": "dev-master",
+		"gigablah/sphinxphp": "2.0.8",
 		"scalia/sphinxsearch": "dev-master"
 	},
 	"autoload": {

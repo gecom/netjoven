@@ -1,6 +1,7 @@
 <?php
 
 return array(
+	'empresa' => 'NetJoven',
 	'backend'	=> array(
 		'new_title_juerga' => 'Regitrar Juerga',
 		'edit_title_juerga' => 'Editar Juerga',

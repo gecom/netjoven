@@ -50,15 +50,17 @@ class Post extends Eloquent {
 		$this->attributes['slug'] = $slugFinal;
 	}
 
-    public static function getPostById($post_id)
-    {
+    public static function getPostById($post_id){
 
 		$dbr_post = (new Post())
-			->select('id', DB::raw('(SELECT parent_id FROM njv_category c WHERE c.id = njv_post.category_id ) as parent_category_id'),
-					'category_id', 'type', 'id_youtube', 'dailymotion_code', 'title', 'slug', 'content', 'summary',
-					'twitter', 'america', 'frecuencia')
-			->where('id', '=', $post_id)
-			->where('status', '=', Status::STATUS_PUBLICADO)
+			->select('njv_post.id', DB::raw("GROUP_CONCAT(njv_tag.tag) as tags"),'njv_post.category_id', 'njv_category.name as category_name' , 'njv_category.slug as category_slug' , 'njv_post.type', 'njv_post.id_video', 'njv_post.type_video', 'njv_post.title', 'njv_post.slug', 'njv_post.content', 'njv_post.summary',
+					'njv_post.twitter', 'njv_post.america', 'njv_post.frecuencia', 'njv_post.post_at')
+			->join('njv_category', 'njv_category.id','=', 'njv_post.category_id')
+			->join('njv_post_tag', 'njv_post_tag.post_id','=', 'njv_post.id')
+			->join('njv_tag', 'njv_tag.id','=', 'njv_post_tag.tag_id')
+			->where('njv_post.id', '=', $post_id)
+			->where('njv_post.status', '=', Status::STATUS_PUBLICADO)
+			->groupBy('njv_post.id')
 			->first();
 
 		return $dbr_post;
@@ -82,12 +84,15 @@ class Post extends Eloquent {
 							Helpers::$prefix_table . 'post.id_video',
 							Helpers::$prefix_table . 'post.type_video',
 							Helpers::$prefix_table . 'post.type',
+							Helpers::$prefix_table . 'post.has_gallery',
 							Helpers::$prefix_table . 'category.id as category_id',
 							Helpers::$prefix_table . 'category.parent_id as category_parent_id',
 							Helpers::$prefix_table . 'category.name as category_name',
 							Helpers::$prefix_table . 'category.slug as category_slug',
-							DB::raw('(SELECT CONCAT(c1.name, " > " ,'.Helpers::$prefix_table . 'category.name'.') FROM ' . Helpers::$prefix_table . 'category c1 WHERE c1.parent_id IS NULL AND c1.id = '.Helpers::$prefix_table .'category.parent_id) as parent_category'))
-					->join( Helpers::$prefix_table . 'category', Helpers::$prefix_table . 'category.id', '=', Helpers::$prefix_table .'post.category_id')
+							'parent_category.slug as parent_category_slug')
+						//	DB::raw('(SELECT CONCAT(c1.name, " > " ,'.Helpers::$prefix_table . 'category.name'.') FROM ' . Helpers::$prefix_table . 'category c1 WHERE c1.parent_id IS NULL AND c1.id = '.Helpers::$prefix_table .'category.parent_id) as parent_category'))
+					->join(Helpers::$prefix_table . 'category', Helpers::$prefix_table . 'category.id', '=', Helpers::$prefix_table .'post.category_id')
+					->join(DB::raw('(SELECT c.id, c.name, c.slug FROM njv_category c WHERE parent_id IS NULL ) AS parent_category'), 'parent_category.id' ,'=', 'njv_category.parent_id')
 					->orderBy(Helpers::$prefix_table . 'post.post_at', 'desc');
 
 		if(is_array($params['type'])){
@@ -130,6 +135,7 @@ class Post extends Eloquent {
 
 		return $post;
 	}
+
 
 }
 

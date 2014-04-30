@@ -84,7 +84,6 @@ class FrontendSectionController extends BaseController {
 			}
 		}
 
-
 		$params_template['dbl_post'] = $dbl_post = Post::getPost($params)->paginate($paginate)->route('frontend.section.pagination', array($slug));
 
 		$dbl_post_view1 = array();
@@ -122,12 +121,12 @@ class FrontendSectionController extends BaseController {
 		$text_search = str_replace("-"," ",$keyword);
 
 		$result = SphinxSearch::search($text_search)
-		->setMatchMode(\Sphinx\SphinxClient::SPH_MATCH_ANY)
+		->setMatchMode(\Sphinx\SphinxClient::SPH_MATCH_EXTENDED2)
 		->setSortMode(\Sphinx\SphinxClient::SPH_SORT_EXTENDED, "post_id DESC")
 		->get();
 
 		$data_post_id = array();
-		$dbl_post = null;
+		$dbl_post_search = null;
 
 		if($result){
 			if ( ! empty($result["matches"]) ){
@@ -140,11 +139,11 @@ class FrontendSectionController extends BaseController {
 		if(count($data_post_id) > 0){
 			$params['with_post_at'] =  true;
 			$params['id'] =  $data_post_id;
-			$dbl_post = Post::getPost($params)->paginate(12)->route('frontend.post.search.pagination', array($keyword));
+			$dbl_post_search = Post::getPost($params)->paginate(12)->route('frontend.post.search.pagination', array($keyword));
 		}
 
-		if(!empty($dbl_post)){
-			$params_template['dbl_post'] = $dbl_post;
+		if(!empty($dbl_post_search)){
+			$params_template['dbl_post_search'] = $dbl_post_search;
 		}else{
 			$params_template['message'] = 'Su búsqueda no produjo ningún resultado';
 		}
@@ -163,8 +162,24 @@ class FrontendSectionController extends BaseController {
 			App::abort(404);
 		}
 
+		$http_referer = Request::server('HTTP_REFERER');
 
-		return View::make('frontend.pages.section.post_view');
+		if (Cache::has('dbl_post_view_' . $post->id)){
+
+			$dbr_post = Post::getPostById($post->id);
+			$dbr_post->content = Helpers::bbcodes($dbr_post->content);
+			$data_tags = explode(',', $dbr_post->tags);
+
+			$params_template['meter_likebox'] = array(300, 300);
+			$params_template['dbr_post'] = $dbr_post;
+
+			Cache::forever('dbl_post_view_' . $post->id, $params_template);
+		}
+
+		$params_template = Cache::get('dbl_post_view_' . $post->id);
+		$params_template['redirect'] = ($http_referer ? $http_referer : route('home')) ;
+
+		return View::make('frontend.pages.section.post_view', $params_template);
 	}
 
 }
