@@ -172,6 +172,7 @@ class FrontendSectionController extends BaseController {
 
 			$params_template['meter_likebox'] = array(300, 300);
 			$params_template['dbr_post'] = $dbr_post;
+			$params_template['tags'] = $data_tags;
 
 			Cache::forever('dbl_post_view_' . $post->id, $params_template);
 		}
