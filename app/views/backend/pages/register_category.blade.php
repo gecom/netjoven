@@ -99,13 +99,7 @@
                                                     <div style="padding:4px" class="text-center">
                                                         @if(isset($dbr_category) && $dbr_category->image)
                                                             @if ($is_new == 0 &&  !is_null($dbr_category->parent_id) )
-                                                                <?php
-                                                                    $filename = $dbr_category->image;
-                                                                    $pos = strpos($filename, '.');
-                                                                    $data_size = Helpers::$size_images['category_others'];
-                                                                    $filename = substr($filename, 0, $pos).'_'. implode('x', $data_size).Helpers::$extension;
-                                                                ?>
-                                                                <img  src="{{Helpers::getImage($filename, 'category')}}" />
+                                                                <img  src="{{Helpers::getImage($dbr_category->image, 'category')}}" />
                                                             @endif
                                                         @endif
                                                     </div>

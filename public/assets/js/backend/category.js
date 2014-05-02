@@ -1,7 +1,7 @@
 $(function(){
 
 	$('#file_image').fileupload({
-		url: '/backend/upload_file_category',
+		url: '/backend/upload_file_image/category',
 		dataType: 'json',
 		autoUpload: true,
 		acceptFileTypes: /(\.|\/)(jpe?g|png|gif)$/i,
@@ -42,10 +42,14 @@ $(function(){
 			var message = '';
 			if(response.success == true){
 				message = response.message;
+				setTimeout(function(){
 
-				if(response.redirect){
-					window.location.href = response.redirect;
-				}
+					if(response.redirect){
+						window.location.href = response.redirect;
+					}
+
+				}, 2000)
+
 			}else{
 				is_error = true;
 				var arr = response.errors;

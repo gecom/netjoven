@@ -114,8 +114,7 @@ class Helpers {
 			'featured_section_module'	=> array('width' => 250, 'height' => 155),
 			'content' 					=> array('width' => 500, 'height' => 500),
 			'gallery' 					=> array('width' => 600, 'height' => 374),
-			'category' 					=> array('width' => 260, 'height' => 378),
-			'category_thumb' 			=> array('width' => 216, 'height' => 265),
+			'category' 					=> array('width' => 216, 'height' => 265),
 			'video_featured'			=> array('width' => 500, 'height' => 300),
 			'view'						=> array('width' => 300, 'height' => 187),
 			'view_thumb' 				=> array('width' => 160, 'height' => 160)

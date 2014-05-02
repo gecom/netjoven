@@ -27,6 +27,11 @@ class Category extends Eloquent {
         return $this->belongsTo('Category','id', 'parent_id');
     }
 
+    public function scopeGetCategoriesByids($query, $data_category_ids){
+        return $query
+                ->whereIn('id', $data_category_ids);
+    }
+
 	public static function getParentCategories($is_menu = false)
     {
         $dbl_categories = (new Category())

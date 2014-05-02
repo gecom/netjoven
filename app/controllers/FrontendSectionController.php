@@ -9,6 +9,7 @@ class FrontendSectionController extends BaseController {
 		if(!$dbr_category)
 			App::abort(404);
 
+		$params_template = array();
 		$categories_ids  = array();
 		$is_parent_category = true;
 		$total_post_v1 = 0;
@@ -16,7 +17,6 @@ class FrontendSectionController extends BaseController {
 		$total_post_v3 = 0;
 
 		if(empty($dbr_category->parent_id)){
-			$params_template['title_section'] = $dbr_category->name;
 			$dbl_categories = Category::getChildrenCategoryByParentId($dbr_category->id)->get();
 
 			foreach ($dbl_categories as $dbr_category) {
@@ -24,7 +24,6 @@ class FrontendSectionController extends BaseController {
 			}
 
 		}else{
-			$params_template['title_section'] = $dbr_category->name;
 			$is_parent_category = false;
 			$categories_ids = array($dbr_category->id);
 		}
@@ -33,8 +32,10 @@ class FrontendSectionController extends BaseController {
 		$params['category_id'] 	=  $categories_ids;
 		$params['with_post_at'] =  true;
 
-		$params_template['type_module'] = $type_module = Helpers::getTypeModule();
 
+		$params_template['title_section'] = $dbr_category->name;
+		$params_template['is_parent_category'] = $is_parent_category;
+		$params_template['type_module'] = $type_module = Helpers::getTypeModule();
 
 		if($is_parent_category){
 			if($type_module == Helpers::TYPE_MODULE_ESTANDAR){
@@ -84,7 +85,7 @@ class FrontendSectionController extends BaseController {
 			}
 		}
 
-		$params_template['dbl_post'] = $dbl_post = Post::getPost($params)->paginate($paginate)->route('frontend.section.pagination', array($slug));
+		$params_template['dbl_post'] = $dbl_post = Post::getPost($params)->remember(300)->paginate($paginate)->route('frontend.section.pagination', array($slug));;
 
 		$dbl_post_view1 = array();
 		$dbl_post_view2 = array();
@@ -104,7 +105,7 @@ class FrontendSectionController extends BaseController {
 		$params_template['dbl_post_view2'] = $dbl_post_view2;
 		$params_template['dbl_post_view3'] = $dbl_post_view3;
 
-		if($is_parent_category){
+		if($params_template['is_parent_category']){
 			return View::make('frontend.pages.section.section',$params_template);
 		}else{
 			return View::make('frontend.pages.section.subsection', $params_template);

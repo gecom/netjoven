@@ -57,6 +57,10 @@ class UploadController extends BaseController{
                 $data_size = Helpers::$size_images['content'];
                 $with_thumb = true;
                 break;
+            case 'category':
+                $data_size = Helpers::$size_images['category'];
+                $with_thumb = false;
+                break;
         }
 
         $response = Helpers::uploadImage($file, $new_name, $directory_path . '/', $data_size, $with_thumb);

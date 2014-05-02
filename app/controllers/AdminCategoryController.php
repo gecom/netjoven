@@ -4,8 +4,7 @@ class AdminCategoryController extends BaseController {
 
 	public function listCategories()
 	{
-		$params= array(Helpers::TYPE_POST_NEWS, Helpers::TYPE_POST_GALLERY, Helpers::TYPE_POST_VIDEO);
-		$dbl_categories = Category::getParentCategories($params)->paginate(15);
+		$dbl_categories = Category::getParentCategories()->paginate(15);
 		return View::make('backend.pages.categories_list', array('dbl_categories' => $dbl_categories ));
 	}
 
@@ -63,12 +62,9 @@ class AdminCategoryController extends BaseController {
         		$dbr_category = $category;
         	}elseif(!empty($parent_category) && empty($category)){
         		$dbr_category = $parent_category;
-        		$rules['type'] = 'required';
         	}else{
 				$dbr_category = null;
         	}
-        }else{
-        	$rules['type'] = 'required';
         }
 
 		$dbr_category = ($is_new == true ? new Category() : $dbr_category);
@@ -86,19 +82,12 @@ class AdminCategoryController extends BaseController {
         }else{
 
 			$dbr_category->name = $data_frm_category['name'];
-			if($is_new){
-				$dbr_category->slug = Str::slug($data_frm_category['name']);
-			}
+			$dbr_category->slug = Str::slug($data_frm_category['name']);
 
 			$dbr_category->description = $data_frm_category['description'];
 
 			if(isset($data_frm_category['is_menu'])){
 				$dbr_category->is_menu = $data_frm_category['is_menu'];
-			}
-
-
-			if(isset($data_frm_category['type'])){
-				$dbr_category->type = $data_frm_category['type'];
 			}
 
 			if(!empty($data_frm_category['image'])){
