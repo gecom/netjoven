@@ -27,11 +27,15 @@ class Category extends Eloquent {
         return $this->belongsTo('Category','id', 'parent_id');
     }
 
-	public static function getParentCategories()
+	public static function getParentCategories($is_menu = false)
     {
         $dbl_categories = (new Category())
         ->where('parent_id')
         ->where('status', '=', Status::STATUS_ACTIVO);
+
+        if($is_menu == true){
+            $dbl_categories->where('is_menu', '=', 1);
+        }
 
         $dbl_categories->orderBy('created_at', 'desc');
 

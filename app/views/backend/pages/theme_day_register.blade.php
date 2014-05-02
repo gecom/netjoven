@@ -22,16 +22,6 @@
                             {{ Form::label('frm_theme_day_name', 'Tema') }}
                             {{ Form::text('frm_theme_day[name]', null, array('id' => 'frm_theme_day_name', 'placeholder' => 'Ingrese Tema', 'class' => 'form-control')) }}
                         </div>
-                        <div class="form-group ">
-                            {{ Form::label('frm_theme_day_category', 'Categoría') }}
-                            <select name="frm_theme_day[category_id]" id="frm_theme_day_category_id" class="form-control">
-                                <option value="">Selecciona Categoria</option>
-                                @foreach($dbl_parent_categories as $parent_category)
-                                <?php //$selected = (!$is_new && ($parent_category->id == $dbr_post_category->parent_id)  ? 'selected="selected"': '' ); ?>
-                                <option value="{{$parent_category->id}}">{{$parent_category->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
                         <div class="form-group">
                             {{ Form::label('frm_theme_day_params', 'Parametros') }}
                             {{ Form::text('frm_theme_day_params[params]', null, array('id' => 'frm_theme_day_params', 'placeholder' => 'Ingrese Parametros', 'class' => 'form-control')) }}
