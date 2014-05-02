@@ -1,5 +1,3 @@
-
-
 -- -----------------------------------------------------
 -- Table `njv_category`
 -- -----------------------------------------------------
@@ -10,6 +8,7 @@ CREATE TABLE IF NOT EXISTS `njv_category` (
   `parent_id` INT(11) NULL DEFAULT NULL,
   `name` VARCHAR(150) NOT NULL,
   `slug` VARCHAR(200) NOT NULL,
+  `keyword` VARCHAR(255) NULL,
   `description` TEXT NULL DEFAULT NULL,
   `image` VARCHAR(50) NULL,
   `is_menu` TINYINT(1) NOT NULL DEFAULT '0',
@@ -22,8 +21,7 @@ CREATE TABLE IF NOT EXISTS `njv_category` (
     FOREIGN KEY (`parent_id`)
     REFERENCES `njv_category` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    ON UPDATE NO ACTION);
 
 
 -- -----------------------------------------------------
@@ -42,8 +40,7 @@ CREATE TABLE IF NOT EXISTS `njv_directory` (
     FOREIGN KEY (`category_id`)
     REFERENCES `njv_category` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    ON UPDATE NO ACTION);
 
 
 -- -----------------------------------------------------
@@ -72,8 +69,7 @@ CREATE TABLE IF NOT EXISTS `njv_directory_publishing` (
   PRIMARY KEY (`id`),
   FULLTEXT INDEX `title` (`title` ASC),
   INDEX `fk_njv_directory_publishing_njv_directory1_idx` (`directory_id` ASC),
-  UNIQUE INDEX `slug_UNIQUE` (`slug` ASC))
-ENGINE = InnoDB;
+  UNIQUE INDEX `slug_UNIQUE` (`slug` ASC));
 
 
 -- -----------------------------------------------------
@@ -94,8 +90,7 @@ CREATE TABLE IF NOT EXISTS `njv_directory_gallery` (
     FOREIGN KEY (`directory_publishing_id`)
     REFERENCES `njv_directory_publishing` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    ON UPDATE NO ACTION);
 
 
 -- -----------------------------------------------------
@@ -108,8 +103,7 @@ CREATE TABLE IF NOT EXISTS `njv_color_palette` (
   `color` CHAR(7) NOT NULL,
   `path` VARCHAR(255) NOT NULL,
   `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+  PRIMARY KEY (`id`));
 
 
 -- -----------------------------------------------------
@@ -131,8 +125,7 @@ CREATE TABLE IF NOT EXISTS `njv_user` (
   `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `user_UNIQUE` (`user` ASC),
-  INDEX `email` (`email` ASC))
-ENGINE = InnoDB;
+  INDEX `email` (`email` ASC));
 
 
 -- -----------------------------------------------------
@@ -159,8 +152,48 @@ CREATE TABLE IF NOT EXISTS `njv_user_tools` (
     FOREIGN KEY (`color_palette_id`)
     REFERENCES `njv_color_palette` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    ON UPDATE NO ACTION);
+
+
+-- -----------------------------------------------------
+-- Table `njv_group`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `njv_group` ;
+
+CREATE TABLE IF NOT EXISTS `njv_group` (
+  `id` INT(11) NOT NULL,
+  `name` VARCHAR(100) NOT NULL,
+  `description` VARCHAR(255) NULL,
+  `name_full` VARCHAR(150) NOT NULL,
+  `updated_at` DATETIME NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`));
+
+
+-- -----------------------------------------------------
+-- Table `njv_user_group`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `njv_user_group` ;
+
+CREATE TABLE IF NOT EXISTS `njv_user_group` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` INT(11) NOT NULL,
+  `group_id` INT(11) NOT NULL,
+  `updated_at` DATETIME NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  INDEX `fk_njv_user_group_njv_user1_idx` (`user_id` ASC),
+  INDEX `fk_njv_user_group_njv_group1_idx` (`group_id` ASC),
+  CONSTRAINT `fk_njv_user_group_njv_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `njv_user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_njv_user_group_njv_group1`
+    FOREIGN KEY (`group_id`)
+    REFERENCES `njv_group` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
 
 -- -----------------------------------------------------
 -- Table `njv_banner`
@@ -172,8 +205,7 @@ CREATE TABLE IF NOT EXISTS `njv_banner` (
   `title` VARCHAR(50) NULL DEFAULT NULL,
   `code` TEXT NULL DEFAULT NULL,
   `created_at` DATE NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+  PRIMARY KEY (`id`));
 
 
 -- -----------------------------------------------------
@@ -209,8 +241,7 @@ CREATE TABLE IF NOT EXISTS `njv_banner_detail` (
     FOREIGN KEY (`category_id`)
     REFERENCES `njv_category` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    ON UPDATE NO ACTION);
 
 
 -- -----------------------------------------------------
@@ -224,8 +255,7 @@ CREATE TABLE IF NOT EXISTS `njv_tag` (
   `slug` VARCHAR(150) NULL DEFAULT NULL,
   `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `slug_UNIQUE` (`slug` ASC))
-ENGINE = InnoDB;
+  UNIQUE INDEX `slug_UNIQUE` (`slug` ASC));
 
 
 -- -----------------------------------------------------
@@ -250,8 +280,7 @@ CREATE TABLE IF NOT EXISTS `njv_banner_detail_tag` (
     FOREIGN KEY (`tag_id`)
     REFERENCES `njv_tag` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    ON UPDATE NO ACTION);
 
 
 -- -----------------------------------------------------
@@ -264,8 +293,7 @@ CREATE TABLE IF NOT EXISTS `njv_city` (
   `city` VARCHAR(35) NOT NULL DEFAULT '',
   `country_code` CHAR(3) NOT NULL DEFAULT '',
   `country` VARCHAR(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+  PRIMARY KEY (`id`));
 
 
 -- -----------------------------------------------------
@@ -281,8 +309,7 @@ CREATE TABLE IF NOT EXISTS `njv_country` (
   `local_name` CHAR(45) NOT NULL DEFAULT '',
   `capital` INT(11) NULL DEFAULT NULL,
   `code2` CHAR(2) NOT NULL DEFAULT '',
-  PRIMARY KEY (`code`))
-ENGINE = InnoDB;
+  PRIMARY KEY (`code`));
 
 
 -- -----------------------------------------------------
@@ -294,8 +321,7 @@ CREATE TABLE IF NOT EXISTS `njv_department` (
   `id` CHAR(2) CHARACTER SET 'utf8' COLLATE 'utf8_spanish_ci' NOT NULL,
   `department` VARCHAR(30) CHARACTER SET 'utf8' COLLATE 'utf8_spanish_ci' NULL DEFAULT NULL,
   `status` CHAR(3) CHARACTER SET 'utf8' COLLATE 'utf8_spanish_ci' NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+  PRIMARY KEY (`id`));
 
 
 -- -----------------------------------------------------
@@ -310,8 +336,7 @@ CREATE TABLE IF NOT EXISTS `njv_district` (
   `link_uri` VARCHAR(50) NOT NULL,
   `place` POINT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `link_uri` (`link_uri` ASC))
-ENGINE = InnoDB;
+  INDEX `link_uri` (`link_uri` ASC));
 
 
 -- -----------------------------------------------------
@@ -327,8 +352,7 @@ CREATE TABLE IF NOT EXISTS `njv_ip2c` (
   `end_ip_num` VARCHAR(45) NOT NULL,
   `country_code` CHAR(2) NOT NULL,
   `country_name` VARCHAR(10) NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+  PRIMARY KEY (`id`));
 
 
 -- -----------------------------------------------------
@@ -371,8 +395,7 @@ CREATE TABLE IF NOT EXISTS `njv_post` (
     FOREIGN KEY (`category_id`)
     REFERENCES `njv_category` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    ON UPDATE NO ACTION);
 
 
 -- -----------------------------------------------------
@@ -396,8 +419,7 @@ CREATE TABLE IF NOT EXISTS `njv_post_featured` (
     FOREIGN KEY (`post_id`)
     REFERENCES `njv_post` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    ON UPDATE NO ACTION);
 
 
 -- -----------------------------------------------------
@@ -422,8 +444,7 @@ CREATE TABLE IF NOT EXISTS `njv_post_tag` (
     FOREIGN KEY (`tag_id`)
     REFERENCES `njv_tag` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    ON UPDATE NO ACTION);
 
 
 -- -----------------------------------------------------
@@ -436,8 +457,7 @@ CREATE TABLE IF NOT EXISTS `njv_province` (
   `department_id` CHAR(4) CHARACTER SET 'utf8' COLLATE 'utf8_spanish_ci' NOT NULL,
   `province` VARCHAR(30) CHARACTER SET 'utf8' COLLATE 'utf8_spanish_ci' NULL DEFAULT NULL,
   `status` CHAR(3) CHARACTER SET 'utf8' COLLATE 'utf8_spanish_ci' NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+  PRIMARY KEY (`id`));
 
 
 -- -----------------------------------------------------
@@ -463,8 +483,7 @@ CREATE TABLE IF NOT EXISTS `njv_post_multimedia` (
     FOREIGN KEY (`post_id`)
     REFERENCES `njv_post` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    ON UPDATE NO ACTION);
 
 
 -- -----------------------------------------------------
@@ -481,8 +500,7 @@ CREATE TABLE IF NOT EXISTS `njv_search` (
   `content` TEXT NULL,
   `type` VARCHAR(45) NOT NULL,
   `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`post_id`))
-ENGINE = InnoDB;
+  PRIMARY KEY (`post_id`));
 
 
 -- -----------------------------------------------------
@@ -495,8 +513,7 @@ CREATE TABLE IF NOT EXISTS `njv_sys_variable` (
   `attribute` VARCHAR(45) NOT NULL,
   `value` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `attribute_UNIQUE` (`attribute` ASC))
-ENGINE = InnoDB;
+  UNIQUE INDEX `attribute_UNIQUE` (`attribute` ASC));
 
 
 -- -----------------------------------------------------
@@ -506,24 +523,20 @@ DROP TABLE IF EXISTS `njv_theme_day` ;
 
 CREATE TABLE IF NOT EXISTS `njv_theme_day` (
   `id` INT(11) NULL AUTO_INCREMENT,
-  `category_id` INT(11) NOT NULL,
-  `user_id` INT(11) NULL,
-  `name` VARCHAR(55) NOT NULL,
-  `slug` VARCHAR(255) NOT NULL,
+  `tag_id` INT(11) NOT NULL,
   `color` VARCHAR(45) NULL DEFAULT NULL,
   `params` VARCHAR(255) NULL,
+  `user_id` INT(11) NULL,
   `updated_at` DATETIME NULL,
   `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   INDEX `user_id` (`user_id` ASC),
-  INDEX `fk_njv_theme_day_njv_category1_idx` (`category_id` ASC),
-  UNIQUE INDEX `slug_UNIQUE` (`slug` ASC),
-  CONSTRAINT `fk_njv_theme_day_njv_category1`
-    FOREIGN KEY (`category_id`)
-    REFERENCES `njv_category` (`id`)
+  INDEX `fk_njv_theme_day_njv_tag1_idx` (`tag_id` ASC),
+  CONSTRAINT `fk_njv_theme_day_njv_tag1`
+    FOREIGN KEY (`tag_id`)
+    REFERENCES `njv_tag` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    ON UPDATE NO ACTION);
 
 
 -- -----------------------------------------------------
@@ -533,19 +546,23 @@ DROP TABLE IF EXISTS `njv_theme_day_section` ;
 
 CREATE TABLE IF NOT EXISTS `njv_theme_day_section` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `theme_day_id` INT(11) NOT NULL,
   `category_id` INT(11) NOT NULL,
+  `theme_day_id` INT(11) NOT NULL,
   `updated_at` DATETIME NULL,
   `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `njv_theme_day_sectioncol` VARCHAR(45) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_njv_theme_day_section_njv_theme_day1_idx` (`theme_day_id` ASC),
+  INDEX `fk_njv_theme_day_section_njv_category1_idx` (`category_id` ASC),
   CONSTRAINT `fk_njv_theme_day_section_njv_theme_day1`
     FOREIGN KEY (`theme_day_id`)
     REFERENCES `njv_theme_day` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_njv_theme_day_section_njv_category1`
+    FOREIGN KEY (`category_id`)
+    REFERENCES `njv_category` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
 
 
 -- -----------------------------------------------------
@@ -561,8 +578,7 @@ CREATE TABLE IF NOT EXISTS `njv_user_activity` (
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   INDEX `type` (`type` ASC),
-  INDEX `created_at` (`created_at` ASC))
-ENGINE = InnoDB;
+  INDEX `created_at` (`created_at` ASC));
 
 
 -- -----------------------------------------------------
@@ -591,5 +607,4 @@ CREATE TABLE IF NOT EXISTS `njv_user_profile` (
     FOREIGN KEY (`user_id`)
     REFERENCES `njv_user` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    ON UPDATE NO ACTION);
