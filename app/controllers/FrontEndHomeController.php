@@ -28,7 +28,7 @@ class FrontendHomeController extends BaseController {
 		$params['with_post_at'] =  true;
 		$params['display'] =  1;
 
-		$dbl_post = Post::getPost($params)->paginate(12)->route('frontend.post.more_news_paginate');
+		$dbl_post = Post::getPostNews($params)->paginate(12)->route('frontend.post.more_news_paginate');
 
 		$params_template['meter_likebox'] = array(300, 300);
 		$params_template['title_text_search'] = 'Noticias';
@@ -65,7 +65,7 @@ class FrontendHomeController extends BaseController {
 			$total_post_v2 = 10;
 		}
 
-		$dbl_last_post = Post::getPost($params)->get();
+		$dbl_last_post = Post::getPostNews($params)->get();
 
 		$dbl_post_view1 = array();
 		$dbl_post_view2 = array();

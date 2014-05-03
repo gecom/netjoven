@@ -26,13 +26,19 @@ $dbl_categories_home = Cache::get('dbl_categories_home');
                             @foreach ($dbr_category_home['children_category'] as $key_children => $children_category)
                                 <div class="videos_drop" id ="children_category_{{$children_category['id']}}" style="display:none">
                                     <?php
-                                        $params['view_index'] = 1;
-                                        $params['category_id'] = $children_category['id'];
-                                        $params['show_limit'] = array(4,0);
-                                        $dbl_post_category = Post::getPost($params)->get();
+                                        $dbl_post_category = Cache::remember('category_post_'.$children_category['id'], 120, function() use ($children_category) {
+                                            $params['view_index'] = 1;
+                                            $params['category_id'] = $children_category['id'];
+                                            $params['show_limit'] = array(4,0);
+
+                                            return Post::getPostNews($params)->get();
+                                        });
                                     ?>
                                     @foreach ($dbl_post_category as $dbr_post_category)
-                                        <?php $data_url = array($dbr_post_category->parent_category_slug, $dbr_post_category->id, $dbr_post_category->slug); ?>
+                                        <?php
+                                            $dbr_parent_category = Category::getParentCategoryById($dbr_post_category->category_parent_id)->first();
+                                            $data_url = array($dbr_parent_category->slug, $dbr_post_category->id, $dbr_post_category->slug);
+                                        ?>
                                         <?php
                                             $dbr_image_featured = Gallery::getImageFeaturedByPostId($dbr_post_category->id)->first();
                                             $image_featured = ($dbr_image_featured ? $dbr_image_featured->image : null);
@@ -97,7 +103,6 @@ $dbl_categories_home = Cache::get('dbl_categories_home');
                             <a href="#" class="fb"></a>
 
                         </li>
-
                     </ul>
                 <div class="search_box">
                     <input type="text" value="Buscar...">

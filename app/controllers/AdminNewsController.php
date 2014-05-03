@@ -6,7 +6,7 @@ class AdminNewsController extends BaseController {
     public function listNews($type_post)
     {
         $params['type'] = array($type_post);
-        $dbl_post = Post::getPost($params)->paginate(15);
+        $dbl_post = Post::getPostNews($params)->paginate(15);
         return View::make('backend.pages.post_list', array('dbl_post' => $dbl_post ));
     }
 

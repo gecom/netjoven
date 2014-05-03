@@ -1,9 +1,9 @@
 <div class="title_news custom_color_text">Últimas noticias</div>
 
-<?php 
+<?php
 
 	if (!Cache::has('dbl_theme_day')){
-		Cache::forever('dbl_theme_day', ThemeDay::getThemeDay());
+		Cache::forever('dbl_theme_day', ThemeDay::getThemeDay()->get());
 	}
 
 	$dbl_theme_day = Cache::get('dbl_theme_day');

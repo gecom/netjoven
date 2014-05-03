@@ -85,7 +85,7 @@ class FrontendSectionController extends BaseController {
 			}
 		}
 
-		$params_template['dbl_post'] = $dbl_post = Post::getPost($params)->remember(300)->paginate($paginate)->route('frontend.section.pagination', array($slug));;
+		$params_template['dbl_post'] = $dbl_post = Post::getPostNews($params)->remember(300)->paginate($paginate)->route('frontend.section.pagination', array($slug));;
 
 		$dbl_post_view1 = array();
 		$dbl_post_view2 = array();
@@ -140,7 +140,7 @@ class FrontendSectionController extends BaseController {
 		if(count($data_post_id) > 0){
 			$params['with_post_at'] =  true;
 			$params['id'] =  $data_post_id;
-			$dbl_post_search = Post::getPost($params)->paginate(12)->route('frontend.post.search.pagination', array($keyword));
+			$dbl_post_search = Post::getPostNews($params)->paginate(12)->route('frontend.post.search.pagination', array($keyword));
 		}
 
 		if(!empty($dbl_post_search)){

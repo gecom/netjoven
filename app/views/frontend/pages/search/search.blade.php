@@ -13,7 +13,8 @@
 			@if (!empty($dbl_post_search))
 				@foreach ($dbl_post_search as $dbr_post_search)
 					<?php
-						$data_url = array($dbr_post_search->parent_category_slug, $dbr_post_search->id, $dbr_post_search->slug);
+						$dbr_parent_category = Category::getParentCategoryById($dbr_post_search->category_parent_id)->first();
+						$data_url = array($dbr_parent_category->slug, $dbr_post_search->id, $dbr_post_search->slug);
 					?>
 					<article>
 						<div class="media">

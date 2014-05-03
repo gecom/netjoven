@@ -431,11 +431,6 @@ header
 						line-height: 18px;
 
 
-
-
-
-
-
 .destacado
 	padding 10px 10px 40px 10px
 	background #fff
@@ -480,6 +475,40 @@ header
 				display inline-block
 				text-align center
 				margin-left 3px
+.bx-wrapper
+	margin 0 auto!important
+.bx-wrapper .bx-viewport
+	left 0!important
+	border 0!important
+.bx-wrapper .bx-caption
+	background none!important
+	text-align center
+.bx-wrapper .bx-caption span
+	font-family 'Open Sans', sans-serif!important
+	font-size 2em!important
+.bx-wrapper .bx-pager.bx-default-pager a
+	margin -15px 4px 0!important
+	float left
+	box-shadow()
+.bx-wrapper .bx-pager.bx-default-pager a:hover, .bx-wrapper .bx-pager.bx-default-pager a.active
+	width 20px!important
+	height 20px!important
+	border-radius(10px)
+	margin 0 4px!important
+.bx-wrapper .bx-pager.bx-default-pager .bx-pager-item:nth-child(1) a
+	background-color #cd9318
+.bx-wrapper .bx-pager.bx-default-pager .bx-pager-item:nth-child(2) a
+	background-color #a1b33d
+.bx-wrapper .bx-pager.bx-default-pager .bx-pager-item:nth-child(3) a
+	background-color #1175b3
+.bx-wrapper .bx-pager.bx-default-pager .bx-pager-item:nth-child(4) a
+	background-color #a14181
+.bx-wrapper .bx-pager.bx-default-pager .bx-pager-item:nth-child(5) a
+	background-color #d44b41
+.bx-wrapper .bx-viewport
+	box-shadow none!important
+	-moz-box-shadow none!important
+	-webkit-box-shadow none!important
 
 #banner
 	padding 10px 10px 40px 10px
@@ -514,13 +543,12 @@ header
 
 	.right_banner
 		font-size 1rem
-		width 625px
+		width 624px
 		display inline-block
 		vertical-align top		
-
+			
 		.slider
 			box-shadow()
-
 		.p1			
 			width 298px
 			height 165px
@@ -772,6 +800,38 @@ header
 		display inline-block
 		vertical-align top
 		font-size 1rem
+		.video_animation
+			.bxslider_video
+				margin-left 42px
+				li 
+					img
+						box-shadow()
+				li:nth-child(1) img
+					border-bottom 4px solid #cd9318
+				li:nth-child(2) img
+					border-bottom 4px solid #a1b33d
+				li:nth-child(3) img
+					border-bottom 4px solid #1175b3
+				li:nth-child(4) img
+					border-bottom 4px solid #a14181
+				li:nth-child(5) img
+					border-bottom 4px solid #d44b41
+			.bx-wrapper 
+				.bx-pager
+					padding-top 10px!important
+					border-top 1px solid #e1e1e1!important
+					bottom -100px
+				.bx-viewport
+					overflow visible!important
+				.bx-caption
+					bottom 0px!important
+					top 312px!important
+					width 520px!important
+					span
+						color #6b6b6b
+						font-size 1.4em!important	
+						padding 0!important
+						line-height 3em!important
 
 		.video_paginate
 			text-align center
@@ -1797,6 +1857,12 @@ footer
 				font-size 1.3em
 				padding-left 11px
 				background #e3e3e3 url('../images/sprite.png') 256px -639px no-repeat
+				&.tab2
+					background-position 256px -671px
+				&.tab3
+					background-position 256px -704px
+				&.tab4
+					background-position 231px -734px 
 			.list 
 				.item
 					padding 7px 0 7px 11px
@@ -2054,224 +2120,460 @@ footer
 	padding-top 15px
 	font-size 0
 	overflow hidden
-.left_notes
-	width 300px
-	display inline-block
-	vertical-align top
-	margin 0 26px 0 9px
-	font-size 1rem
-	.monster_box
+	.left_notes
 		width 300px
-		height 618px
-		box-shadow()		
-		padding 9px 0
-		margin-bottom 15px
-	.add
-		width 300px
-		height 290px
-		padding 20px 0
-		box-shadow()
-		margin-bottom 15px
+		display inline-block
+		vertical-align top
+		margin 0 26px 0 9px
+		font-size 1rem
+		.monster_box
+			width 300px
+			height 618px
+			box-shadow()		
+			padding 9px 0
+			margin-bottom 15px
+		.add
+			width 300px
+			height 290px
+			padding 20px 0
+			box-shadow()
+			margin-bottom 15px
 
-		img
-			width 100%
-			height auto
-
-	.mas_visto
-		box-shadow()
-		.tab
-			height 26px
-			font-size 1.3em
-			padding-left 11px
-			background #e3e3e3 url('../images/sprite.png') 256px -639px no-repeat
-		.list 
-			.item
-				padding 7px 0 7px 11px
-				width 300px
-				font-size 0
-				border-bottom 1px solid #d9d9d9
-				figure
-					vertical-align top
-					display inline-block
-					font-size 1rem
-					img
-						width 120px
-						height 74px
-				.des
-					width 162px 
-					vertical-align top
-					display inline-block
-					font-size 1rem
-					padding-left 7px
-					height 74px
-				&:nth-child(even)
-					background-color #f1f1f1
-
-		.pagine
-			height 49px 
-			text-align center
-
-	.plugin_fb
-		width 300px
-		box-shadow()
-		margin 15px 0
-	#ads
-		width 300px
-		border 0
-		padding 0
-		.item
-			width 140px
-			margin-left 20px
-			margin-bottom 20px
-			&:nth-child(odd)
-				margin-left 0
-
-.right_notes
-	width 600px
-	display inline-block
-	vertical-align top
-	font-size 1rem
-	float right
-	margin-right 25px
-	.group_title
-		font-size 2.8em
-		line-height 30px
-	.title_nota
-		font-size 1.9em
-		margin-top 5px
-	.image 
-		.opt
-			height 27px
-			background-color #e2e2e2
-			width 100%
-			padding 0 10px
-			text-align left
-			margin-top 30px
-			
-			ul
-				font-size 0
-				li 
-					display inline-block
-					vertical-align top
-					font-size 0.8rem
-
-					a 
-						color #6D6D6D
-				.e1
-					width 274px
-					padding-top 8px
-				.e2 a, .e4 a
-					width 28px
-					height 20px
-					background url('../images/sprite.png') 0 -191px
-					display block
-					margin-top 4px
-				.e4 a
-					background-position -41px -191px
-				.e3
-					padding 8px 20px 0 0
-					background url('../images/sprite.png') 261px -217px
-					width 276px
-					text-align right
-					background-repeat no-repeat
-		.gallery
-			position relative
-			a 
-				position absolute
-				width 38px
-				height 38px
-				display block
-				border-radius(19px)
-				background url('../images/sprite.png')
-				top 50%
-				margin-top -19px
-				opacity(0.7)
-				&.next
-					background-position -200px -637px
-					left 0
-				&.prev
-					background-position -157px -637px
-					right 0
-		figure 
-			width 600px
 			img
 				width 100%
 				height auto
-	.text_note
-		font-size 1.13em
-		margin-top 15px
-	.author
-		font-size 0.88em
-		text-align center
-		margin-top 25px
-		span 
-			height 8px
-			width 8px
-			border-radius(4px)
-			display inline-block
-			margin-right 7px
-			margin-top 2px
 
-	.social
-		text-align center
-		padding 15px 0
-		border-top 1px solid #d9d9d9
-		border-bottom 1px solid #d9d9d9
-	.tags
-		font-size 0.88em
-		text-align center
-		padding 5px 0 22px		
-		span 
-			font-size 1.14em
-			font-weight 700
-	.action
-		text-align center
-		.btn_volver
-			text-align center
-			margin 0 auto
-			padding 0 18px
-			font-size 1.2em
-			color #fff
-			display inline-block
-			border-radius(12px)
-			text-decoration none
-	.buscar_otro
-		border-bottom 1px solid #d9d9d9
-		padding-bottom 6px
-		.tit 
-			font-size 2em
-			text-align center
-		.box_form
-			background-color #ececec
-			height 40px
-			border-bottom 1px solid #bababa
-			select
-				display inline-block
-				margin-left 50px
-				margin-right 142px
-				height 28px
-				width 162px
-				border 1px solid #a5a5a5
-				vertical-align top
-				margin-top 5px
-			.box_search
-				display inline-block
-				background #bdbdbd
-				width 213px
+		.mas_visto
+			box-shadow()
+			.tab
 				height 26px
-				border-radius(13px)	
-				vertical-align top
-				margin-top 6px	
-				.ipt 
-					background none
-					border 0
-					height 20px
-					padding-left 20px
-					width 172px
-					margin-left 5px
-				.btn 
-					background url('../images/sprite.png') -1px -146px
+				font-size 1.3em
+				padding-left 11px
+				background #e3e3e3 url('../images/sprite.png') 256px -639px no-repeat
+				&.tab2
+					background-position 256px -671px
+				&.tab3
+					background-position 256px -704px
+				&.tab4
+					background-position 231px -734px 
+			.list 
+				.item
+					padding 7px 0 7px 11px
+					width 300px
+					font-size 0
+					border-bottom 1px solid #d9d9d9
+					figure
+						vertical-align top
+						display inline-block
+						font-size 1rem
+						img
+							width 120px
+							height 74px
+					.des
+						width 162px 
+						vertical-align top
+						display inline-block
+						font-size 1rem
+						padding-left 7px
+						height 74px
+					&:nth-child(even)
+						background-color #f1f1f1
+
+			.pagine
+				height 49px 
+				text-align center
+
+		.plugin_fb
+			width 300px
+			box-shadow()
+			margin 15px 0
+		#ads
+			width 300px
+			border 0
+			padding 0
+			.item
+				width 140px
+				margin-left 20px
+				margin-bottom 20px
+				&:nth-child(odd)
+					margin-left 0
+
+	.right_notes
+		width 600px
+		display inline-block
+		vertical-align top
+		font-size 1rem
+		float right
+		margin-right 25px
+		.group_title
+			font-size 2.8em
+			line-height 30px
+		.title_nota
+			font-size 1.9em
+			margin-top 5px
+		.image 
+			.opt
+				height 27px
+				background-color #e2e2e2
+				width 100%
+				padding 0 10px
+				text-align left
+				margin-top 30px
+				
+				ul
+					font-size 0
+					li 
+						display inline-block
+						vertical-align top
+						font-size 0.8rem
+
+						a 
+							color #6D6D6D
+					.e1
+						width 274px
+						padding-top 8px
+					.e2 a, .e4 a
+						width 28px
+						height 20px
+						background url('../images/sprite.png') 0 -191px
+						display block
+						margin-top 4px
+					.e4 a
+						background-position -41px -191px
+					.e3
+						padding 8px 20px 0 0
+						background url('../images/sprite.png') 261px -217px
+						width 276px
+						text-align right
+						background-repeat no-repeat
+			.gallery
+				position relative
+				a 
+					position absolute
+					width 38px
+					height 38px
+					display block
+					border-radius(19px)
+					background url('../images/sprite.png')
+					top 50%
+					margin-top -19px
+					opacity(0.7)
+					&.next
+						background-position -200px -637px
+						left 0
+					&.prev
+						background-position -157px -637px
+						right 0
+			figure 				
+				img
+					width 100%
+					height auto
+		.text_note
+			font-size 1.13em
+			margin-top 15px
+		.author
+			font-size 0.88em
+			text-align center
+			margin-top 25px
+			span 
+				height 8px
+				width 8px
+				border-radius(4px)
+				display inline-block
+				margin-right 7px
+				margin-top 2px
+
+		.social
+			text-align center
+			padding 15px 0
+			border-top 1px solid #d9d9d9
+			border-bottom 1px solid #d9d9d9
+		.tags
+			font-size 0.88em
+			text-align center
+			padding 5px 0 22px		
+			span 
+				font-size 1.14em
+				font-weight 700
+		.action
+			text-align center
+			.btn_volver
+				text-align center
+				margin 0 auto
+				padding 0 18px
+				font-size 1.2em
+				color #fff
+				display inline-block
+				border-radius(12px)
+				text-decoration none
+		.buscar_otro
+			border-bottom 1px solid #d9d9d9
+			padding-bottom 6px
+			.tit 
+				font-size 2em
+				text-align center
+			.box_form
+				background-color #ececec
+				height 40px
+				border-bottom 1px solid #bababa
+				select
+					display inline-block
+					margin-left 50px
+					margin-right 142px
+					height 28px
+					width 162px
+					border 1px solid #a5a5a5
+					vertical-align top
+					margin-top 5px
+				.box_search
+					display inline-block
+					background #bdbdbd
+					width 213px
 					height 26px
+					border-radius(13px)	
+					vertical-align top
+					margin-top 6px	
+					.ipt 
+						background none
+						border 0
+						height 20px
+						padding-left 20px
+						width 172px
+						margin-left 5px
+					.btn 
+						background url('../images/sprite.png') -1px -146px
+						height 26px
+
+		&.pichanga_y_juerga
+			.image
+				margin-top 26px
+				box-shadow()
+			.title_nota
+				margin-top 10px
+				margin-bottom -15px
+			.subtitle
+				font-size 2em				
+				padding 10px 0
+			.text_note
+				font-size 1em
+				span
+					font-size 1.13em
+			.address
+				font-size 2.8em
+				margin-bottom -30px
+				margin-top 20px		
+			.author 
+				margin-top 40px		
+			.list_content
+				background #ececec
+				border-left 1px solid #d8d8d8
+				border-right 1px solid #d8d8d8
+				padding-top 16px
+				margin-left -6px
+				margin-right -11px
+				border-bottom 1px solid #d8d8d8
+				.tabs
+					background #fff
+					height 38px
+					border 1px solid #bdbdbd
+					border-top 1px solid #e5e5e5
+					margin 0 -1px 
+					border-radius(3px)
+					ul
+						
+						li
+							float left 
+							width auto
+							margin-left 10px
+							height 36px
+							a 
+								padding 0 5px
+								display block
+								height 36px
+								line-height 33px
+								text-decoration none
+							&.active
+							&:hover
+								margin-top -5px
+								height 41px
+								background color_lila
+								padding-top 5px
+								-webkit-border-top-left-radius: 5px;
+								-webkit-border-top-right-radius: 5px;
+								-moz-border-radius-topleft: 5px;
+								-moz-border-radius-topright: 5px;
+								border-top-left-radius: 5px;
+								border-top-right-radius: 5px;
+								a
+									color #fff
+								
+
+					.buscar_otro
+						float left
+						margin-left 12px
+						border-bottom 0
+						.box_form
+							background #fff
+							height 37px
+							.box_search
+								margin-top 5px
+				
+				.list_articles		 
+					font-size 0		
+					padding 0 7px 10px 6px
+					.filter
+						height 45px
+						font-size 1rem
+						padding-top 8px
+						select
+							width 181px
+							height 27px
+							margin-left 10px
+						a 
+							width 18px
+							height 18px
+							display inline-block
+							border-radius(9px)
+							text-align center
+							text-decoration none
+							&:hover
+							&.active
+								background color_lila
+								color #fff
+								line-height 16px
+
+					article
+						width 600px
+						display inline-block
+						vertical-align top		
+						box-shadow()
+						margin 0 0 20px 0
+						font-size 1rem
+						
+						.add_in_news 
+							width 406px
+							height 250px
+							background-color #333
+							margin 20px 0
+
+						.media 
+							height 120px
+							width 194px
+							float left
+							position relative
+							overflow hidden
+
+							img
+								width 100%
+								height auto
+
+							.play_video
+								background-image url('../images/sprite.png') 
+								background-position -71px -180px
+								background-repeat no-repeat
+								width 38px
+								height 38px
+								display block
+								position absolute
+								top 50%
+								left 50%
+								margin-left -19px
+								margin-top -19px
+								border-radius(19px)
+								opacity(0.8)
+								box-shadow()
+								z-index 10
+
+							.exclusive_label
+								width 140px
+								height 140px
+								border-radius (70px)	
+								position absolute	
+								box-shadow()
+								color #fff
+								font-size 1.1em
+								top -109px 
+								left -9px
+								padding 109px 0 0 39px
+								opacity(0.7)
+
+						.text 
+							height 93px 
+							font-size 1.6em
+							line-height 1.35em
+							padding 10px 10px 5px
+							width 406px
+							float left
+							background  #fff
+						.opt
+							height 27px
+							background-color #e2e2e2
+							width 406px
+							padding 0 10px
+							float left
+							ul
+								font-size 0
+								li 
+									display inline-block
+									vertical-align top
+									font-size 0.8rem
+
+									a 
+										color #6D6D6D
+								.e1
+									width 180px
+									padding-top 8px
+								.e2 a, .e4 a
+									width 28px
+									height 20px
+									background url('../images/sprite.png') 0 -191px
+									display block
+									margin-top 4px
+								.e4 a
+									background-position -41px -191px
+								.e3
+									padding 8px 20px 0 0
+									background url('../images/sprite.png') 160px -216px
+									width 175px
+									text-align right
+									background-repeat no-repeat
+
+				.paginate
+					border-top 1px solid #d8d8d8
+					height 40px
+					padding 9px 15px 0 0 
+					text-align right
+					margin-top 10px
+					width 100%
+					border-bottom #a9a9a9
+					ul
+						font-size 0
+						li 
+							display inline-block
+							width 16px
+							height 16px
+							border-radius(8px)
+							text-align center
+							line-height 15px
+							font-size 1rem
+							margin-left 2px
+
+							a 
+								font-size 0.9em
+								display inline-block
+								color #6d6d6d
+								line-height auto
+												
+						li:hover, .active			
+
+							a
+								color #fff
+								text-decoration none
+
+
+		
+
+
 
 
 
@@ -3007,7 +3309,13 @@ footer
 				width 750px!important
 				margin-bottom 20px
 				.tab
-					background-position 706px -639px
+					background-position 707px -639px
+					&.tab2
+						background-position 707px -671px
+					&.tab3
+						background-position 707px -703px
+					&.tab4
+						background-position 680px -734px
 				.list 
 					.item
 						width 750px!important
@@ -3106,9 +3414,16 @@ footer
 			display none
 		.left_notes
 			width 690px
-		.mas_visto
-			.tab
-					background-position 529px -734px
+			margin 0
+			.mas_visto
+				.tab
+					background-position 557px -639px
+					&.tab2
+						background-position 557px -671px
+					&.tab3
+						background-position 557px -703px
+					&.tab4
+						background-position 529px -734px
 		.right_notes
 			width 690px	
 			padding-bottom 10px	
@@ -3133,6 +3448,29 @@ footer
 						.e3
 							width 322px
 							background-position 306px -217px
+
+			&.pichanga_y_juerga
+				margin-right 0
+				.group_title 
+					padding-left 40px
+					&.p2 
+						padding-left 10px
+				.image
+					width 600px
+					margin-left 41px
+					figure
+						width 600px
+					&.p2
+						margin-left 0
+						figure
+							width 690px
+
+				.list_content
+					width 618px
+					margin-left 36px
+					margin-bottom 30px
+				.subtitle
+					padding-left 40px
 
 		.mas_visto
 			width 600px
@@ -3162,6 +3500,12 @@ footer
 			width 690px
 			.mas_visto
 				.tab
+					background-position 557px -639px
+					&.tab2
+						background-position 557px -671px
+					&.tab3
+						background-position 557px -703px
+					&.tab4
 						background-position 529px -734px
 		.right_horoscopo
 			width 690px	
@@ -3331,11 +3675,17 @@ footer
 					margin-left 0
 		.features
 			width 300px!important
-			text-align left
-			.tab
-				background-position 256px -639px!important
+			text-align left			
 			.mas_visto
 				width 300px!important
+				.tab
+					background-position 259px -639px	
+					&.tab2
+						background-position 259px -672px	
+					&.tab3
+						background-position 259px -704px	
+					&.tab4
+						background-position 228px -734px
 				.list
 					.item
 						width 300px!important
@@ -3441,22 +3791,80 @@ footer
 						.e3
 							width 134px
 							background-position 119px -217px
+				
+
+			&.pichanga_y_juerga
+				.group_title
+				.subtitle
+					padding-left 10px
+				.image
+					margin-left 0
+					figure 
+						width 320px
+					&.p2
+						figure
+							width 320px
+				.pag_pichanga
+					width 320px
+				.list_content
+					margin-left 0
+					.tabs
+					.paginate
+						display none
+					.list_articles
+						padding-left 0
+						.filter
+							background #fff
+							margin-bottom 30px
+						article
+							width 300px
+							margin-left 10px
+							margin-right 10px
+							.media
+								width 116px
+								height auto
+							.text 
+								width 183px
+								height 72px
+								font-size 1.2em
+								display inline-block
+							.opt 
+								width 299px
+								ul 
+									.e1
+										width 136px
+									.e3
+										width 114px
+										background-position 99px -217px
+
+
+			
+				
 		.left_notes
 			width 320px
 			margin 0
-		.mas_visto
-			width 300px	
-			.tab
-				background-position 228px -734px		
-			.list
+			&.pichanga_juerga
+				display none				
 				
-				.item
-					float left
-					&:nth-child(even)
-						border-left 1px solid #d9d9d9
-						background none
-					&.bg_class
-						background-color #f1f1f1
+			.mas_visto
+				width 300px	
+				.tab
+					background-position 259px -639px	
+					&.tab2
+						background-position 259px -672px	
+					&.tab3
+						background-position 259px -704px	
+					&.tab4
+						background-position 228px -734px		
+				.list
+					
+					.item
+						float left
+						&:nth-child(even)
+							border-left 1px solid #d9d9d9
+							background none
+						&.bg_class
+							background-color #f1f1f1
 
 	#horoscopo_resultados 
 		width 320px
@@ -3482,16 +3890,22 @@ footer
 		.left_horoscopo
 			width 320px
 			margin 0
-		.mas_visto
-			width 300px	
-			.tab
-				background-position 228px -734px		
-			.list
-				
-				.item
-					float left
-					&:nth-child(even)
-						border-left 1px solid #d9d9d9
-						background none
-					&.bg_class
-						background-color #f1f1f1
+			.mas_visto
+				width 300px	
+				.tab
+					background-position 259px -639px	
+					&.tab2
+						background-position 259px -672px	
+					&.tab3
+						background-position 259px -704px	
+					&.tab4
+						background-position 228px -734px		
+				.list
+					
+					.item
+						float left
+						&:nth-child(even)
+							border-left 1px solid #d9d9d9
+							background none
+						&.bg_class
+							background-color #f1f1f1

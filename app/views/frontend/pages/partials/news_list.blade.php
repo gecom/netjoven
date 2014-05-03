@@ -5,7 +5,8 @@
 		</div>
 	@endif
 	<?php
-		$data_url = array($dbr_post_view->parent_category_slug, $dbr_post_view->id, $dbr_post_view->slug);
+		$dbr_parent_category = Category::getParentCategoryById($dbr_post_view->category_parent_id)->first();
+		$data_url = array($dbr_parent_category->slug, $dbr_post_view->id, $dbr_post_view->slug);
 	?>
 	<div class="news {{$type_module == Helpers::TYPE_MODULE_MODULAR || $type_module == Helpers::TYPE_MODULE_LISTADO ? 'view2' : ''}}">
 	    <figure>

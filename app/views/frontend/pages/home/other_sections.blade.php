@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-if (Cache::has('dbl_other_sections')){
+if (!Cache::has('dbl_other_sections')){
     Cache::forever('dbl_other_sections', Category::getCategoriesByids(array(2,30,35,40))->get());
 }
 

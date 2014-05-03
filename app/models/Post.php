@@ -66,7 +66,69 @@ class Post extends Eloquent {
 		return $dbr_post;
     }
 
-	public static function getPost($params = array())
+
+    public function scopeGetPostNews($query, $params = array()){
+		$params_default = array('id' => null,'type' => array(Helpers::TYPE_POST_NEWS, Helpers::TYPE_POST_VIDEO), 'display' => null,'with_post_at' => false ,'category_id' => null, 'show_not_featured' => false, 'view_index' => false,'show_limit' => false);
+		$params = array_merge($params_default, $params);
+
+    	$query->select('njv_post.id',
+						'njv_post.title',
+						'njv_post.slug',
+						'njv_post.content',
+						'njv_post.summary',
+						'njv_post.status',
+						'njv_post.post_at',
+						'njv_post.view_index',
+						'njv_post.id_video',
+						'njv_post.type_video',
+						'njv_post.type',
+						'njv_post.has_gallery',
+						'njv_category.id as category_id',
+						'njv_category.parent_id as category_parent_id',
+						'njv_category.name as category_name',
+						'njv_category.slug as category_slug')
+    			->join('njv_category', 'njv_category.id', '=', 'njv_post.category_id')
+    			->orderBy('njv_post.post_at', 'desc');
+
+
+		if(is_array($params['id'])){
+			$query->whereIn('njv_post.id', $params['id']);
+		}
+
+		if(is_array($params['type'])){
+			$query->whereIn('njv_post.type', $params['type']);
+		}
+
+		if($params['with_post_at'] == true){
+			$query->where('njv_post.post_at', '<=', DB::raw("NOW()"));
+		}
+
+		if(is_numeric($params['view_index'])){
+			$query->where('njv_post.view_index', '=', $params['view_index']);
+		}
+
+		if(is_numeric($params['display'])){
+			$query->where('njv_post.display', '=', $params['display']);
+		}
+
+		if(!empty($params['category_id'])){
+			if(is_array($params['category_id']) && count($params['category_id']) > 0){
+				$query->whereIn('njv_post.category_id', $params['category_id']);
+			}else{
+				$query->where('njv_post.category_id', '=', $params['category_id']);
+			}
+		}
+
+		if(is_array($params['show_limit']) && count($params['show_limit'])){
+			$limit_end = $params['show_limit'][0] ;
+			$limit_start = $params['show_limit'][1] ;
+			$query->take($limit_end)->skip($limit_start);
+		}
+
+		return $query;
+    }
+
+	/*public static function getPost($params = array())
 	{
 
 		$params_default = array('id' => null,'type' => array(Helpers::TYPE_POST_NEWS, Helpers::TYPE_POST_VIDEO), 'display' => null,'with_post_at' => false ,'category_id' => null, 'show_not_featured' => false, 'view_index' => false,'show_limit' => false);
@@ -90,7 +152,6 @@ class Post extends Eloquent {
 							Helpers::$prefix_table . 'category.name as category_name',
 							Helpers::$prefix_table . 'category.slug as category_slug',
 							'parent_category.slug as parent_category_slug')
-						//	DB::raw('(SELECT CONCAT(c1.name, " > " ,'.Helpers::$prefix_table . 'category.name'.') FROM ' . Helpers::$prefix_table . 'category c1 WHERE c1.parent_id IS NULL AND c1.id = '.Helpers::$prefix_table .'category.parent_id) as parent_category'))
 					->join(Helpers::$prefix_table . 'category', Helpers::$prefix_table . 'category.id', '=', Helpers::$prefix_table .'post.category_id')
 					->join(DB::raw('(SELECT c.id, c.name, c.slug FROM njv_category c WHERE parent_id IS NULL ) AS parent_category'), 'parent_category.id' ,'=', 'njv_category.parent_id')
 					->orderBy(Helpers::$prefix_table . 'post.post_at', 'desc');
@@ -134,7 +195,7 @@ class Post extends Eloquent {
 		}
 
 		return $post;
-	}
+	}*/
 
 	public function scopeUpdateCounterRead($query, $post_id){
 		return $query
