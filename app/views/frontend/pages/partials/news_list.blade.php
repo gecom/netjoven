@@ -10,7 +10,15 @@
 	?>
 	<div class="news {{$type_module == Helpers::TYPE_MODULE_MODULAR || $type_module == Helpers::TYPE_MODULE_LISTADO ? 'view2' : ''}}">
 	    <figure>
-	        <img src="{{Helpers::getImage($dbr_post_view->image, 'noticias')}}" alt="{{$dbr_post_view->title}}">
+			<?php
+				if(!empty($dbr_post_view->id_video)){
+					$image_featured = Helpers::getThumbnailYoutubeByIdVideo($dbr_post_view->id_video);
+				}else{
+					$dbr_image_featured = Gallery::getImageFeaturedByPostId($dbr_post_view->id)->first();
+					$image_featured = Helpers::getImage($dbr_image_featured->image, 'noticias');
+				}
+			?>
+	        <img src="{{$image_featured}}" alt="{{$dbr_post_view->title}}">
 	    </figure>
 	    <div class="desc"><a href="{{ route('frontend.post.view', $data_url) }}">{{$dbr_post_view->title}}</a></div>
 	    <div class="opt">

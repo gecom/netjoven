@@ -59,7 +59,7 @@
 	@endif
 
 	<div class="paginate">
-		{{$dbl_post->links('frontend.pages.partials.paginator')}}
+		{{$dbl_post_links}}
 	</div>
 </section>
 

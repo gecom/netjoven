@@ -11,7 +11,7 @@ $dbl_other_sections = Cache::get('dbl_other_sections');
         <div class="add_title">{{$dbr_other_section->name}}</div>
         <div class="add_content">
             <figure>
-                <img src="{{Helpers::getImage($dbr_other_section->image, 'category')}}" alt="{{$dbr_other_section->name}}">
+                <img src="{{Helpers::getImage($dbr_other_section->image, 'category')}}" alt="{{$dbr_other_section->name}}" title="{{$dbr_other_section->name}}">
             </figure>
             <div class="link">
                 <a href="{{ route('frontend.section.list', array($dbr_other_section->slug)) }}">ver<span class="custom_color_bg">+</span></a>

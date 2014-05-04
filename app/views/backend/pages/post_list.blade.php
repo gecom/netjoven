@@ -1,7 +1,7 @@
 @extends('backend.layouts.default')
 
 @section('title_content')
-	Noticias
+	{{$title}}
 @stop
 
 @section('content')
@@ -9,12 +9,12 @@
 <div class="col-lg-12">
     <div class="panel panel-default">
         <div class="panel-heading">
-            Listado de Noticias
+            Listado de {{$title}}
         </div>
         <div class="panel-body">
             <div class="row">
                 <div class="col-lg-12">
-                	<a href="{{ route('backend.register.new')}}" class="btn btn-primary pull-right"><b>+</b> Agregar Nueva Noticia</a>
+                	<a href="{{ route('backend.register.new')}}" class="btn btn-primary pull-right"><b>+</b> Agregar {{$title}}</a>
                 </div>
                 <div class="show-grid col-lg-12">
 					<table class="table table-striped table-bordered table-hover dataTable no-footer">
@@ -45,14 +45,12 @@
 									<?php
 										$dbr_post_featured = PostFeatured::getFeaturedActiveByPostId($dbr_post->id)->first();
 										$post_featured = ($dbr_post_featured ? 'Si': 'No');
-
-echo mb_strtolower($dbr_post->type)."***";
 									?>
 									<td>{{ $post_featured }}</td>
 									<td class="text-center">
-										<a href="{{ route('backend.register.edit', array(mb_strtolower($dbr_post->type),$dbr_post->id)); }}" class="btn btn-primary btn-xs" ><span class="glyphicon glyphicon-pencil"></span> Editar</a>
-										<a href="{{ route('backend.register.featured', array($dbr_post->id) )}}" class="btn btn-success btn-xs" ><span class="glyphicon glyphicon-ok-sign"></span> Destacar</a>
-										<a href="#" class="btn btn-success btn-xs" ><span class="glyphicon glyphicon-file"></span> Copiar</a>
+										<a href="{{ route('backend.register.edit', array(mb_strtolower($dbr_post->type),$dbr_post->id)); }}" title="Editar" class="btn btn-primary btn-xs" ><span class="glyphicon glyphicon-pencil"></span></a>
+										<a href="{{ route('backend.register.featured', array($dbr_post->id) )}}" title="Destacar" class="btn btn-primary btn-xs" ><span class="glyphicon glyphicon-ok-sign"></span></a>
+										<!--<a href="#" class="btn btn-success btn-xs" ><span class="glyphicon glyphicon-file"></span> Copiar</a>-->
 									</td>
 								</tr>
 							@endforeach

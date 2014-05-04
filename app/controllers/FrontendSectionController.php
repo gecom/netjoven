@@ -2,9 +2,9 @@
 
 class FrontendSectionController extends BaseController {
 
-	public function listSection($slug){
+	public function listSection($slug, $page = 1){
 
-		$dbr_category = Category::where('slug', $slug)->first();
+		$dbr_category = Category::getCategoryBySlug($slug)->first();
 
 		if(!$dbr_category)
 			App::abort(404);
@@ -17,10 +17,10 @@ class FrontendSectionController extends BaseController {
 		$total_post_v3 = 0;
 
 		if(empty($dbr_category->parent_id)){
-			$dbl_categories = Category::getChildrenCategoryByParentId($dbr_category->id)->get();
+			$dbl_children_categories = $dbr_category->childrenCategories()->get();
 
-			foreach ($dbl_categories as $dbr_category) {
-				$categories_ids[] = $dbr_category->id;
+			foreach ($dbl_children_categories as $dbr_children_category) {
+				$categories_ids[] = $dbr_children_category->id;
 			}
 
 		}else{
@@ -31,7 +31,6 @@ class FrontendSectionController extends BaseController {
 		$params['display'] 		=  1;
 		$params['category_id'] 	=  $categories_ids;
 		$params['with_post_at'] =  true;
-
 
 		$params_template['title_section'] = $dbr_category->name;
 		$params_template['is_parent_category'] = $is_parent_category;
@@ -85,13 +84,26 @@ class FrontendSectionController extends BaseController {
 			}
 		}
 
-		$params_template['dbl_post'] = $dbl_post = Post::getPostNews($params)->remember(300)->paginate($paginate)->route('frontend.section.pagination', array($slug));;
+		$key = 'post_' . $dbr_category->slug . '_' . $page;
+
+		if (!Cache::has($key)) {
+			$dbl_post = Cache::remember($key, 120, function() use ($params, $paginate, $slug) {
+				$dbl_post = Post::getPostNews($params)
+					->paginate($paginate)
+					->route('frontend.section.pagination', array($slug));
+
+				return ['list' => $dbl_post->getItems(), 'links' => (string) $dbl_post->links('frontend.pages.partials.paginator')];
+			});
+
+		}else{
+			$dbl_post = Cache::get($key);
+		}
 
 		$dbl_post_view1 = array();
 		$dbl_post_view2 = array();
 		$dbl_post_view3 = array();
 
-		foreach ($dbl_post as $dbr_post) {
+		foreach ($dbl_post['list'] as $dbr_post) {
 			if(count($dbl_post_view1) < $total_post_v1){
 				$dbl_post_view1[] = $dbr_post;
 			}elseif(count($dbl_post_view2) < $total_post_v2){
@@ -101,6 +113,7 @@ class FrontendSectionController extends BaseController {
 			}
 		}
 
+		$params_template['dbl_post_links'] = $dbl_post['links'];
 		$params_template['dbl_post_view1'] = $dbl_post_view1;
 		$params_template['dbl_post_view2'] = $dbl_post_view2;
 		$params_template['dbl_post_view3'] = $dbl_post_view3;
@@ -168,7 +181,10 @@ class FrontendSectionController extends BaseController {
 		if (!Cache::has('dbl_post_view_' . $post->id)){
 
 			$dbr_post = Post::getPostById($post->id);
-			$dbr_post->content = Helpers::bbcodes($dbr_post->content);
+			if(!$dbr_post->id_video){
+				$dbr_post->content = Helpers::bbcodes($dbr_post->content);
+			}
+
 			$data_tags = explode(',', $dbr_post->tags);
 
 			$params_template['meter_likebox'] = array(300, 300);

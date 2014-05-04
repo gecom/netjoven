@@ -7,7 +7,11 @@ class AdminNewsController extends BaseController {
     {
         $params['type'] = array($type_post);
         $dbl_post = Post::getPostNews($params)->paginate(15);
-        return View::make('backend.pages.post_list', array('dbl_post' => $dbl_post ));
+
+        $params_template['dbl_post'] = $dbl_post;
+        $params_template['type_post'] = $type_post;
+        $params_template['title'] = ucfirst($type_post);
+        return View::make('backend.pages.post_list', $params_template);
     }
 
     public function newsFeatured($post){

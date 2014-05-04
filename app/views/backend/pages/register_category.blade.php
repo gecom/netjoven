@@ -69,18 +69,6 @@
                             {{ Form::label('frm_category_description', 'Descripcíon') }}
                             {{ Form::textarea('frm_category[description]', (!empty($dbr_category) && $is_new == 0  ? $dbr_category->description: null ), array('id' => 'frm_category_description', 'placeholder' => 'Ingrese la descripcíon', 'class' => 'form-control')) }}
                         </div>
-                        @if($is_new == 1 || ($is_new == 0 && isset($type_category)))
-                            <div class="form-group">
-                                {{ Form::label('frm_category_type', 'Tipo Categoría') }}
-                                <select name="frm_category[type]" id="frm_category_type" class="form-control">
-                                    <option value="">Selecciona Tipo</option>
-                                    @foreach($type_category as $type)
-                                    <?php $selected = (!$is_new && ($type == $dbr_category->type)  ? 'selected="selected"': '' ); ?>
-                                    <option value="{{$type}}" {{ $selected}}>{{$type}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        @endif
 
                         @if (($is_new == 1 && isset($dbr_category)) || ($is_new == 0 && !is_null($dbr_category->parent_id)))
                             <div class="form-group">

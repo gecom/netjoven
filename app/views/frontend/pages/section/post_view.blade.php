@@ -19,7 +19,19 @@
                     </div>
                 </div>
                 <div class="text_note">
-                    {{$dbr_post->content}}
+                    @if ($dbr_post->id_video)
+                        <div  class="video-container">
+                            <object width="455" height="344">
+                            <param name="wmode" value="transparent"></param>
+                            <param name="movie" value="http://www.youtube.com/v/{{$dbr_post->id_video}}&hl=es&fs=1&showinfo=0&rel=0"></param>
+                            <param name="allowFullScreen" value="true"></param>
+                            <param name="allowscriptaccess" value="always"></param>
+                            <embed src="http://www.youtube.com/v/{{$dbr_post->id_video}}&hl=es&fs=1&showinfo=0&rel=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="600" height="350" wmode="transparent"></embed>
+                        </object>
+                    </div>
+                    @else
+                        {{$dbr_post->content}}
+                    @endif
                 </div>
                 <div class="author">
                     <span class="custom_color_bg"></span>Samantha Cervantes / NetJoven
@@ -48,7 +60,8 @@
                 </div>
 
                 <section id="ads">
-                    <article class="item">
+                    @include('frontend.pages.home.other_sections')
+                    <!--<article class="item">
                         <div class="add_content">
                             <figure>
                                 <img src="/assets/images/maq/add1.jpg" alt="">
@@ -90,7 +103,7 @@
                                 <a href="#">ver<span class="custom_color_bg">+</span></a>
                             </div>
                         </div>
-                    </article>
+                    </article>-->
                 </section>
 
             </div>

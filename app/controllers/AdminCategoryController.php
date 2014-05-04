@@ -38,7 +38,6 @@ class AdminCategoryController extends BaseController {
 	public function registerNewCategory($parent_category){
 		$params_template['is_new'] = $is_new =  true;
 		$params_template['title'] = 'Agregar Subcategoría';
-		$params_template['type_category'] = array(Helpers::TYPE_POST_NEWS, Helpers::TYPE_POST_VIDEO);
 		$params_template['dbr_category'] = $parent_category;
 
 		return View::make('backend.pages.register_category', $params_template);
@@ -49,6 +48,8 @@ class AdminCategoryController extends BaseController {
 		$data_frm_category = Input::get('frm_category');
 
 		$is_new =  false;
+		$is_parent_category = false;
+
 		if($data_frm_category['is_new'] == 1){
 			$is_new = true;
 		}
@@ -62,6 +63,7 @@ class AdminCategoryController extends BaseController {
         		$dbr_category = $category;
         	}elseif(!empty($parent_category) && empty($category)){
         		$dbr_category = $parent_category;
+        		$is_parent_category = true;
         	}else{
 				$dbr_category = null;
         	}
@@ -82,7 +84,16 @@ class AdminCategoryController extends BaseController {
         }else{
 
 			$dbr_category->name = $data_frm_category['name'];
-			$dbr_category->slug = Str::slug($data_frm_category['name']);
+
+			if($is_new && $parent_category){
+				$dbr_category->parent_id = $parent_category->id;
+			}
+
+			if($dbr_category->parent_id){
+				$dbr_category->slug = Str::slug($parent_category->name . ' ' . $data_frm_category['name']);
+			}else{
+				$dbr_category->slug = Str::slug($data_frm_category['name']);
+			}
 
 			$dbr_category->description = $data_frm_category['description'];
 

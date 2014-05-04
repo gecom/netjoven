@@ -64,6 +64,10 @@ class Category extends Eloquent {
                 ->where('njv_category.is_menu', '=', 1);
     }
 
+    public function scopeGetCategoryBySlug($query, $slug){
+        return $query->where('njv_category.slug', '=', $slug);
+    }
+
 
 
 

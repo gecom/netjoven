@@ -213,7 +213,7 @@ class Helpers {
 		return $time;
 	}
 
-	public static function getThumbnailYoutubeByIdVideo($id_video, $quality = 'default')
+	public static function getThumbnailYoutubeByIdVideo($id_video, $quality = '0')
 	{
 		return 'http://img.youtube.com/vi/' . $id_video . '/' . $quality . '.jpg';
 	}
@@ -358,11 +358,11 @@ class Helpers {
 	public static function  bbcodes($content){
 
 		$pattern[0] = "#\[video\](.*?)\[/video\]#si";
-		$pre_replace[0] = '<div class="videoNoticia">
+		$pre_replace[0] = '<div class="video-container">
 		<object width="455" height="344"><param name="movie" value="http://www.youtube.com/v/\1&hl=es&fs=1&showinfo=0&rel=0&"></param><param name="allowFullScreen"
 		value="true"></param><param name="allowscriptaccess" value="always"></param>
 		<param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/\1&hl=es&fs=1&showinfo=0&rel=0&" type="application/x-shockwave-flash"
-		allowscriptaccess="always" wmode="transparent" allowfullscreen="true" width="580" height="350"></embed></object></div><div class="ad-container" id="div_promotion" style="display: block;"></div>';
+		allowscriptaccess="always" wmode="transparent" allowfullscreen="true" width="580" height="350"></embed></object></div>';
 
 		$pattern[1] = '#<span style="font-weight: bold;">(.*?)</span>#si';
 		$pre_replace[1] = '<strong>\1</strong>';
