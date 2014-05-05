@@ -44,15 +44,6 @@ class AdminThemeDayController extends BaseController {
             }
         }else{
 
-
-        		/*$data_sections = ThemeDay::find(1)->sections()->get();
-
-
-        		print_r($data_sections);
-
-        		die();*/
-
-
         		try {
 					$tag_data_id = Helpers::getTagIds(array($data_frm_theme_day['name']));
 
@@ -84,32 +75,6 @@ class AdminThemeDayController extends BaseController {
 					$response['success'] = false;
 					$response['errors'] =  ['Error:' . $e->getMessage()];
         		}
-
-
-
-
-
-/*print_r($name);
-
-die();
-			$dbr_theme_day->name = $data_frm_theme_day['name'];
-			$dbr_theme_day->category_id = $data_frm_theme_day['category_id'];
-
-
-
-			try {
-				if($dbr_theme_day->save()){
-					$response['success'] = true;
-					$response['message'] =  'Nota registrada satisfactorimente';
-					$response['redirect'] =  route('backend.theme_day.list');
-				}else{
-					$response['success'] = false;
-					$response['errors'] =  ['Error: Hubo un error al registrar el tema del dia'];
-				}
-			} catch (Exception $e) {
-				$response['success'] = false;
-				$response['errors'] =  ['Error:' . $e->getMessage()];
-			}*/
 
         }
 

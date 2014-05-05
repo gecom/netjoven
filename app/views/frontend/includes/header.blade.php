@@ -12,9 +12,9 @@
         </div>
         <div class="social">
             <ul>
-                <li><a href="#" class="tw"></a><span>20613</span></li>
-                <li><a href="#" class="fb"></a><span>20613</span></li>
-                <li><a href="#" class="gp"></a><span>20613</span></li>
+                <li><a href="https://twitter.com/#!/netjoven" class="tw"></a><!--<span>20613</span>--></li>
+                <li><a href="http://www.facebook.com/netjoven" class="fb"></a><!--<span>20613</span>--></li>
+                <li><a href="#" class="gp"></a><!--<span>20613</span>--></li>
             </ul>
         </div>
     </div>

@@ -18,16 +18,14 @@
 					$image_featured = Helpers::getImage($dbr_image_featured->image, 'noticias');
 				}
 			?>
-	        <img src="{{$image_featured}}" alt="{{$dbr_post_view->title}}">
+	        <img src="{{$image_featured}}" alt="{{$dbr_post_view->title}}" />
 	    </figure>
 	    <div class="desc"><a href="{{ route('frontend.post.view', $data_url) }}">{{$dbr_post_view->title}}</a></div>
-	    <div class="opt">
-	        <ul>
-	            <li class="e1"><a href="{{route('frontend.section.list', array($dbr_post_view->category_slug))}}">+ {{$dbr_post_view->category_name}}</a></li>
-	            <li class="e2"><a href="{{ route('frontend.post.view', $data_url) }}"></a></li>
-	            <li class="e3">{{ Helpers::intervalDate($dbr_post_view->post_at, date('Y-m-d H:i:s'))}}</li>
-	        </ul>
-	    </div>
+		<div class="opt">
+			<div class="opt1"><a href="{{route('frontend.section.list', array($dbr_post_view->category_slug))}}">+ {{$dbr_post_view->category_name}}</a></div>
+			<div class="opt2"></div>
+			<div class="opt3">{{ Helpers::intervalDate($dbr_post_view->post_at, date('Y-m-d H:i:s'))}}</div>						
+		</div>
 	</div>
 @endforeach
 
