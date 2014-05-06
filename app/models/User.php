@@ -65,4 +65,14 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return 'remember_token';
 	}
 
+	public function userProfile()
+    {
+        return $this->hasOne('UserProfile');
+    }
+
+	public function userTool()
+    {
+        return $this->hasOne('UserTool');
+    }
+
 }

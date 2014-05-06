@@ -122,7 +122,9 @@ Route::get('{slug_category}/{post}/{slug}.html', array('as' => 'frontend.post.vi
 
 Route::get('/iniciar_sesion', array('as' => 'frontend.login', 'uses' => 'UserController@login' ));
 Route::post('/iniciar_sesion', array('as' => 'frontend.login', 'uses' => 'UserController@signin' ));
-Route::get('/cerrar_sesion', 'UserController@logout');
+//Route::get('/cerrar_sesion', 'UserController@logout');
+
+Route::get('/cambiar_color', array('as' => 'frontend.user.tools.changecolor', 'uses' => 'FrontendUserToolsController@viewChangeColor' ));
 
 /*******Cambiar tipo de vista*******/
 

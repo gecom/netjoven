@@ -1,7 +1,5 @@
 <?php
 
-$type_module = Helpers::getTypeModule();
-
 if (!Cache::has('dbl_categories_home')){
     Cache::forever('dbl_categories_home', Helpers::getCategoriesHome());
 }
@@ -206,11 +204,5 @@ $dbl_categories_home = Cache::get('dbl_categories_home');
     </ul>
 </div>
 <div class="row user_options">
-    <ul id="view_options" class="view_options">
-        <li data-type="{{Helpers::TYPE_MODULE_ESTANDAR}}" class="v1" ><a class="{{$type_module == Helpers::TYPE_MODULE_ESTANDAR ? 'active custom_color_bg' : ''}}" href="#" ></a></li>
-        <li data-type="{{Helpers::TYPE_MODULE_MODULAR}}" class="v2"><a class="{{$type_module == Helpers::TYPE_MODULE_MODULAR ? 'active custom_color_bg' : ''}}" href="#"></a></li>
-        <li data-type="{{Helpers::TYPE_MODULE_LISTADO}}" class="v3"><a class="{{$type_module == Helpers::TYPE_MODULE_LISTADO ? 'active custom_color_bg' : ''}}" href="#"></a></li>
-        <li class="v4"><a id="login" href="{{route('frontend.login')}}"><span>Iniciar Sesión</span><div class="icon_v4 custom_color_bg"></div></a></li>
-        <li class="v5"><a href="#" class="active custom_color_bg"></a></li>
-    </ul>
+    @include('frontend.pages.partials.user_options')
 </div>

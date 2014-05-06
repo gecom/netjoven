@@ -11,8 +11,6 @@ class UserController extends BaseController {
      * Displays the login form
      *
      */
-
-
     public function login(){
 
         if(Request::ajax()){
@@ -39,11 +37,13 @@ class UserController extends BaseController {
         );
 
         $response = array();
+        $http_referer = Request::server('HTTP_REFERER');
 
         if(Request::ajax()){
             if (Auth::attempt($input)) {                
                 $response['success'] = true;
                 $response['message'] =  'Usuario Logeado Satisfactoriamente';
+                $response['redirect'] = ($http_referer ? $http_referer : route('home')) ;
             } else {
  
                 $user = User::where('email', Input::get('email'))->first();
@@ -53,6 +53,7 @@ class UserController extends BaseController {
                     $user->save();
                     $response['success'] = true;
                     $response['message'] =  'Usuario Logeado Satisfactoriamente';
+                    $response['redirect'] = ($http_referer ? $http_referer : route('home')) ;
                     return Response::json($response);
                 }
                 

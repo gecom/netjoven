@@ -7,6 +7,9 @@ return array(
 		'edit_title_juerga' => 'Editar Juerga',
 		'new_title_pichanga' => 'Regitrar Juerga',
 		'edit_title_pichanga' => 'Editar Juerga'
+    ),
+    'frontend' => array(
+    	'welcome_user' => 'Bienvenido(a)'
     )
 
 );

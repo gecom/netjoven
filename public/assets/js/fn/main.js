@@ -75,6 +75,32 @@ $(function(){
 
 	});
 
+	$('#user_tools_color').on('click', function(e){
+		e.preventDefault();
+		var $this = $(this);
+
+		if(!$this.attr('href')){
+			return false;
+		}
+
+		$('body').modalmanager('loading');
+
+		setTimeout(function(){
+			$modal.load($this.attr('href'), '', function(){
+				$modal.modal({ backdrop: 'static'});
+			});
+		}, 1000);
+
+	});
+
+	$modal.on('click', '#pick_color a', function(e){
+		e.preventDefault();
+		var $this = $(this);
+		console.log($this);
+		document.getElementById('stylesheet_custom_color').href=$this.attr('data-stylesheet');
+	});
+
+
 	$modal.on('submit', '#frm_login', function(e){
 		e.preventDefault();
 		var $this = $(this);
@@ -85,7 +111,13 @@ $(function(){
 			dataType:'json',
 			data: $this.serializeArray()
 		}).done(function(response){
-			console.log(response);
+			if(response.success == true){
+				setTimeout(function(){
+					window.location.href = response.redirect;
+				}, 1500)
+			}else{
+
+			}
 		});
 
 	});
