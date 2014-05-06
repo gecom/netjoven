@@ -15,6 +15,10 @@ class UserTool extends Eloquent {
         return $this->belongsTo('ColorPalette');
     }
 
+    public function scopeGetToolByUserId($query, $user_id){
+    	return $query->where('user_id', '=', $user_id);
+    }
+
 
 }
 

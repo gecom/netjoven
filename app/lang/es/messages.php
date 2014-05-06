@@ -9,7 +9,9 @@ return array(
 		'edit_title_pichanga' => 'Editar Juerga'
     ),
     'frontend' => array(
-    	'welcome_user' => 'Bienvenido(a)'
+    	'welcome_user' => 'Bienvenido(a)',
+    	'user_tool_title' => 'Diseña tu interfaz',
+    	'user_tool_confirm' => '¿Deseas guardar los cambios?'
     )
 
 );

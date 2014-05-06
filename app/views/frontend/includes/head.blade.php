@@ -20,7 +20,7 @@
 {{ HTML::style('assets/css/site/style.css')}}
 {{ HTML::style('assets/css/bootstrap_modal/bootstrap-modal-bs3patch.css')}}
 {{ HTML::style('assets/css/bootstrap_modal/bootstrap-modal.css')}}
-{{ HTML::style('assets/css/site/custom/custom_default.css', array('id' => 'stylesheet_custom_color'))}}
+{{ HTML::style($stylesheet_custom_color, array('id' => 'stylesheet_custom_color'))}}
 
 @section('css')
 @show

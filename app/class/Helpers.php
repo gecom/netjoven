@@ -355,6 +355,26 @@ class Helpers {
 		}
 	}
 
+	public static function getUserTool(){
+		return Auth::user()->userTool()->first();
+	}
+
+
+	public static function getColorCurrent(){
+		if(Auth::check()){
+			$dbr_user_tool = self::getUserTool();
+
+			if(!$dbr_user_tool){
+				return ColorPalette::where('is_default', '=', 1)->first()->color;
+			}else{
+				return ColorPalette::where('id', '=', $dbr_user_tool->color_palette_id)->first()->color;
+			}
+
+		}else{
+			return ColorPalette::where('is_default', '=', 1)->first()->color;
+		}
+	}
+
 	public static function  bbcodes($content){
 
 		$pattern[0] = "#\[video\](.*?)\[/video\]#si";

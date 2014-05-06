@@ -93,11 +93,21 @@ $(function(){
 
 	});
 
-	$modal.on('click', '#pick_color a', function(e){
+	$modal.on('click', '#palette_color a', function(e){
 		e.preventDefault();
-		var $this = $(this);
-		console.log($this);
-		document.getElementById('stylesheet_custom_color').href=$this.attr('data-stylesheet');
+		var $this = $(this), $confirm_palette_color = $('#confirm_palette_color');
+
+		if($this.attr('data-auth') == 1){
+			document.getElementById('stylesheet_custom_color').href = $this.attr('data-stylesheet');
+			if($confirm_palette_color.is(':hidden')){
+				$confirm_palette_color.show();
+			}
+
+		}else{
+			$modal.load('/iniciar_sesion', '', function(){
+				$modal.modal({ backdrop: 'static'});
+			});			
+		}
 	});
 
 
@@ -146,6 +156,11 @@ $(function(){
 		 if($modal.find('#close_type_module').is(':visible')){
 		 	location.reload();
 		 }
+
+		 if($modal.find('#cancel_color_palette').is(':visible')){
+			document.getElementById('stylesheet_custom_color').href = $(document).data('color_palette_current');
+		 }
+
 	});
 
 })

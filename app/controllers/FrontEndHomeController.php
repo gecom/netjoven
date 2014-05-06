@@ -84,30 +84,5 @@ class FrontendHomeController extends BaseController {
 		return $data;
 	}
 
-	public function changeTypeModule($type_module = null){
-		$type_module = (empty($type_module) ? Helpers::TYPE_MODULE_ESTANDAR : $type_module);
-
-		if(Request::ajax()){
-			return View::make('frontend.pages.partials.type_module',array('type_module'=>$type_module))->render();
-		}
-
-	}
-
-	public function saveTypeModule($type_module){
-		$type_module = (empty($type_module) ? Helpers::TYPE_MODULE_ESTANDAR : $type_module);
-
-		if(Cookie::has('type_module')){
-			Cookie::forget('type_module');
-		}
-
-		$cookie = Cookie::forever('type_module', $type_module);
-
-		$response['success'] = true;
-		$response['type_module'] = $type_module;
-		$response['message'] = 'Tus cambios se realizaron con éxito';
-
-		return Response::json($response)->withCookie($cookie);
-	}
-
 }
 

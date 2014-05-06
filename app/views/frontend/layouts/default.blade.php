@@ -1,6 +1,10 @@
 <!doctype html>
 <html lang="es">
     <head>
+        <?php
+            $color = str_replace('#', '', Helpers::getColorCurrent());
+            $stylesheet_custom_color = "assets/css/site/custom/custom_color_".$color.".css";
+        ?>
         @include('frontend.includes.head')
     </head>
     <body>
@@ -44,6 +48,9 @@
         @show
 
         <script>
+            $(function(){
+               $(document).data('color_palette_current','{{$stylesheet_custom_color}}');
+            });
             @section('script')
             @show
         </script>
