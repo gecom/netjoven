@@ -75,19 +75,6 @@ class Post extends Eloquent {
 				->where('njv_post.status', '=', Status::STATUS_PUBLICADO)
 				->groupBy('njv_post.id')
 				->first();
-
-		/*$dbr_post = (new Post())
-			->select('njv_post.id', DB::raw("GROUP_CONCAT(njv_tag.tag) as tags"),'njv_post.category_id', 'njv_category.name as category_name' , 'njv_category.slug as category_slug' , 'njv_post.type', 'njv_post.id_video', 'njv_post.type_video', 'njv_post.title', 'njv_post.slug', 'njv_post.content', 'njv_post.summary',
-					'njv_post.twitter', 'njv_post.america', 'njv_post.frecuencia', 'njv_post.post_at')
-			->join('njv_category', 'njv_category.id','=', 'njv_post.category_id')
-			->leftJoin('njv_post_tag', 'njv_post_tag.post_id','=', 'njv_post.id')
-			->leftJoin('njv_tag', 'njv_tag.id','=', 'njv_post_tag.tag_id')
-			->where('njv_post.id', '=', $post_id)
-			->where('njv_post.status', '=', Status::STATUS_PUBLICADO)
-			->groupBy('njv_post.id')
-			->first();
-
-		return $dbr_post;*/
     }
 
 

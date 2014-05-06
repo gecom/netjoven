@@ -184,10 +184,6 @@ class AdminNewsController extends BaseController {
                     $post->display = $data_frm_news['display'];
                 }
 
-                if(isset($data_frm_news['is_recommended'])){
-                    $post->is_recommended = $data_frm_news['is_recommended'];
-                }
-
                 $post->content = Helpers::prepareContent($data_frm_news['description']);
                 $post->summary = $data_frm_news['summary'];
                 $post->category_id = $data_frm_news['subcategory'];

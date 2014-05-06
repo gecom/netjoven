@@ -34,19 +34,25 @@ class Category extends Eloquent {
                 ->whereIn('id', $data_category_ids);
     }
 
-	public static function getParentCategories($is_menu = false)
+	public function scopeGetParentCategories($query, $params = array())
     {
-        $dbl_categories = (new Category())
-        ->where('parent_id')
-        ->where('status', '=', Status::STATUS_ACTIVO);
 
-        if($is_menu == true){
-            $dbl_categories->where('is_menu', '=', 1);
+        $params_default = array('id' => null, 'is_menu' => false, );
+        $params = array_merge($params_default, $params);
+
+        $query->where('parent_id')
+            ->where('status', '=', Status::STATUS_ACTIVO);
+
+
+        if(!empty($params['id'])){
+            $query->where('id', '=', $params['id']);
         }
 
-        $dbl_categories->orderBy('created_at', 'desc');
+        if($params['is_menu']){
+            $query->where('is_menu', '=', 1);
+        }
 
-        return $dbl_categories;
+       return $query;
     }
 
     public function scopeGetParentCategoryById($query, $parent_id){

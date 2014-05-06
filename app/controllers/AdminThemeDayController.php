@@ -44,61 +44,25 @@ class AdminThemeDayController extends BaseController {
             }
         }else{
 
+    		try {
+				$tag_data_id = Helpers::getTagIds(array($data_frm_theme_day['name']));
 
-        		/*$data_sections = ThemeDay::find(1)->sections()->get();
+				if(count($tag_data_id) == 0){
+					throw new Exception("Error: Hubo un error al registrar el tema del dia");
+				}
 
+				$dbr_theme_day->tag_id = $tag_data_id[0];
 
-        		print_r($data_sections);
+				if(!empty($data_frm_theme_day['params'])){
+					$dbr_theme_day->params = $data_frm_theme_day['params'];
+				}
 
-        		die();*/
+				if(!empty($data_frm_theme_day['color'])){
+					$dbr_theme_day->color = $data_frm_theme_day['color'];
+				}
 
-
-        		try {
-					$tag_data_id = Helpers::getTagIds(array($data_frm_theme_day['name']));
-
-					if(count($tag_data_id) == 0){
-
-					}
-
-					$dbr_theme_day->tag_id = $tag_data_id[0];
-
-					if(!empty($data_frm_theme_day['params'])){
-						$dbr_theme_day->params = $data_frm_theme_day['params'];
-					}
-
-					if(!empty($data_frm_theme_day['color'])){
-						$dbr_theme_day->color = $data_frm_theme_day['color'];
-					}
-
-					if($dbr_theme_day->save()){
-						$dbr_theme_day->sections = $data_frm_theme_day['sections'];
-						$response['success'] = true;
-						$response['message'] =  'Nota registrada satisfactorimente';
-						$response['redirect'] =  route('backend.theme_day.list');
-					}else{
-						$response['success'] = false;
-						$response['errors'] =  ['Error: Hubo un error al registrar el tema del dia'];
-					}
-
-        		} catch (Exception $e) {
-					$response['success'] = false;
-					$response['errors'] =  ['Error:' . $e->getMessage()];
-        		}
-
-
-
-
-
-/*print_r($name);
-
-die();
-			$dbr_theme_day->name = $data_frm_theme_day['name'];
-			$dbr_theme_day->category_id = $data_frm_theme_day['category_id'];
-
-
-
-			try {
 				if($dbr_theme_day->save()){
+					$dbr_theme_day->sections = $data_frm_theme_day['sections'];
 					$response['success'] = true;
 					$response['message'] =  'Nota registrada satisfactorimente';
 					$response['redirect'] =  route('backend.theme_day.list');
@@ -106,10 +70,11 @@ die();
 					$response['success'] = false;
 					$response['errors'] =  ['Error: Hubo un error al registrar el tema del dia'];
 				}
-			} catch (Exception $e) {
+
+    		} catch (Exception $e) {
 				$response['success'] = false;
 				$response['errors'] =  ['Error:' . $e->getMessage()];
-			}*/
+    		}
 
         }
 
