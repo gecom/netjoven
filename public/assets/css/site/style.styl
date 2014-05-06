@@ -12,6 +12,11 @@ box-shadow()
   -moz-box-shadow box_shadow 
   box-shadow box_shadow 
 
+text-shadow()
+  -webkit-text-shadow box_shadow 
+  -moz-text-shadow box_shadow 
+  text-shadow box_shadow 
+
 shadow-inset()
   -webkit-box-shadow  box_shadow_inset 
   -moz-box-shadow  box_shadow_inset 
@@ -40,6 +45,58 @@ ul, li
 
 a
 	color #6d6d6d
+
+.opt 
+	position relative!important
+.opt1 
+	float left
+	padding-top 8px
+	font-size 0.8rem
+.opt2
+.opt4 
+	width: 28px;
+	height: 20px;
+	background: url("../images/sprite.png") 0 -191px no-repeat
+	margin-top: 4px;
+	left 50%
+	margin-left -14px
+	position absolute
+.opt4
+	background-position -41px -191px
+.opt3 
+	float: right;
+	padding: 8px 20px 0 0;
+	font-size: 0.8em;
+	background url("../images/sprite.png") 69px -216px no-repeat
+.mas_visto
+	.tab
+		.t1
+		.t2
+		.t3
+		.t4
+			float right
+			display block
+			width 70px
+			height 26px
+			background url('../images/sprite.png') 30px -639px no-repeat
+		.t2
+			background-position 30px -671px
+		.t3
+			background-position 30px -704px
+		.t4
+			background-position 0px -734px 
+
+.list_articles
+	.text
+		a
+			&:hover 
+				color #6d6d6d!important
+.busqueda_left
+	width 337px
+	float left
+.busqueda_right
+	float left
+	width 608px
 
 header
 	background-image url('../images/bg_banner.png')
@@ -92,7 +149,7 @@ header
 			outline 0
 			left 12px
 			width 174px
-			height 18px
+			height 20px
 			top 2px
 			font-size 1em
 			line-height 18px
@@ -217,6 +274,7 @@ header
 						width 158px
 						display inline-block
 						margin-left 13px
+						vertical-align top
 
 						&:first-child
 							margin-left 0						
@@ -239,10 +297,18 @@ header
 								position: absolute;
 								border-radius(19px)
 								box-shadow()
-								top 33px
+								top 50%
 								left 50%
+								margin-top -19px
 								margin-left -19px
-								
+								opacity(0.8)
+								transition all 0.4s ease
+								&:hover
+									width 45px
+									height 45px
+									margin-top -22.5px
+									margin-left -22.5px
+									background-position -67px -176px
 
 						.description
 							width 158px 
@@ -447,16 +513,16 @@ header
 		.txt 
 			position absolute
 			left 0
-			bottom 28px
-			height 105px
+			bottom 0
 			border-bottom 1px solid #000
 			color #fff
 			font-size 1.85em
 			font-weight 700
 			text-align center
 			width 100%
-			padding-top 20px
-
+			padding 25px 0 30px
+			background url('../images/sombra-destacado.png') repeat-x
+			line-height 1.4em
 		.link
 			left 0
 			bottom 4px
@@ -481,7 +547,7 @@ header
 	left 0!important
 	border 0!important
 .bx-wrapper .bx-caption
-	background none!important
+	background transparent url('../images/sombra-destacado.png') 0 -10px repeat-x!important
 	text-align center
 .bx-wrapper .bx-caption span
 	font-family 'Open Sans', sans-serif!important
@@ -555,7 +621,7 @@ header
 			margin-top 20px
 			box-shadow()
 			display inline-block
-			margin-right 25px
+			margin-right 24px
 			
 		.fb			
 			margin-top 20px
@@ -648,12 +714,21 @@ header
 					height 38px
 					display block
 					position absolute
-					top 70px
-					left 131px
+					top 50%
+					left 50%
+					margin-left -19px
+					margin-top -19px
 					border-radius(19px)
 					opacity(0.8)
 					box-shadow()
 					z-index 10
+					transition all 0.4s ease
+					&:hover
+						width 45px
+						height 45px
+						margin-top -22px
+						margin-left -22px
+						background-position -67px -176px
 
 				.exclusive_label
 					width 140px
@@ -679,32 +754,7 @@ header
 				width 300px
 				padding 0 10px
 				
-				ul
-					font-size 0
-					li 
-						display inline-block
-						vertical-align top
-						font-size 0.8rem
-
-						a 
-							color #6D6D6D
-					.e1
-						width 127px
-						padding-top 8px
-					.e2 a, .e4 a
-						width 28px
-						height 20px
-						background url('../images/sprite.png') 0 -191px
-						display block
-						margin-top 4px
-					.e4 a
-						background-position -41px -191px
-					.e3
-						padding 8px 20px 0 0
-						background url('../images/sprite.png') 110px -216px
-						width 125px
-						text-align right
-						background-repeat no-repeat
+								
 
 			&:nth-child(3n+1)
 				margin-left 0 
@@ -731,11 +781,7 @@ header
 			.opt
 				width 263px
 				float left
-			.e1
-				width 105px!important
-			.e3
-				width 110px!important
-				background-position 95px -217px!important
+			
 	
 	.include_add
 		article
@@ -758,8 +804,7 @@ header
 		ul
 			font-size 0
 			li 
-				display inline-block
-				width 16px
+				display inline-block				
 				height 16px
 				border-radius(8px)
 				text-align center
@@ -772,6 +817,8 @@ header
 					display inline-block
 					color #6d6d6d
 					line-height auto
+					padding-right 5px
+					padding-left 5px
 									
 			li:hover, .active			
 
@@ -940,6 +987,44 @@ footer
 		border-bottom 1px solid #d8d8d8
 		border-top 1px solid #d8d8d8
 		background-color #fff
+		height 130px
+		background url('../images/sponsors.jpg') no-repeat
+		ul
+			margin 42px 0 0
+			padding 0
+			li 
+				margin 0
+				padding 0
+				float left
+				a 
+					display block
+					background url('../images/footer.png') no-repeat
+					height 60px
+					&.sp1
+						width 116px
+						margin-left 19px
+						&:hover
+							background-position -1px -120px
+					&.sp2
+						width 129px
+						margin-left 26px
+						background-position -130px 6px
+						&:hover
+							background-position -143px -114px
+					&.sp3
+						width 130px
+						margin-left 76px
+						background-position -448px -116px
+					&.sp4
+						width 132px
+						margin-left 7px
+						background-position -458px -2px
+					&.sp5
+						width 128px
+						margin-left 179px
+						background-position -295px 0
+						&:hover
+							background-position -295px -119px
 
 	.footer_rights
 		height 25px
@@ -1188,6 +1273,10 @@ footer
 			padding 0 0 0 14px
 			line-height 40px
 			text-align left
+			a 
+				width 100%
+				color #3D3D3D
+				background none
 			.user_av
 				background url('../images/sprite.png') -71px -497px no-repeat
 				float right
@@ -1196,6 +1285,9 @@ footer
 				height 21px
 				display block
 				margin-top 10px
+			.iniciar_sesion
+			.registro_form
+				display none
 
 		.pick_color
 			border-top 1px solid #3d3d3d
@@ -1413,10 +1505,12 @@ footer
 			line-height 1.1em
 			.f4 
 				width 21px
-				height 21px
+				height 22px
 				display inline-block
 				margin-top 5px
 				background url('../images/sprite.png') -198px -339px no-repeat
+				&:hover
+					background-position -3px -521px
 
 
 #popup_personaliza_pagina
@@ -1477,34 +1571,7 @@ footer
 				padding 0 10px
 				text-align left
 				
-				ul
-					font-size 0
-					li 
-						display inline-block
-						vertical-align top
-						font-size 0.8rem
-
-						a 
-							color #6D6D6D
-					.e1
-						width 127px
-						padding-top 8px
-					.e2 a, .e4 a
-						width 28px
-						height 20px
-						background url('../images/sprite.png') 0 -191px
-						display block
-						margin-top 4px
-					.e4 a
-						background-position -41px -191px
-					.e3
-						padding 8px 20px 0 0
-						background url('../images/sprite.png') 110px -216px
-						width 125px
-						text-align right
-						background-repeat no-repeat
-
-			
+							
 		
 		
 			&.view_3	
@@ -1521,14 +1588,7 @@ footer
 				.opt
 					width 263px
 					float left
-				.e1
-					width 105px!important
-				.e3
-					width 110px!important
-					background-position 95px -217px!important
-
-
-
+				
 
 		.save_cancel_opt
 			height 35px
@@ -1543,6 +1603,8 @@ footer
 					margin-right 10px
 					background-position -34px -499px
 					float left
+					&:hover
+						background-position -36px -523px
 				&:hover
 					text-decoration none
 			.save
@@ -1552,6 +1614,9 @@ footer
 					margin-left 10px
 					background-position -4px -499px
 					float right
+					&:hover
+						background-position -4px -523px
+						
 				&:hover
 					text-decoration none
 			span
@@ -1590,10 +1655,12 @@ footer
 			line-height 1.1em
 			.f6 
 				width 21px
-				height 21px
+				height 22px
 				display inline-block
 				margin-top 5px
 				background url('../images/sprite.png') -198px -339px no-repeat
+				&:hover
+					background-position -3px -521px
 
 #portada_espectaculos
 	width 960px
@@ -1601,7 +1668,7 @@ footer
 	background #fff
 	font-size 0
 	padding-bottom 40px
-	
+	overflow hidden
 	
 	figure
 		text-align left
@@ -1618,32 +1685,7 @@ footer
 		padding 0 10px
 		text-align left
 		
-		ul
-			font-size 0
-			li 
-				display inline-block
-				vertical-align top
-				font-size 0.8rem
-
-				a 
-					color #6D6D6D
-			.e1
-				width 284px
-				padding-top 8px
-			.e2 a, .e4 a
-				width 28px
-				height 20px
-				background url('../images/sprite.png') 0 -191px
-				display block
-				margin-top 4px
-			.e4 a
-				background-position -41px -191px
-			.e3
-				padding 8px 20px 0 0
-				background url('../images/sprite.png') 261px -217px
-				width 276px
-				text-align right
-				background-repeat no-repeat
+		
 
 	.title 
 		width 100%
@@ -1751,16 +1793,7 @@ footer
 				img 
 					width 100%
 					height auto			
-			.opt
-				ul					
-					.e1
-						width 122px					
-					.e4 a
-						background-position -41px -191px
-					.e3
-						background-position 111px -217px
-						width 126px
-
+			
 			&:first-child
 				margin-bottom 21px
 
@@ -1787,14 +1820,7 @@ footer
 				margin-left 0
 			&:nth-child(3n+1)
 				margin-left 0
-			.opt 
-				.e1
-					width 122px					
-				.e4 a
-					background-position -41px -191px
-				.e3
-					background-position 111px -217px
-					width 126px
+			
 
 	&.view_3		
 		.more_news
@@ -1816,11 +1842,7 @@ footer
 				.opt 
 					float left
 					width 263px
-					.e1
-						width 111px
-					.e3
-						width 104px
-						background-position 89px -217px
+					
 
 	.features
 		margin-top 20px
@@ -1856,13 +1878,8 @@ footer
 				height 26px
 				font-size 1.3em
 				padding-left 11px
-				background #e3e3e3 url('../images/sprite.png') 256px -639px no-repeat
-				&.tab2
-					background-position 256px -671px
-				&.tab3
-					background-position 256px -704px
-				&.tab4
-					background-position 231px -734px 
+				background #e3e3e3 
+				
 			.list 
 				.item
 					padding 7px 0 7px 11px
@@ -1920,15 +1937,7 @@ footer
 				width 300px
 			.opt 
 				width 300px
-				.e1
-					width 122px					
-				.e4 a
-					background-position -41px -191px
-				.e3
-					background-position 111px -217px
-					width 126px
-
-
+				
 
 
 	.more_news_v2
@@ -1962,11 +1971,7 @@ footer
 				float left
 				width 414px
 				height 27px
-				.e1
-					width 176px
-				.e3
-					width 189px
-					background-position 174px -217px
+				
 		.view2
 			width 300px
 			display inline-block
@@ -1992,14 +1997,7 @@ footer
 				width 300px
 			.opt 
 				width 300px
-				.e1
-					width 122px					
-				.e4 a
-					background-position -41px -191px
-				.e3
-					background-position 111px -217px
-					width 126px
-
+				
 
 	&.view_3
 		.features
@@ -2040,12 +2038,7 @@ footer
 				.opt 
 					float left
 					width 263px
-					.e1
-						width 111px
-					.e3
-						width 104px
-						background-position 89px -217px
-
+					
 		.more_news_v2
 			width 457px
 			.news
@@ -2066,12 +2059,7 @@ footer
 				.opt 
 					float left
 					width 263px
-					.e1
-						width 111px
-					.e3
-						width 104px
-						background-position 89px -217px
-
+					
 		
 		.plugin_fb
 			width 457px
@@ -2149,13 +2137,7 @@ footer
 				height 26px
 				font-size 1.3em
 				padding-left 11px
-				background #e3e3e3 url('../images/sprite.png') 256px -639px no-repeat
-				&.tab2
-					background-position 256px -671px
-				&.tab3
-					background-position 256px -704px
-				&.tab4
-					background-position 231px -734px 
+				background #e3e3e3 
 			.list 
 				.item
 					padding 7px 0 7px 11px
@@ -2220,32 +2202,7 @@ footer
 				text-align left
 				margin-top 30px
 				
-				ul
-					font-size 0
-					li 
-						display inline-block
-						vertical-align top
-						font-size 0.8rem
-
-						a 
-							color #6D6D6D
-					.e1
-						width 274px
-						padding-top 8px
-					.e2 a, .e4 a
-						width 28px
-						height 20px
-						background url('../images/sprite.png') 0 -191px
-						display block
-						margin-top 4px
-					.e4 a
-						background-position -41px -191px
-					.e3
-						padding 8px 20px 0 0
-						background url('../images/sprite.png') 261px -217px
-						width 276px
-						text-align right
-						background-repeat no-repeat
+				
 			.gallery
 				position relative
 				a 
@@ -2483,6 +2440,13 @@ footer
 								opacity(0.8)
 								box-shadow()
 								z-index 10
+								transition all 0.4s ease
+								&:hover
+									width 45px
+									height 45px
+									margin-top -22px
+									margin-left -22px
+									background-position -67px -176px
 
 							.exclusive_label
 								width 140px
@@ -2511,32 +2475,7 @@ footer
 							width 406px
 							padding 0 10px
 							float left
-							ul
-								font-size 0
-								li 
-									display inline-block
-									vertical-align top
-									font-size 0.8rem
-
-									a 
-										color #6D6D6D
-								.e1
-									width 180px
-									padding-top 8px
-								.e2 a, .e4 a
-									width 28px
-									height 20px
-									background url('../images/sprite.png') 0 -191px
-									display block
-									margin-top 4px
-								.e4 a
-									background-position -41px -191px
-								.e3
-									padding 8px 20px 0 0
-									background url('../images/sprite.png') 160px -216px
-									width 175px
-									text-align right
-									background-repeat no-repeat
+							
 
 				.paginate
 					border-top 1px solid #d8d8d8
@@ -2674,6 +2613,13 @@ footer
 						opacity(0.8)
 						box-shadow()
 						z-index 10
+						transition all 0.4s ease
+						&:hover
+							width 45px
+							height 45px
+							margin-top -22px
+							margin-left -22px
+							background-position -67px -176px
 
 					.exclusive_label
 						width 140px
@@ -2701,32 +2647,7 @@ footer
 					width 406px
 					padding 0 10px
 					float left
-					ul
-						font-size 0
-						li 
-							display inline-block
-							vertical-align top
-							font-size 0.8rem
-
-							a 
-								color #6D6D6D
-						.e1
-							width 180px
-							padding-top 8px
-						.e2 a, .e4 a
-							width 28px
-							height 20px
-							background url('../images/sprite.png') 0 -191px
-							display block
-							margin-top 4px
-						.e4 a
-							background-position -41px -191px
-						.e3
-							padding 8px 20px 0 0
-							background url('../images/sprite.png') 160px -216px
-							width 175px
-							text-align right
-							background-repeat no-repeat
+					
 
 				
 	.left_horoscopo
@@ -2758,7 +2679,7 @@ footer
 				height 26px
 				font-size 1.3em
 				padding-left 11px
-				background #e3e3e3 url('../images/sprite.png') 256px -639px no-repeat
+				background #e3e3e3 
 			.list 
 				.item
 					padding 7px 0 7px 11px
@@ -2833,7 +2754,7 @@ footer
 				right 34px
 				background-color #3a3a3a
 				width 248px!important
-				height 31px!important
+				height 35px!important
 				-webkit-border-bottom-right-radius: 10px;
 				-webkit-border-bottom-left-radius: 10px;
 				-moz-border-radius-bottomright: 10px;
@@ -2896,6 +2817,15 @@ footer
 						padding 0 0 0 14px
 						line-height 40px
 						text-align left
+						a 
+							background none
+							width 100%
+							color #cfcfcf
+						.iniciar_sesion
+						.registro_form
+						.log_in_mobile
+							display none
+
 					.pick_color
 						border-top 1px solid #3d3d3d
 						width 100%
@@ -3086,6 +3016,7 @@ footer
 				.search_box
 					width 700px
 					float left
+					display block
 				a 
 					width 34px
 					height 25px
@@ -3110,23 +3041,30 @@ footer
 					text-align center
 					
 					.bg_search
-						width 179px
-						height 17px
+						width 190px
+						height 23px
 						background-color: #000;					
 						opacity(.2)
 						position absolute
-						top 4px
+						top 2px
 						left 50%
 						margin-left -90px
-						border-radius(13px)
+						border-radius(13px)						
 
 					input
 						border 0
 						background none
 						color #fff
 						outline 0
-						height 18px
-						margin-top 1px
+						height 23px
+						vertical-align top
+						padding-left 20px
+					.btn_search
+						background url('../images/sprite.png') -129px -733px
+						width 20px
+						height 23px
+						margin-top 0
+
 
 		.user_options
 			display none
@@ -3182,11 +3120,7 @@ footer
 
 				.media
 					width 116px
-					height 71px
-					.play_video
-						top 16px
-						left 40px
-					
+					height 71px					
 				.text
 					width 185px
 					height 71px
@@ -3195,10 +3129,7 @@ footer
 				.opt
 					width 301px
 					text-align left
-					.e1
-						width 126px!important
-					.e3
-						margin-left 17px
+					
 			.adding
 				display none
 		.no_title
@@ -3275,13 +3206,7 @@ footer
 			margin 0
 			.monster_box
 				display none
-		.opt 
-			ul 
-				.e1
-					width 364px
-				.e3
-					width 355px
-					background-position 340px -217px
+		
 		.right_column
 			width 768px
 			text-align center
@@ -3308,20 +3233,14 @@ footer
 			.mas_visto 				
 				width 750px!important
 				margin-bottom 20px
-				.tab
-					background-position 707px -639px
-					&.tab2
-						background-position 707px -671px
-					&.tab3
-						background-position 707px -703px
-					&.tab4
-						background-position 680px -734px
+				
 				.list 
 					.item
 						width 750px!important
 						.des
 							width 83%
 							text-align left
+				
 
 		.plugin_fb
 			display none
@@ -3338,11 +3257,7 @@ footer
 					width 504px
 				.opt
 					width 506px
-					.e1
-						width 236px
-					.e3
-						width 219px
-						background-position 204px -217px
+					
 		&.view_3
 			
 		
@@ -3375,13 +3290,7 @@ footer
 					width 300px!important
 				.opt 
 					width 300px!important
-					.e1
-						width 122px!important				
-					.e4 a
-						background-position -41px -191px
-					.e3
-						background-position 111px -217px
-						width 126px!important
+					
 
 	.view_3 
 		.plugin_fb
@@ -3415,15 +3324,6 @@ footer
 		.left_notes
 			width 690px
 			margin 0
-			.mas_visto
-				.tab
-					background-position 557px -639px
-					&.tab2
-						background-position 557px -671px
-					&.tab3
-						background-position 557px -703px
-					&.tab4
-						background-position 529px -734px
 		.right_notes
 			width 690px	
 			padding-bottom 10px	
@@ -3440,14 +3340,7 @@ footer
 			.title_nota
 				padding-left 10px
 				padding-right 10px
-			.image 
-				.opt 
-					ul 
-						.e1
-							width 317px
-						.e3
-							width 322px
-							background-position 306px -217px
+			
 
 			&.pichanga_y_juerga
 				margin-right 0
@@ -3498,15 +3391,7 @@ footer
 			display none
 		.left_horoscopo
 			width 690px
-			.mas_visto
-				.tab
-					background-position 557px -639px
-					&.tab2
-						background-position 557px -671px
-					&.tab3
-						background-position 557px -703px
-					&.tab4
-						background-position 529px -734px
+			
 		.right_horoscopo
 			width 690px	
 			padding-bottom 10px	
@@ -3526,15 +3411,7 @@ footer
 				.title_nota
 					padding-left 10px
 					padding-right 10px
-				.image 
-					.opt 
-						ul 
-							.e1
-								width 317px
-							.e3
-								width 322px
-								background-position 306px -217px
-
+				
 		.mas_visto
 			width 600px
 			margin 0 auto
@@ -3568,11 +3445,217 @@ footer
 				margin-left 0
 				text-align center
 			.options 				
-				
+				height 36px
+				background-color #5d5d5d
+
+				a 
+					height 35px
+					margin-top 1px
+					width 40px
+					&.show_menu
+						background-position -198px -731px						
+					&.config
+						background-position -157px -730px
 				.search_box
-					width 252px
+					width 240px
+					.bg_search
+						top 6px
+						width 232px
+						margin-left -116px
+						height 24px
+					input
+						padding-left 0
+						margin-top 6px!important
+						width 190px
+					.btn_search						
+						background-position -129px -736px
+						width 20px
+
 				.circles
-					width 216px
+					width 200px
+				.showing_config
+				.showing_menu
+					top 36px
+				.showing_config
+					.pick_color
+					.share
+					.change
+						display none
+						background #333
+						padding-bottom 10px
+						overflow hidden
+						height 107px
+						span
+							font-size 1.4em
+						a 
+							float none
+					.cerrar_sesion
+						padding 10px 0
+						a 
+							float right
+							margin-right 10px
+							text-decoration none
+							width: 100%;
+							background: none;
+							font-size: 1.2em;
+							color #cfcfcf
+					.log_in_mobile
+						display block!important
+					.welcome
+						font-size 1.3em
+						min-height 51px
+						height auto
+						padding-top 4px
+						position relative
+						.bien
+							display none
+						.user_icon
+							display block
+						
+						a 
+							background none
+							color #cfcfcf
+							width 100%
+						span
+							display block
+							position absolute
+							height 40px
+							width 40px
+							background url('../images/sprite.png') -96px -817px
+							right 8px
+							top 4px
+						&.log_in
+							span								
+								left 50%
+								margin-left -20px
+							.iniciar_sesion
+								text-align center
+								.registrate
+									background #333
+									float left
+									margin: 0 0 0 -14px;
+									width: 320px;
+									color #fff
+									padding-bottom 10px
+									font-size 1.2em
+									.registrate_btn
+										display initial
+										color #fff										
+										padding 4px 10px
+										width auto
+										background #EE8435
+										float none
+										width 110px
+										font-size 0.9em
+										text-decoration none
+							.registro_form
+								text-align center
+								padding-top 33px
+								.sel1
+									height 33px
+									width 54px
+									padding 0
+									margin-right 7px
+									font-size 0.9em
+								.sel2
+									height 33px
+									width 144px
+									font-size 0.9em
+									margin-left -48px
+								.finalizar_btn
+									display initial
+									color #fff										
+									padding 4px 10px
+									width auto
+									background #EE8435
+									float none
+									width 110px
+									font-size 0.9em
+									text-decoration none
+								.redes_sociales
+									background #333
+									float left
+									margin: 0 0 0 -14px;
+									width: 320px;
+									color #fff
+									padding-bottom 10px
+									font-size 1.2em
+									margin-top 25px
+									padding-bottom 10px
+									a 
+										height 40px
+										width 40px
+										display inline-block
+										margin 0px 8px
+										vertical-align top
+										background url('../images/sprite.png') 
+										float none
+										&.fb
+											background-position -2px -818px
+										&.tw
+											background-position -50px -818px
+										&.gp
+											background-position -188px -818px
+
+						.login_input
+							width 189px
+							height 33px
+							margin-top 12px
+							padding 0
+							padding-left 5px
+							line-height 1em
+						.btn_login
+							width 80px
+							color #fff
+							display block
+							text-align left
+							background url('../images/sprite.png') -155px -780px
+							border none
+							height 27px
+							padding 0
+							line-height 1em
+							font-size 0.9em
+							margin-left 167px
+							margin-top 12px
+						.lnk1
+							color #8C8C8C
+							font-size 0.9em
+
+				.showing_menu
+					padding-top 0
+					.opt_menu
+						height 32px						
+						a 
+							height 30px
+							font-size 1.3em
+							background-position 289px -781px
+						&:last-child
+							font-size 1.3em
+							height 62px
+							padding-top 5px
+							a 
+								width 40px
+								height 41px
+								&.gp
+									display none
+								&.tw
+									background-position -50px -818px
+									&:hover
+										background-position -50px -818px
+								&.fb
+									background-position -2px -818px
+									&:hover
+										background-position -2px -818px
+
+		&.menu_fixed
+			.options
+				.search_box
+					top 36px
+					height 38px!important
+					right 39px				
+					display none
+			.search
+				background-position -1px -372px !important
 
 
 	#news
@@ -3653,13 +3736,7 @@ footer
 						.desc
 							font-size 1.3em
 							height 102px
-			.opt 
-				ul 
-					.e1
-						width 136px
-					.e3
-						width 136px
-						background-position 119px -217px
+			
 		.right_column
 			width 320px
 			.news
@@ -3678,14 +3755,7 @@ footer
 			text-align left			
 			.mas_visto
 				width 300px!important
-				.tab
-					background-position 259px -639px	
-					&.tab2
-						background-position 259px -672px	
-					&.tab3
-						background-position 259px -704px	
-					&.tab4
-						background-position 228px -734px
+				
 				.list
 					.item
 						width 300px!important
@@ -3716,13 +3786,7 @@ footer
 					width 300px
 				.opt 
 					width 300px
-					.e1
-						width 122px					
-					.e4 a
-						background-position -41px -191px
-					.e3
-						background-position 111px -217px
-						width 126px
+					
 
 		&.view_3
 			.portada_destacado
@@ -3767,13 +3831,7 @@ footer
 					width 300px!important
 				.opt 
 					width 300px!important
-					.e1
-						width 122px!important				
-					.e4 a
-						background-position -41px -191px
-					.e3
-						background-position 111px -217px
-						width 126px!important
+					
 
 	#notes 
 		width 320px
@@ -3783,15 +3841,7 @@ footer
 				display none
 			figure 
 				width 320px
-			.image 
-				.opt 
-					ul 
-						.e1
-							width 136px
-						.e3
-							width 134px
-							background-position 119px -217px
-				
+							
 
 			&.pichanga_y_juerga
 				.group_title
@@ -3830,15 +3880,7 @@ footer
 								display inline-block
 							.opt 
 								width 299px
-								ul 
-									.e1
-										width 136px
-									.e3
-										width 114px
-										background-position 99px -217px
-
-
-			
+											
 				
 		.left_notes
 			width 320px
@@ -3848,14 +3890,7 @@ footer
 				
 			.mas_visto
 				width 300px	
-				.tab
-					background-position 259px -639px	
-					&.tab2
-						background-position 259px -672px	
-					&.tab3
-						background-position 259px -704px	
-					&.tab4
-						background-position 228px -734px		
+						
 				.list
 					
 					.item
@@ -3879,27 +3914,16 @@ footer
 						width 320px
 						height auto	
 					.text 
-						width 320px					
+						width 320px	
 					.opt 
-						ul 
-							.e1
-								width 136px
-							.e3
-								width 134px
-								background-position 119px -217px
+						width 100%				
+					
 		.left_horoscopo
 			width 320px
 			margin 0
 			.mas_visto
 				width 300px	
-				.tab
-					background-position 259px -639px	
-					&.tab2
-						background-position 259px -672px	
-					&.tab3
-						background-position 259px -704px	
-					&.tab4
-						background-position 228px -734px		
+					
 				.list
 					
 					.item

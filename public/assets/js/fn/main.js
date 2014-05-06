@@ -51,10 +51,43 @@ $(function(){
 		$('body').modalmanager('loading');
 
 		setTimeout(function(){
-				$modal.load('/cambiar_tipo_vista/' + $this.data('type'), '', function(){
+			$modal.load('/cambiar_tipo_vista/' + $this.data('type'), '', function(){
 				$modal.modal({ backdrop: 'static'});
 			});
 		}, 1000);
+	});
+
+	$('#login').on('click', function(e){
+		e.preventDefault();
+		var $this = $(this);
+
+		if(!$this.attr('href')){
+			return false;
+		}
+
+		$('body').modalmanager('loading');
+
+		setTimeout(function(){
+			$modal.load($this.attr('href'), '', function(){
+				$modal.modal({ backdrop: 'static'});
+			});
+		}, 1000);
+
+	});
+
+	$modal.on('submit', '#frm_login', function(e){
+		e.preventDefault();
+		var $this = $(this);
+
+		$.ajax({
+			url: $this.attr('action') ,
+			type:'post',
+			dataType:'json',
+			data: $this.serializeArray()
+		}).done(function(response){
+			console.log(response);
+		});
+
 	});
 
 	$modal.on('click', '#save_type_module', function(e){

@@ -10,9 +10,9 @@
 </div>
 <div class="footer_social">
     <ul>
-        <li class="fb"><span class="d1">Hazte fan</span><a href="#"></a><br/><span class="d2">200613</span></li>
-        <li class="tw"><span class="d1">Síguenos es</span><a href="#"></a><br/><span class="d2">200613</span></li>
-        <li class="gp"><span class="d1">Únete a</span><a href="#"></a><br/><span class="d2">200613</span></li>
+        <li class="fb"><span class="d1">Hazte fan</span><a href="http://www.facebook.com/netjoven"></a><!--<br/><span class="d2">200613</span>--></li>
+        <li class="tw"><span class="d1">Síguenos es</span><a href="https://twitter.com/#!/netjoven"></a><!--<br/><span class="d2">200613</span>--></li>
+        <li class="gp"><span class="d1">Únete a</span><a href="#"></a><!--<br/><span class="d2">200613</span>--></li>
     </ul>
 </div>
 <div class="footer_devices">
@@ -28,7 +28,13 @@
 Fifa  /  Guardaespaldas,  /   Justin Bieber En Buenos Aires  /  Fifa  /  Guardaespaldas
 </div>
 <div class="sponsors">
-    <img src="{{asset('assets/images/sponsors.jpg')}}">
+    <ul>
+        <li ><a class="sp1" href="#"></a></li>
+        <li ><a class="sp2" href="#"></a></li>
+        <li ><a class="sp3" href="#"></a></li>
+        <li ><a class="sp4" href="#"></a></li>
+        <li ><a class="sp5" href="#"></a></li>
+    </ul>
 </div>
 <div class="footer_rights">
     ©Copyright Grupo Emprendedor de Comunicaciones. Derechos Reservados: Prohibida su reproducción sin autorización. / Calle Arica 115 oficina 504

@@ -104,8 +104,8 @@ Route::group(array('prefix' => 'backend'), function()
 
     });
 
-    Route::get('/login', 'UserController@login');
-    Route::post('/login', 'UserController@signin');
+    Route::get('/login', 'UserController@loginBackend');
+    Route::post('/login', 'UserController@signinBackend');
     Route::get('/logout', 'UserController@logout');
 
 });
@@ -119,6 +119,10 @@ Route::get('{slug}', array('as' => 'frontend.section.list', 'uses' => 'FrontendS
 Route::get('{slug}/{page}', array('as' => 'frontend.section.pagination', 'uses' => 'FrontendSectionController@listSection' ));
 Route::get('{slug_category}/{post}/{slug}.html', array('as' => 'frontend.post.view', 'uses' => 'FrontendSectionController@viewPost' ));
 
+
+Route::get('/iniciar_sesion', array('as' => 'frontend.login', 'uses' => 'UserController@login' ));
+Route::post('/iniciar_sesion', array('as' => 'frontend.login', 'uses' => 'UserController@signin' ));
+Route::get('/cerrar_sesion', 'UserController@logout');
 
 /*******Cambiar tipo de vista*******/
 
