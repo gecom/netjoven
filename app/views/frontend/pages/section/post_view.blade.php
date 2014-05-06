@@ -11,11 +11,9 @@
                 <div class="title_nota">{{$dbr_post->title}}</div>
                 <div class="image">
                     <div class="opt">
-                        <ul>
-                            <li class="e1"><a href="{{route('frontend.section.list', array($dbr_post->category_slug))}}">+ {{$dbr_post->category_name}}</a></li>
-                            <li class="e2"><a></a></li>
-                            <li class="e3">{{ Helpers::intervalDate($dbr_post->post_at, date('Y-m-d H:i:s'))}}</li>
-                        </ul>
+                        <div class="opt1"><a href="{{route('frontend.section.list', array($dbr_post->category_slug))}}">+ {{$dbr_post->category_name}}</a></div>
+                        <div class="{{($dbr_post->has_gallery == 1 ? 'opt4' : 'opt2')}}"></div>
+                        <div class="opt3">{{ Helpers::intervalDate($dbr_post->post_at, date('Y-m-d H:i:s'))}}</div>
                     </div>
                 </div>
                 <div class="text_note">

@@ -19,13 +19,13 @@
 	                    $image_featured = Helpers::getImage($image_featured, 'noticias');
 	                }
 	            ?>
-	            <img src="{{$image_featured}}" />
+	            <a href="{{route('frontend.post.view', $data_url)}}" ><img src="{{$image_featured}}" /></a>
 	        </div>
-	        <div class="text"><a href="{{route('frontend.post.view', $data_url)}}">{{$dbr_post_view->title}}</a></div>	        
+	        <div class="text"><a href="{{route('frontend.post.view', $data_url)}}">{{$dbr_post_view->title}}</a></div>
 			<div class="opt">
 				<div class="opt1"><a href="{{route('frontend.section.list', array($dbr_post_view->category_slug))}}">+{{ $dbr_post_view->category_name}}</a></div>
 				<div class="{{($dbr_post_view->has_gallery == 1 ? 'opt4' : 'opt2')}}"></div>
-				<div class="opt3">{{ Helpers::intervalDate($dbr_post_view->post_at, date('Y-m-d H:i:s'))}}</div>						
+				<div class="opt3">{{ Helpers::intervalDate($dbr_post_view->post_at, date('Y-m-d H:i:s'))}}</div>
 			</div>
 
 	    </article>

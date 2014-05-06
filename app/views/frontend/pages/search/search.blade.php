@@ -31,15 +31,13 @@
 				                    $image_featured = Helpers::getImage($image_featured, 'noticias');
 				                }
 				            ?>
-				            <img src="{{$image_featured}}" />
+				            <a href="{{route('frontend.post.view', $data_url)}}"><img src="{{$image_featured}}" /></a>
 				        </div>
 				        <div class="text"><a href="{{route('frontend.post.view', $data_url)}}">{{$dbr_post_search->title}}</a></div>
 				        <div class="opt">
-				            <ul>
-				                <li class="e1"><a href="{{route('frontend.section.list', array($dbr_post_search->category_slug))}}">+{{ $dbr_post_search->category_name}}</a></li>
-				                <li class="{{($dbr_post_search->has_gallery == 1 ? 'e4' : 'e2')}}"><a href="{{route('frontend.post.view', $data_url)}}"></a></li>
-				                <li class="e3">{{ Helpers::intervalDate($dbr_post_search->post_at, date('Y-m-d H:i:s'))}}</li>
-				            </ul>
+							<div class="opt1"><a href="{{route('frontend.section.list', array($dbr_post_search->category_slug))}}">+{{ $dbr_post_search->category_name}}</a></div>
+							<div class="{{($dbr_post_search->has_gallery == 1 ? 'opt4' : 'opt2')}}"></div>
+							<div class="opt3">{{ Helpers::intervalDate($dbr_post_search->post_at, date('Y-m-d H:i:s'))}}</div>
 				        </div>
 					</article>
 				@endforeach
