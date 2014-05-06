@@ -1,0 +1,7 @@
+#container .custom_color_bg{background-color: #9f4180}
+#container .custom_color_text{color: #9f4180}
+#container .menu li:hover, #container .paginate li:hover, #container .view_options .v1 a:hover, #container .view_options .v2 a:hover, #container .view_options .v3 a:hover{background-color: #9f4180;}
+#main_nav .options_menu_fixed .config:hover{background-color: #9f4180}
+#main_nav .search.custom_color_bg.active{background-color: #9f4180}
+.v_news .option_news a:hover{color : #9f4180;}
+#footer_nav ul li a:hover{color: #9f4180};
