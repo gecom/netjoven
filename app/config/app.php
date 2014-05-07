@@ -112,6 +112,7 @@ return array(
 		'Thujohn\Twitter\TwitterServiceProvider',
 		'Intervention\Image\ImageServiceProvider',
 		'Scalia\SphinxSearch\SphinxSearchServiceProvider',
+		'Artdarek\OAuth\OAuthServiceProvider',
 
 	),
 
@@ -183,6 +184,7 @@ return array(
 		'Twitter' 		  => 'Thujohn\Twitter\TwitterFacade',
 		'Image' 		  => 'Intervention\Image\Facades\Image',
 		'SphinxSearch' 	  => 'Scalia\SphinxSearch\SphinxSearchFacade',
+		'OAuth'			  => 'Artdarek\OAuth\Facade\OAuth',
 
 	),
 

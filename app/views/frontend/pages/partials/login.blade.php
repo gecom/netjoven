@@ -14,6 +14,12 @@
 				<input type="submit" value="Entrar" class="btn_login" />
 			{{ Form::close() }}			
 			<a class="lnk1" href="#">Olvidaste tu Contraseña?</a>
+			<div class="share">
+				<span>Registrate con: </span>
+				<a class="gp" href="#"><span></span></a>
+				<a class="tw" href="#"><span></span></a>
+				<a class="fb" href="{{ route('frontend.login.facebook') }}"><span></span></a>
+			</div>
 			<div class="registrate">
 				Eres nuevo en Netjoven?<br><a class="registrate_btn" href="#">Regístrate</a>
 			</div>

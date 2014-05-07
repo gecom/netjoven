@@ -12,7 +12,8 @@
 		"desmart/pagination": "1.1.*",
 		"intervention/imagecache": "dev-master",
 		"gigablah/sphinxphp": "2.0.8",
-		"scalia/sphinxsearch": "dev-master"
+		"scalia/sphinxsearch": "dev-master",
+		"artdarek/oauth-4-laravel": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

@@ -1,19 +1,22 @@
 $(function(){
 
-	var $modal = $('#ajax-modal'), $view_options = $('#view_options'), $search_form = $('#search-form'), url_search = $search_form.attr('action');
+	var $modal = $('#ajax-modal'), $view_options = $('#view_options'), 
+	$search_form = $('.input-search, .input_search'), url_search = $search_form.attr('action'),
+	color_select = null;
 
-	$search_form.on('submit', function(){
-		var $this = $(this), keyword = $this.find('input:text').val();
-		if(!keyword){
-			return false;
+	$search_form.on('keypress', function(e){
+		var $this = $(this), keyword = $this.val(),
+		keycode = (e.keyCode ? e.keyCode : e.which);
+
+		if(keycode == '13'){
+			if(!keyword){
+				return false;
+			}
+
+			keyword = uriSanitize(keyword);
+			window.location = '/noticias/buscar/' + keyword
 		}
-
-		keyword = uriSanitize(keyword);
-
-		$(this).attr('action', url_search + '/' + keyword);
-		return true;
-	})
-
+	});
 
 	$('.dropdown ul').each(function(){
 		$("li:first",$(this)).addClass('active custom_color_bg');
@@ -93,11 +96,14 @@ $(function(){
 
 	});
 
+
+
 	$modal.on('click', '#palette_color a', function(e){
 		e.preventDefault();
 		var $this = $(this), $confirm_palette_color = $('#confirm_palette_color');
 
 		if($this.attr('data-auth') == 1){
+			color_select = $this.attr('data-color');
 			document.getElementById('stylesheet_custom_color').href = $this.attr('data-stylesheet');
 			if($confirm_palette_color.is(':hidden')){
 				$confirm_palette_color.show();
@@ -108,6 +114,32 @@ $(function(){
 				$modal.modal({ backdrop: 'static'});
 			});			
 		}
+	});
+
+	$modal.on('click', '#save_color_palette', function(e){
+		e.preventDefault();
+		var $this = $(this);
+
+		if(!color_select){
+			return false;
+		}
+
+		$.ajax({
+			url: $this.attr('href') ,
+			type:'post',
+			dataType:'json',
+			data: {color:color_select}
+		}).done(function(response){
+			console.log(response);
+			/*$modal.find('.msg-confirm').show();
+			$modal.find('.f1').text(response.message);
+			$modal.find('.save_cancel_opt, .f2,.f4').remove();
+
+			$view_options.find("li[data-type] a").removeClass('active').removeClass('custom_color_bg');
+			$view_options.find("li[data-type='"+response.type_module+"'] a").addClass('active custom_color_bg');*/
+		});
+
+
 	});
 
 

@@ -126,6 +126,16 @@ class FrontendSectionController extends BaseController {
 
 	}
 
+	public function redirectTag($slug, $keyword = null){
+
+		$dbr_category = Category::getCategoryBySlug($slug)->first();
+		if(empty($keyword) || !$dbr_category ){
+			App::abort(404);
+		}
+
+		return Redirect::route('frontend.post.tags', array($keyword), 301);		
+	}
+
 	public function searchPost($keyword = null){
 
 		if(empty($keyword)){

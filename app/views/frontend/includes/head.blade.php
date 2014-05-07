@@ -10,7 +10,7 @@
 <!-- Mobile Specific Metas
 ================================================== -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<link href="http://netjovenv2.local/favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="favicon.ico" type="image/x-icon" rel="shortcut icon">
 
 <!-- CSS
 ================================================== -->

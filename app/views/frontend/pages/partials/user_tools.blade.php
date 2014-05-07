@@ -19,7 +19,7 @@ $dbl_color_palette = Cache::get('dbl_color_palette');
 		<div class="pick_color">			
 			<ul id="palette_color">
 				@foreach ($dbl_color_palette as $dbr_color_palette)
-					<li><a data-auth="{{ Auth::check() ? true : false}}" data-stylesheet="{{$dbr_color_palette->path}}" style="background-color: {{$dbr_color_palette->color}}"></a></li>
+					<li><a data-color="{{$dbr_color_palette->color}}" data-auth="{{ Auth::check() ? true : false}}" data-stylesheet="{{$dbr_color_palette->path}}" style="background-color: {{$dbr_color_palette->color}}"></a></li>
 				@endforeach
 			</ul>
 			<div id="confirm_palette_color" style="display:none" >

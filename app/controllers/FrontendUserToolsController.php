@@ -22,6 +22,7 @@ class FrontendUserToolsController extends BaseController {
 		$cookie = null;
 
 		if(Auth::check()){
+			$dbr_user = Auth::user();
 			$params['type_module'] = $type_module;
 			$this->saveUserTool($dbr_user->id, $params);
 		}else{
@@ -35,16 +36,19 @@ class FrontendUserToolsController extends BaseController {
 		$response['type_module'] = $type_module;
 		$response['message'] = 'Tus cambios se realizaron con éxito';
 
-		return Response::json($response)->withCookie($cookie);
+		if($cookie){
+			return Response::json($response)->withCookie($cookie);
+		}
+
+		return Response::json($response);		
 	}
 
 	public function saveChangeColor(){
 		if(Request::ajax()){
-			if(Auth::check()){
-				$dbr_user = Auth::user();
-
+			if(Auth::check()){				
 				try {
-					$dbr_color = ColorPalette::where('color','=', Input::get('color'));
+					$dbr_user = Auth::user();
+					$dbr_color = ColorPalette::where('color','=', Input::get('color'))->first();
 
 					$response = array();
 					if(!$dbr_color){
@@ -67,20 +71,20 @@ class FrontendUserToolsController extends BaseController {
 	}
 
 	private function saveUserTool($user_id, $params = array()){
-		$dbr_user_tool = UserTool::getToolByUserId($user_id);
+		$dbr_user_tool = UserTool::getToolByUserId($user_id)->first();
 
 		if(!$dbr_user_tool){
 			$dbr_user_tool = new UserTool();
 		}
 
-		$dbr_user_tool->user_id = $dbr_user->id;
+		$dbr_user_tool->user_id = $user_id;
 
 		if(isset($params['color_palette_id'])){
 			$dbr_user_tool->color_palette_id = $params['color_palette_id'];
 		}
 
 		if(isset($params['type_module'])){
-			$dbr_user_tool->color_palette_id = $params['type_module'];
+			$dbr_user_tool->type_module = $params['type_module'];
 		}
 		
 		$dbr_user_tool->save();

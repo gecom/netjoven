@@ -118,10 +118,13 @@ Route::any('/noticias/buscar/{keyword?}/{page}', array('as' => 'frontend.post.se
 Route::get('{slug}', array('as' => 'frontend.section.list', 'uses' => 'FrontendSectionController@listSection' ));
 Route::get('{slug}/{page}', array('as' => 'frontend.section.pagination', 'uses' => 'FrontendSectionController@listSection' ));
 Route::get('{slug_category}/{post}/{slug}.html', array('as' => 'frontend.post.view', 'uses' => 'FrontendSectionController@viewPost' ));
+Route::get('/tag/{keyword?}', array('as' => 'frontend.post.tags', 'uses' => 'FrontendSectionController@searchPost' ));
+Route::get('/{slug_category}/{keyword?}', array('as' => 'frontend.post.redirect_tags', 'uses' => 'FrontendSectionController@redirectTag' ));
 
 
 Route::get('/iniciar_sesion', array('as' => 'frontend.login', 'uses' => 'UserController@login' ));
 Route::post('/iniciar_sesion', array('as' => 'frontend.login', 'uses' => 'UserController@signin' ));
+Route::get('/iniciar_sesion_facebook', array('as' => 'frontend.login.facebook', 'uses' => 'UserController@loginWithFacebook' ));
 Route::get('/cerrar_sesion', 'UserController@logout');
 
 Route::get('/cambiar_color', array('as' => 'frontend.user.tools.changecolor', 'uses' => 'FrontendUserToolsController@viewChangeColor' ));

@@ -38,7 +38,17 @@
                     @include('frontend.pages.section.post_button_social')
                 </div>
                 <div class="tags">
-                    <span class="custom_color_text">Tags:</span> {{$dbr_post->tags}}
+                     @if ($dbr_post->tags)
+                        <?php
+                            $data_tags = explode(',', $dbr_post->tags) ;
+                        ?>
+                        <span class="custom_color_text">Tags:</span>
+                        <ul>
+                            @foreach ($data_tags as $tag)
+                                <li><a href="{{ route('frontend.post.tags', array(Str::slug($tag))) }}">{{$tag}}</a></li>
+                            @endforeach
+                        </ul>
+                     @endif
                 </div>
                 <div class="action">
                     <a href="{{$redirect}}" class="btn_volver custom_color_bg">Volver</a>

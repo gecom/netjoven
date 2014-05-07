@@ -12,11 +12,9 @@
             @foreach($dbl_last_post_featured_slider as $dbr_post_featured_slider)
                 <li>
                     <figure>
-                        <a href=""><img title="{{$dbr_post_featured_slider->title}}" src="{{ Helpers::getImage($dbr_post_featured_slider->image, 'featured')}}" width="100%" height="100%"></a>
+                        <a href=""><img title="{{$dbr_post_featured_slider->title}}" src="{{ Helpers::getImage($dbr_post_featured_slider->image, 'featured')}}"></a>
                     </figure>
                 </li>
             @endforeach
-        </ul>
     </div>
-
 </div>

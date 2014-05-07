@@ -15,6 +15,9 @@
             <nav id="main_nav">
                 @include('frontend.includes.menu')
             </nav>
+            <section id="topics_day">
+                @include('frontend.includes.topics_day')
+            </section>
             @yield('content')
             <footer>
                 @include('frontend.includes.footer')

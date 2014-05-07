@@ -168,7 +168,7 @@ class Helpers {
         	return false;
         }
 
-        if($image->resize($size['width'], $size['height'], true, true)->save($path . $name)){
+        if($image->resize($size['width'], $size['height'], true)->save($path . $name)){
         	$image->destroy();
         	return true;
         }
@@ -345,6 +345,12 @@ class Helpers {
 
 	public static function getTypeModule(){
 		if(Auth::check()){
+			$dbr_user_tool = self::getUserTool();
+
+			if($dbr_user_tool && $dbr_user_tool->type_module){
+				return $dbr_user_tool->type_module;
+			}
+
 			return self::TYPE_MODULE_ESTANDAR;
 		}else{
 			if(Cookie::has('type_module')){

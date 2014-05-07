@@ -4,11 +4,11 @@
     </div>
     <div class="col-xs-6 ">
         <div class="search">
-            <form id="search-form"  action="{{ URL::action('FrontendSectionController@searchPost') }}" method="post">
+            <!--<form id="search-form"  action="{{ URL::action('FrontendSectionController@searchPost') }}" method="post">-->
                 <input type="text" class="input-search" name="keyword" placeholder="BUSCAR..."/>
-                <input type="submit" class="btn-search" value="">
+                <input type="button" class="btn-search" value="">
                 <div class="bg_search"></div>
-            </form>
+            <!--</form>-->
         </div>
         <div class="social">
             <ul>

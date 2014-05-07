@@ -28,7 +28,7 @@
 ?>
 <ul>
 	@if ($paginator->getCurrentPage() > 1)
-	   <li><a href="{{$paginator->getUrl($paginator->getCurrentPage()+1) }}">&lt;</a></li>
+	   <li><a href="{{$paginator->getUrl($paginator->getCurrentPage()-1) }}">&lt;</a></li>
 	@endif
 
 	@for ($page = $start; $page <= $end; $page++)
