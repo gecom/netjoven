@@ -5,7 +5,7 @@ class DirectoryPublication extends Eloquent {
 	protected $table = 'njv_directory_publishing';
 
 	public function directorate(){
-		return $this->belongsTo('Directorate', 'directory_id');
+		return $this->belongsTo('Directorate');
 	}
 
 	public function setPlaceAttribute($value){
@@ -23,8 +23,27 @@ class DirectoryPublication extends Eloquent {
 		$this->attributes['slug'] = $slugFinal;
 	}
 
+	public function scopeGetPublicationsByDirectoryId($query, $params = array()){
+
+		$params_default = array('id' => null, 'status' => array(Status::STATUS_ACTIVO, Status::STATUS_INACTIVO), 'type' => null ,'show_limit' => false);
+		$params = array_merge($params_default, $params);
+
+		 $query->where('directory_id', '=', $params['id']);
+
+		if(is_array($params['status'])){
+			$query->whereIn('status', $params['status']);
+		}
+
+		if($params['type']){
+			$query->where('type', '=', $params['type']);
+		}
+
+		return $query;
+
+	}
+
 	public function newQuery($excludeDeleted = true){
-	    return parent::newQuery()->addSelect('*',DB::raw('X(place) latitude, Y(place) longitude'));
+	    return parent::newQuery()->addSelect('*',DB::raw('X(place) latitude, Y(place) longitude, (SELECT njv_district.district FROM njv_district WHERE njv_district.id =  njv_directory_publishing.id_district) district_name'));
 	}
 
 }

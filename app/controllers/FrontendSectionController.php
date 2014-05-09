@@ -2,12 +2,32 @@
 
 class FrontendSectionController extends BaseController {
 
-	public function listSection($slug, $page = 1){
+	public function listSection($slug, $keyword = '', $page = 1){
 
 		$dbr_category = Category::getCategoryBySlug($slug)->first();
 
 		if(!$dbr_category)
 			App::abort(404);
+
+		$dbr_directory = $dbr_category->directorates()->first();
+
+		if($dbr_directory){
+			$params_template = $this->getListDirectoryPublications($dbr_category, $dbr_directory, $slug, $keyword, $page);
+
+			return View::make('frontend.pages.directorate.directory_list', $params_template);
+		}
+
+		$params_template = $this->getListSection($dbr_category, $slug, $keyword, $page);
+
+		if($params_template['is_parent_category']){
+			return View::make('frontend.pages.section.section',$params_template);
+		}else{
+			return View::make('frontend.pages.section.subsection', $params_template);
+		}
+
+	}
+
+	private function getListSection($dbr_category, $slug, $keyword = null, $page = 1) {
 
 		$params_template = array();
 		$categories_ids  = array();
@@ -84,10 +104,10 @@ class FrontendSectionController extends BaseController {
 			}
 		}
 
-		$key = 'post_' . $dbr_category->slug . '_' . $page;
+		$key = 'post_' . $dbr_category->slug . '_' . $keyword . '_' . $page;
 
 		if (!Cache::has($key)) {
-			$dbl_post = Cache::remember($key, 120, function() use ($params, $paginate, $slug) {
+			$dbl_post = Cache::remember($key, 120, function() use ($params, $paginate, $keyword, $slug) {
 				$dbl_post = Post::getPostNews($params)
 					->paginate($paginate)
 					->route('frontend.section.pagination', array($slug));
@@ -118,17 +138,54 @@ class FrontendSectionController extends BaseController {
 		$params_template['dbl_post_view2'] = $dbl_post_view2;
 		$params_template['dbl_post_view3'] = $dbl_post_view3;
 
-		if($params_template['is_parent_category']){
-			return View::make('frontend.pages.section.section',$params_template);
-		}else{
-			return View::make('frontend.pages.section.subsection', $params_template);
-		}
+		return $params_template;
+	}
 
+	private function getListDirectoryPublications($dbr_category, $dbr_directory, $slug, $keyword, $page = 1){
+
+		
+		if(!$dbr_category && !$dbr_directory)
+			App::abort(404);
+
+			$key = 'post_' . $dbr_category->slug . '_' . $keyword . '_' . $page;
+
+			if (!Cache::has($key)) {
+				$dbl_directory_publications = Cache::remember($key, 60, function() use ($dbr_directory, $keyword,$slug) {
+
+					$params['status'] = array(Status::STATUS_ACTIVO);
+					$params['id'] = $dbr_directory->id;
+
+					if(in_array(strtoupper($keyword), array(Helpers::TYPE_BINGE_BAR, Helpers::TYPE_BINGE_DISCOTECA, Helpers::TYPE_BINGE_LOUNGES))){
+						$params['type'] = strtoupper($keyword);
+					}else{
+
+					}
+
+					$dbl_directory_publications = DirectoryPublication::getPublicationsByDirectoryId($params)
+										->paginate(5)							
+										->route('frontend.section.pagination', array($slug, strtolower($keyword)));
+
+					return ['list' => $dbl_directory_publications->getItems(), 'links' => (string) $dbl_directory_publications->links('frontend.pages.partials.paginator')];
+				});
+
+			}else{
+				$dbl_directory_publications = Cache::get($key);
+			}
+
+			$params_template['meter_likebox'] = array(300, 286);
+			$params_template['dbl_district'] = Helpers::getDistrict();
+			$params_template['dbr_category'] = $dbr_category;
+			$params_template['is_juerga'] = ($dbr_directory->id == 2 ? true : false );
+			$params_template['title_section'] = $dbr_directory->name;
+			$params_template['dbl_directory_publications'] = $dbl_directory_publications['list'];
+			$params_template['dbl_directory_publications_links'] = $dbl_directory_publications['links'];
+		
+			return $params_template;
 	}
 
 	public function redirectTag($slug, $keyword = null){
 
-		$dbr_category = Category::getCategoryBySlug($slug)->first();
+		$dbr_category = Category::getCategoryBySlug($slug)->where('parent_id')->first();
 		if(empty($keyword) || !$dbr_category ){
 			App::abort(404);
 		}

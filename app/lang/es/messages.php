@@ -11,7 +11,9 @@ return array(
     'frontend' => array(
     	'welcome_user' => 'Bienvenido(a)',
     	'user_tool_title' => 'Diseña tu interfaz',
-    	'user_tool_confirm' => '¿Deseas guardar los cambios?'
+    	'user_tool_confirm' => '¿Deseas guardar los cambios?',
+    	'directory_sub_title_pichanga' => 'Encuentra tu cancha',
+    	'directory_sub_title_juerga' => 'Encuentra tu juerga'
     )
 
 );

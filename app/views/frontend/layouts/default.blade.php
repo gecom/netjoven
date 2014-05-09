@@ -8,7 +8,7 @@
         @include('frontend.includes.head')
     </head>
     <body>
-        <div class="container">
+        <div id="container" class="container">
             <header class="custom_color_bg">
                 @include('frontend.includes.header')
             </header>
@@ -20,7 +20,7 @@
             </section>
             @yield('content')
             <footer>
-            
+             @include('frontend.includes.footer')
             </footer>
 
             <div id="bottom_responsive">

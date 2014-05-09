@@ -11,9 +11,9 @@ class Helpers {
 	const TYPE_POST_BLOGS      	= 'BLOGS';
 	const TYPE_POST_FAIL       	= 'FAIL';
 
-	const TYPE_BINGE_BAR = 'Bar';
-	const TYPE_BINGE_DISCOTECA = 'Discotecas';
-	const TYPE_BINGE_LOUNGES = 'Lounges';
+	const TYPE_BINGE_BAR = 'BAR';
+	const TYPE_BINGE_DISCOTECA = 'DISCOTECAS';
+	const TYPE_BINGE_LOUNGES = 'LOUNGES';
 
 	const TYPE_VIDEO_YOUTUBE = 'Y';
 	const TYPE_VIDEO_DAILYMOTION = 'D';

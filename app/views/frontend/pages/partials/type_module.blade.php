@@ -17,7 +17,7 @@
 
 		?>
 		<span class="{{$class_view_type}}"></span><br/>
-		<div class="view {{$type_module != Helpers::TYPE_MODULE_MODULAR ? 'view_3' : ''}}">
+		<div class="view {{$type_module == Helpers::TYPE_MODULE_LISTADO ? 'view_3' : ''}}">
 			<div class="media"><img src="{{asset('assets/images/maq/nota4.jpg')}}"></div>
 			<div class="text">Arquero de Bayern Munich fue el mejor del 2013 según la IFFHS</div>
 			<div class="opt">

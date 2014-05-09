@@ -32,11 +32,11 @@
 						<tbody>
 							@foreach ($dbl_directory_publications as $dbr_directory_publication)
 								<tr>
-									<td>{{ $dbr_directory_publication->title}}</td>
+									<td>{{ $dbr_directory_publication->slug}}</td>
 									<td>{{ $dbr_directory_publication->address}}</td>
 									<td>{{ $dbr_directory_publication->phone}}</td>
 									<td>{{ Status::$statuses[$dbr_directory_publication->status] }}</td>
-									<td><a href="{{ route('backend.directory.edit', array($dbr_directory_publication->directory_id, $dbr_directory->slug, $dbr_directory_publication->id)); }}" class="btn btn-success btn-xs" ><span class="glyphicon glyphicon-edit"></span></a></td>
+									<td><a href="{{ route('backend.directory.edit', array($dbr_directory_publication->directory_id, $dbr_directory_publication->slug, $dbr_directory_publication->id)); }}" class="btn btn-success btn-xs" ><span class="glyphicon glyphicon-edit"></span></a></td>
 								</tr>
 							@endforeach
 						</tbody>

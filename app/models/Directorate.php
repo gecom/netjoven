@@ -5,7 +5,7 @@ class Directorate extends Eloquent {
 	protected $table = 'njv_directory';
 
 	public function directoryPublications(){
-		return $this->hasMany('DirectoryPublications');
+		return $this->hasMany('DirectoryPublication', 'directory_id');
 	}
 
 	public function category(){
@@ -18,7 +18,13 @@ class Directorate extends Eloquent {
 		$params = array_merge($params_default, $params);
 
 		$publications = (new Directorate())
-		->select(Helpers::$prefix_table .'directory_publishing.id', Helpers::$prefix_table .'directory_publishing.directory_id', Helpers::$prefix_table .'directory_publishing.slug', Helpers::$prefix_table .'directory_publishing.title', Helpers::$prefix_table .'directory_publishing.address', Helpers::$prefix_table .'directory_publishing.phone', Helpers::$prefix_table .'directory_publishing.status')
+		->select(Helpers::$prefix_table .'directory_publishing.id', 
+				Helpers::$prefix_table .'directory_publishing.directory_id',
+				Helpers::$prefix_table .'directory_publishing.slug',
+				Helpers::$prefix_table .'directory_publishing.title',
+				Helpers::$prefix_table .'directory_publishing.address',
+				Helpers::$prefix_table .'directory_publishing.phone',
+				Helpers::$prefix_table .'directory_publishing.status')
 			->join( Helpers::$prefix_table . 'directory_publishing', Helpers::$prefix_table . 'directory_publishing.directory_id', '=', Helpers::$prefix_table .'directory.id')
 			->where(Helpers::$prefix_table .'directory_publishing.directory_id', '=', $params['id'] );
 
@@ -28,8 +34,6 @@ class Directorate extends Eloquent {
 
 		return $publications;
 	}
-
-
 
 }
 
