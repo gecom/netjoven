@@ -21,11 +21,21 @@ class FrontendSectionController extends BaseController {
 
 	public function listDirectorate($keyword = 'all', $page = 1){
 		$slug_url_current = Request::segment(1);
-		$data_url = array('juerga', 'juerga-cerca-de-ti', 'juerga-alfabetico', 'pichanga', 'pichanga-cerca-de-ti', 'pichanga-alfabetico');
+		$data_url_directory = array('juerga' => 'frontend.directorate.list.juerga',
+							'juerga-cerca-de-ti' => 'frontend.directorate.list.juerga.cerca_de_ti',
+							'juerga-alfabetico' => 'frontend.directorate.list.juerga.alfabetico', 
+							'pichanga' => 'frontend.directorate.list.pichanga',
+							'pichanga-cerca-de-ti' => 'frontend.directorate.list.pichanga.cerca_de_ti',
+							'pichanga-alfabetico' => 'frontend.directorate.list.pichanga.alfabetico');
 
-		if(!in_array($slug_url_current, $data_url)){
+		if(!array_key_exists($slug_url_current, $data_url_directory)){
 			App::abort(404);
 		}
+
+
+		/*if(!in_array($slug_url_current, $data_url)){
+			App::abort(404);
+		}*/
 
 		$string_current = 'juerga';
 
@@ -159,9 +169,9 @@ class FrontendSectionController extends BaseController {
 		return $params_template;
 	}
 
-	private function getListDirectoryPublications($dbr_directory, $slug_url_current, $keyword = 'all', $page = 1){
+	private function getListDirectoryPublications($dbr_directory, $keyword = 'all', $page = 1){
 
-			$key = 'directory_' . $dbr_directory->slug . '_'. $slug_url_current . '_' . $keyword . '_' . $page;
+			$key = 'directory_' . $dbr_directory->slug  . '_' . $keyword . '_' . $page;
 
 			if (!Cache::has($key)) {
 				$dbl_directory_publications = Cache::remember($key, 120, function() use ($dbr_directory, $keyword) {
