@@ -1,8 +1,8 @@
 <div class="tabs">
 	<ul>
-		<li class="active custom_color_bg"><a href="{{ route('frontend.directorate.list.' . $dbr_directory->slug) }}" >Todas las {{mb_strtolower($dbr_directory->title)}}s</a></li>
-		<li><a href="{{ route('frontend.directorate.list.' . $dbr_directory->slug, array(str::slug('cerca de ti')))}}">Cerca de ti</a></li>
-		<li><a href="{{ route('frontend.directorate.list.' . $dbr_directory->slug, array('alfabetico')) }}">Por orden alfabético</a></li>
+		<li class="active custom_color_bg"><a href="{{ URL::to($slug_url_current)}}" >Todas las {{mb_strtolower($dbr_directory->title)}}s</a></li>
+		<li><a href="{{ URL::to('juerga-cerca-de-ti')}}">Cerca de ti</a></li>
+		<li><a href="{{ URL::to('juerga-cerca-de-ti') }}">Por orden alfabético</a></li>
 	</ul>
 	<div class="buscar_otro">					
 		<div class="box_form">							
