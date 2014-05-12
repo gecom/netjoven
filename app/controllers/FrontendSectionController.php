@@ -19,9 +19,10 @@ class FrontendSectionController extends BaseController {
 	}
 
 
-	public function listDirectorate($keyword = 'all', $page = 1){
+	public function listDirectorate($keyword = 'all', $filter = null, $page = 1){
 		$slug_url_current = Request::segment(1);
-		$data_url_directory = array('juerga' => 'frontend.directorate.list.juerga',
+		$data_url_directory = array(
+							'juerga' => 'frontend.directorate.list.juerga',
 							'juerga-cerca-de-ti' => 'frontend.directorate.list.juerga.cerca_de_ti',
 							'juerga-alfabetico' => 'frontend.directorate.list.juerga.alfabetico', 
 							'pichanga' => 'frontend.directorate.list.pichanga',
@@ -31,11 +32,6 @@ class FrontendSectionController extends BaseController {
 		if(!array_key_exists($slug_url_current, $data_url_directory)){
 			App::abort(404);
 		}
-
-
-		/*if(!in_array($slug_url_current, $data_url)){
-			App::abort(404);
-		}*/
 
 		$string_current = 'juerga';
 
@@ -47,8 +43,9 @@ class FrontendSectionController extends BaseController {
 
 		$keyword = Str::slug($keyword);
 
-		$params_template = $this->getListDirectoryPublications($dbr_directory, $keyword, $page);
+		$params_template = $this->getListDirectoryPublications($dbr_directory,$data_url_directory, $slug_url_current, $keyword, $filter, $page);
 		$params_template['slug_url_current'] = $slug_url_current;
+		$params_template['data_url_directory'] = $data_url_directory;
 
 		return View::make('frontend.pages.directorate.directory_list', $params_template);
 
@@ -169,12 +166,12 @@ class FrontendSectionController extends BaseController {
 		return $params_template;
 	}
 
-	private function getListDirectoryPublications($dbr_directory, $keyword = 'all', $page = 1){
+	private function getListDirectoryPublications($dbr_directory,$data_url_directory, $slug_url_current, $keyword = 'all', $filter = null, $page = 1){
 
-			$key = 'directory_' . $dbr_directory->slug  . '_' . $keyword . '_' . $page;
+			$key = 'directory_' . $dbr_directory->slug  . '_' . $keyword . '_'. $filter.'_' . $page;
 
 			if (!Cache::has($key)) {
-				$dbl_directory_publications = Cache::remember($key, 120, function() use ($dbr_directory, $keyword) {
+				$dbl_directory_publications = Cache::remember($key, 120, function() use ($dbr_directory,$data_url_directory, $slug_url_current, $keyword, $filter) {
 
 					$params['status'] = array(Status::STATUS_ACTIVO);
 					$params['id'] = $dbr_directory->id;
@@ -182,13 +179,21 @@ class FrontendSectionController extends BaseController {
 
 					if(in_array(strtoupper($keyword), array(Helpers::TYPE_BINGE_BAR, Helpers::TYPE_BINGE_DISCOTECA, Helpers::TYPE_BINGE_LOUNGES))){
 						$params['type'] = strtoupper($keyword);
-					}else{
+					}
 
+					if(!empty($filter)){
+						$pos = strpos($filter, ':');
+						if($pos === false){
+							$params['district_id'] = $filter;
+						}else{
+							$filter = str_replace(':', '', $filter);
+							$params['letter'] = $filter;
+						}
 					}
 
 					$dbl_directory_publications = DirectoryPublication::getPublicationsByDirectoryId($params)
 										->paginate(5)							
-										->route('frontend.directorate.list.' . $dbr_directory->slug, array($keyword));
+										->route( $data_url_directory[$slug_url_current], array($keyword, $filter));
 
 					return ['list' => $dbl_directory_publications->getItems(), 'links' => (string) $dbl_directory_publications->links('frontend.pages.partials.paginator')];
 				});

@@ -25,7 +25,7 @@ class DirectoryPublication extends Eloquent {
 
 	public function scopeGetPublicationsByDirectoryId($query, $params = array()){
 
-		$params_default = array('id' => null, 'status' => array(Status::STATUS_ACTIVO, Status::STATUS_INACTIVO), 'type' => null ,'show_limit' => false);
+		$params_default = array('id' => null,'district_id' => null, 'letter' => null, 'status' => array(Status::STATUS_ACTIVO, Status::STATUS_INACTIVO), 'type' => null ,'show_limit' => false);
 		$params = array_merge($params_default, $params);
 
 		 $query->where('directory_id', '=', $params['id']);
@@ -38,6 +38,12 @@ class DirectoryPublication extends Eloquent {
 			$query->where('type', '=', $params['type']);
 		}
 
+		if($params['letter']){
+			$query->where('title', 'LIKE', $params['letter'].'%');
+		}
+
+		$query->orderBy('id', 'desc');
+		
 		return $query;
 
 	}

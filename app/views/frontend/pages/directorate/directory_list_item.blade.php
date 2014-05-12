@@ -19,10 +19,10 @@
 		@if ($is_juerga)
 			<div class="filter1">
 				<ul class="pestanas">
-					<li class="p1"><a class="p2" href="#">Todos</a></li>
-					<li class="p1"><a class="p2" href="{{route('frontend.directorate.list.' . $dbr_directory->slug, array(strtolower(Helpers::TYPE_BINGE_BAR)))}}">{{Helpers::TYPE_BINGE_BAR}}</a></li>
-					<li class="p1"><a class="p2" href="{{route('frontend.directorate.list.' . $dbr_directory->slug, array(strtolower(Helpers::TYPE_BINGE_DISCOTECA)))}}">{{Helpers::TYPE_BINGE_DISCOTECA}}</a></li>
-					<li class="p1"><a class="p2" href="{{route('frontend.directorate.list.' . $dbr_directory->slug, array(strtolower(Helpers::TYPE_BINGE_LOUNGES)))}}">{{Helpers::TYPE_BINGE_LOUNGES}}</a></li>
+					<li class="p1"><a class="p2" href="{{route($data_url_directory[$slug_url_current])}}">Todos</a></li>
+					<li class="p1"><a class="p2" href="{{route($data_url_directory[$slug_url_current], array(strtolower(Helpers::TYPE_BINGE_BAR)))}}">{{Helpers::TYPE_BINGE_BAR}}</a></li>
+					<li class="p1"><a class="p2" href="{{route($data_url_directory[$slug_url_current], array(strtolower(Helpers::TYPE_BINGE_DISCOTECA)))}}">{{Helpers::TYPE_BINGE_DISCOTECA}}</a></li>
+					<li class="p1"><a class="p2" href="{{route($data_url_directory[$slug_url_current], array(strtolower(Helpers::TYPE_BINGE_LOUNGES)))}}">{{Helpers::TYPE_BINGE_LOUNGES}}</a></li>
 				</ul>
 			</div>
 		@endif
@@ -39,33 +39,13 @@
 		@endif
 
 		@if ($slug_url_current == 'juerga-alfabetico')
+				<?php
+					$data_pagination_letter = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
+				 ?>
 				<div class="filter3">
-					<a class="custom_color_bg active" href="#">a</a>
-					<a class="" href="#">b</a>
-					<a class="" href="#">c</a>
-					<a class="" href="#">d</a>
-					<a class="" href="#">e</a>
-					<a class="" href="#">f</a>
-					<a class="" href="#">g</a>
-					<a class="" href="#">h</a>
-					<a class="" href="#">i</a>
-					<a class="" href="#">j</a>
-					<a class="" href="#">k</a>
-					<a class="" href="#">l</a>
-					<a class="" href="#">m</a>
-					<a class="" href="#">n</a>
-					<a class="" href="#">o</a>
-					<a class="" href="#">p</a>
-					<a class="" href="#">q</a>
-					<a class="" href="#">r</a>
-					<a class="" href="#">s</a>
-					<a class="" href="#">t</a>
-					<a class="" href="#">u</a>
-					<a class="" href="#">v</a>
-					<a class="" href="#">w</a>
-					<a class="" href="#">x</a>
-					<a class="" href="#">y</a>
-					<a class="" href="#">z</a>
+					@foreach ($data_pagination_letter as $pagination_letter)
+						<a class="" href="{{route($data_url_directory[$slug_url_current], array(strtolower(Helpers::TYPE_BINGE_BAR), ':' . $pagination_letter))}}">{{strtolower($pagination_letter)}}</a>
+					@endforeach
 				</div>
 		@endif
 
