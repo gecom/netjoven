@@ -6,17 +6,8 @@ class FrontendSectionController extends BaseController {
 
 		$dbr_category = Category::getCategoryBySlug($slug)->first();
 
-		if(!$dbr_category)
-			App::abort(404);
-
-		$dbr_directory = $dbr_category->directorates()->first();
-
-		if($dbr_directory){
-			$params_template = $this->getListDirectoryPublications($dbr_category, $dbr_directory, $slug, $keyword, $page);
-
-			return View::make('frontend.pages.directorate.directory_list', $params_template);
-		}
-
+		if(!$dbr_category) App::abort(404);
+		
 		$params_template = $this->getListSection($dbr_category, $slug, $keyword, $page);
 
 		if($params_template['is_parent_category']){
@@ -26,6 +17,33 @@ class FrontendSectionController extends BaseController {
 		}
 
 	}
+
+
+	public function listDirectorate($keyword = 'all', $page = 1){
+		$slug_url_current = Request::segment(1);
+		$data_url = array('juerga', 'juerga-cerca-de-ti', 'juerga-alfabetico', 'pichanga', 'pichanga-cerca-de-ti', 'pichanga-alfabetico');
+
+		if(!in_array($slug_url_current, $data_url)){
+			App::abort(404);
+		}
+
+		$string_current = 'juerga';
+
+		$dbr_directory = Directorate::where('slug',  '=', $string_current)->first();
+
+		if(!$dbr_directory){
+			App::abort(404);
+		}
+
+		$keyword = Str::slug($keyword);
+
+		$params_template = $this->getListDirectoryPublications($dbr_directory, $keyword, $page);
+		$params_template['slug_url_current'] = $slug_url_current;
+
+		return View::make('frontend.pages.directorate.directory_list', $params_template);
+
+	}
+
 
 	private function getListSection($dbr_category, $slug, $keyword = null, $page = 1) {
 
@@ -141,19 +159,16 @@ class FrontendSectionController extends BaseController {
 		return $params_template;
 	}
 
-	private function getListDirectoryPublications($dbr_category, $dbr_directory, $slug, $keyword, $page = 1){
+	private function getListDirectoryPublications($dbr_directory, $slug_url_current, $keyword = 'all', $page = 1){
 
-		
-		if(!$dbr_category && !$dbr_directory)
-			App::abort(404);
-
-			$key = 'post_' . $dbr_category->slug . '_' . $keyword . '_' . $page;
+			$key = 'directory_' . $dbr_directory->slug . '_'. $slug_url_current . '_' . $keyword . '_' . $page;
 
 			if (!Cache::has($key)) {
-				$dbl_directory_publications = Cache::remember($key, 60, function() use ($dbr_directory, $keyword,$slug) {
+				$dbl_directory_publications = Cache::remember($key, 120, function() use ($dbr_directory, $keyword) {
 
 					$params['status'] = array(Status::STATUS_ACTIVO);
 					$params['id'] = $dbr_directory->id;
+
 
 					if(in_array(strtoupper($keyword), array(Helpers::TYPE_BINGE_BAR, Helpers::TYPE_BINGE_DISCOTECA, Helpers::TYPE_BINGE_LOUNGES))){
 						$params['type'] = strtoupper($keyword);
@@ -163,7 +178,7 @@ class FrontendSectionController extends BaseController {
 
 					$dbl_directory_publications = DirectoryPublication::getPublicationsByDirectoryId($params)
 										->paginate(5)							
-										->route('frontend.section.pagination', array($slug, strtolower($keyword)));
+										->route('frontend.directorate.list.' . $dbr_directory->slug, array($keyword));
 
 					return ['list' => $dbl_directory_publications->getItems(), 'links' => (string) $dbl_directory_publications->links('frontend.pages.partials.paginator')];
 				});
@@ -174,9 +189,8 @@ class FrontendSectionController extends BaseController {
 
 			$params_template['meter_likebox'] = array(300, 286);
 			$params_template['dbl_district'] = Helpers::getDistrict();
-			$params_template['dbr_category'] = $dbr_category;
 			$params_template['is_juerga'] = ($dbr_directory->id == 2 ? true : false );
-			$params_template['title_section'] = $dbr_directory->name;
+			$params_template['dbr_directory'] = $dbr_directory;
 			$params_template['dbl_directory_publications'] = $dbl_directory_publications['list'];
 			$params_template['dbl_directory_publications_links'] = $dbl_directory_publications['links'];
 		

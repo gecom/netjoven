@@ -115,9 +115,10 @@ Route::get('/noticias', array('as' => 'frontend.post.more_news', 'uses' => 'Fron
 Route::get('/noticias/page/{page}', array('as' => 'frontend.post.more_news_paginate', 'uses' => 'FrontendHomeController@viewMoreNews' ));
 Route::any('/noticias/buscar/{keyword?}', array('as' => 'frontend.post.search', 'uses' => 'FrontendSectionController@searchPost' ));
 Route::any('/noticias/buscar/{keyword?}/{page}', array('as' => 'frontend.post.search.pagination', 'uses' => 'FrontendSectionController@searchPost' ));
+Route::get('/juerga/{keyword?}/{page?}', array('as' => 'frontend.directorate.list.juerga', 'uses' => 'FrontendSectionController@listDirectorate' ));
+Route::get('/pichanga/{type?}', array('as' => 'frontend.directorate.list.pichanga', 'uses' => 'FrontendSectionController@listDirectorate' ));
 Route::get('{slug}', array('as' => 'frontend.section.list', 'uses' => 'FrontendSectionController@listSection' ));
 Route::get('{slug}/{page}', array('as' => 'frontend.section.pagination', 'uses' => 'FrontendSectionController@listSection' ));
-//Route::get('{slug}/cerca-de-ti/{type?}', array('as' => 'frontend.section.list.near_you', 'uses' => 'FrontendSectionController@listSection' ));
 Route::get('{slug_category}/{post}/{slug}.html', array('as' => 'frontend.post.view', 'uses' => 'FrontendSectionController@viewPost' ));
 Route::get('/tag/{keyword?}', array('as' => 'frontend.post.tags', 'uses' => 'FrontendSectionController@searchPost' ));
 Route::get('/{slug_category}/{keyword?}', array('as' => 'frontend.post.redirect_tags', 'uses' => 'FrontendSectionController@redirectTag' ));
