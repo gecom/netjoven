@@ -116,7 +116,9 @@ Route::get('/noticias/page/{page}', array('as' => 'frontend.post.more_news_pagin
 Route::any('/noticias/buscar/{keyword?}', array('as' => 'frontend.post.search', 'uses' => 'FrontendSectionController@searchPost' ));
 Route::any('/noticias/buscar/{keyword?}/{page}', array('as' => 'frontend.post.search.pagination', 'uses' => 'FrontendSectionController@searchPost' ));
 
-Route::get('/juerga/{keyword?}/{page?}', array('as' => 'frontend.directorate.list.juerga', 'uses' => 'FrontendSectionController@listDirectorate' ));
+
+Route::get('/juerga/{args?}/{page?}', array('as' => 'frontend.juerga.list', 'uses' => 'FrontendSectionController@listDirectorate' ))->where('args', '(.*)');;
+//Route::get('/juerga/{keyword?}/{page?}', array('as' => 'frontend.directorate.list.juerga', 'uses' => 'FrontendSectionController@listDirectorate' ));
 Route::get('/juerga-cerca-de-ti/{keyword?}/{page?}', array('as' => 'frontend.directorate.list.juerga.cerca_de_ti', 'uses' => 'FrontendSectionController@listDirectorate' ));
 Route::get('/juerga-cerca-de-ti/{keyword?}/{filter?}/{page?}', array('as' => 'frontend.directorate.list.juerga.cerca_de_ti.filter', 'uses' => 'FrontendSectionController@listDirectorate' ));
 Route::get('/juerga-alfabetico/{keyword?}/{page?}', array('as' => 'frontend.directorate.list.juerga.alfabetico', 'uses' => 'FrontendSectionController@listDirectorate' ));

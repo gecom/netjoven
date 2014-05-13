@@ -42,6 +42,10 @@ class DirectoryPublication extends Eloquent {
 			$query->where('title', 'LIKE', $params['letter'].'%');
 		}
 
+		if($params['district_id']){
+			$query->where('id_district', '=', $params['district_id']);
+		}
+
 		$query->orderBy('id', 'desc');
 		
 		return $query;

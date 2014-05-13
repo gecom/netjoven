@@ -13,7 +13,7 @@ class Helpers {
 
 	const TYPE_BINGE_BAR = 'BAR';
 	const TYPE_BINGE_DISCOTECA = 'DISCOTECAS';
-	const TYPE_BINGE_LOUNGES = 'LOUNGES';
+	const TYPE_BINGE_LOUNGES = 'LOUNGE';
 
 	const TYPE_VIDEO_YOUTUBE = 'Y';
 	const TYPE_VIDEO_DAILYMOTION = 'D';

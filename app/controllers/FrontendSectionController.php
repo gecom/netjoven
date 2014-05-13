@@ -19,33 +19,42 @@ class FrontendSectionController extends BaseController {
 	}
 
 
-	public function listDirectorate($keyword = 'all', $filter = null, $page = 1){
+	//public function listDirectorate($keyword = 'all', $filter = null, $page = 1){
+	public function listDirectorate($args = null, $page = 1){
+
 		$slug_url_current = Request::segment(1);
-		$data_url_directory = array(
-							'juerga' => 'frontend.directorate.list.juerga',
-							'juerga-cerca-de-ti' => 'frontend.directorate.list.juerga.cerca_de_ti',
-							'juerga-alfabetico' => 'frontend.directorate.list.juerga.alfabetico', 
-							'pichanga' => 'frontend.directorate.list.pichanga',
-							'pichanga-cerca-de-ti' => 'frontend.directorate.list.pichanga.cerca_de_ti',
-							'pichanga-alfabetico' => 'frontend.directorate.list.pichanga.alfabetico');
-
-		if(!array_key_exists($slug_url_current, $data_url_directory)){
-			App::abort(404);
-		}
-
-		$string_current = 'juerga';
-
-		$dbr_directory = Directorate::where('slug',  '=', $string_current)->first();
+		$dbr_directory = Directorate::where('slug',  '=', $slug_url_current)->first();
 
 		if(!$dbr_directory){
 			App::abort(404);
 		}
 
-		$keyword = Str::slug($keyword);
+		$data_segments = array();
+		if(!empty($args)){
+			$data_segments = explode('/', $args);	
+		}
 
-		$params_template = $this->getListDirectoryPublications($dbr_directory,$data_url_directory, $slug_url_current, $keyword, $filter, $page);
-		$params_template['slug_url_current'] = $slug_url_current;
-		$params_template['data_url_directory'] = $data_url_directory;
+		$is_cerca_de_ti = false;
+		$is_alfabetico = false;
+		if(isset($data_segments[0]) && $data_segments[0] == 'cerca-de-ti'){
+			$is_cerca_de_ti = true;
+		}
+
+		if(isset($data_segments[0]) && $data_segments[0] == 'alfabetico'){
+			$is_alfabetico = true;
+		}
+		
+		
+		$keyword = null;//Str::slug($keyword);
+		$filter = null;
+		$page = 1;
+
+
+		$params_template = $this->getListDirectoryPublications($dbr_directory, $keyword, $filter, $page, $data_segments);
+		$params_template['is_cerca_de_ti'] = $is_cerca_de_ti;
+		$params_template['is_alfabetico'] = $is_alfabetico;
+		$params_template['data_segments'] = $data_segments;
+		//$params_template['url_current'] = $url_current;
 
 		return View::make('frontend.pages.directorate.directory_list', $params_template);
 
@@ -166,48 +175,110 @@ class FrontendSectionController extends BaseController {
 		return $params_template;
 	}
 
-	private function getListDirectoryPublications($dbr_directory,$data_url_directory, $slug_url_current, $keyword = 'all', $filter = null, $page = 1){
+	private function getListDirectoryPublications($dbr_directory, $keyword = 'all', $filter = null, $page = 1, $data_segments){
+
+
+		$keyword = null;
+		if(isset($data_segments[0])){
+			$keyword = $data_segments[0];	
+		}
 
 			$key = 'directory_' . $dbr_directory->slug  . '_' . $keyword . '_'. $filter.'_' . $page;
 
-			if (!Cache::has($key)) {
-				$dbl_directory_publications = Cache::remember($key, 120, function() use ($dbr_directory,$data_url_directory, $slug_url_current, $keyword, $filter) {
+			//if (!Cache::has($key)) {
+				//$dbl_directory_publications = Cache::remember($key, 120, function() use ($dbr_directory,$data_url_directory, $slug_url_current, $keyword, $filter) {
 
 					$params['status'] = array(Status::STATUS_ACTIVO);
 					$params['id'] = $dbr_directory->id;
 
 
+					
 					if(in_array(strtoupper($keyword), array(Helpers::TYPE_BINGE_BAR, Helpers::TYPE_BINGE_DISCOTECA, Helpers::TYPE_BINGE_LOUNGES))){
 						$params['type'] = strtoupper($keyword);
 					}
 
-					if(!empty($filter)){
-						$pos = strpos($filter, ':');
-						if($pos === false){
-							$params['district_id'] = $filter;
+					if($keyword == 'alfabetico'){
+						if(isset($data_segments[1]) && isset($data_segments[2])){
+							if(in_array(strtoupper($data_segments[1]), array(Helpers::TYPE_BINGE_BAR, Helpers::TYPE_BINGE_DISCOTECA, Helpers::TYPE_BINGE_LOUNGES))){
+								$params['type'] = strtoupper($data_segments[1]);
+							}
+
+							$pos = strpos($data_segments[2], ':');
+							if($pos === false){
+								$filter = 'A';
+							}else{
+								$filter = str_replace(':', '', $data_segments[2]);
+							}								
+							
 						}else{
-							$filter = str_replace(':', '', $filter);
-							$params['letter'] = $filter;
+							if(isset($data_segments[1])){
+								if(in_array(strtoupper($data_segments[1]), array(Helpers::TYPE_BINGE_BAR, Helpers::TYPE_BINGE_DISCOTECA, Helpers::TYPE_BINGE_LOUNGES))){
+									$params['type'] = strtoupper($data_segments[1]);
+								}else{
+									$pos = strpos($data_segments[1], ':');
+									if($pos === false){
+										$filter = 'A';
+									}else{										
+										$filter = str_replace(':', '', $data_segments[1]);
+									}								
+								}
+							}else{
+								$filter = 'A';
+							}
 						}
-					}
+						
+						$params['letter'] = $filter;
+					}	
+
+
+					if($keyword == 'cerca-de-ti'){
+
+						if(isset($data_segments[1]) && isset($data_segments[2])){
+							if(in_array(strtoupper($data_segments[1]), array(Helpers::TYPE_BINGE_BAR, Helpers::TYPE_BINGE_DISCOTECA, Helpers::TYPE_BINGE_LOUNGES))){
+								$params['type'] = strtoupper($data_segments[1]);
+							}
+
+							$search_neo = array_reverse(explode("-",$data_segments[2]));
+							$filter = intval($search_neo[0]);
+
+						}else{
+							if(in_array(strtoupper($data_segments[1]), array(Helpers::TYPE_BINGE_BAR, Helpers::TYPE_BINGE_DISCOTECA, Helpers::TYPE_BINGE_LOUNGES))){
+								$params['type'] = strtoupper($data_segments[1]);
+							}else{
+
+								$search_neo = array_reverse(explode("-",$data_segments[1]));
+								$filter = intval($search_neo[0]);
+							}
+						}
+
+						$params['district_id'] = $filter;
+
+					}	
+				
 
 					$dbl_directory_publications = DirectoryPublication::getPublicationsByDirectoryId($params)
 										->paginate(5)							
-										->route( $data_url_directory[$slug_url_current], array($keyword, $filter));
+										->route('frontend.'.$dbr_directory->slug.'.list', $data_segments);
 
-					return ['list' => $dbl_directory_publications->getItems(), 'links' => (string) $dbl_directory_publications->links('frontend.pages.partials.paginator')];
-				});
 
-			}else{
+
+				//	return ['list' => $dbl_directory_publications->getItems(), 'links' => (string) $dbl_directory_publications->links('frontend.pages.partials.paginator')];
+				//});
+
+			/*}else{
 				$dbl_directory_publications = Cache::get($key);
-			}
+			}*/
 
 			$params_template['meter_likebox'] = array(300, 286);
 			$params_template['dbl_district'] = Helpers::getDistrict();
 			$params_template['is_juerga'] = ($dbr_directory->id == 2 ? true : false );
 			$params_template['dbr_directory'] = $dbr_directory;
-			$params_template['dbl_directory_publications'] = $dbl_directory_publications['list'];
-			$params_template['dbl_directory_publications_links'] = $dbl_directory_publications['links'];
+
+			$params_template['dbl_directory_publications'] = $dbl_directory_publications->getItems();
+			$params_template['dbl_directory_publications_links'] = $dbl_directory_publications->links('frontend.pages.partials.paginator'); //str_replace('//', '/', $dbl_directory_publications->links('frontend.pages.partials.paginator'));
+
+			/*$params_template['dbl_directory_publications'] = $dbl_directory_publications['list'];
+			$params_template['dbl_directory_publications_links'] = $dbl_directory_publications['links'];*/
 		
 			return $params_template;
 	}

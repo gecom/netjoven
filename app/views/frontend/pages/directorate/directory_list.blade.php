@@ -34,4 +34,5 @@
 @stop
 
 @section('js')
+	{{ HTML::script('assets/js/fn/juerga.js'); }}
 @stop
