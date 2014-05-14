@@ -64,7 +64,7 @@
 							@if(in_array(strtoupper($data_segments[1]), array(Helpers::TYPE_BINGE_BAR, Helpers::TYPE_BINGE_DISCOTECA, Helpers::TYPE_BINGE_LOUNGES)))
 								<option  value="{{ URL::to($dbr_directory->slug. '/'.$data_segments[0].'/'.$data_segments[1]. '/'.$slug_district ); }}">{{$dbr_district->district}}</option>												
 							@else
-								<option  value="{{ URL::to($dbr_directory->slug. '/**'.$data_segments[0].'/'.$slug_district ); }}">{{$dbr_district->district}}</option>
+								<option  value="{{ URL::to($dbr_directory->slug. '/'.$data_segments[0].'/'.$slug_district ); }}">{{$dbr_district->district}}</option>
 							@endif
 						@endif						
 					@else
