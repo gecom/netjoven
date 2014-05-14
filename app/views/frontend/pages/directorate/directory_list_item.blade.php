@@ -5,12 +5,7 @@
 		<li><a href="{{route('frontend.'.$dbr_directory->slug.'.list', array('alfabetico'))}}">Por orden alfabético</a></li>
 	</ul>
 	<div class="buscar_otro">					
-		<div class="box_form">							
-			<div class="box_search">
-				<input type="text" class="ipt">
-				<input type="button" value="" class="btn">
-			</div>
-		</div>
+		@include('frontend.pages.directorate.directory_search');
 	</div>
 </div>
 
@@ -28,8 +23,6 @@
 
 
 					$data_type_juerga = array(Helpers::TYPE_BINGE_BAR, Helpers::TYPE_BINGE_DISCOTECA, Helpers::TYPE_BINGE_LOUNGES);
-
-
 				?>
 
 				<ul class="pestanas">

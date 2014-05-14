@@ -16,5 +16,6 @@
                     </figure>
                 </li>
             @endforeach
+        </ul>
     </div>
 </div>

@@ -28,7 +28,7 @@
                         Cartelera
                     </div>
                     <div class="playing">
-                        <img src="images/maq/cartelera.jpg" width="100%" height="90%" />
+                        <img src="{{asset('assets/images/maq/cartelera.jpg')}}" width="100%" height="90%" />
                         <div class="release_date">
                             Estreno: 9 de Enero <a href="#" class="custom_color_bg">Ver trailer</a>
                         </div>

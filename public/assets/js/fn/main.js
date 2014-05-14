@@ -2,7 +2,7 @@ $(function(){
 
 	var $modal = $('#ajax-modal'), $view_options = $('#view_options'), 
 	$search_form = $('.input-search, .input_search'), url_search = $search_form.attr('action'),
-	color_select = null;
+	color_select = null, $slider_more = $('#slider_more');
 
 	$search_form.on('keypress', function(e){
 		var $this = $(this), keyword = $this.val(),
@@ -17,6 +17,18 @@ $(function(){
 			window.location = '/noticias/buscar/' + keyword
 		}
 	});
+
+    $('#slider_more div.slider_item:gt(0)').hide();
+
+    setInterval(function(){
+      	$('#slider_more div.slider_item:first-child').fadeOut(0)
+		         .next('div.slider_item').fadeIn(1000)
+		         .end().appendTo('#slider_more');
+
+		var $slider_item_visible = $('#slider_more div.slider_item:visible');
+		$('#slider_more_tab').html($slider_item_visible.attr('data-title') + '<span class="'+$slider_item_visible.attr('data-class')+'"></span>');
+
+     }, 4000);
 
 	$('.dropdown ul').each(function(){
 		$("li:first",$(this)).addClass('active custom_color_bg');

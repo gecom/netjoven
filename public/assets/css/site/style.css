@@ -372,6 +372,7 @@ footer .footer_devices .fd2:hover{background-position:-48px -629px;}
 #portada_espectaculos.view_3 .more_news .news .desc{float:left;width:262px;height:93px}
 #portada_espectaculos.view_3 .more_news .news .opt{float:left;width:263px}
 #portada_espectaculos .features{margin-top:20px;width:300px;margin-right:28px;margin-left:9px;display:inline-block;vertical-align:top;font-size:1rem;}
+#portada_espectaculos .features #slider_more {height: 100%;margin: 0 auto;overflow: hidden;padding: 0;position: relative;	width: 100%;}
 #portada_espectaculos .features.subseccion_modular_listado,#portada_espectaculos .features.subseccion_modular{margin-left:22px;margin-right:9px}
 #portada_espectaculos .features .add{height:290px;padding:20px 0;width:300px;margin-bottom:40px;-webkit-box-shadow:1px 1px 4px 0 #6d6d6d;-moz-box-shadow:1px 1px 4px 0 #6d6d6d;box-shadow:1px 1px 4px 0 #6d6d6d;}
 #portada_espectaculos .features .add img{width:100%;height:auto}

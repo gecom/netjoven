@@ -239,7 +239,7 @@ class Helpers {
 		$v = '';
 
 		//bifurcador ternario
-		$v =  (!empty($_SERVER['REMOTE_ADDR']))?$_SERVER['REMOTE_ADDR'] :((!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) ? $_SERVER['HTTP_X_FORWARDED_FOR']: @getenv('REMOTE_ADDR'));
+		$v =  (!empty($_SERVER['REMOTE_ADDR']))? $_SERVER['REMOTE_ADDR'] :((!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) ? $_SERVER['HTTP_X_FORWARDED_FOR']: @getenv('REMOTE_ADDR'));
 
 		if(isset($_SERVER['HTTP_CLIENT_IP']))
 		{
@@ -365,7 +365,6 @@ class Helpers {
 		return Auth::user()->userTool()->first();
 	}
 
-
 	public static function getColorCurrent(){
 		if(Auth::check()){
 			$dbr_user_tool = self::getUserTool();
@@ -422,6 +421,48 @@ class Helpers {
 		$string = mb_strtoupper($string);
 		}
 		return $string;
+	}
+
+	public static function getMoreSlider($params, $limit = 5){
+
+		$params_default = array('tags' => null,'order_read' => false , 'order_commented' => false,'order_shared' => false, 'has_gallery' => false, 'has_video' => false, 'category_id' => null);
+		$params = array_merge($params_default, $params);
+
+		$query = DB::table('njv_slider_more')
+			->select('njv_slider_more.post_id', 'njv_slider_more.title', 'njv_slider_more.slug', 'njv_slider_more.category_id' ,'njv_slider_more.category_parent_id', 'njv_slider_more.tags')
+			->take($limit);
+
+		if($params['tags']){
+			$query->addSelect(DB::raw("MATCH (tags) AGAINST ( '" . $params['tags'] . "' IN BOOLEAN MODE) as ranking"))
+					->whereRaw("MATCH (tags) AGAINST ( '" . $params['tags'] . "' IN BOOLEAN MODE)")
+					->orderBy('ranking', 'desc');
+		}
+
+		if($params['order_read']){
+			$query->orderBy('count_read', 'desc');
+		}
+
+		if($params['order_commented']){
+			$query->orderBy('count_commented', 'desc');
+		}
+
+		if($params['order_shared']){
+			$query->orderBy('count_shared', 'desc');
+		}
+
+		if($params['has_gallery']){
+			$query->where('has_gallery', '=', 1)->orderBy('post_id', 'desc');
+		}
+
+		if($params['has_video']){
+			$query->where('has_video', '=', 1)->orderBy('post_id', 'desc');
+		}
+
+		if($params['category_id']){
+			$query->where('category_id', '=', $params['category_id']);
+		}
+
+		return $query->get();
 	}
 
 }
