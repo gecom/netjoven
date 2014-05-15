@@ -129,6 +129,7 @@ Route::get('/{slug_category}/{keyword?}', array('as' => 'frontend.post.redirect_
 
 Route::get('/iniciar_sesion', array('as' => 'frontend.login', 'uses' => 'UserController@login' ));
 Route::post('/iniciar_sesion', array('as' => 'frontend.login', 'uses' => 'UserController@signin' ));
+Route::get('/registrate.html', array('as' => 'frontend.user.register', 'uses' => 'UserController@userRegister' ));
 Route::get('/iniciar_sesion_facebook', array('as' => 'frontend.login.facebook', 'uses' => 'UserController@loginWithFacebook' ));
 Route::get('/cerrar_sesion', 'UserController@logout');
 

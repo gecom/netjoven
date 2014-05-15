@@ -4,19 +4,15 @@
 
 class UserController extends BaseController {
 
-
-
-
-    /**
-     * Displays the login form
-     *
-     */
     public function login(){
-
         if(Request::ajax()){
             return View::make('frontend.pages.partials.login')->render();
         }
+    }
 
+    public function userRegister(){
+        $params_template['meter_likebox'] = array(300, 286);
+        return View::make('frontend.pages.user.user_register', $params_template);
     }
 
     public function loginWithFacebook() {
@@ -69,7 +65,7 @@ class UserController extends BaseController {
     }
 
     public function signin(){
-                $input = array(
+        $input = array(
             'email'    => Input::get( 'email' ), // May be the username too
             'password' => Input::get( 'password' ),
         );

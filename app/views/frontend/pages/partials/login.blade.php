@@ -21,7 +21,7 @@
 				<a class="fb" href="{{ route('frontend.login.facebook') }}"><span></span></a>
 			</div>
 			<div class="registrate">
-				Eres nuevo en Netjoven?<br><a class="registrate_btn" href="#">Regístrate</a>
+				Eres nuevo en Netjoven?<br><a class="registrate_btn" href="{{ route('frontend.user.register') }}">Regístrate</a>
 			</div>
 		</div>
 		<div style="display:none" class="registro_form">

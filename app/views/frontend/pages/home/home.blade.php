@@ -20,22 +20,12 @@
             <img src="images/maq/banner.jpg" alt="">
         </section>
         <section id="videos">
-                <div class="left_video">                    
-                    @include('frontend.pages.home.featured_video')
-                </div>
-                <div class="right_video">
-                    <div class="video_title">
-                        Cartelera
-                    </div>
-                    <div class="playing">
-                        <img src="{{asset('assets/images/maq/cartelera.jpg')}}" width="100%" height="90%" />
-                        <div class="release_date">
-                            Estreno: 9 de Enero <a href="#" class="custom_color_bg">Ver trailer</a>
-                        </div>
-                    </div>
-
-                </div>
-
+            <div class="left_video">                    
+                @include('frontend.pages.home.featured_video')
+            </div>
+            <div class="right_video">
+                @include('frontend.pages.home.post_cartelera')  
+            </div>
         </section>
         <section id="news_two" class="v_news" style="display:block">
             @if ($type_module == Helpers::TYPE_MODULE_LISTADO || $type_module == Helpers::TYPE_MODULE_MODULAR)

@@ -8,8 +8,22 @@ class FrontendSectionController extends BaseController {
 
 		if(!$dbr_category) App::abort(404);
 		
+		$dbr_post_featured_section = null;
 		$params_template = $this->getListSection($dbr_category, $slug, $keyword, $page);
-		$params_template['dbl_slider_more'] = $this->getMoreSlider();
+		$params_template['dbl_slider_more'] = Helpers::viewMoreSlider();
+
+		if(empty($dbr_category->parent_id)){
+			$dbr_post_featured_section = PostFeatured::GetFeaturedPost(Helpers::TYPE_POST_SECTION_FEATURED, $dbr_category->id)->first();
+		}else{
+			$dbr_post_featured_section = PostFeatured::GetFeaturedPost(Helpers::TYPE_POST_SUBSECTION_FEATURED, $dbr_category->id)->first();
+		}
+
+		$params_template['dbr_post_featured_section'] = $dbr_post_featured_section;
+
+		if($slug == 'actualidad-fail-en-redes'){
+			$params_template['meter_likebox'] = array(300, 286);
+			return View::make('frontend.pages.section.section_fail_redes',$params_template);
+		}
 
 		if($params_template['is_parent_category']){
 			return View::make('frontend.pages.section.section',$params_template);
@@ -44,6 +58,7 @@ class FrontendSectionController extends BaseController {
 		}		
 
 		$params_template = $this->getListDirectoryPublications($dbr_directory,$data_segments, $page);
+		$params_template['dbl_slider_more'] = Helpers::viewMoreSlider();
 		$params_template['is_cerca_de_ti'] = $is_cerca_de_ti;
 		$params_template['is_alfabetico'] = $is_alfabetico;
 		$params_template['data_segments'] = $data_segments;
@@ -129,7 +144,7 @@ class FrontendSectionController extends BaseController {
 			}
 		}
 
-		$key = 'post_' . $dbr_category->slug . '_' . $keyword . '_' . $page;
+		$key = 'post_' . $dbr_category->slug . '_' . $keyword . '_' . $type_module . '_' . $page;
 
 		if (!Cache::has($key)) {
 			$dbl_post = Cache::remember($key, 120, function() use ($params, $paginate, $keyword, $slug) {
@@ -269,36 +284,6 @@ class FrontendSectionController extends BaseController {
 		return $params_template;
 	}
 
-	private function getMoreSlider($dbr_post = null){
-
-		$key = 'slider_more_section'. ($dbr_post ? $dbr_post->id : '');
-
-		if (!Cache::has($key)) {
-			$dbl_slider_more = Cache::remember($key, 240, function() use($dbr_post){
-				if(!empty($dbr_post->category_id)){
-					$params['category_id'] = $dbr_post->category_id;
-					$dbr_slider_more['related'] 	= Helpers::getMoreSlider(array('tags' => $dbr_post->tags));
-				}else{
-					$dbr_slider_more['more_read'] 		= Helpers::getMoreSlider(array('order_read' => true));
-				}
-		
-				$dbr_slider_more['more_commented'] 	= Helpers::getMoreSlider(array('order_commented' => true));
-				$dbr_slider_more['more_shared'] 	= Helpers::getMoreSlider(array('order_shared' => true));
-				$dbr_slider_more['has_gallery'] 	= Helpers::getMoreSlider(array('has_gallery' => true));
-				$dbr_slider_more['has_video'] 		= Helpers::getMoreSlider(array('has_video' => true));
-
-				return $dbr_slider_more;
-			});
-
-		}else{
-			$dbl_slider_more = Cache::get($key);
-		}
-
-
-		return $dbl_slider_more;
-
-	}
-
 	public function redirectTag($slug, $keyword = null){
 
 		$dbr_category = Category::getCategoryBySlug($slug)->where('parent_id')->first();
@@ -347,6 +332,7 @@ class FrontendSectionController extends BaseController {
 
 		$params_template['meter_likebox'] = array(300, 300);
 		$params_template['title_text_search'] = $text_search;
+		$params_template['dbl_slider_more'] = Helpers::viewMoreSlider();
 
 		return View::make('frontend.pages.search.search', $params_template);
 	}
@@ -382,7 +368,7 @@ class FrontendSectionController extends BaseController {
 
 		$params_template = $data_params;
 		$params_template['redirect'] = ($http_referer ? $http_referer : route('home')) ;
-		$params_template['dbl_slider_more'] = $this->getMoreSlider($data_params['dbr_post']);
+		$params_template['dbl_slider_more'] = Helpers::viewMoreSlider($data_params['dbr_post']);
 
 		return View::make('frontend.pages.section.post_view', $params_template);
 	}

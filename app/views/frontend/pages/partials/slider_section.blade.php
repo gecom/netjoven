@@ -33,7 +33,7 @@
             @endif
 
             @if ($dbl_slider_more['more_shared'])
-                 <div class="slider_item" data-title="{{Lang::get('messages.frontend.slider_more_title_related')}}" data-class="t3">
+                 <div class="slider_item" data-title="{{Lang::get('messages.frontend.slider_more_title_shared')}}" data-class="t3">
                     @foreach ($dbl_slider_more['more_shared'] as $dbr_more_shared)
                         @include('frontend.pages.partials.slider_section_item', array('dbr_slider_more' => $dbr_more_shared))
                     @endforeach

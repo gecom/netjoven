@@ -11,25 +11,25 @@ class Helpers {
 	const TYPE_POST_BLOGS      	= 'BLOGS';
 	const TYPE_POST_FAIL       	= 'FAIL';
 
-	const TYPE_BINGE_BAR = 'BAR';
-	const TYPE_BINGE_DISCOTECA = 'DISCOTECAS';
-	const TYPE_BINGE_LOUNGES = 'LOUNGE';
+	const TYPE_BINGE_BAR 		= 'BAR';
+	const TYPE_BINGE_DISCOTECA 	= 'DISCOTECAS';
+	const TYPE_BINGE_LOUNGES 	= 'LOUNGE';
 
-	const TYPE_VIDEO_YOUTUBE = 'Y';
-	const TYPE_VIDEO_DAILYMOTION = 'D';
+	const TYPE_VIDEO_YOUTUBE 		= 'Y';
+	const TYPE_VIDEO_DAILYMOTION 	= 'D';
 
-	const TYPE_POST_SUPER_FEATURED = 'S';
-	const TYPE_POST_SLIDER_FEATURED = 'SL';
-	const TYPE_POST_SECTION_FEATURED = 'SE';
-	const TYPE_POST_SUBSECTION_FEATURED = 'SSE';
-	const TYPE_VIDEO_FEATURED = 'V';
+	const TYPE_POST_SUPER_FEATURED 		= 'S';
+	const TYPE_POST_SLIDER_FEATURED 	= 'SL';
+	const TYPE_POST_SECTION_FEATURED 	= 'SE';
+	const TYPE_POST_SUBSECTION_FEATURED	= 'SSE';
+	const TYPE_VIDEO_FEATURED 			= 'V';
 
-	const TYPE_MODULE_ESTANDAR = 'E';
-	const TYPE_MODULE_MODULAR = 'M';
-	const TYPE_MODULE_LISTADO = 'L';
+	const TYPE_MODULE_ESTANDAR	= 'E';
+	const TYPE_MODULE_MODULAR 	= 'M';
+	const TYPE_MODULE_LISTADO	= 'L';
 
-	public static $prefix_table = 'njv_';
-	public static $extension = '.jpg';
+	public static $prefix_table	= 'njv_';
+	public static $extension 	= '.jpg';
 
 	public static $type_video = array(
 		self::TYPE_VIDEO_YOUTUBE => 'Yotube',
@@ -341,6 +341,37 @@ class Helpers {
 	public static function getTagByKeyword($keyword, $limit){
 		$dbl_tags = DB::select("SELECT tag FROM njv_tag WHERE tag LIKE '%".$keyword."%' LIMIT $limit");
 		return $dbl_tags;
+	}
+
+
+	public static function viewMoreSlider($dbr_post = null){
+
+		$key = 'slider_more_section'. ($dbr_post ? $dbr_post->id : '');
+
+		if (!Cache::has($key)) {
+			$dbl_slider_more = Cache::remember($key, 240, function() use($dbr_post){
+				if(!empty($dbr_post->category_id)){
+					$params['category_id'] = $dbr_post->category_id;
+					$dbr_slider_more['related'] 	= self::getMoreSlider(array('tags' => $dbr_post->tags));
+				}else{
+					$dbr_slider_more['more_read'] 		= self::getMoreSlider(array('order_read' => true));
+				}
+		
+				$dbr_slider_more['more_commented'] 	= self::getMoreSlider(array('order_commented' => true));
+				$dbr_slider_more['more_shared'] 	= self::getMoreSlider(array('order_shared' => true));
+				$dbr_slider_more['has_gallery'] 	= self::getMoreSlider(array('has_gallery' => true));
+				$dbr_slider_more['has_video'] 		= self::getMoreSlider(array('has_video' => true));
+
+				return $dbr_slider_more;
+			});
+
+		}else{
+			$dbl_slider_more = Cache::get($key);
+		}
+
+
+		return $dbl_slider_more;
+
 	}
 
 	public static function getTypeModule(){

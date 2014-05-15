@@ -17,13 +17,20 @@ class PostFeatured extends Eloquent {
 	}
 
 
-	public function scopeGetFeaturedPost($query, $type_featured)
+	public function scopeGetFeaturedPost($query, $type_featured, $category_id = null, $category_parent_id = null)
 	{
-		return $query
-				->where('expired_at','>=', DB::raw("NOW()"))
+		$query->where('expired_at','>=', DB::raw("NOW()"))
 				->where('post_at','<=', DB::raw("NOW()"))
 				->where('type', '=', $type_featured)
+				->with('Post')
 				->orderBy('id', 'desc');
+
+
+		if($category_id){
+				$query->where('category_id', '=', $category_id);
+		}
+
+		return $query;
 	}
 
 }
