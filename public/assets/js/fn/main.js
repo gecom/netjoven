@@ -1,6 +1,6 @@
 $(function(){
 
-	var $modal = $('#ajax-modal'), $view_options = $('#view_options'), 
+	var $modal = $('#ajax-modal'), $view_options = $('#view_options'),
 	$search_form = $('.input-search, .input_search'), url_search = $search_form.attr('action'),
 	color_select = null, $slider_more = $('#slider_more');
 
@@ -124,7 +124,7 @@ $(function(){
 		}else{
 			$modal.load('/iniciar_sesion', '', function(){
 				$modal.modal({ backdrop: 'static'});
-			});			
+			});
 		}
 	});
 
