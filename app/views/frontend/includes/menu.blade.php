@@ -12,7 +12,7 @@ $dbl_categories_home = Cache::get('dbl_categories_home');
         <li class="li_menu active custom_color_bg"><a href="{{ route('home') }}" >INICIO</a></li>
         @foreach ($dbl_categories_home as $key => $dbr_category_home)
             <li class="li_menu">
-                <a href="{{ route('frontend.section.list', array($dbr_category_home['slug'])) }}" role="button" class="dropdown-toggle" data-toggle="dropdown" >{{ mb_strtoupper($dbr_category_home['name']) }}</a>
+                <a href="{{ route('frontend.section.list', array($dbr_category_home['slug'])) }}" >{{ mb_strtoupper($dbr_category_home['name']) }}</a>
                 @if(isset($dbr_category_home['children_category']))
                     <div style="display:none" class="dropdown">
                         <ul>
@@ -55,7 +55,7 @@ $dbl_categories_home = Cache::get('dbl_categories_home');
                                                 @endif
                                             </a>
                                         </figure>
-                                        <div class="description">{{ $dbr_post_category->title}}</div>
+                                        <div class="description"><a href="{{ route('frontend.post.view', $data_url) }}">{{ $dbr_post_category->title}}</a></div>
                                     </div>
                                 @endforeach
                             </div>

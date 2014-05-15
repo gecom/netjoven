@@ -52,6 +52,7 @@ header .social ul li .gp:hover{background-position:-128px -555px}
 #main_nav .menu .li_menu .dropdown .videos_drop .video_item figure .play{background-image:url("/../assets/images/sprite.png");background-position:-71px -180px;background-repeat:no-repeat;width:38px;height:38px;display:block;position:absolute;-webkit-border-radius:19px;-moz-border-radius:19px;border-radius:19px;-webkit-box-shadow:1px 1px 4px 0 #6d6d6d;-moz-box-shadow:1px 1px 4px 0 #6d6d6d;box-shadow:1px 1px 4px 0 #6d6d6d;top:50%;left:50%;margin-top:-19px;margin-left:-19px;opacity:.8;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=80);transition:all .4s ease;}
 #main_nav .menu .li_menu .dropdown .videos_drop .video_item figure .play:hover{width:45px;height:45px;margin-top:-22.5px;margin-left:-22.5px;background-position:-67px -176px}
 #main_nav .menu .li_menu .dropdown .videos_drop .video_item .description{width:158px;line-height:1.3em}
+#main_nav .menu .li_menu .dropdown .videos_drop .video_item .description a{color: #6D6D6D !important}
 #main_nav .user_options{height:42px;border-bottom:1px solid #d8d8d8;background-color:#f1f1f1;margin:0;}
 #main_nav .user_options .view_options{text-align:left;margin:0 0 0 10px;font-size:0;}
 #main_nav .user_options .view_options li{display:inline-block;margin:0 13px 0 0;padding-top:6px;height:42px;vertical-align:top;font-size:1rem;}
