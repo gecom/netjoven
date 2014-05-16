@@ -1,6 +1,7 @@
 @extends('frontend.layouts.default')
 
 @section('css')
+    {{ HTML::style('assets/css/site/prettyPhoto.css')}}
 @stop
 
 @section('content')
@@ -25,11 +26,13 @@
                             <param name="allowFullScreen" value="true"></param>
                             <param name="allowscriptaccess" value="always"></param>
                             <embed src="http://www.youtube.com/v/{{$dbr_post->id_video}}&hl=es&fs=1&showinfo=0&rel=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="600" height="350" wmode="transparent"></embed>
-                        </object>
-                    </div>
-                    @else
-                        {{$dbr_post->content}}
+                            </object>
+                        </div>
                     @endif
+
+                    <a href="#">Abrir Galeria</a>
+
+                    {{$dbr_post->content}}
                 </div>
                 <div class="author">
                     <span class="custom_color_bg"></span>Samantha Cervantes / NetJoven
@@ -69,49 +72,6 @@
 
                 <section id="ads">
                     @include('frontend.pages.home.other_sections')
-                    <!--<article class="item">
-                        <div class="add_content">
-                            <figure>
-                                <img src="/assets/images/maq/add1.jpg" alt="">
-                            </figure>
-                            <div class="link">
-                                <a href="#">ver<span class="custom_color_bg">+</span></a>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="item">
-
-                        <div class="add_content">
-                            <figure>
-                                <img src="/assets/images/maq/add2.jpg" alt="">
-                            </figure>
-                            <div class="link">
-                                <a href="#">ver<span class="custom_color_bg">+</span></a>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="item">
-
-                        <div class="add_content">
-                            <figure>
-                                <img src="/assets/images/maq/add3.jpg" alt="">
-                            </figure>
-                            <div class="link">
-                                <a href="#">ver<span class="custom_color_bg">+</span></a>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="item">
-
-                        <div class="add_content">
-                            <figure>
-                                <img src="/assets/images/maq/add4.jpg" alt="">
-                            </figure>
-                            <div class="link">
-                                <a href="#">ver<span class="custom_color_bg">+</span></a>
-                            </div>
-                        </div>
-                    </article>-->
                 </section>
 
             </div>
@@ -120,4 +80,5 @@
 @stop
 
 @section('js')
+{{ HTML::script('assets/js/jquery.prettyPhoto.js'); }}
 @stop

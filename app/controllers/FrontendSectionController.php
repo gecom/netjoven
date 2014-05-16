@@ -7,7 +7,7 @@ class FrontendSectionController extends BaseController {
 		$dbr_category = Category::getCategoryBySlug($slug)->first();
 
 		if(!$dbr_category) App::abort(404);
-		
+
 		$dbr_post_featured_section = null;
 		$params_template = $this->getListSection($dbr_category, $slug, $keyword, $page);
 		$params_template['dbl_slider_more'] = Helpers::viewMoreSlider();
@@ -44,7 +44,7 @@ class FrontendSectionController extends BaseController {
 
 		$data_segments = array();
 		if(!empty($args)){
-			$data_segments = explode('/', $args);	
+			$data_segments = explode('/', $args);
 		}
 
 		$is_cerca_de_ti = false;
@@ -55,7 +55,7 @@ class FrontendSectionController extends BaseController {
 
 		if(isset($data_segments[0]) && $data_segments[0] == 'alfabetico'){
 			$is_alfabetico = true;
-		}		
+		}
 
 		$params_template = $this->getListDirectoryPublications($dbr_directory,$data_segments, $page);
 		$params_template['dbl_slider_more'] = Helpers::viewMoreSlider();
@@ -186,7 +186,7 @@ class FrontendSectionController extends BaseController {
 
 		$keyword = null;
 		if(isset($data_segments[0])){
-			$keyword = $data_segments[0];	
+			$keyword = $data_segments[0];
 		}
 
 		$key = 'directory_' . $dbr_directory->slug  . '_' . implode('_', $data_segments) . '_'.  $page;
@@ -196,7 +196,7 @@ class FrontendSectionController extends BaseController {
 
 				$params['status'] = array(Status::STATUS_ACTIVO);
 				$params['id'] = $dbr_directory->id;
-				
+
 				if(in_array(strtoupper($keyword), array(Helpers::TYPE_BINGE_BAR, Helpers::TYPE_BINGE_DISCOTECA, Helpers::TYPE_BINGE_LOUNGES))){
 					$params['type'] = strtoupper($keyword);
 				}
@@ -213,8 +213,8 @@ class FrontendSectionController extends BaseController {
 								$filter = 'A';
 							}else{
 								$filter = str_replace(':', '', $data_segments[2]);
-							}								
-							
+							}
+
 						}else{
 							if(isset($data_segments[1])){
 								if(in_array(strtoupper($data_segments[1]), array(Helpers::TYPE_BINGE_BAR, Helpers::TYPE_BINGE_DISCOTECA, Helpers::TYPE_BINGE_LOUNGES))){
@@ -223,15 +223,15 @@ class FrontendSectionController extends BaseController {
 									$pos = strpos($data_segments[1], ':');
 									if($pos === false){
 										$filter = 'A';
-									}else{										
+									}else{
 										$filter = str_replace(':', '', $data_segments[1]);
-									}								
+									}
 								}
 							}else{
 								$filter = 'A';
 							}
 						}
-						
+
 						$params['letter'] = $filter;
 						break;
 					case 'cerca-de-ti':
@@ -263,7 +263,7 @@ class FrontendSectionController extends BaseController {
 				}
 
 				$dbl_directory_publications = DirectoryPublication::getPublicationsByDirectoryId($params)
-									->paginate(5)							
+									->paginate(5)
 									->useCurrentRoute()
 									->pagesProximity(3);
 
@@ -280,7 +280,7 @@ class FrontendSectionController extends BaseController {
 		$params_template['dbr_directory'] = $dbr_directory;
 		$params_template['dbl_directory_publications'] = $dbl_directory_publications['list'];
 		$params_template['dbl_directory_publications_links'] = $dbl_directory_publications['links'];
-	
+
 		return $params_template;
 	}
 
@@ -291,7 +291,7 @@ class FrontendSectionController extends BaseController {
 			App::abort(404);
 		}
 
-		return Redirect::route('frontend.post.tags', array($keyword), 301);		
+		return Redirect::route('frontend.post.tags', array($keyword), 301);
 	}
 
 	public function searchPost($keyword = null){
@@ -349,11 +349,8 @@ class FrontendSectionController extends BaseController {
 
 		if (!Cache::has('dbl_post_view_' . $post->id)){
 
-			$dbr_post = Post::getPostById($post->id);
-			if(!$dbr_post->id_video){
-				$dbr_post->content = Helpers::bbcodes($dbr_post->content);
-			}
-
+			$dbr_post = Post::getPostById($post->id)->first();
+			$dbr_post->content = Helpers::bbcodes($dbr_post->content);
 			$data_tags = explode(',', $dbr_post->tags);
 
 			$params_template['meter_likebox'] = array(300, 300);
