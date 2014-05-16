@@ -58,6 +58,7 @@ class Post extends Eloquent {
 					'njv_category.name as category_name',
 					'njv_category.slug as category_slug',
 					'njv_post.type',
+					'njv_post.has_gallery',
 					'njv_post.id_video',
 					'njv_post.type_video',
 					'njv_post.title',
@@ -73,8 +74,7 @@ class Post extends Eloquent {
 				->leftJoin('njv_tag', 'njv_tag.id','=', 'njv_post_tag.tag_id')
 				->where('njv_post.id', '=', $post_id)
 				->where('njv_post.status', '=', Status::STATUS_PUBLICADO)
-				->groupBy('njv_post.id')
-				->first();
+				->groupBy('njv_post.id');
     }
 
 
@@ -145,9 +145,9 @@ class Post extends Eloquent {
 				->update(array('total_read' => DB::raw('total_read + 1')));
 	}
 
-	public function newQuery($excludeDeleted = true){
-	    return parent::newQuery()->addSelect('*',DB::raw('(SELECT parent_id FROM njv_category WHERE id = category_id) category_parent_id'));
-	}
+	//public function newQuery($excludeDeleted = true){
+	   // return parent::newQuery()->addSelect('*',DB::raw('(SELECT parent_id FROM njv_category WHERE id = category_id) category_parent_id'));
+	//}
 
 }
 

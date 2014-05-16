@@ -15,7 +15,7 @@
 					$image_featured = Helpers::getThumbnailYoutubeByIdVideo($dbr_post_view->id_video);
 				}else{
 					$dbr_image_featured = Gallery::getImageFeaturedByPostId($dbr_post_view->id)->first();
-					$image_featured = Helpers::getImage($dbr_image_featured->image, 'noticias');
+					$image_featured = Helpers::getImage(($dbr_image_featured ? $dbr_image_featured->image : null), 'noticias');
 				}
 			?>
 	        <a href="{{ route('frontend.post.view', $data_url) }}"><img src="{{$image_featured}}" alt="{{$dbr_post_view->title}}" /></a>
