@@ -1,7 +1,4 @@
-
 <?php 
-
-//$dbr_user_tool = Auth::user()->userTool()->first();
 
 if (!Cache::has('dbl_color_palette')){
     Cache::forever('dbl_color_palette', ColorPalette::all());
@@ -33,6 +30,14 @@ $dbl_color_palette = Cache::get('dbl_color_palette');
 			<a href="#" class="gp"><span></span></a>
 			<a href="#" class="tw"><span></span></a>
 			<a href="#" class="fb"><span></span></a>
+		</div>
+		<div class="col-md-12" style="padding: 5px 0;">
+			<a class="btn btn-default btn-sm custom_color_bg">
+				<span class="glyphicon glyphicon-edit"></span> Edita tu perfil
+			</a>
+			<a href="{{ route('frontend.login.close_session') }}" class="btn btn-default btn-sm custom_color_bg">
+				<span class="glyphicon glyphicon-remove-sign"></span> Cerrar Sesión
+			</a>
 		</div>
 	</div>	
 </div>

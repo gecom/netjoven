@@ -20,7 +20,11 @@ return array(
         'slider_more_title_has_video'       => 'Últimos videos',
         'slider_more_title_read'            => 'Lo + Leido',
         'slider_more_title_shared'          => 'Lo + Compartido',
-        'post_title_cartelera'              => 'Cartelera'
+        'post_title_cartelera'              => 'Cartelera',
+        'user_group_register_title'              => 'Registro de Usuario',
+        'user_form_register_title'              => 'Registrate',
+        'user_group_edit_title'              => 'Edita tu Perfil',
+        'user_form_edit_title'              => 'Editar'
 
     )
 

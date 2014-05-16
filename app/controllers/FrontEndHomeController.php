@@ -12,9 +12,7 @@ class FrontendHomeController extends BaseController {
 		$params_template['dbl_last_post_video_featured'] = PostFeatured::GetFeaturedPost(Helpers::TYPE_VIDEO_FEATURED)->limit(5)->get();
 		$params_template['dbr_post_cartelera'] = Post::getPostNews(array('type' => array(Helpers::TYPE_POST_CARTELERA), 'with_post_at' => true))->first();
 
-		if(Cookie::has('type_module')){
-			$type_module = Cookie::get('type_module');
-		}
+		$type_module = Helpers::getTypeModule();
 
 		$params_template = array_merge($params_template, $this->getPostByTypeModule($type_module));
 		$params_template['type_module'] = $type_module;

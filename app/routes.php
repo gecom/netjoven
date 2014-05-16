@@ -130,8 +130,11 @@ Route::get('/{slug_category}/{keyword?}', array('as' => 'frontend.post.redirect_
 Route::get('/iniciar_sesion', array('as' => 'frontend.login', 'uses' => 'UserController@login' ));
 Route::post('/iniciar_sesion', array('as' => 'frontend.login', 'uses' => 'UserController@signin' ));
 Route::get('/registrate.html', array('as' => 'frontend.user.register', 'uses' => 'UserController@userRegister' ));
+Route::post('/registrate.html', array('as' => 'frontend.user.save_register', 'uses' => 'UserController@saveUserProfile' ));
+Route::get('/edita_tu_perfil.html', array('as' => 'frontend.user.edit_perfil', 'uses' => 'UserController@editPerfilUser' ));
+
 Route::get('/iniciar_sesion_facebook', array('as' => 'frontend.login.facebook', 'uses' => 'UserController@loginWithFacebook' ));
-Route::get('/cerrar_sesion', 'UserController@logout');
+Route::get('/cerrar_sesion', array('as' => 'frontend.login.close_session', 'uses' => 'UserController@logout' ));
 
 Route::get('/cambiar_color', array('as' => 'frontend.user.tools.changecolor', 'uses' => 'FrontendUserToolsController@viewChangeColor' ));
 Route::post('/cambiar_color', array('as' => 'frontend.user.tools.savechangecolor', 'uses' => 'FrontendUserToolsController@saveChangeColor' ));

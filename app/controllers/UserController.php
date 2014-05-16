@@ -11,8 +11,64 @@ class UserController extends BaseController {
     }
 
     public function userRegister(){
+        if(Auth::check()){
+            return Redirect::route('frontend.user.edit_perfil');
+        }
+
         $params_template['meter_likebox'] = array(300, 286);
         return View::make('frontend.pages.user.user_register', $params_template);
+    }
+
+    public function editPerfilUser(){
+        if(!Auth::check()){
+            return Redirect::route('home');
+        }
+        
+        $dbr_user = Auth::user();
+
+        $params_template['meter_likebox'] = array(300, 286);
+        $params_template['dbr_user'] = ($dbr_user ? $dbr_user : null);
+        $params_template['dbr_user_profile'] = ($dbr_user ? $dbr_user->userProfile()->first() : null);
+        return View::make('frontend.pages.user.user_register', $params_template);
+    }
+
+
+    public function saveUserProfile(){
+
+        $params_form = Input::all();
+        $rules = array(
+            'first_name'=>'required|alpha|min:2',
+            'last_name'=>'required|alpha|min:2',
+            'email'=>'required|email|unique:njv_user',
+            'password'=>'required|alpha_num|between:6,12',
+            'day'=>'required',
+            'month'=>'required',
+            'year'=>'required',
+            'gender'=>'required',
+        );
+        $params_form = $params_form['frm_user'];
+
+        $validation = Validator::make($params_form, $rules);
+        if ($validation->fails()) {
+            return Redirect::route('frontend.user.register')->with('message', 'The following errors occurred')->withErrors($validation)->withInput();
+        }
+
+        $dbr_user = new User();
+        $dbr_user->user = uniqid();
+        $dbr_user->email = $params_form['email'];
+        $dbr_user->password = Hash::make($params_form['password']);
+        $dbr_user->save();
+
+        $dbr_user_profile = new UserProfile();
+        $dbr_user_profile->first_name = $params_form['first_name'];
+        $dbr_user_profile->last_name = $params_form['last_name'];
+        $dbr_user_profile->gender = $params_form['gender'];
+        $dbr_user_profile->birthday = $params_form['year'].'-'.$params_form['month'].'-'.$params_form['day'];
+
+        $dbr_user->userProfile()->save($dbr_user_profile);
+
+        return Redirect::route('home');
+
     }
 
     public function loginWithFacebook() {
