@@ -679,7 +679,7 @@ footer{display:none}
 #banner{display:none}
 .v_news{width:768px;margin:0 auto 14px;background-color:#e2e2e2;padding-top:0;}
 .v_news .paginate{display:none}
-#topics_day .option_news{display:none}
+#topics_day{width: 768px;}
 .v_news .title_news{text-align:left;width:690px;margin:0 auto;background-color:#fff;padding:10px 10px 0;height:60px}
 .v_news .list_articles{width:690px;margin:0 auto;background-color:#fff;text-align:center;}
 .v_news .list_articles article:nth-child(3n+1){margin-left:20px}
@@ -896,4 +896,5 @@ footer{display:none}
 #horoscopo_resultados .left_horoscopo .mas_visto .list .item{float:left;}
 #horoscopo_resultados .left_horoscopo .mas_visto .list .item:nth-child(even){border-left:1px solid #d9d9d9;background:none}
 #horoscopo_resultados .left_horoscopo .mas_visto .list .item.bg_class{background-color:#f1f1f1}
+#topics_day{width: 320px;}
 }
