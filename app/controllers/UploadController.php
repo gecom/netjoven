@@ -54,7 +54,13 @@ class UploadController extends BaseController{
                 }
                 break;
             case 'noticias':
-                $data_size = Helpers::$size_images['content'];
+                $is_fail_redes = Input::get('is_fail_redes', false);
+                if($is_fail_redes == true){
+                    $data_size = Helpers::$size_images['fail_redes'];
+                }else{
+                    $data_size = Helpers::$size_images['content'];
+                }
+
                 $with_thumb = true;
                 break;
             case 'category':

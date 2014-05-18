@@ -62,7 +62,6 @@ class AdminThemeDayController extends BaseController {
 				}
 
 				if($dbr_theme_day->save()){
-					$dbr_theme_day->sections = $data_frm_theme_day['sections'];
 					$response['success'] = true;
 					$response['message'] =  'Nota registrada satisfactorimente';
 					$response['redirect'] =  route('backend.theme_day.list');

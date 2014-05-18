@@ -14,10 +14,12 @@ $(function(){
 			var message = '';
 			if(response.success == true){
 				message = response.message;
+				setTimeout(function(){
+					if(response.redirect){
+						window.location.href = response.redirect;
+					}
+				}, 2000);
 
-				if(response.redirect){
-					window.location.href = response.redirect;
-				}
 			}else{
 				is_error = true;
 				var arr = response.errors;

@@ -6,6 +6,8 @@
 
 @section('css')
     {{ HTML::style('assets/css/backend/jquery.fileupload.css')}}
+    {{ HTML::style('assets/css/plugins/tagsinput/bootstrap-tagsinput.css')}}
+    {{ HTML::style('assets/css/plugins/tagsinput/typeahead.css')}}
 @stop
 
 @section('content')
@@ -58,6 +60,12 @@
                             {{ Form::label('frm_category_name', 'Titulo') }}
                             {{ Form::text('frm_category[name]', (!empty($dbr_category) && $is_new == 0 ? $dbr_category->name: null ), array('id' => 'frm_category_name', 'placeholder' => 'Ingrese un titulo', 'class' => 'form-control')) }}
                         </div>
+                        @if (($is_new == 1 && !isset($dbr_category)) || ($is_new == 0 && is_null($dbr_category->parent_id)))
+                            <div class="form-group">
+                                {{ Form::label('frm_category_keyword', 'Tags') }}
+                                {{ Form::text('frm_category[keyword]', (!empty($dbr_category) && $is_new == 0 ? $dbr_category->keyword: null ), array('id' => 'frm_category_keyword', 'placeholder' => 'Ingrese Tags', 'class' => 'form-control')) }}
+                            </div>
+                        @endif
                         <div class="form-group">
                             <div class="checkbox">
                                 <label>
@@ -125,6 +133,8 @@
     {{ HTML::script('assets/js/jquery_file_upload/jquery.fileupload.js'); }}
     {{ HTML::script('assets/js/jquery_file_upload/jquery.fileupload-process.js'); }}
     {{ HTML::script('assets/js/jquery_file_upload/jquery.fileupload-validate.js'); }}
+    {{ HTML::script('assets/js/typeahead/typeahead.js'); }}
+    {{ HTML::script('assets/js/tagsinput/bootstrap-tagsinput.js'); }}
     {{ HTML::script('assets/js/underscore.js'); }}
     {{ HTML::script('assets/js/backend/category.js'); }}
 @stop

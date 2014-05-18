@@ -95,21 +95,53 @@ class AdminNewsController extends BaseController {
             $params['is_new'] = $is_new = true;
         }
 
-    	$params['dbl_parent_categories'] = Category::getParentCategories()->get();
-        $params['data_type_video'] = Helpers::$type_video;
+        $params = array();
+        $dbr_category = null;
+        $type_post = strtoupper($type_post);
 
-        if(!$is_new){
-            $params['dbr_post_category'] = $dbr_post_category = $post->category()->first();
-            $params['dbl_categories'] = Category::getChildrenCategoryByParentId($dbr_post_category->parent_id)->get();
-            $params['dbl_galleries'] = $post->galleries()->get();
-            $params['tags'] = implode(',', Helpers::getTagsByPost($post));
+        switch ($type_post) {
+            case Helpers::TYPE_POST_VIDEO:
+                $params['id'] = 34;
+                break;
+            case Helpers::TYPE_POST_HOROSCOPO:
+                $dbr_category = Category::find(24);
+                break;
+            case Helpers::TYPE_POST_FAIL:
+                $dbr_category = Category::find(2);
+                break;
+            case Helpers::TYPE_POST_CARTELERA:
+                $dbr_category = Category::find(42);
+                break;
+            case Helpers::TYPE_POST_PARANORMAL:
+                $dbr_category = Category::find(35);
+                break;
+            case Helpers::TYPE_POST_JUEGOS:
+                $dbr_category = Category::find(30);
+                break;
+            case Helpers::TYPE_POST_BLOGS:
+                $dbr_category = Category::find(40);
+                break;
+            case Helpers::TYPE_POST_NEWS:
+                $params['category_not_id'] = array(2,24,30,34,35,40,42);
+                break;
         }
 
-        $params['is_new'] = $is_new;
-        $params['dbr_post'] = $post;
-        $params['type_post'] = $type_post;
+        $params_template['data_type_video'] = Helpers::$type_video;
+        $params_template['dbr_category'] = $dbr_category;
+    	$params_template['dbl_parent_categories'] = (!$dbr_category ? Category::getParentCategories($params)->get() : null);
 
-    	return View::make('backend.pages.post', $params);
+        if(!$is_new){
+            $params_template['dbr_post_category'] = $dbr_post_category = $post->category()->first();
+            $params_template['dbl_categories'] = (!$dbr_category ? Category::getChildrenCategoryByParentId($dbr_post_category->parent_id)->get() : null);
+            $params_template['dbl_galleries'] = $post->galleries()->get();
+            $params_template['tags'] = implode(',', Helpers::getTagsByPost($post));
+        }
+
+        $params_template['is_new'] = $is_new;
+        $params_template['dbr_post'] = $post;
+        $params_template['type_post'] = $type_post;
+
+    	return View::make('backend.pages.post', $params_template);
     }
 
 
@@ -117,6 +149,7 @@ class AdminNewsController extends BaseController {
     {
 
         $data_frm_news = Input::get('frm_news');
+        $type_post = strtoupper($type_post);
 
         $is_new = false;
         if(!$post && $data_frm_news['is_new'] == true){
@@ -127,7 +160,6 @@ class AdminNewsController extends BaseController {
 
         $rules = array(
             'title'   => 'required|min:3',
-            'category'      => 'required|numeric',
             'subcategory'   => 'required|numeric',
             'summary'       => 'required',
             'keywords'       => 'required',
@@ -135,6 +167,10 @@ class AdminNewsController extends BaseController {
 
         if(!empty($data_frm_news['type_video'])){
             $rules['id_video'] = 'required';
+        }
+
+        if($type_post != Helpers::TYPE_POST_FAIL){
+            $rules['category']  = 'required|numeric';
         }
 
         $validator = Validator::make($data_frm_news, $rules);
@@ -149,20 +185,19 @@ class AdminNewsController extends BaseController {
                 }
             }else{
                 $post->title = $data_frm_news['title'];
+                $data_frm_news['post_at'] = Helpers::changeToMysql( $data_frm_news['post_at']);
+                $post->post_at     =   $data_frm_news['post_at'];
 
                 if($is_new == true){
                     $post->slug = $data_frm_news['title'];
                 }
 
-                if($is_new == true){
-                    if(!empty($data_frm_news['type_video']) && !empty($data_frm_news['id_video'])){
-                        $post->type = Helpers::TYPE_POST_VIDEO;
-                        $post->type_video =  $data_frm_news['type_video'];
-                        $post->id_video =  $data_frm_news['id_video'];
-                    }else{
-                        $post->type = Helpers::TYPE_POST_NEWS;
-                    }
+                if(!empty($data_frm_news['type_video']) && !empty($data_frm_news['id_video'])){
+                    $post->type_video =  $data_frm_news['type_video'];
+                    $post->id_video =  $data_frm_news['id_video'];
                 }
+
+                $post->type = $type_post;
 
                 if(isset($data_frm_news['twitter'])){
                    $post->twitter = $data_frm_news['twitter'];
@@ -184,7 +219,10 @@ class AdminNewsController extends BaseController {
                     $post->display = $data_frm_news['display'];
                 }
 
-                $post->content = Helpers::prepareContent($data_frm_news['description']);
+                if(isset($data_frm_news['description'])){
+                    $post->content = Helpers::prepareContent($data_frm_news['description']);
+                }
+
                 $post->summary = $data_frm_news['summary'];
                 $post->category_id = $data_frm_news['subcategory'];
                 $data_image_principal = !empty($data_frm_news['image_principal']) ? array(json_decode($data_frm_news['image_principal'], true)) : array();
@@ -197,7 +235,7 @@ class AdminNewsController extends BaseController {
                         $response['success'] = true;
                         $response['message'] =  'Nota registrada satisfactorimente';
                         if($is_new){
-                            $response['redirect'] =  route('backend.register.edit', array($post->id));
+                            $response['redirect'] =  route('backend.register.edit', array(strtolower($type_post), $post->id));
                         }
                     }else{
                         $response['success'] = false;
@@ -239,7 +277,7 @@ class AdminNewsController extends BaseController {
         }
 
         try {
-            $post->type = Helpers::TYPE_POST_GALLERY;
+            $post->has_gallery = 1;
             $post->save();
             $this->saveGalleryByPost($data_images, $post);
             $response['success'] = true;
@@ -296,8 +334,8 @@ class AdminNewsController extends BaseController {
 
         if(Request::ajax()){
             $category_id = Input::get('category_id');
-
-            $dbl_category = Category::getChildrenCategoryByParentId($category_id)->select('id', 'name')->get()->toArray();
+            $category_not_id = array(2,24,30,34,35,40,42);
+            $dbl_category = Category::getChildrenCategoryByParentId($category_id, $category_not_id)->select('id', 'name')->get()->toArray();
 
             return Response::json($dbl_category);
         }

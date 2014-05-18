@@ -37,7 +37,7 @@ class Category extends Eloquent {
 	public function scopeGetParentCategories($query, $params = array())
     {
 
-        $params_default = array('id' => null, 'is_menu' => false, );
+        $params_default = array('id' => null, 'is_menu' => false, 'category_not_id' => array() );
         $params = array_merge($params_default, $params);
 
         $query->where('parent_id')
@@ -52,6 +52,10 @@ class Category extends Eloquent {
             $query->where('is_menu', '=', 1);
         }
 
+        if(is_array($params['category_not_id']) && count($params['category_not_id'])){
+            $query->whereNotIn('id', $params['category_not_id']);
+        }
+
        return $query;
     }
 
@@ -60,9 +64,15 @@ class Category extends Eloquent {
                     ->where('parent_id');
     }
 
-    public function scopeGetChildrenCategoryByParentId($query, $parent_id){
-        return $query->where('status', '=', Status::STATUS_ACTIVO)
-                    ->where('parent_id','=', $parent_id);
+    public function scopeGetChildrenCategoryByParentId($query, $parent_id, $category_not_id = array()){
+        $query->where('status', '=', Status::STATUS_ACTIVO)
+                ->where('parent_id','=', $parent_id);
+
+        if(is_array($category_not_id) && count($category_not_id)){
+            $query->whereNotIn('id', $category_not_id);
+        }
+
+        return $query;
     }
 
     public function scopeGetParentCategoriesHome($query){

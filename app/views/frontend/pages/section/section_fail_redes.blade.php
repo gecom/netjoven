@@ -11,48 +11,24 @@
 			Facebook Fail <a href="#" class="show_form_upload" style="display:none">Sube tu fail</a>
 		</div>
 		<section class="fails">
-			<article class="fail_item">
-				<div class="fail_item_title custom_color_text">
-					Hembra que se Respeta
-				</div>
-				<figure>
-					<img src="images/maq/fail.jpg" alt="">
-				</figure>
-				<div class="thanks">
-					Gracias por tu publicación Harry Potter
-				</div>
-				<div class="sociales">
-					compartir, me gusta, twitter, google
-				</div>
-			</article>
-			<article class="fail_item">
-				<div class="fail_item_title custom_color_text">
-					Hembra que se Respeta
-				</div>
-				<figure>
-					<img src="images/maq/fail.jpg" alt="">
-				</figure>
-				<div class="thanks">
-					Gracias por tu publicación Harry Potter
-				</div>
-				<div class="sociales">
-					compartir, me gusta, twitter, google
-				</div>
-			</article>
-			<article class="fail_item">
-				<div class="fail_item_title custom_color_text">
-					Hembra que se Respeta
-				</div>
-				<figure>
-					<img src="images/maq/fail.jpg" alt="">
-				</figure>
-				<div class="thanks">
-					Gracias por tu publicación Harry Potter
-				</div>
-				<div class="sociales">
-					compartir, me gusta, twitter, google
-				</div>
-			</article>
+			@foreach ($dbl_post_view as $dbr_post_view)
+				<article class="fail_item">
+					<div class="fail_item_title custom_color_text">{{$dbr_post_view->title}}</div>
+					<figure>
+						<?php
+						$dbr_image_featured = Gallery::getImageFeaturedByPostId($dbr_post_view->id)->first();
+						$image_featured = Helpers::getImage(($dbr_image_featured ? $dbr_image_featured->image : null), 'noticias');
+						?>
+						<img src="{{$image_featured}}" alt="{{$dbr_post_view->title}}" />
+					</figure>
+					<div class="thanks">
+						Gracias por tu publicación Harry Potter
+					</div>
+					<div class="sociales">
+						@include('frontend.pages.section.post_button_social', array('url' => URL::current() .'#'.$dbr_post_view->slug))
+					</div>
+				</article>
+			@endforeach
 		</section>
 	</div>
 
@@ -68,19 +44,11 @@
 
 		<section id="ads">
 			@include('frontend.pages.home.other_sections')
-		</section>		
-	</div>	
+		</section>
+	</div>
 
 	<div class="paginate_fail">
-		<ul>
-			<li class="active custom_color_bg" style="background-color: rgb(239, 133, 53);"><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
-			<li><a href="#">5</a></li>
-			<li>...</li>
-			<li><a href="#">&gt;&gt;</a></li>
-		</ul>
+		{{$dbl_post_links}}
 	</div>
 
 </div>

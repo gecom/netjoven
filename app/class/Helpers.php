@@ -32,7 +32,7 @@ class Helpers {
 	public static $extension 	= '.jpg';
 
 	public static $type_video = array(
-		self::TYPE_VIDEO_YOUTUBE => 'Yotube',
+		self::TYPE_VIDEO_YOUTUBE => 'Youtube',
 		self::TYPE_VIDEO_DAILYMOTION => 'Dailymotion'
 	);
 
@@ -86,9 +86,12 @@ class Helpers {
 				'subcategories'=> array(
 						array('name' => 'Noticias', 'url' => url('backend/publicaciones/' . mb_strtolower(self::TYPE_POST_NEWS))),
 						array('name' => 'Videos', 'url' => url('backend/publicaciones/' . mb_strtolower(self::TYPE_POST_VIDEO))),
-						array('name' => 'Fail en Redes', 'url' => '#'),
-						array('name' => 'Cartelera', 'url' => '#'),
-						array('name' => 'Blogs', 'url' => '#'),
+						array('name' => 'Fail en Redes', 'url' => url('backend/publicaciones/' . mb_strtolower(self::TYPE_POST_FAIL))),
+						array('name' => 'Juegos', 'url' => url('backend/publicaciones/' . mb_strtolower(self::TYPE_POST_JUEGOS))),
+						array('name' => 'Blogs', 'url' => url('backend/publicaciones/' . mb_strtolower(self::TYPE_POST_BLOGS))),
+						array('name' => 'Cartelera', 'url' => url('backend/publicaciones/' . mb_strtolower(self::TYPE_POST_CARTELERA))),
+						array('name' => 'Horoscopo', 'url' => url('backend/publicaciones/' . mb_strtolower(self::TYPE_POST_HOROSCOPO))),
+						array('name' => 'Paranormal', 'url' => url('backend/publicaciones/' . mb_strtolower(self::TYPE_POST_PARANORMAL))),
 						array('name' => 'Fotos', 'url' => '#')
 					)
 			),
@@ -113,6 +116,7 @@ class Helpers {
 			'featured_section_standar'	=> array('width' => 612, 'height' => 383),
 			'featured_section_module'	=> array('width' => 250, 'height' => 155),
 			'content' 					=> array('width' => 500, 'height' => 500),
+			'fail_redes' 				=> array('width' => 530, 'height' => 400),
 			'gallery' 					=> array('width' => 600, 'height' => 374),
 			'category' 					=> array('width' => 216, 'height' => 265),
 			'video_featured'			=> array('width' => 500, 'height' => 300),
@@ -297,9 +301,8 @@ class Helpers {
 		return $content;
 	}
 
-	public static function getTagIds($data_tags){
-
-		$data_tag_ids = array();
+	public static function getTagIds($data_tags, $is_return_ids = true){
+		$data_return_tags = array();
 		foreach ($data_tags as $tag) {
 			$tag = trim($tag);
 			$dbr_tag = Tag::where('slug',Str::slug($tag))->first();
@@ -311,12 +314,10 @@ class Helpers {
 				$dbr_tag->save();
 			}
 
-			$data_tag_ids[] = $dbr_tag->id;
-
+			$data_return_tags[] = ($is_return_ids ? $dbr_tag->id : $dbr_tag->tag);
 		}
 
-		return $data_tag_ids;
-
+		return $data_return_tags;
 	}
 
 	public static function getPostGalleryByPost($post, $where = array('is_principal', 1)){
@@ -356,7 +357,7 @@ class Helpers {
 				}else{
 					$dbr_slider_more['more_read'] 		= self::getMoreSlider(array('order_read' => true));
 				}
-		
+
 				$dbr_slider_more['more_commented'] 	= self::getMoreSlider(array('order_commented' => true));
 				$dbr_slider_more['more_shared'] 	= self::getMoreSlider(array('order_shared' => true));
 				$dbr_slider_more['has_gallery'] 	= self::getMoreSlider(array('has_gallery' => true));

@@ -101,6 +101,12 @@ class AdminCategoryController extends BaseController {
 				$dbr_category->is_menu = $data_frm_category['is_menu'];
 			}
 
+			if(isset($data_frm_category['keyword'])){
+				$data_keywords = Helpers::getTagIds(explode(',', $data_frm_category['keyword']), false);
+				$keywords = implode(',', $data_keywords);
+				$dbr_category->keyword = $keywords;
+			}
+
 			if(!empty($data_frm_category['image'])){
 				$dbr_category->image = $data_frm_category['image'];
 			}

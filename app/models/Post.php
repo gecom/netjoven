@@ -74,12 +74,13 @@ class Post extends Eloquent {
 				->leftJoin('njv_tag', 'njv_tag.id','=', 'njv_post_tag.tag_id')
 				->where('njv_post.id', '=', $post_id)
 				->where('njv_post.status', '=', Status::STATUS_PUBLICADO)
+				->where('njv_post.post_at', '<=', DB::raw("NOW()"))
 				->groupBy('njv_post.id');
     }
 
 
     public function scopeGetPostNews($query, $params = array()){
-		$params_default = array('id' => null,'type' => array(Helpers::TYPE_POST_NEWS, Helpers::TYPE_POST_VIDEO), 'display' => null,'with_post_at' => false ,'category_id' => null, 'show_not_featured' => false, 'view_index' => false,'show_limit' => false);
+		$params_default = array('id' => null,'type' => array(), 'display' => null,'with_post_at' => false ,'category_id' => null, 'show_not_featured' => false, 'view_index' => false,'show_limit' => false);
 		$params = array_merge($params_default, $params);
 
     	$query->select('njv_post.id',
@@ -106,7 +107,7 @@ class Post extends Eloquent {
 			$query->whereIn('njv_post.id', $params['id']);
 		}
 
-		if(is_array($params['type'])){
+		if(is_array($params['type']) && count($params['type'])){
 			$query->whereIn('njv_post.type', $params['type']);
 		}
 
@@ -145,9 +146,9 @@ class Post extends Eloquent {
 				->update(array('total_read' => DB::raw('total_read + 1')));
 	}
 
-	//public function newQuery($excludeDeleted = true){
-	   // return parent::newQuery()->addSelect('*',DB::raw('(SELECT parent_id FROM njv_category WHERE id = category_id) category_parent_id'));
-	//}
+	public function newQuery($excludeDeleted = true){
+	    return parent::newQuery()->addSelect('*',DB::raw('(SELECT parent_id FROM njv_category WHERE id = category_id) category_parent_id'));
+	}
 
 }
 

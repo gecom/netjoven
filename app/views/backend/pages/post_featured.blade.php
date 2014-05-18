@@ -33,7 +33,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                        @endif                        
+                        @endif
 
                         <div class="form-group">
                             {{ Form::label('frm_post_featured_title', 'Titulo') }}

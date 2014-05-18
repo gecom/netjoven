@@ -14,7 +14,7 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-lg-12">
-                	<a href="{{ route('backend.register.new')}}" class="btn btn-primary pull-right"><b>+</b> Agregar {{$title}}</a>
+                	<a href="{{ route('backend.register.new', array($type_post))}}" class="btn btn-primary pull-right"><b>+</b> Agregar {{$title}}</a>
                 </div>
                 <div class="show-grid col-lg-12">
 					<table class="table table-striped table-bordered table-hover dataTable no-footer">

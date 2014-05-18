@@ -66,4 +66,16 @@ $(function(){
 
 	});
 
+	var elt = $('#frm_category_keyword');
+
+    elt.tagsinput();
+    elt.tagsinput('input').typeahead({
+        name: 'user-search',
+	    remote: '/backend/autocompletar_tag?keyword=%QUERY',
+	    limit: 10 // limit to show only 10 results
+    }).bind('typeahead:selected', $.proxy(function (obj, datum) {
+        this.tagsinput('add', datum.value);
+        this.tagsinput('input').typeahead('setQuery', '');
+    }, elt));
+
 });

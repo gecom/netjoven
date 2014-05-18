@@ -9,18 +9,22 @@
 <div class="right_banner">
     <div class="slider">
         <ul class="bxslider">
-            @foreach($dbl_last_post_featured_slider as $dbr_post_featured_slider)
-                <?php 
-                    $dbr_post_first = $dbr_post_featured_slider->post()->first();
-                    $dbr_parent_category = Category::getParentCategoryById($dbr_post_first->category_parent_id)->first();
-                    $data_url = array($dbr_parent_category->slug, $dbr_post_first->id, $dbr_post_first->slug);
-                ?>
-                <li>
-                    <figure>
-                        <a href="{{ route('frontend.post.view', $data_url) }}"><img title="{{$dbr_post_featured_slider->title}}" src="{{ Helpers::getImage($dbr_post_featured_slider->image, 'featured')}}"></a>
-                    </figure>
-                </li>
-            @endforeach
+
+            @if (isset($dbl_last_post_featured_slider))
+                @foreach($dbl_last_post_featured_slider as $dbr_post_featured_slider)
+                    <?php
+                        $dbr_post_first = $dbr_post_featured_slider->post()->first();
+                        $dbr_parent_category = Category::getParentCategoryById($dbr_post_first->category_parent_id)->first();
+                        $data_url = array($dbr_parent_category->slug, $dbr_post_first->id, $dbr_post_first->slug);
+                    ?>
+                    <li>
+                        <figure>
+                            <a href="{{ route('frontend.post.view', $data_url) }}"><img title="{{$dbr_post_featured_slider->title}}" src="{{ Helpers::getImage($dbr_post_featured_slider->image, 'featured')}}"></a>
+                        </figure>
+                    </li>
+                @endforeach
+            @endif
+
         </ul>
     </div>
 </div>

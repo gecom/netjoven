@@ -25,6 +25,11 @@ class FrontendSectionController extends BaseController {
 			return View::make('frontend.pages.section.section_fail_redes',$params_template);
 		}
 
+		if($slug == 'estilo-de-vida-horoscopo'){
+			$params_template['meter_likebox'] = array(300, 500);
+			return View::make('frontend.pages.section.section_horoscopo',$params_template);
+		}
+
 		if($params_template['is_parent_category']){
 			return View::make('frontend.pages.section.section',$params_template);
 		}else{
@@ -121,26 +126,30 @@ class FrontendSectionController extends BaseController {
 				$total_post_v3 = 4;
 			}
 		}else{
-			if($type_module == Helpers::TYPE_MODULE_ESTANDAR){
-				$params_template['meter_likebox'] = array(300, 286);
-				$paginate = 6;
-				$total_post_v1 = 6;
-			}
+			if(!in_array($slug, array('actualidad-fail-en-redes', 'estilo-de-vida-horoscopo'))){
+				if($type_module == Helpers::TYPE_MODULE_ESTANDAR){
+					$params_template['meter_likebox'] = array(300, 286);
+					$paginate = 6;
+					$total_post_v1 = 6;
+				}
 
-			if($type_module == Helpers::TYPE_MODULE_MODULAR){
-				$params_template['meter_likebox'] = array(300, 286);
-				$paginate = 15;
-				$total_post_v1 = 6;
-				$total_post_v2 = 8;
-				$total_post_v3 = 1;
-			}
+				if($type_module == Helpers::TYPE_MODULE_MODULAR){
+					$params_template['meter_likebox'] = array(300, 286);
+					$paginate = 15;
+					$total_post_v1 = 6;
+					$total_post_v2 = 8;
+					$total_post_v3 = 1;
+				}
 
-			if($type_module == Helpers::TYPE_MODULE_LISTADO){
-				$params_template['meter_likebox'] = array(457, 261);
-				$paginate = 18;
-				$total_post_v1 = 6;
-				$total_post_v2 = 8;
-				$total_post_v3 = 4;
+				if($type_module == Helpers::TYPE_MODULE_LISTADO){
+					$params_template['meter_likebox'] = array(457, 261);
+					$paginate = 18;
+					$total_post_v1 = 6;
+					$total_post_v2 = 8;
+					$total_post_v3 = 4;
+				}
+			}else{
+				$paginate = 12;
 			}
 		}
 
@@ -148,6 +157,7 @@ class FrontendSectionController extends BaseController {
 
 		if (!Cache::has($key)) {
 			$dbl_post = Cache::remember($key, 120, function() use ($params, $paginate, $keyword, $slug) {
+
 				$dbl_post = Post::getPostNews($params)
 					->paginate($paginate)
 					->route('frontend.section.pagination', array($slug));
@@ -163,20 +173,26 @@ class FrontendSectionController extends BaseController {
 		$dbl_post_view2 = array();
 		$dbl_post_view3 = array();
 
-		foreach ($dbl_post['list'] as $dbr_post) {
-			if(count($dbl_post_view1) < $total_post_v1){
-				$dbl_post_view1[] = $dbr_post;
-			}elseif(count($dbl_post_view2) < $total_post_v2){
-				$dbl_post_view2[] = $dbr_post;
-			}else{
-				$dbl_post_view3[] = $dbr_post;
+		if($total_post_v1 || $total_post_v2 || $total_post_v3){
+			foreach ($dbl_post['list'] as $dbr_post) {
+				if(count($dbl_post_view1) < $total_post_v1){
+					$dbl_post_view1[] = $dbr_post;
+				}elseif(count($dbl_post_view2) < $total_post_v2){
+					$dbl_post_view2[] = $dbr_post;
+				}else{
+					$dbl_post_view3[] = $dbr_post;
+				}
 			}
+
+			$params_template['dbl_post_view1'] = $dbl_post_view1;
+			$params_template['dbl_post_view2'] = $dbl_post_view2;
+			$params_template['dbl_post_view3'] = $dbl_post_view3;
+
+		}else{
+			$params_template['dbl_post_view'] = $dbl_post['list'];
 		}
 
 		$params_template['dbl_post_links'] = $dbl_post['links'];
-		$params_template['dbl_post_view1'] = $dbl_post_view1;
-		$params_template['dbl_post_view2'] = $dbl_post_view2;
-		$params_template['dbl_post_view3'] = $dbl_post_view3;
 
 		return $params_template;
 	}
