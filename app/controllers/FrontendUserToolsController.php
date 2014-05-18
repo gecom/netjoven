@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class FrontendUserToolsController extends BaseController {
 
@@ -40,32 +40,38 @@ class FrontendUserToolsController extends BaseController {
 			return Response::json($response)->withCookie($cookie);
 		}
 
-		return Response::json($response);		
+		return Response::json($response);
 	}
 
 	public function saveChangeColor(){
+		$http_referer = Request::server('HTTP_REFERER');
+
 		if(Request::ajax()){
-			if(Auth::check()){				
+			if(Auth::check()){
 				try {
 					$dbr_user = Auth::user();
 					$dbr_color = ColorPalette::where('color','=', Input::get('color'))->first();
 
 					$response = array();
 					if(!$dbr_color){
-						throw new Exception("Error al guardar el color");						
+						throw new Exception("Error al guardar el color");
 					}
 
 					$params['color_palette_id'] = $dbr_color->id;
 					$this->saveUserTool($dbr_user->id, $params);
 					$response['success'] = true;
-					$response['message'] = 'Cambio de colores guardados satisfactoriamente';
+					$response['message'] = 'Tema actualizado satisfactoriamente';
+					$response['redirect'] = ($http_referer ? $http_referer : route('home')) ;
 				} catch (Exception $e) {
 					$response['success'] = false;
 					$response['message'] = $e->getMessage();
-				}				
+				}
+			}else{
+				$response['success'] = false;
+				$response['message'] = 'Inicie sesion para personlizar su tema';
 			}
 
-			return Response::json($response);			
+			return Response::json($response);
 		}
 
 	}
@@ -86,7 +92,7 @@ class FrontendUserToolsController extends BaseController {
 		if(isset($params['type_module'])){
 			$dbr_user_tool->type_module = $params['type_module'];
 		}
-		
+
 		$dbr_user_tool->save();
 	}
 

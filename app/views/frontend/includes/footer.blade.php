@@ -10,9 +10,9 @@
 </div>
 <div class="footer_social">
     <ul>
-        <li class="fb"><span class="d1">Hazte fan</span><a href="http://www.facebook.com/netjoven"></a><!--<br/><span class="d2">200613</span>--></li>
-        <li class="tw"><span class="d1">Síguenos es</span><a href="https://twitter.com/#!/netjoven"></a><!--<br/><span class="d2">200613</span>--></li>
-        <li class="gp"><span class="d1">Únete a</span><a href="#"></a><!--<br/><span class="d2">200613</span>--></li>
+        <li class="fb"><span class="d1">Hazte fan</span><a href="http://www.facebook.com/netjoven"></a></li>
+        <li class="tw"><span class="d1">Síguenos es</span><a href="https://twitter.com/#!/netjoven"></a></li>
+        <li class="gp"><span class="d1">Únete a</span><a href="#"></a></li>
     </ul>
 </div>
 <div class="footer_devices">
@@ -29,11 +29,11 @@ Fifa  /  Guardaespaldas,  /   Justin Bieber En Buenos Aires  /  Fifa  /  Guardae
 </div>
 <div class="sponsors">
     <ul>
-        <li ><a class="sp1" href="#"></a></li>
-        <li ><a class="sp2" href="#"></a></li>
-        <li ><a class="sp3" href="#"></a></li>
-        <li ><a class="sp4" href="#"></a></li>
-        <li ><a class="sp5" href="#"></a></li>
+        <li ><a class="sp1" href="http://www.divas.pe/"></a></li>
+        <li ><a class="sp2" href="http://www.netjoven.pe/"></a></li>
+        <li ><a class="sp3" href="http://iabperu.com/"></a></li>
+        <li ><a class="sp4" href="http://www.comscore.com/"></a></li>
+        <li ><a class="sp5" href="http://gecom.pe/"></a></li>
     </ul>
 </div>
 <div class="footer_rights">

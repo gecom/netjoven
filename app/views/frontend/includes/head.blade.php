@@ -10,7 +10,7 @@
 <!-- Mobile Specific Metas
 ================================================== -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<link href="favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="{{URL::asset('assets/ico/favicon.ico')}}" type="image/x-icon" rel="shortcut icon">
 
 <!-- CSS
 ================================================== -->

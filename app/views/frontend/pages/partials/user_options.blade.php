@@ -8,15 +8,16 @@
     <li data-type="{{Helpers::TYPE_MODULE_LISTADO}}" class="v3"><a class="{{$type_module == Helpers::TYPE_MODULE_LISTADO ? 'active custom_color_bg' : ''}}" href="#"></a></li>
     <li class="v4">
         @if (Auth::check())
-            <?php 
+            <?php
                 $dbr_user = Auth::user();
                 $dbr_user_profie = $dbr_user->userProfile()->first();
             ?>
-            <a>
+            <a href="{{ route('frontend.user.edit_perfil') }}">
                 <span>{{Lang::get('messages.frontend.welcome_user') . ' ' . $dbr_user_profie->first_name }}</span>
                 <figure class="icon_v4 custom_color_bg"><img src="assets/images/maq/user.jpg" alt=""></figure>
+                <span class="glyphicon glyphicon-info-sign"></span>
             </a>
-            <span class="label label-danger glyphicon glyphicon-info-sign">&nbsp;</span>
+
         @else
             <a id="login" href="{{route('frontend.login')}}">
                 <span>Iniciar Sesión</span><div class="icon_v4 custom_color_bg"></div>

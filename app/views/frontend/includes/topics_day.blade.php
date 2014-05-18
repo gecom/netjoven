@@ -12,7 +12,7 @@
         <ul class="option_news">
                 <li><strong class="custom_color_text"><span class="circle custom_color_bg"></span>Temas</strong></li>
             @foreach ($dbl_theme_day as $dbr_theme_day)
-                <li><span class="circle custom_color_bg"></span><a href="#">{{$dbr_theme_day->tag}}</a></li>
+                <li><span class="circle custom_color_bg"></span><a href="{{ route('frontend.post.tags', array($dbr_theme_day->slug)) }}">{{$dbr_theme_day->tag}}</a></li>
             @endforeach
         </ul>
     </div>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 if (!Cache::has('dbl_color_palette')){
     Cache::forever('dbl_color_palette', ColorPalette::all());
@@ -13,7 +13,7 @@ $dbl_color_palette = Cache::get('dbl_color_palette');
 		<div class="welcome">
 			<span class="t1">{{Lang::get('messages.frontend.user_tool_title')}}</span>
 		</div>
-		<div class="pick_color">			
+		<div class="pick_color">
 			<ul id="palette_color">
 				@foreach ($dbl_color_palette as $dbr_color_palette)
 					<li><a data-color="{{$dbr_color_palette->color}}" data-auth="{{ Auth::check() ? true : false}}" data-stylesheet="{{$dbr_color_palette->path}}" style="background-color: {{$dbr_color_palette->color}}"></a></li>
@@ -31,13 +31,14 @@ $dbl_color_palette = Cache::get('dbl_color_palette');
 			<a href="#" class="tw"><span></span></a>
 			<a href="#" class="fb"><span></span></a>
 		</div>
-		<div class="col-md-12" style="padding: 5px 0;">
-			<a class="btn btn-default btn-sm custom_color_bg">
-				<span class="glyphicon glyphicon-edit"></span> Edita tu perfil
-			</a>
-			<a href="{{ route('frontend.login.close_session') }}" class="btn btn-default btn-sm custom_color_bg">
-				<span class="glyphicon glyphicon-remove-sign"></span> Cerrar Sesión
-			</a>
+		<div class="col-md-12">
+			@if (Auth::check())
+				<a class="btn btn-sm custom_color_bg" href="{{ route('frontend.user.edit_perfil') }}"><span class="glyphicon glyphicon-edit"></span> Edita tu perfil</a>
+				<a href="{{ route('frontend.login.close_session') }}" class="btn btn-sm custom_color_bg"><span class="glyphicon glyphicon-remove-sign"></span> Cerrar Sesión</a>
+			@else
+				<a class="btn btn-sm custom_color_bg" href="{{ route('frontend.user.register') }}"><span class="glyphicon glyphicon-edit"></span> Registrate</a>
+			@endif
+
 		</div>
-	</div>	
+	</div>
 </div>
