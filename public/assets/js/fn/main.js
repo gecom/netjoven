@@ -94,7 +94,7 @@ $(function(){
 
 	});
 
-	$('#user_tools_color').on('click', function(e){
+	$('#user_tools_color, #options_menu_fixed_tools_color').on('click', function(e){
 		e.preventDefault();
 		var $this = $(this);
 
@@ -111,8 +111,6 @@ $(function(){
 		}, 1000);
 
 	});
-
-
 
 	$modal.on('click', '#palette_color a', function(e){
 		e.preventDefault();
@@ -158,7 +156,6 @@ $(function(){
 
 
 	});
-
 
 	$modal.on('submit', '#frm_popup_login, #frm_login', function(e){
 		e.preventDefault();
@@ -235,7 +232,6 @@ $(function(){
 	$(".options .show_menu").on('click', function(e){
 		e.preventDefault();
 		$('.menu_desktop').toggle();
-		console.log($('.show_menu').hasClass('active'));
 		if($('.show_menu').hasClass('active')){
 			$('.show_menu').removeClass('active');
 			$('.menu_desktop').removeClass('showing_menu').css('display','');
@@ -274,7 +270,17 @@ $(function(){
 		e.preventDefault();
 		$(this).parent().addClass('log_in');
 		$('.welcome .iniciar_sesion').show();
-	})
+	});
+
+	$(document).scroll(function() {
+		var scrolledHeight = $(document).scrollTop(), $main_nav = $("#main_nav");
+
+		if(scrolledHeight >= 95){
+			$main_nav.addClass("menu_fixed");
+		}else{
+			$main_nav.removeClass("menu_fixed");
+		}
+	});
 
 })
 

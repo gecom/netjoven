@@ -24,13 +24,19 @@ $dbl_categories_home = Cache::get('dbl_categories_home');
                         @foreach ($dbr_category_home['children_category'] as $key_children => $children_category)
                             <div class="videos_drop" id ="children_category_{{$children_category['id']}}" style="display:none">
                                 <?php
-                                    $dbl_post_category = Cache::remember('category_post_'.$children_category['id'], 120, function() use ($children_category) {
-                                        $params['view_index'] = 1;
-                                        $params['category_id'] = $children_category['id'];
-                                        $params['show_limit'] = array(4,0);
+                                    $key = 'category_post_'.$children_category['id'];
 
-                                        return Post::getPostNews($params)->get();
-                                    });
+                                    if (!Cache::has($key)) {
+                                        $dbl_post_category = Cache::remember($key, 240, function() use ($children_category) {
+                                            $params['view_index'] = 1;
+                                            $params['category_id'] = $children_category['id'];
+                                            $params['show_limit'] = array(4,0);
+
+                                            return Post::getPostNews($params)->get();
+                                        });
+                                    }else{
+                                        $dbl_post_category = Cache::get($key);
+                                    }
                                 ?>
                                 @foreach ($dbl_post_category as $dbr_post_category)
                                     <?php
@@ -80,7 +86,7 @@ $dbl_categories_home = Cache::get('dbl_categories_home');
                 <div class="bg_search"></div>
             </div>
         </li>
-        <li><a href="#" class="config"></a></li>
+        <li><a id="options_menu_fixed_tools_color" href="{{ route('frontend.user.tools.changecolor') }}" class="config"></a></li>
     </ul>
 </div>
 <div class="row user_options">

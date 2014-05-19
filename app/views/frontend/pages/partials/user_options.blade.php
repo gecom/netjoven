@@ -17,7 +17,6 @@
                 <figure class="icon_v4"><img src="assets/images/maq/user.jpg" alt=""></figure>
                 <span class="glyphicon glyphicon-info-sign"></span>
             </a>
-
         @else
             <a id="login" href="{{route('frontend.login')}}">
                 <span>Iniciar Sesión</span><div class="icon_v4 custom_color_bg"></div>
