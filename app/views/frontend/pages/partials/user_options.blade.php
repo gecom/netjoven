@@ -14,7 +14,7 @@
             ?>
             <a href="{{ route('frontend.user.edit_perfil') }}">
                 <span>{{Lang::get('messages.frontend.welcome_user') . ' ' . $dbr_user_profie->first_name }}</span>
-                <figure class="icon_v4 custom_color_bg"><img src="assets/images/maq/user.jpg" alt=""></figure>
+                <figure class="icon_v4"><img src="assets/images/maq/user.jpg" alt=""></figure>
                 <span class="glyphicon glyphicon-info-sign"></span>
             </a>
 

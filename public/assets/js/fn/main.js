@@ -160,7 +160,7 @@ $(function(){
 	});
 
 
-	$modal.on('submit', '#frm_login', function(e){
+	$modal.on('submit', '#frm_popup_login, #frm_login', function(e){
 		e.preventDefault();
 		var $this = $(this);
 
@@ -258,7 +258,7 @@ $(function(){
 		} else {
 			$(this).addClass('active')
 		}
-	})
+	});
 
 	$(".options .config").on('click', function(e){
 		e.preventDefault();
@@ -268,6 +268,12 @@ $(function(){
 		} else {
 			$(this).addClass('active')
 		}
+	});
+
+	$(".log_in_mobile").on('click', function(e){
+		e.preventDefault();
+		$(this).parent().addClass('log_in');
+		$('.welcome .iniciar_sesion').show();
 	})
 
 })

@@ -639,12 +639,13 @@ header .social,header .search{display:none}
 #main_nav .menu_responsive .options .showing_config .cerrar_sesion a{float:right;margin-right:10px;text-decoration:none;width:100%;background:none;font-size:1.2em;color:#cfcfcf}
 #main_nav .menu_responsive .options .showing_config .log_in_mobile{display:block !important;height:auto}
 #main_nav .menu_responsive .options .showing_config .welcome{font-size:1.3em;min-height:51px;height:auto;padding-top:4px;position:relative;padding-left:0;}
-#main_nav .menu_responsive .options .showing_config .welcome .bien{display:none}
+#main_nav .menu_responsive .options .showing_config .welcome .bien{display:block;padding-left: 6px;}
 #main_nav .menu_responsive .options .showing_config .welcome .user_icon{display:block}
 #main_nav .menu_responsive .options .showing_config .welcome a{background:none;color:#cfcfcf;width:100%}
 #main_nav .menu_responsive .options .showing_config .welcome span{display:block;position:absolute;height:40px;width:40px;background:url("/../assets/images/sprite.png") -96px -817px;right:8px;top:4px}
 #main_nav .menu_responsive .options .showing_config .welcome.log_in span{left:50%;margin-left:-20px}
-#main_nav .menu_responsive .options .showing_config .welcome.log_in .iniciar_sesion{text-align:center;}
+#main_nav .menu_responsive .options .showing_config .welcome.log_in .iniciar_sesion{text-align:center;padding-top: 55px;}
+#main_nav .menu_responsive .options .showing_config .welcome.log_in .iniciar_sesion form{padding: 0 20px;}
 #main_nav .menu_responsive .options .showing_config .welcome.log_in .iniciar_sesion .registrate{background:#333;float:left;width:320px;color:#fff;padding-bottom:10px;font-size:1.2em;width:100%;}
 #main_nav .menu_responsive .options .showing_config .welcome.log_in .iniciar_sesion .registrate .registrate_btn{display:initial;color:#fff;padding:4px 10px;width:auto;background:#ee8435;float:none;width:110px;font-size:.9em;text-decoration:none}
 #main_nav .menu_responsive .options .showing_config .welcome.log_in .registro_form{text-align:center;padding-top:33px;}

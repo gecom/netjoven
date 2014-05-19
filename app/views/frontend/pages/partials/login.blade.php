@@ -6,9 +6,9 @@
 			<span class="user_icon"></span>
 		</div>
 		<div class="iniciar_sesion">
-			{{ Form::open(array('role'=>'form', 'id' => 'frm_login', 'autocomplete' => 'off')) }}
-				<input type="text" id="email" name="email" class="login_input form-control" placeholder="Correo electronico" /><br>
-				<input type="password" id="password" name="password" class="login_input form-control" placeholder="Contraseña" /><br>
+			{{ Form::open(array('role'=>'form', 'id' => 'frm_popup_login', 'autocomplete' => 'off')) }}
+				<input type="text" name="email" class="login_input form-control" placeholder="Correo electronico" /><br>
+				<input type="password" name="password" class="login_input form-control" placeholder="Contraseña" /><br>
 				<div class="form-group">
 					<input type="submit" value="Entrar" class="btn_login" />
 				</div>
