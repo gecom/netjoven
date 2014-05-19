@@ -4,9 +4,9 @@
     </div>
     <div class="col-xs-6 ">
         <div class="search">
-                <input type="text" class="input-search" name="keyword" placeholder="BUSCAR..."/>
-                <input type="button" class="btn-search" value="">
-                <div class="bg_search"></div>
+            <input type="text" class="input-search" name="keyword" placeholder="BUSCAR..."/>
+            <input type="button" class="btn-search" value="" />
+            <div class="bg_search"></div>
         </div>
         <div class="social">
             <ul>
