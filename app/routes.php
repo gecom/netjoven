@@ -116,9 +116,12 @@ Route::get('/noticias/page/{page}', array('as' => 'frontend.post.more_news_pagin
 Route::any('/noticias/buscar/{keyword?}', array('as' => 'frontend.post.search', 'uses' => 'FrontendSectionController@searchPost' ));
 Route::any('/noticias/buscar/{keyword?}/{page}', array('as' => 'frontend.post.search.pagination', 'uses' => 'FrontendSectionController@searchPost' ));
 
-
+Route::get('/juerga/{directory_publication}/{slug}.html', array('as' => 'frontend.juerga.view', 'uses' => 'FrontendSectionController@viewDirectoryPublication' ));
 Route::get('/juerga/{args?}/{page?}', array('as' => 'frontend.juerga.list', 'uses' => 'FrontendSectionController@listDirectorate' ))->where('args', '(.*)');
+Route::get('/pichanga/{directory_publication}/{slug}.html', array('as' => 'frontend.pichanga.view', 'uses' => 'FrontendSectionController@viewDirectoryPublication' ));
 Route::get('/pichanga/{args?}/{page?}', array('as' => 'frontend.pichanga.list', 'uses' => 'FrontendSectionController@listDirectorate' ))->where('args', '(.*)');
+
+
 
 Route::get('{slug}', array('as' => 'frontend.section.list', 'uses' => 'FrontendSectionController@listSection' ));
 Route::get('{slug}/{page}', array('as' => 'frontend.section.pagination', 'uses' => 'FrontendSectionController@listSection' ));

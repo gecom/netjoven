@@ -89,12 +89,19 @@
 				</div>
 		@endif
 
-
 	</div>
 	@foreach ($dbl_directory_publications as $dbr_directory_publication)
 		<article>
-			<div class="media"><img src="images/maq/pich1.jpg"></div>
-			<div class="text"><a>"{{$dbr_directory_publication->title}}"</a><br/>{{$dbr_directory_publication->district_name}}</div>
+			<div class="media">
+				<?php 
+					$image_featured = Helpers::getImage($dbr_directory_publication->image, 'agenda');
+				?>
+				<img src="{{$image_featured}}" />
+			</div>
+			<div class="text">
+				<a href="{{ route('frontend.'.$dbr_directory->slug.'.view', array($dbr_directory_publication->id, $dbr_directory_publication->slug)) }}" >"{{$dbr_directory_publication->title}}"</a>
+				<br/>{{$dbr_directory_publication->district_name}}
+			</div>
 			<div class="opt">
 				<div class="opt1"></div>
 				<div class="opt2"></div>

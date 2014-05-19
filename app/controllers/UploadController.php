@@ -27,7 +27,7 @@ class UploadController extends BaseController{
                 }
 
                 if(Input::get('is_principal')){
-                    $data_size = Helpers::$size_images['video'];
+                    $data_size = Helpers::$size_images['directory'];
                 }
                 break;
             case 'featured':

@@ -219,6 +219,7 @@ class FrontendSectionController extends BaseController {
 
 				switch ($keyword) {
 					case 'alfabetico':
+						$filter = 'A';
 						if(isset($data_segments[1]) && isset($data_segments[2])){
 							if(in_array(strtoupper($data_segments[1]), array(Helpers::TYPE_BINGE_BAR, Helpers::TYPE_BINGE_DISCOTECA, Helpers::TYPE_BINGE_LOUNGES))){
 								$params['type'] = strtoupper($data_segments[1]);
@@ -384,6 +385,35 @@ class FrontendSectionController extends BaseController {
 		$params_template['dbl_slider_more'] = Helpers::viewMoreSlider($data_params['dbr_post']);
 
 		return View::make('frontend.pages.section.post_view', $params_template);
+	}
+
+	public function viewDirectoryPublication($directory_publication, $slug){
+
+		$slug_url_current = Request::segment(1);
+		$dbr_directory = Directorate::where('slug',  '=', $slug_url_current)->first();
+
+		if(!$dbr_directory || !$directory_publication || ($directory_publication->slug != $slug)){
+			App::abort(404);
+		}
+
+		$http_referer = Request::server('HTTP_REFERER');
+
+		if (!Cache::has('dbl_directory_publication_' . $directory_publication->id)){
+
+			$params['meter_likebox'] = array(300, 300);
+			$params['dbr_directory_publication'] = $directory_publication;
+			$params['dbr_directory'] = $dbr_directory;
+			$params['dbl_slider_more'] = Helpers::viewMoreSlider();
+
+			Cache::forever('dbl_directory_publication_' . $directory_publication->id, $params);
+		}
+
+		$data_params = Cache::get('dbl_directory_publication_' . $directory_publication->id);
+
+		$params_template = $data_params;
+		$params_template['redirect'] = ($http_referer ? $http_referer : route('home')) ;		
+
+		return View::make('frontend.pages.directorate.directory_view', $params_template);
 	}
 
 }

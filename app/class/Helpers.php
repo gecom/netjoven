@@ -121,7 +121,8 @@ class Helpers {
 			'category' 					=> array('width' => 216, 'height' => 265),
 			'video_featured'			=> array('width' => 500, 'height' => 300),
 			'view'						=> array('width' => 300, 'height' => 187),
-			'view_thumb' 				=> array('width' => 160, 'height' => 160)
+			'view_thumb' 				=> array('width' => 160, 'height' => 160),
+			'directory' 				=> array('width' => 194, 'height' => 120)
 	);
 
 	public static function uploadImage($file, $new_name = null ,$path = null, $data_size = array(), $generate_thumbnail = false,$max_size = array(2000, 1024)){
@@ -495,6 +496,18 @@ class Helpers {
 		}
 
 		return $query->get();
+	}
+
+	public static function getTags($category_id = null){
+
+		$dbl_category_tags = Category::where('parent_id')
+					->select(DB::raw('GROUP_CONCAT(keyword) as keywords'));
+
+		if($category_id){
+			$dbl_category_tags->where('id', '=', $category_id);
+		}
+
+		return $dbl_category_tags->first();
 	}
 
 }

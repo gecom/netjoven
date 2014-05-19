@@ -1,6 +1,6 @@
 $(function(){
 
-	var $search_keyword_directory = $('#keyword_directory');
+	var $search_keyword_directory = $('#keyword_directory'), $preview_map = $('#preview_map');
 
 	$('#cbo_district').on('change', function(){
 		window.location = $(this).val();
@@ -19,5 +19,26 @@ $(function(){
 			window.location = $this.attr('data-action') + '/' + keyword
 		}
 	});
+
+
+	if($preview_map.length){
+	
+		var options_map = {
+			marker : {
+				values:[{latLng:[$preview_map.data('latitude'), $preview_map.data('longitude')]}]
+			},
+			map : {
+				 options: { 
+					draggable: false,
+					scrollwheel: false,
+					disableDoubleClickZoom: true,
+					zoomControl: false,
+					zoom : 14 
+				 }
+			}
+		};
+
+		$preview_map.gmap3(options_map);
+	}
 
 });

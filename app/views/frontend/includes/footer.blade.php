@@ -24,8 +24,24 @@
     <span class="fd2"></span>
 </div>
 <div class="tags">
-    TAGS:   Mundial Brasil 2014  /  Brasil 2014  /   Horarios, Partidos  /  Programacion  /  Mundial  /  Copa Del Mundo  /  Mundial Brasil 2014  /  Brasil 2014  /  Fifa  /  Guardaespaldas, <br/>
-Fifa  /  Guardaespaldas,  /   Justin Bieber En Buenos Aires  /  Fifa  /  Guardaespaldas
+
+    <?php 
+
+        $tags = Helpers::getTags()->keywords;
+
+        $data_tags = explode(',', $tags);
+
+        //echo 
+
+
+       // $preview_default = preg_replace('/<code>(.*)<\/code>/is', "<code class=\"prettyprint\">$1</code>", $preview);
+
+
+        
+    ?>
+
+
+    TAGS: {{Helpers::getTags()->keywords}}
 </div>
 <div class="sponsors">
     <ul>
