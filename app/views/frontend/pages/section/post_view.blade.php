@@ -42,15 +42,8 @@
                 </div>
                 <div class="tags">
                      @if ($dbr_post->tags)
-                        <?php
-                            $data_tags = explode(',', $dbr_post->tags) ;
-                        ?>
-                        <span class="custom_color_text">Tags:</span>
-                        <ul>
-                            @foreach ($data_tags as $tag)
-                                <li><a href="{{ route('frontend.post.tags', array(Str::slug($tag))) }}">{{$tag}}</a></li>
-                            @endforeach
-                        </ul>
+                        <?php $tags = $dbr_post->tags; ?>
+                        <span class="custom_color_text">Tags:</span>{{Helpers::formatTags($tags)}}
                      @endif
                 </div>
                 <div class="action">
@@ -60,7 +53,6 @@
                     @include('frontend.pages.section.post_comment')
                 </div>
             </div>
-
             <div class="left_notes">
                 <div class="add">
                     <img src="/assets/images/maq/banner1.png" alt="">

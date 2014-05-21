@@ -498,16 +498,40 @@ class Helpers {
 		return $query->get();
 	}
 
-	public static function getTags($category_id = null){
+	public static function getTagsCategory($category_id = null){
 
-		$dbl_category_tags = Category::where('parent_id')
-					->select(DB::raw('GROUP_CONCAT(keyword) as keywords'));
+		$key = "dbl_tags_category" . $category_id;
 
-		if($category_id){
-			$dbl_category_tags->where('id', '=', $category_id);
+		if (!Cache::has($key)) {
+			$dbl_category_tags = Cache::remember($key, 180, function() use($category_id){
+				$dbl_category_tags = Category::where('parent_id')
+							->select(DB::raw('GROUP_CONCAT(keyword) as keywords'));
+
+				if($category_id){
+					$dbl_category_tags->where('id', '=', $category_id);
+				}
+
+				return $dbl_category_tags->first();
+			});
+
+		}else{
+			$dbl_category_tags = Cache::get($key);
 		}
 
-		return $dbl_category_tags->first();
+		return $dbl_category_tags;
+	}
+
+	public static function formatTags($tags){
+
+		$data_tags = explode(',', $tags);
+
+		$tags_html = array();
+		foreach ($data_tags as $tag) {
+			$tags_html[] = '<a href="' . route('frontend.post.tags', array(Str::slug($tag))) . '">' . ucwords($tag) . '</a>';
+		}
+
+		return implode(', ', $tags_html);
+
 	}
 
 }

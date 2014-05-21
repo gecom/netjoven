@@ -24,24 +24,8 @@
     <span class="fd2"></span>
 </div>
 <div class="tags">
-
-    <?php 
-
-        $tags = Helpers::getTags()->keywords;
-
-        $data_tags = explode(',', $tags);
-
-        //echo 
-
-
-       // $preview_default = preg_replace('/<code>(.*)<\/code>/is', "<code class=\"prettyprint\">$1</code>", $preview);
-
-
-        
-    ?>
-
-
-    TAGS: {{Helpers::getTags()->keywords}}
+    <?php $tags = Helpers::getTagsCategory()->keywords; ?>
+    TAGS: {{Helpers::formatTags($tags)}}
 </div>
 <div class="sponsors">
     <ul>
