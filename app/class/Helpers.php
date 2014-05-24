@@ -253,6 +253,37 @@ class Helpers {
 		return htmlspecialchars($v,ENT_QUOTES);
 	}
 
+	public static function getCountryData(){
+
+		$ip_num = sprintf("%u",ip2long(self::getClientIp()));
+		$dbr_country_data = DB::select("SELECT country_code,country_name FROM njv_ip2c WHERE ". $ip_num." BETWEEN begin_ip_num AND end_ip_num LIMIT 1 ");
+		return $dbr_country_data;
+	}
+
+
+	public static function getCountrycode(){
+
+		$dbr_country_data = self::getCountryData();
+
+		$country_code = null;
+		if(Cookie::has('country_code')){
+			$country_code = Cookie::get('country_code');	
+		}
+
+		if(!$country_code){
+			if(!$dbr_country_data){
+				$country_code = 'PE';
+			}else{
+				$country_code = $dbr_country_data->country_code;
+			}
+
+			$time_minutes_cookie = time() + 31536000;
+			Cookie::queue('country_code', $country_code, $time_minutes_cookie);
+		}
+
+		return $country_code;
+	}
+
 	public static function urlExists($url){
 		$ch = @curl_init($url);
 		@curl_setopt($ch, CURLOPT_HEADER, TRUE);
