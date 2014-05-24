@@ -1,7 +1,7 @@
 @extends('frontend.layouts.default')
 
 @section('css')
-    {{ HTML::style('assets/css/site/prettyPhoto.css')}}
+    {{ HTML::style('assets/css/bxslider/jquery.bxslider.css')}}
 @stop
 
 @section('content')
@@ -16,6 +16,17 @@
                         <div class="{{($dbr_post->has_gallery == 1 ? 'opt4' : 'opt2')}}"></div>
                         <div class="opt3">{{ Helpers::intervalDate($dbr_post->post_at, date('Y-m-d H:i:s'))}}</div>
                     </div>
+                    @if ($dbr_post->has_gallery)
+                        <div class="gallery">
+                            <?php $image_featured = Helpers::getImage($dbr_post_gallery->image, 'gallery');?>
+                            <figure>
+                                <img alt="" src="{{$image_featured}}">
+                            </figure>
+                            <a id="open_post_gallery" href="{{ route('frontend.post.gallery', array($dbr_post->id)) }}" class="btn btn-default btn-sm custom_color_bg">
+                                <span class="glyphicon glyphicon-list-alt"></span> Abrir Galería
+                            </a>
+                        </div>
+                    @endif
                 </div>
                 <div class="text_note">
                     @if ($dbr_post->id_video)
@@ -29,9 +40,6 @@
                             </object>
                         </div>
                     @endif
-
-                    <a href="#">Abrir Galeria</a>
-
                     {{$dbr_post->content}}
                 </div>
                 <div class="author">
@@ -72,5 +80,6 @@
 @stop
 
 @section('js')
-{{ HTML::script('assets/js/jquery.prettyPhoto.js'); }}
+    {{ HTML::script('assets/js/bxslider/jquery.bxslider.min.js'); }}
+    {{ HTML::script('assets/js/fn/post_view.js'); }}
 @stop

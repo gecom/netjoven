@@ -1,7 +1,7 @@
 <div class="video_title">Videos</div>
 <div class="right_banner">
     <div class="slider">
-        <ul class="bxslider">
+        <ul id="slider_featured_videos" class="bxslider">
             @foreach($dbl_last_post_video_featured as $dbr_last_post_video_featured)
                 <li>
                     <figure>

@@ -8,7 +8,7 @@
 </div>
 <div class="right_banner">
     <div class="slider">
-        <ul class="bxslider">
+        <ul id="slider_featured" class="bxslider">
 
             @if (isset($dbl_last_post_featured_slider))
                 @foreach($dbl_last_post_featured_slider as $dbr_post_featured_slider)

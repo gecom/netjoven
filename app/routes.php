@@ -126,7 +126,8 @@ Route::get('/pichanga/{args?}/{page?}', array('as' => 'frontend.pichanga.list', 
 Route::get('{slug}', array('as' => 'frontend.section.list', 'uses' => 'FrontendSectionController@listSection' ));
 Route::get('{slug}/{page}', array('as' => 'frontend.section.pagination', 'uses' => 'FrontendSectionController@listSection' ));
 Route::get('{slug_category}/{post}/{slug}.html', array('as' => 'frontend.post.view', 'uses' => 'FrontendSectionController@viewPost' ));
-Route::get('/tag/{keyword?}', array('as' => 'frontend.post.tags', 'uses' => 'FrontendSectionController@searchPost' ));
+Route::get('/tag/{keyword?}', array('as' => 'frontend.post.tags', 'uses' => 'FrontendSectionController@searchTag' ));
+Route::get('/tag/{keyword?}/{page}', array('as' => 'frontend.post.tags.pagination', 'uses' => 'FrontendSectionController@searchTag' ));
 Route::get('/{slug_category}/{keyword?}', array('as' => 'frontend.post.redirect_tags', 'uses' => 'FrontendSectionController@redirectTag' ));
 
 
@@ -143,3 +144,4 @@ Route::get('/cambiar_color', array('as' => 'frontend.user.tools.changecolor', 'u
 Route::post('/cambiar_color', array('as' => 'frontend.user.tools.savechangecolor', 'uses' => 'FrontendUserToolsController@saveChangeColor' ));
 Route::get('/cambiar_tipo_vista/{type_module}', array('as' => 'frontend.change_view', 'uses' => 'FrontendUserToolsController@changeTypeModule' ));
 Route::post('/cambiar_tipo_vista/{type_module}', array('as' => 'frontend.save.change_view', 'uses' => 'FrontendUserToolsController@saveTypeModule' ));
+Route::get('/galeria_imagenes/{post}', array('as' => 'frontend.post.gallery', 'uses' => 'FrontendSectionController@viewPostGallery' ));

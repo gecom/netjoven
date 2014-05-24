@@ -16,6 +16,7 @@ class Gallery extends Eloquent {
 				->where('is_principal','=', 1);
 	}
 
+
 }
 
 

@@ -60,7 +60,7 @@
 	</div>
 	<div class="paginate">
 		@if (!empty($dbl_post_search))
-			{{$dbl_post_search->links('frontend.pages.partials.paginator')}}
+			{{$dbl_post_search_links}}
 		@endif
 	</div>
 </div>

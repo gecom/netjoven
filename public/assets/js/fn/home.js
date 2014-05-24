@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-	$('.bxslider').bxSlider({
+	$('#slider_featured, #slider_featured_videos').bxSlider({
 		mode: 'fade',
 		captions: true,
 		auto : true,

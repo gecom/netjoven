@@ -343,6 +343,41 @@ class FrontendSectionController extends BaseController {
 
 		if(!empty($dbl_post_search)){
 			$params_template['dbl_post_search'] = $dbl_post_search;
+			$params_template['dbl_post_search_links'] = (string) $dbl_post_search->links('frontend.pages.partials.paginator');
+		}else{
+			$params_template['message'] = 'Su búsqueda no produjo ningún resultado';
+		}
+
+		$params_template['meter_likebox'] = array(300, 300);
+		$params_template['title_text_search'] = $text_search;
+		$params_template['dbl_slider_more'] = Helpers::viewMoreSlider();
+
+		return View::make('frontend.pages.search.search', $params_template);
+	}
+
+	public function searchTag($keyword = null, $page = 1){
+
+		if(empty($keyword)){
+			App::abort(404);
+		}
+
+		$text_search = Helpers::cleanStopWords($keyword);
+		$key = 'search_tag_e' . $keyword .'_'. $page;
+
+		if (!Cache::has($key)) {
+			$dbl_post_search = Cache::remember($key, 120, function() use ($text_search) {
+				$dbl_post_search = Search::getPostTags($text_search)->paginate(12)->route('frontend.post.tags.pagination', array($text_search));
+
+				return ['list' => $dbl_post_search->getItems(), 'links' => (string) $dbl_post_search->links('frontend.pages.partials.paginator')];
+			});
+
+		}else{
+			$dbl_post_search = Cache::get($key);
+		}
+
+		if(!empty($dbl_post_search)){
+			$params_template['dbl_post_search'] = $dbl_post_search['list'];
+			$params_template['dbl_post_search_links'] = $dbl_post_search['links'];
 		}else{
 			$params_template['message'] = 'Su búsqueda no produjo ningún resultado';
 		}
@@ -367,11 +402,13 @@ class FrontendSectionController extends BaseController {
 		if (!Cache::has('dbl_post_view_' . $post->id)){
 
 			$dbr_post = Post::getPostById($post->id)->first();
+			$dbr_post_gallery = ($dbr_post->has_gallery ? $dbr_post->galleries()->select('image', 'title')->where('is_gallery', '=', 1)->first() : null);
 			$dbr_post->content = Helpers::bbcodes($dbr_post->content);
 			$data_tags = explode(',', $dbr_post->tags);
 
 			$params_template['meter_likebox'] = array(300, 300);
 			$params_template['dbr_post'] = $dbr_post;
+			$params_template['dbr_post_gallery'] = $dbr_post_gallery;
 			$params_template['tags'] = $data_tags;
 
 			Cache::forever('dbl_post_view_' . $post->id, $params_template);
@@ -411,9 +448,34 @@ class FrontendSectionController extends BaseController {
 		$data_params = Cache::get('dbl_directory_publication_' . $directory_publication->id);
 
 		$params_template = $data_params;
-		$params_template['redirect'] = ($http_referer ? $http_referer : route('home')) ;		
+		$params_template['redirect'] = ($http_referer ? $http_referer : route('home')) ;
 
 		return View::make('frontend.pages.directorate.directory_view', $params_template);
+	}
+
+	public function viewPostGallery($post){
+		if(!$post){
+			App::abort(404);
+		}
+
+		$dbr_post = $post;
+		$key = 'dbr_post_gallery_' . $dbr_post->id;
+
+		if (!Cache::has($key)) {
+			$dbl_post_gallery = Cache::remember($key, 240, function() use ($dbr_post) {
+				return $dbr_post->galleries()
+					->select('image', 'title')
+					->where('is_gallery', '=', 1)->get();
+			});
+
+		}else{
+			$dbl_post_gallery = Cache::get($key);
+		}
+
+		if(Request::ajax()){
+			return View::make('frontend.pages.partials.post_gallery',array('dbl_post_gallery'=>$dbl_post_gallery))->render();
+		}
+
 	}
 
 }
