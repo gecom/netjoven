@@ -1,5 +1,5 @@
 
-CREATE  PROCEDURE `addPostSearch`(p_year INT)
+CREATE  PROCEDURE addPostSearch(p_year INT)
 BEGIN
 
 REPLACE INTO njv_search(id, category, tag, title, summary, content, created_at)
@@ -13,16 +13,16 @@ GROUP BY p.id;
 
 END;
 
-CREATE  PROCEDURE `explode`( pDelim VARCHAR(32), pStr TEXT)
-BEGIN                                
-  DROP TABLE IF EXISTS temp_explode;                                
-  CREATE TEMPORARY TABLE temp_explode (id INT AUTO_INCREMENT PRIMARY KEY NOT NULL, word VARCHAR(40));                                
-  SET @sql := CONCAT('INSERT INTO temp_explode (word) VALUES (', REPLACE(QUOTE(pStr), pDelim, '\'), (\''), ')');                                
-  PREPARE myStmt FROM @sql;                                
-  EXECUTE myStmt;                                
+CREATE  PROCEDURE explode( pDelim VARCHAR(32), pStr TEXT)
+BEGIN
+  DROP TABLE IF EXISTS temp_explode;
+  CREATE TEMPORARY TABLE temp_explode (id INT AUTO_INCREMENT PRIMARY KEY NOT NULL, word VARCHAR(40));
+  SET @sql := CONCAT('INSERT INTO temp_explode (word) VALUES (', REPLACE(QUOTE(pStr), pDelim, '\'), (\''), ')');
+  PREPARE myStmt FROM @sql;
+  EXECUTE myStmt;
 END;
 
-CREATE  PROCEDURE `migrateUser`()
+CREATE  PROCEDURE migrateUser()
 BEGIN
 	DECLARE done INT DEFAULT 0;
 	DECLARE a INT;
@@ -40,7 +40,7 @@ BEGIN
   CLOSE cr_user;
 END;
 
-CREATE  PROCEDURE `migrate_slug_news`(type_news varchar(50), p_year INT)
+CREATE  PROCEDURE migrate_slug_news(type_news varchar(50), p_year INT)
 BEGIN
 	DECLARE done INT DEFAULT 0;
 	DECLARE a TEXT;
@@ -51,14 +51,14 @@ BEGIN
 
   REPEAT
     FETCH cr_news INTO a;
-	
+
 		UPDATE njv_post SET slug = slugify(title) WHERE id = a;
   UNTIL done END REPEAT;
 
   CLOSE cr_news;
 END;
 
-CREATE  PROCEDURE `migrate_slug_news_by_type`(type_news varchar(50))
+CREATE  PROCEDURE migrate_slug_news_by_type(type_news varchar(50))
 BEGIN
 	DECLARE done INT DEFAULT 0;
 	DECLARE a TEXT;
@@ -69,7 +69,7 @@ BEGIN
 
   REPEAT
     FETCH cr_news INTO a;
-	
+
 		UPDATE njv_post SET slug = slugify(title) WHERE id = a;
   UNTIL done END REPEAT;
 
@@ -77,7 +77,7 @@ BEGIN
 
 END;
 
-CREATE  PROCEDURE `migrate_tags_by_type`(p_type varchar(60))
+CREATE  PROCEDURE migrate_tags_by_type(p_type varchar(60))
 BEGIN
 	DECLARE done INT DEFAULT 0;
 	DECLARE a TEXT;
@@ -90,7 +90,7 @@ BEGIN
     FETCH cr_tags INTO a;
 
 		CALL explode(',',a);
-	
+
 		REPLACE INTO njv_tag (tag, slug) SELECT word, slugify(word) FROM temp_explode;
   UNTIL done END REPEAT;
 
@@ -98,12 +98,12 @@ BEGIN
 
 END;
 
-CREATE  PROCEDURE `migrate_tags_news`(p_year int(4))
-BEGIN	
+CREATE  PROCEDURE migrate_tags_news(p_year int(4))
+BEGIN
  	DECLARE done INT DEFAULT 0;
 	DECLARE a INT;
 	DECLARE b TEXT;
-	DECLARE cr_tags_news CURSOR FOR select id, tags_old from njv_post WHERE YEAR(created_at) = p_year  AND tags_old <> '';	
+	DECLARE cr_tags_news CURSOR FOR select id, tags_old from njv_post WHERE YEAR(created_at) = p_year  AND tags_old <> '';
 	DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET done = 1;
 
 	OPEN cr_tags_news;
@@ -118,7 +118,7 @@ BEGIN
 
 END;
 
-CREATE  PROCEDURE `migrate_tags_publish`(p_year int(4))
+CREATE  PROCEDURE migrate_tags_publish(p_year int(4))
 BEGIN
  	DECLARE done INT DEFAULT 0;
 	DECLARE a TEXT;
@@ -129,7 +129,7 @@ BEGIN
 		REPEAT
 			FETCH cr_tags INTO a;
 			CALL explode(',',a);
-		
+
 			REPLACE INTO njv_tag (tag, slug) SELECT word, slugify(word) FROM temp_explode;
 		UNTIL done END REPEAT;
   CLOSE cr_tags;
@@ -139,7 +139,7 @@ END;
 --
 -- Funciones
 --
-CREATE  FUNCTION `fn_remove_accents`( textvalue varchar(20000) ) RETURNS varchar(20000)
+CREATE  FUNCTION fn_remove_accents( textvalue varchar(20000) ) RETURNS varchar(20000)
 begin
 
 set @textvalue = textvalue;
@@ -155,7 +155,7 @@ while @count > 0 do
 end while;
 
 -- SPECIAL CHARS
-set @special = '!@#$%¨&*()_+=§¹²³£¢¬"`´{[^~}]<,>.:;?/°ºª+*|\\''';
+set @special = '!@#$%¨&*()_+=§¹²³£¢¬"´{[^~}]<,>.:;?/°ºª+*|\\''';
 set @count = length(@special);
 while @count > 0 do
     set @textvalue = replace(@textvalue, substring(@special, @count, 1), '');
@@ -166,7 +166,7 @@ return @textvalue;
 
 end;
 
-CREATE  FUNCTION `slugify`(dirty_string varchar(200)) RETURNS varchar(200)
+CREATE  FUNCTION slugify(dirty_string varchar(200)) RETURNS varchar(200)
 BEGIN
     DECLARE x, y , z Int;
     Declare temp_string, allowed_chars, new_string VarChar(200);

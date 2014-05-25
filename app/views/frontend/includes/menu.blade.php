@@ -72,6 +72,9 @@ $dbl_categories_home = Cache::get('dbl_categories_home');
                 @endif
             </li>
         @endforeach
+        <li  class="opt_menu conecta_comparte"> Conectate y Comparte
+            <a class="tw" href="http://twitter.com/#!/netjoven"></a><a class="fb" href="http://www.facebook.com/netjoven"></a>
+        </li>
     </ul>
 
     <div class="menu_responsive" style="display:none">

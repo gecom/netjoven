@@ -76,7 +76,7 @@
 				<div class="form-group">
 					<div class="col-md-12">
 						<label for="frm_user_gender">Fecha de Nacimiento</label>
-					</div>				
+					</div>
 					<div class="col-md-2">
 						{{Form::selectRange('frm_user[day]', 1, 31, null, ['class' => 'form-control'])}}
 					</div>
@@ -114,7 +114,7 @@
 
 		<section id="ads">
 			@include('frontend.pages.home.other_sections')
-		</section>		
+		</section>
 	</div>
 
 </div>
