@@ -53,7 +53,7 @@ class Post extends Eloquent {
     public function scopeGetPostById($query, $post_id){
 
     	return $query->select('njv_post.id',
-					DB::raw("GROUP_CONCAT(njv_tag.tag) as tags"),
+					DB::raw("GROUP_CONCAT(njv_tag.tag) as tags_name"),
 					'njv_post.category_id',
 					'njv_category.name as category_name',
 					'njv_category.slug as category_slug',

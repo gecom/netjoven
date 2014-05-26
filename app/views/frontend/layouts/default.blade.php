@@ -8,6 +8,7 @@
         @include('frontend.includes.head')
     </head>
     <body>
+        {{ BannerHelper::getBanner(7)}}
         <div id="container" class="container">
             <header class="custom_color_bg">
                 @include('frontend.includes.header')
@@ -18,13 +19,14 @@
             <section id="topics_day">
                 @include('frontend.includes.topics_day')
             </section>
+            @include('frontend.pages.partials.banner_superior')
             @yield('content')
             <footer>
              @include('frontend.includes.footer')
             </footer>
 
             <div id="bottom_responsive">
-                <div class="paginate">
+                <!--<div class="paginate">
                     <ul>
                         <li><a href="#" class="custom_color_bg"></a></li>
                         <li><a href="#" class="custom_color_bg"></a></li>
@@ -32,7 +34,7 @@
                         <li><a href="#" class="custom_color_bg"></a></li>
                         <li><a href="#" class="custom_color_bg"></a></li>
                     </ul>
-                </div>
+                </div>-->
                 <div class="go_top">
                     <a href="#"></a>
                 </div>

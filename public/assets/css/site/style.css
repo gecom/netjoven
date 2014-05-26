@@ -148,7 +148,9 @@ header .social ul li .gp:hover{background-position:-128px -555px}
 .v_news .paginate ul li{display:inline-block;height:16px;-webkit-border-radius:8px;-moz-border-radius:8px;border-radius:8px;text-align:center;line-height:15px;font-size:1rem;margin-left:2px;}
 .v_news .paginate ul li a{font-size:.9em;display:inline-block;color:#6d6d6d;line-height:auto;padding-right:5px;padding-left:5px}
 .v_news .paginate ul li:hover a,.v_news .paginate ul .active a{color:#fff;text-decoration:none}
-#big_banner{width:960px;height:90px;margin:14px 0;display:block;background-color:#5d5d5d;text-align:center}
+.fullbanner{width:960px;min-height:0;margin:14px 0;display:block;background-color:#5d5d5d;text-align:center}
+.fullbanner iframe,.fullbanner object,.fullbanner embed {position: absolute;top: 0;left: 0;width: 100%;height: 100%;}
+.fullbanner img{width: 100%; height: 100%;}
 #videos{margin-bottom:14px;width:960px;background-color:#fff;padding:10px 10px 40px;border-bottom:1px solid #d8d8d8;border-top:1px solid #d8d8d8;font-size:0;}
 #videos .left_video{width:604px;display:inline-block;vertical-align:top;font-size:1rem;}
 #videos .left_video .video_animation .bxslider_video{margin-left:42px;}
@@ -727,8 +729,7 @@ footer{display:none}
 .v_news .list_mode article .opt{width:301px;text-align:left}
 .v_news .list_mode .adding{display:none}
 .v_news .no_title{padding-top:25px}
-#big_banner{width:690px;margin:0 auto 14px;background-color:#fff;padding-top:0;border-bottom:1px solid #d8d8d8;border-top:1px solid #d8d8d8;text-align:center;padding-top:20px;}
-#big_banner.fullbanner{margin-bottom:0}
+.fullbanner{width:690px;margin:0 auto 14px;margin-bottom:0;background-color:#fff;padding-top:0;border-bottom:1px solid #d8d8d8;border-top:1px solid #d8d8d8;text-align:center;padding-top:20px;}
 #videos{display:none}
 #ads{width:690px;text-align:center;margin:0 auto 14px;}
 #ads .item{width:140px}
@@ -842,8 +843,7 @@ footer{display:none}
 .v_news .list_articles{width:320px;}
 .v_news .list_articles article{margin:0 0 20px;}
 .v_news .list_articles article:nth-child(3n+1){margin-left:0}
-#big_banner{width:320px;padding-top:0;height:auto;}
-#big_banner img{width:100%}
+.fullbanner{width:320px;padding-top:0;height:auto;}
 #ads{width:320px;padding-bottom:20px;}
 #ads .item{margin-left:20px;margin-bottom:20px;}
 #ads .item:nth-child(odd){margin-left:0}

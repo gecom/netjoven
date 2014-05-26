@@ -1,336 +1,161 @@
 <?php
 
-class Banner{
-
-
+class BannerHelper{
 
 	const TYPE_BANNER_ALL 		= 'ALL';
 	const TYPE_BANNER_VIEW		= 'VIEW';
 
 	public static $type_video = array(
-		self::TYPE_BANNER_ALL => 'All',
+		self::TYPE_BANNER_ALL => 'Todos',
 		self::TYPE_BANNER_VIEW => 'Ver'
 	);
 
-	public static function getBanner($sector_id){
-
-		//$routes = Route::getCurrentRoute()->getParameter('keyword');  obtner paramtro
+	public static function getBanner($sector_id, $module = null, $do = false){
 		$current_route_action = Route::currentRouteAction();
 		$data_route_action = explode('@', $current_route_action);
-
-		if($data_route_action[0] == 'FrontendHomeController' && $data_route_action[1] == 'home'){
-			$module = '0';
-		}
-
 		$type = self::TYPE_BANNER_ALL;
 		$dbr_post = null;
+		$keyword = null;
 		$tags = null;
-		if($data_route_action[0] == 'FrontendSectionController' && $data_route_action[1] == 'viewPost'){
-			$type = self::TYPE_BANNER_VIEW;
-			$dbr_post = Route::getCurrentRoute()->getParameter('post');
-			$tags = $dbr_post->tags;
-		}
 
-		if($data_route_action[0] == 'FrontendSectionController' && $data_route_action[1] == 'listSection'){
-			$slug = Route::getCurrentRoute()->getParameter('slug');
-			$dbr_category = Category::getCategoryBySlug($slug)->first();
-			$module = $dbr_category->id;
-		}
-
-		if(($data_route_action[0] == 'FrontendSectionController' && $data_route_action[1] == 'searchPost') || $tags){ // esto se puede cambiar por el route de tags
-			$keyword = (!$tags ? Route::getCurrentRoute()->getParameter('keyword') : $tags);
-
-
-			
-		}
-		
-
-
-
-		$params['category_id'] = $module;
-		$params['sector_id'] = $sector_id;
-		$params['type'] = $type;
-
-		$dbr_banner_detail = BannerDeTail::getBannerDetail($params)->first();
-		
-	}
-
-
-
-function _banner($sector='all',$base='',$do=FALSE){
-	
-	$CI =& get_instance();
-	$obej = $CI->uri->segment(1);
-	
-	if( empty($base )){
-		if( empty($obej) ){
-			$base = 'index';
-			
-		}else{
-		  	$base = $CI->uri->segment(1);
-
-		}
-	}
-
-	if( is_numeric( $CI->uri->segment(2) ) ){
-		$method = 'ver';
-	}else{
-	  	$method = "all";
-	}
-	
-
-	if(isset($CI->m_noticias) and !$do){
-		
-		
-		
-		if(!empty( $CI->m_noticias->categoria )){
-			$base = links(strtolower($CI->m_noticias->categoria));
-			
-			switch( $base ){
-				
-				case 'tecnologia':
-				case 'apps':
-				case 'video-juego':
-					$base = 'tecnologia';
-				break;
+		if(!$do){
+			if($data_route_action[0] == 'FrontendHomeController' && $data_route_action[1] == 'home'){
+				$module = 1;
 			}
-		}else{
-			switch( $CI->uri->segment(1) ){
-				case 'espectaculos':
-					$base = 'internacionales';	
-				break;
-				case 'deportes':
-					$base = 'deportes-internacionales';
-				break;
-				case 'estilo_de_vida':
-					$base = 'estilo';
-				break;
-				case 'tecnologia':
-				case 'apps':
-				case 'video_juego':
-					$base = 'tecnologia';
-				break;
-				case 'redes_sociales':
-					$base = 'redes-sociales';
-				break;
+
+			if($data_route_action[0] == 'FrontendSectionController' && $data_route_action[1] == 'viewPost'){
+				$type = self::TYPE_BANNER_VIEW;
+				$dbr_post = Route::getCurrentRoute()->getParameter('post');
+
+				$data_tags = array();
+				$dbl_post_tags = Tag::getTagByPostId($dbr_post->id)->get();
+
+				foreach ($dbl_post_tags as $dbr_post_tag) {
+					$data_tags[] = $dbr_post_tag->tag;
+				}
+
+				$tags = implode(',', $data_tags);
+			}
+
+			if($data_route_action[0] == 'FrontendSectionController' &&  in_array($data_route_action[1], array('viewDirectoryPublication', 'listDirectorate'))){
+					
+				if($data_route_action[1] == 'viewDirectoryPublication'){
+					$type = self::TYPE_BANNER_VIEW;
+				}
+
+				$dbr_banner_nodule = BannerModule::where('slug', '=', Request::segment(1))->first();
+				$module = $dbr_banner_nodule->id;
+			}
+
+			if($data_route_action[0] == 'FrontendSectionController' && $data_route_action[1] == 'listSection'){
+				$slug = Route::getCurrentRoute()->getParameter('slug');
+				$dbr_banner_nodule = BannerModule::where('slug', '=', $slug)->first();
+				$module = $dbr_banner_nodule->id;
+			}
+
+			if(($data_route_action[0] == 'FrontendSectionController' && $data_route_action[1] == 'searchTag') || $tags){ // esto se puede cambiar por el route de tags
+				$tags = (!$tags ? Route::getCurrentRoute()->getParameter('keyword') : $tags);
+				$module = 2;			
 			}
 		}
-		if( ! empty ( $CI->m_noticias->tag ) ) {
-			
-				
-				$tag = $CI->m_noticias->tag;
-				$query_str = "SELECT idbanner,peso,pais,horainicio,horafin,UNIX_TIMESTAMP(inicio) as inicio,UNIX_TIMESTAMP(fin) as fin
-				FROM banners 
-				WHERE modulo = 'tags' and tipo = 'all' and sector='$sector' and activo='si' and tag = '$tag'";
-			
-				return load_banner(0, $query_str, $sector, $do);
-		}
-		if( ! empty ( $CI->m_noticias->tags ) ) {
-				
-				$tag = explode( ",", $CI->m_noticias->tags );
-				$tag = links( $tag[0]);
-				
-				$query_str = "SELECT idbanner,peso,pais,horainicio,horafin,UNIX_TIMESTAMP(inicio) as inicio,UNIX_TIMESTAMP(fin) as fin
-				FROM banners 
-				WHERE modulo = 'tags' and tipo = 'all' and sector='$sector' and activo='si' and MATCH (tag) AGAINST ('$tag' IN BOOLEAN MODE)";
-				
-				$query = $CI->db->query($query_str);
-				
-				if($query->num_rows > 0 ){
-					
-					return load_banner(0, $query_str, $sector, $do);
-				}
-				
-			
-		}
-	}
-	
-	$query_str = "SELECT idbanner,peso,pais,horainicio,horafin,UNIX_TIMESTAMP(inicio) as inicio,UNIX_TIMESTAMP(fin) as fin
-	FROM banners 
-	WHERE modulo = '$base' and tipo = '$method' and sector='$sector' and activo='si'";
-	
-	
-	return load_banner(0, $query_str, $sector, $do);
-}
-
-function _banner_by_id($idBanner, $sector='all', $base='', $do=FALSE){
-	$CI =& get_instance();
-	$obej = $CI->uri->segment(1);
-	
-	if($obej == 'adminnet' or $obej == 'addnoticia' or $obej == 'ingresar'){
-		return;
-	}
-	
-	if(empty($base)){
-		if( empty($obej) ){
-			$base = 'index';
-		}else{
-		  $base = $CI->uri->segment(1);
-		}
-	}
-
-	if(is_numeric($CI->uri->segment(2)) or $CI->uri->segment(2) == "jugar" or $CI->uri->segment(2) == "ver" ){
-		$method = 'ver';
-	}else if( $CI->uri->segment(2) == "genero" or $CI->uri->segment(2) == "categoria"){
-		$method = "categorias";
-	}else{
-	  $method = "all";
-	}
-	
-	if($base == 'all'){
-		$method = 'all';
-	}
-	
-	if($CI->uri->segment(1) == 'noticias' and $method == 'ver'){
 		
-		switch($CI->noticia->cat){
-			case 4:
-				$base = 'internacionales';
-				$method = 'all';
-				break;
-			case 23:
-				$base = 'deporinternacionales';
-				$method = 'all';
-				break;
-			case 22:
-				$base = 'depornacionales';
-				$method = 'all';
-				break;
-			case 15:
-				$base = 'cine';
-				$method = 'all';
-				break;
+		$params['module_id'] 	= $module;
+		$params['sector_id'] 	= $sector_id;
+		$params['type'] 		= $type;
+
+		if($tags){
+			$params['tags']		= $tags;
 		}
+
+
+
+		return self::loadBanner($params, $do);		
 	}
 
-	$query_str = "SELECT id,idbanner,peso,pais,horainicio,horafin,UNIX_TIMESTAMP(inicio) as inicio,UNIX_TIMESTAMP(fin) as fin
-	FROM banners ";
-	//WHERE id= '$idBanner' and tipo = '$method' and sector='$sector' and activo='si'";
-	$query_str .= "WHERE (modulo = '$base' or idBanner='$idBanner') and tipo = '$method' and sector='$sector' and activo='si'";
-	
-	return load_banner($idBanner, $query_str, $sector, $do);
-}
+	private static function loadBanner($params, $do){
+		$dbl_banner_detail = BannerDeTail::getBannerDetail($params)->get();
 
-function _load_banner($idBanner, $query_str, $sector, $do=FALSE){
-	$CI =& get_instance();
-
-	$query = $CI->db->query($query_str);
-	
-	if($query->num_rows() == 0){
-		if($do){
-			return;
-		}else{
-			return banner($sector,'all',true);
-		}
-	}
-	
-	
-	$bPais = '';
-	$b ='';
-	$bFP = '';
-	$bF = '';
-	$i = 0;
-	$y = 0;
-	$today = strtotime(date('Y-m-d'), time());
-	$hora = date("G");
-	
-	foreach ($query->result_array() as $row){
-		
-		if(!empty($row['inicio']) and ($row['inicio'] <= $today and $row['fin'] >= $today) ){
-			
-			if($row['horainicio'] <= $hora and $row['horafin'] >= $hora ){
-			   	
-				if( strtolower($CI->m_login->countryName) == strtolower($row['pais']) ){
-					
-					$bFP['id'][] = $row['idbanner'];
-					$bFP['peso'][] = $row['peso'];
-				}else{
-				    if(empty($row['pais'])){
-				    	$bF['id'][] = $row['idbanner'];
-					    $bF['peso'][] = $row['peso'];
-				    }
-				}
-				continue;
+		if(!$dbl_banner_detail){
+			if($do){
+				return;
 			}else{
-				$existh = TRUE;
-				continue;
-			}
-		}else{
-			if(!empty($row['inicio'])) continue;
-		}
-		
-		if( strtolower($CI->m_login->countryName) == strtolower($row['pais']) ){
-			
-			$bFP['id'][] = $row['idbanner'];
-			$bFP['peso'][] = $row['peso'];
-			$i++;
-		}else{
-			if(empty($row['pais'])){
-				$bF['id'][] = $row['idbanner'];
-				$bF['peso'][] = $row['peso'];
-				$y++;
+				return self::getBanner($params['sector_id'], 3, true);
 			}
 		}
-	}
-	
-	//en caso sea 1
-	if($idBanner != 0){
-			return obtenerbanner($idBanner);
-	}
-	if(is_array($bFP) and count($bFP) >= 1){
-		 return obtenerbanner(bannerRandon($bFP['id'], $bFP['peso']));
-	}
-	if(is_array($bF) and count($bF) >= 1){
-		// return obtenerbanner(bannerRandon($bF['id'], $bF['peso']));
-	}
-	// en el caso que halla varios
-	if($i >= 1){
-		if($idBanner){
-			return obtenerbanner($idBanner);
-		}
-		return obtenerbanner(bannerRandon($bPais['id'], $bPais['peso']));
-	}else if($y >= 1){
-		 return obtenerbanner(bannerRandon($b['id'], $b['peso']));
-	}else{
-	 	if(!$do) return banner($sector,'all',true);
-	}
-}
 
-function _get_id_from_banner($banners, $idBanner){
-	foreach($banners as $banner => $guid){
-		if($guid == $idBanner){
-			return $guid;
-		}
-	}
-}
+		$bFP = array();
+		$bF = array();
+		$today = strtotime(date('Y-m-d'), time());
+		$time = date("G");
 
-function _bannerRandon($values, $weights){ 
+
+		foreach ($dbl_banner_detail as $dbr_banner_detail) {
+
 		
-    $count = count($values); 
-    $i = 0; 
-    $n = 0; 
-    $num = mt_rand(0, array_sum($weights)); 
-    while($i < $count){
-        $n += $weights[$i]; 
-        if($n >= $num){
-            break; 
-        }
-        $i++; 
-    } 
-    return $values[$i]; 
+			if(!empty($dbr_banner_detail->start) and ($dbr_banner_detail->start <= $today and $dbr_banner_detail->end >= $today) ){
+
+				if($dbr_banner_detail->time_start <= $time and $dbr_banner_detail->time_end >= $time ){
+				   	
+					if( Helpers::getCountrycode() == $dbr_banner_detail->country){						
+						$bFP['id'][] = $dbr_banner_detail->banner_id;
+						$bFP['weight'][] = $dbr_banner_detail->weight;
+					}else{
+					    if(empty($dbr_banner_detail->country)){
+					    	$bF['id'][] = $dbr_banner_detail->banner_id;
+						    $bF['weight'][] = $dbr_banner_detail->weight;
+					    }
+					}
+					continue;
+				}else{
+					continue;
+				}
+
+
+			}else{
+				if(!empty($dbr_banner_detail->start)) continue;
+			}
+
+			if( Helpers::getCountrycode() == $dbr_banner_detail->country ){
+				$bFP['id'][] = $dbr_banner_detail->banner_id;
+				$bFP['weight'][] = $dbr_banner_detail->weight;
+			}else{
+				if(empty($dbr_banner_detail->country)){
+			    	$bF['id'][] = $dbr_banner_detail->banner_id;
+				    $bF['weight'][] = $dbr_banner_detail->weight;
+				}
+			}
+		}
+
+		if(is_array($bFP) and count($bFP) >= 1){
+			return self::getBannerById(self::bannerRandon($bFP['id'], $bFP['weight']));
+		}
+
+		if(is_array($bF) and count($bF) >= 1){
+			return self::getBannerById(self::bannerRandon($bF['id'], $bF['weight']));
+		}
+
+		return ;
+	}
+
+	private static function bannerRandon($values, $weights){ 
+		
+		$count = count($values); 
+		$i = 0; 
+		$n = 0; 
+		$num = mt_rand(0, array_sum($weights)); 
+		while($i < $count){
+		    $n += $weights[$i]; 
+		    if($n >= $num){
+		        break; 
+		    }
+		    $i++; 
+		} 
+		return $values[$i]; 
+	}
+
+	private static function getBannerById($id){
+		$dbr_banner = Banner::where('id', '=', $id)->first();
+		return stripslashes($dbr_banner->code); 
+	}
+
 }
-function _obtenerbanner($id){
-
-
-
-	$CI =& get_instance();
-	$query = $CI->db->query("SELECT codigo FROM bannerstxt WHERE id='$id'");
-	$ret = $query->row_array();
-	
-	return stripslashes($ret['codigo']); 
-}
-
-
-}
-
-?>

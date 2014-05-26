@@ -7,20 +7,16 @@ class BannerDetail extends Eloquent {
 		return $this->belongsTo('Banner');
 	}
 
+	public function scopeGetBannerDetail($query, $params){
 
-	public function scopeGetBannerDetail($query, $data_param){
-
-		$params_default = array('category_id' => null, 'sector_id' => null, 'type' => null ,  'tags' => null);
+		$params_default = array('module_id' => null, 'sector_id' => null, 'type' => null ,  'tags' => null);
 		$params = array_merge($params_default, $params);
 
 		$query->where('status', '=', Status::STATUS_ACTIVO);
 
-		if(empty($params['category_id'])){
-			$query->where('category_id');
-		}else{
-			$query->where('category_id', '=', $params['category_id']);
+		if($params['module_id']){
+			$query->where('module_id', '=', $params['module_id']);
 		}
-
 
 		if($params['sector_id']){
 			$query->where('sector_id', '=', $params['sector_id']);
@@ -30,12 +26,16 @@ class BannerDetail extends Eloquent {
 			$query->where('type', '=', $params['type']);
 		}
 
-		if(!$params['tags']){
-
-
+		if(!empty($params['tags'])){
+			$tags = $params['tags'];
+			$query->whereRaw("MATCH(tag) AGAINST('$tags' IN BOOLEAN MODE)");
 		}
 
 		return $query;
+	}
+
+	public function newQuery($excludeDeleted = true){
+	    return parent::newQuery()->addSelect('*',DB::raw('UNIX_TIMESTAMP(date_start)  AS start, UNIX_TIMESTAMP(date_end)  AS end'));
 	}
 }
 

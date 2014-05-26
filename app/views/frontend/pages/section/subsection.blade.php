@@ -27,9 +27,7 @@
 		<div class="more_news">
 			@include('frontend.pages.partials.news_list', array('dbl_post_view'=> $dbl_post_view1, 'is_section_facebook' => false))
 		</div>
-		<section id="big_banner" class="fullbanner">
-			<img src="images/maq/banner.jpg" alt="">
-		</section>
+		@include('frontend.pages.partials.banner_intermedio')
 		<div class="more_news_v2 {{ $type_module == Helpers::TYPE_MODULE_MODULAR ? 'subseccion_modular' : 'subseccion_modular_listado'}}">
 			@include('frontend.pages.partials.news_list', array('dbl_post_view'=> $dbl_post_view2, 'is_section_facebook' => $type_module == Helpers::TYPE_MODULE_MODULAR ? false : true))
 		</div>
@@ -62,11 +60,7 @@
 		{{$dbl_post_links}}
 	</div>
 </section>
-
-<section id="big_banner" class="fullbanner">
-	<img src="{{asset('assets/images/maq/banner.png')}}" alt="">
-</section>
-
+@include('frontend.pages.partials.banner_intermedio')
 <section id="ads">
 @include('frontend.pages.home.other_sections')
 </section>

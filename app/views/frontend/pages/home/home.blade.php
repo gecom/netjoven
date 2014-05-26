@@ -16,9 +16,7 @@
         <section id="news" class="v_news">
             @include('frontend.pages.home.latest_news')
         </section>
-        <section id="big_banner">
-            <img src="images/maq/banner.jpg" alt="">
-        </section>
+        @include('frontend.pages.partials.banner_intermedio')
         <section id="videos">
             <div class="left_video">                    
                 @include('frontend.pages.home.featured_video')

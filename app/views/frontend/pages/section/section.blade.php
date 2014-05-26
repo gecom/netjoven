@@ -41,9 +41,7 @@
     </div>
 
     @if ($type_module == Helpers::TYPE_MODULE_MODULAR || $type_module == Helpers::TYPE_MODULE_LISTADO)
-        <section id="big_banner" class="fullbanner">
-            <img src="{{asset('assets/images/maq/banner.jpg')}}" alt="">
-        </section>
+        @include('frontend.pages.partials.banner_intermedio')
     @endif
 
     <div class="features">

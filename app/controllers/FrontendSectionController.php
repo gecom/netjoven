@@ -404,7 +404,7 @@ class FrontendSectionController extends BaseController {
 			$dbr_post = Post::getPostById($post->id)->first();
 			$dbr_post_gallery = ($dbr_post->has_gallery ? $dbr_post->galleries()->select('image', 'title')->where('is_gallery', '=', 1)->first() : null);
 			$dbr_post->content = Helpers::bbcodes($dbr_post->content);
-			$data_tags = explode(',', $dbr_post->tags);
+			$data_tags = explode(',', $dbr_post->tags_name);
 
 			$params_template['meter_likebox'] = array(300, 300);
 			$params_template['dbr_post'] = $dbr_post;
