@@ -267,7 +267,7 @@ class Helpers {
 
 		$country_code = null;
 		if(Cookie::has('country_code')){
-			$country_code = Cookie::get('country_code');	
+			$country_code = Cookie::get('country_code');
 		}
 
 		if(!$country_code){

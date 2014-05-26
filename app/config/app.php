@@ -113,6 +113,7 @@ return array(
 		'Intervention\Image\ImageServiceProvider',
 		'Scalia\SphinxSearch\SphinxSearchServiceProvider',
 		'Artdarek\OAuth\OAuthServiceProvider',
+		'Barryvdh\Debugbar\ServiceProvider',
 
 	),
 

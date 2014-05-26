@@ -84,9 +84,6 @@ class Category extends Eloquent {
         return $query->where('njv_category.slug', '=', $slug);
     }
 
-
-
-
 }
 
 

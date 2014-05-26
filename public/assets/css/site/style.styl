@@ -1,3935 +1,4037 @@
-color_lila = #9F4180
-box_shadow = 1px 1px 4px 0 #6d6d6d
-box_shadow_inset = inset 0px 7px 5px -6px #404040
-
-border-radius(n)
-  -webkit-border-radius n
-  -moz-border-radius n
-  border-radius n
-
-box-shadow()
-  -webkit-box-shadow box_shadow 
-  -moz-box-shadow box_shadow 
-  box-shadow box_shadow 
-
-text-shadow()
-  -webkit-text-shadow box_shadow 
-  -moz-text-shadow box_shadow 
-  text-shadow box_shadow 
-
-shadow-inset()
-  -webkit-box-shadow  box_shadow_inset 
-  -moz-box-shadow  box_shadow_inset 
-  box-shadow  box_shadow_inset 
-
-opacity(n)
-      opacity n
-      if support-for-ie
-        filter unquote('progid:DXImageTransform.Microsoft.Alpha(Opacity=' + round(n * 100) + ')')
-
-
 html
-	font-size 14px
+  font-size 14px
 
 body
-	background #e2e2e2
-	font-size 1em
-	font-family 'Open Sans', sans-serif
-	font-weight 300
-	color #6D6D6D
+  background #e2e2e2
+  font-size 1em
+  font-family 'Open Sans',sans-serif
+  font-weight 300
+  color #6d6d6d
 
-ul, li
-	margin 0
-	padding 0
-	list-style none
+ul,li
+  margin 0
+  padding 0
+  list-style none
 
 a
-	color #6d6d6d
+  color #6d6d6d
+  &:hover
+    text-decoration none
 
-.opt 
-	position relative!important
-.opt1 
-	float left
-	padding-top 8px
-	font-size 0.8rem
-.opt2
-.opt4 
-	width: 28px;
-	height: 20px;
-	background: url("../images/sprite.png") 0 -191px no-repeat
-	margin-top: 4px;
-	left 50%
-	margin-left -14px
-	position absolute
+.opt
+  position relative !important
+
+.opt1
+  float left
+  padding-top 8px
+  font-size .8rem
+
+.opt2,.opt4
+  width 28px
+  height 20px
+  background url("/../assets/images/sprite.png") 0 -191px no-repeat
+  margin-top 4px
+  left 50%
+  margin-left -14px
+  position absolute
+
 .opt4
-	background-position -41px -191px
-.opt3 
-	float: right;
-	padding: 8px 20px 0 0;
-	font-size: 0.8em;
-	background url("../images/sprite.png") 69px -216px no-repeat
+  background-position -41px -191px
+
+.opt3
+  float right
+  padding 8px 20px 0 0
+  font-size .8em
+  background url("/../assets/images/sprite.png") 69px -216px no-repeat
+
+.mas_visto .tab .t1,.mas_visto .tab .t2,.mas_visto .tab .t3,.mas_visto .tab .t4
+  float right
+  display block
+  width 70px
+  height 26px
+  background url("/../assets/images/sprite.png") 30px -639px no-repeat
+
 .mas_visto
-	.tab
-		.t1
-		.t2
-		.t3
-		.t4
-			float right
-			display block
-			width 70px
-			height 26px
-			background url('../images/sprite.png') 30px -639px no-repeat
-		.t2
-			background-position 30px -671px
-		.t3
-			background-position 30px -704px
-		.t4
-			background-position 0px -734px 
+  .tab
+    .t2
+      background-position 30px -671px
+    .t3
+      background-position 30px -704px
+    .t4
+      background-position 0 -734px
 
 .list_articles
-	.text
-		a
-			&:hover 
-				color #6d6d6d!important
+  .text
+    a
+      &:hover
+        color #6d6d6d !important
+
 .busqueda_left
-	width 337px
-	float left
+  width 337px
+  float left
+
 .busqueda_right
-	float left
-	width 608px
+  float left
+  width 608px
 
 header
-	background-image url('../images/bg_banner.png')
-	background-repeat no-repeat
-	height 94px
-	width 960px
-	box-shadow()
-	z-index 1
-
-	.row
-		margin 0
-
-	.col-xs-6
-		padding 0
-
-	#logo 
-		padding 5px 0 0 9px
-
-		a
-			background url('../images/sprite.png')
-			display block
-			width 223px
-			height 80px
-
-	.search
-		margin 39px 0 0 67px
-		width 213px
-		height 26px		
-		position relative
-		display inline-block
-		vertical-align top
-
-		.bg_search
-			background-color #000
-			width 213px
-			height 26px	
-			border-radius(13px)
-			opacity(0.2)
-			position absolute
-			top 0
-			left 0
-			z-index 0
-
-		.input-search
-			border 0
-			color #fff
-			background none
-			position absolute
-			z-index 10
-			outline 0
-			left 12px
-			width 174px
-			height 20px
-			top 2px
-			font-size 1em
-			line-height 18px
-
-		.btn-search
-			border 0
-			background url('../images/sprite.png') -2px -149px
-			width 23px 
-			height 20px
-			position absolute
-			left 186px
-			top 5px
-			cursor pointer
-			cursor hand
-			z-index 10
-			outline 0
-
-	.social
-		width 190px
-		display inline-block
-		vertical-align top
-		margin 20px 0 0
-
-		ul
-			font-size 0
-
-			li 				
-				display inline-block
-				width 46px
-				margin 0 7px
-				text-align center
-				font-size 0.85rem
-				color #fff
-
-				a 
-					height 36px
-					width 36px
-					display inline-block
-					background-image url('../images/sprite.png')
-
-				.tw
-					background-position -4px -90px	
-				.fb
-					background-position -67px -90px				
-				.gp
-					background-position -129px -90px	
+  background-image url("/../assets/images/bg_banner.png")
+  background-repeat no-repeat
+  height 94px
+  width 960px
+  -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+  -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+  box-shadow 1px 1px 4px 0 #6d6d6d
+  z-index 1
+  overflow hidden
+  width 768px
+  .row
+    margin 0
+  .col-xs-6
+    padding 0
+  #logo
+    padding 5px 0 0 9px
+    a
+      background url("/../assets/images/sprite.png")
+      display block
+      width 223px
+      height 80px
+  .search
+    margin 39px 0 0 67px
+    width 213px
+    height 26px
+    position relative
+    display inline-block
+    vertical-align top
+    .bg_search
+      background-color #000
+      width 213px
+      height 26px
+      -webkit-border-radius 13px
+      -moz-border-radius 13px
+      border-radius 13px
+      opacity .2
+      filter progid:DXImageTransform.Microsoft.Alpha(Opacity=20)
+      position absolute
+      top 0
+      left 0
+      z-index 0
+    .input-search
+      border 0
+      color #fff
+      background none
+      position absolute
+      z-index 10
+      outline 0
+      left 12px
+      width 174px
+      height 20px
+      top 2px
+      font-size 1em
+      line-height 18px
+    .btn-search
+      border 0
+      background url("/../assets/images/sprite.png") -2px -149px
+      width 23px
+      height 20px
+      position absolute
+      left 186px
+      top 5px
+      cursor pointer
+      cursor hand
+      z-index 10
+      outline 0
+  .social
+    width 190px
+    display inline-block
+    vertical-align top
+    margin 20px 0 0
+    ul
+      font-size 0
+      li
+        display inline-block
+        width 46px
+        margin 0 7px
+        text-align center
+        font-size .85rem
+        color #fff
+        a
+          height 36px
+          width 36px
+          display inline-block
+          background-image url("/../assets/images/sprite.png")
+        .tw
+          background-position -4px -90px
+          &:hover
+            background-position -3px -555px
+        .fb
+          background-position -67px -90px
+          &:hover
+            background-position -66px -555px
+        .gp
+          background-position -129px -90px
+          &:hover
+            background-position -128px -555px
 
 #main_nav
-	width 960px
-	background url('../images/sprite_fondos.png') repeat-x
-	text-align right
-	position relative
+  width 960px
+  background url("/../assets/images/sprite_fondos.png") repeat-x
+  text-align right
+  position relative
+  width 768px
+  .row
+    margin-left 0
+  .menu
+    margin-right 11px
+    font-size 0
+    position relative
+    -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+    -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+    box-shadow 1px 1px 4px 0 #6d6d6d
+    .li_menu
+      margin-left 4px
+      display inline-block
+      height 35px
+      -webkit-border-radius 0 0 10px 10px
+      -moz-border-radius 0 0 10px 10px
+      border-radius 0 0 10px 10px
+      font-size 1rem
+      & > a
+        padding 0 8px
+        display block
+        height 32px
+        color #6d6d6d
+        font-size 1em
+        margin-top 5px
+      .dropdown
+        background-color #5b5b5b
+        position absolute
+        top 35px
+        left 0px
+        padding-bottom 8px
+        width 960px
+        z-index 999
+        overflow hidden
+        border-top 1px solid #e0e0e0
+        ul
+          width 203px
+          padding-top 32px
+          float left
+          li
+            display block
+            a
+              height 20px
+              width 100%
+              display block
+              line-height 20px
+              text-align center
+        .videos_drop
+          width 751px
+          background-color #fff
+          float left
+          -webkit-border-radius 10px
+          -moz-border-radius 10px
+          border-radius 10px
+          margin-top -10px
+          padding-top 25px
+          padding-bottom 18px
+          text-align center
+          .video_item
+            width 158px
+            display inline-block
+            margin-left 13px
+            vertical-align top
+            &:first-child
+              margin-left 0
+            figure
+              width 158px
+              height 100px
+              position relative
+              img
+                width 100%
+                height auto
+              .play
+                background-image url("/../assets/images/sprite.png")
+                background-position -71px -180px
+                background-repeat no-repeat
+                width 38px
+                height 38px
+                display block
+                position absolute
+                -webkit-border-radius 19px
+                -moz-border-radius 19px
+                border-radius 19px
+                -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+                -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+                box-shadow 1px 1px 4px 0 #6d6d6d
+                top 50%
+                left 50%
+                margin-top -19px
+                margin-left -19px
+                opacity .8
+                filter progid:DXImageTransform.Microsoft.Alpha(Opacity=80)
+                transition all .4s ease
+                &:hover
+                  width 45px
+                  height 45px
+                  margin-top -22.5px
+                  margin-left -22.5px
+                  background-position -67px -176px
+            .description
+              width 158px
+              line-height 1.3em
+              a
+                color #6D6D6D !important
+  .user_options
+    height 42px
+    border-bottom 1px solid #d8d8d8
+    background-color #f1f1f1
+    margin 0
+    display none
+    .view_options
+      text-align left
+      margin 0 0 0 10px
+      font-size 0
+      li
+        display inline-block
+        margin 0 13px 0 0
+        padding-top 6px
+        height 42px
+        vertical-align top
+        font-size 1rem
+        a
+          width 28px
+          height 29px
+          display inline-block
+          vertical-align top
+          background-image url("/../assets/images/sprite.png")
+      .v1
+        a
+          background-position -58px -142px
+      .v2
+        a
+          background-position -101px -142px
+      .v3
+        a
+          background-position -142px -142px
+      .v4
+        border-left 1px solid #d8d8d8
+        text-align right
+        width 767px
+        padding-top 0
+        a
+          width auto
+          background none !important
+          color #6d6d6d
+          span
+            vertical-align top
+            margin 10px 8px 0 0
+            display inline-block
+          .icon_v4
+            height 38px
+            width 38px
+            -webkit-border-radius 20px
+            -moz-border-radius 20px
+            border-radius 20px
+            background-image url("/../assets/images/sprite.png")
+            background-position -186px -93px
+            display inline-block
+            vertical-align top
+            margin-top 2px
+            overflow hidden
+          &:hover
+            background-color #f1f1f1
+      .v5
+        border-left 1px solid #d8d8d8
+        padding-left 10px
+        margin-right 8px
+        a
+          background-position -192px -142px
+  &.menu_fixed
+    position fixed
+    top 0
+    z-index 1000
+    background #383838 url("/../assets/images/sprite.png") -96px -369px no-repeat
+    .user_options
+      display none
+    .li_menu
+      & > a
+        color #fff
+        padding-top 8px
+        margin-top 0
+    .menu
+      height 40px
+      float left
+      width 870px
+    .options_menu_fixed
+      display block !important
+      margin-right 7px
+      width 72px
+      float left
+      li
+        margin-left 4px
+        display inline-block
+        position relative
+        &:first-child
+          margin-left 0
+        a
+          width 32px
+          height 32px
+          display block
+          background url("/../assets/images/sprite.png")
+          margin-top 5px
+          &.search
+            background-position -4px -375px
+            -webkit-border-top-left-radius 5px
+            -webkit-border-top-right-radius 5px
+            -moz-border-radius-topleft 5px
+            -moz-border-radius-topright 5px
+            border-top-left-radius 5px
+            border-top-right-radius 5px
+            height 37px
+            margin-bottom -5px
+          &.config
+            background-position -41px -370px
+            -webkit-border-bottom-right-radius 5px
+            -webkit-border-bottom-left-radius 5px
+            -moz-border-radius-bottomright 5px
+            -moz-border-radius-bottomleft 5px
+            border-bottom-right-radius 5px
+            border-bottom-left-radius 5px
+            margin-top 0
+            padding-top 37px
+        &.active
+          background #ee8435
+        .search_box
+          width 288px
+          height 38px
+          position absolute
+          top 42px
+          left -256px
+          -webkit-border-bottom-right-radius 10px
+          -webkit-border-bottom-left-radius 10px
+          -moz-border-radius-bottomright 10px
+          -moz-border-radius-bottomleft 10px
+          border-bottom-right-radius 10px
+          border-bottom-left-radius 10px
+          .bg_search
+            background-color #000
+            width 213px
+            height 26px
+            opacity .2
+            filter progid:DXImageTransform.Microsoft.Alpha(Opacity=20)
+            position absolute
+            top 4px
+            left 36px
+            -webkit-border-radius 13px
+            -moz-border-radius 13px
+            border-radius 13px
+          input
+            border 0
+            color #fff
+            background none
+            position absolute
+            z-index 10
+            outline 0
+            left 50px
+            width 174px
+            height 18px
+            top 5px
+            font-size 1em
+            line-height 18px
+    .menu_responsive
+      .options
+        .search_box
+          display none
+          position absolute !important
+          top 36px
+          right 39px
+          background-color #3a3a3a
+          width 248px !important
+          height 35px !important
+          -webkit-border-bottom-right-radius 10px
+          -webkit-border-bottom-left-radius 10px
+          -moz-border-radius-bottomright 10px
+          -moz-border-radius-bottomleft 10px
+          border-bottom-right-radius 10px
+          border-bottom-left-radius 10px
+          top 36px
+          height 38px !important
+          right 39px
+          display none
+          .bg_search
+            top 7px !important
+          input
+            margin-top 4px !important
+    .circles
+      display block !important
+      float left
+      width 648px
+      background url("/../assets/images/sprite.png") center -598px no-repeat
+      height 24px
+    .search
+      display block !important
+      float left
+      background-position -1px -372px !important
+      background-position -1px -372px !important
+      &.active
+        background-color #3a3a3a
+    .showing_menu
+      display block !important
+      position absolute
+      background-color #3a3a3a
+      top 36px
+      left 0
+      width 100%
+      z-index 900
+      padding-top 0
+      -webkit-border-bottom-right-radius 10px
+      -webkit-border-bottom-left-radius 10px
+      -moz-border-radius-bottomright 10px
+      -moz-border-radius-bottomleft 10px
+      border-bottom-right-radius 10px
+      border-bottom-left-radius 10px
+      overflow hidden
+      padding-top 0
+      margin-right 0 !important
+      .opt_menu
+        width 100%
+        line-height 24px
+        background-color #353535
+        border-top 1px solid #3d3d3d
+        height 32px
+        margin-left 0
+        -webkit-border-radius 0
+        -moz-border-radius 0
+        border-radius 0
+        height 32px
+        &:last-child
+          height 43px
+          background-color #3a3a3a
+          color #cfcfcf
+          line-height 43px
+          padding-left 15px
+          text-align left
+          font-size 1.3rem
+          height 62px
+          padding-top 5px
+          a
+            height 30px
+            width 29px
+            display inline-block
+            margin-right 8px
+            margin-top 6px
+            background url("/../assets/images/sprite.png") no-repeat
+            float right
+            width 40px
+            height 41px
+            &.fb
+              background-position -1px -461px
+              background-position -2px -818px
+              &:hover
+                background-position -108px -461px
+                background-position -2px -818px
+            &.tw
+              background-position -37px -461px
+              background-position -50px -818px
+              &:hover
+                background-position -144px -461px
+                background-position -50px -818px
+            &.gp
+              background-position -73px -461px
+              display none
+              &:hover
+                background-position -180px -461px
+        a
+          height 24px
+          width 100%
+          display block
+          color #cfcfcf
+          background none
+          text-align left
+          padding-left 15px
+          font-size .9em
+          background-image url("/../assets/images/sprite.png")
+          background-repeat no-repeat
+          background-position right -568px
+          height 30px
+          font-size 1.3em
+          background-position 737px -781px
+          padding-top 3px !important
+  .menu_desktop
+    display none
+  .menu_responsive
+    display block !important
+    .menu
+      padding-left 10px
+      margin-left 0
+      text-align left
+      margin-left 0
+      text-align center
+    .options
+      height 36px
+      background-color #5d5d5d
+      margin 0 10px 0 0
+      position relative
+      height 36px
+      background-color #5d5d5d
+      .showing_config
+        position absolute
+        background-color #3a3a3a
+        top 25px
+        left 0
+        width 100%
+        z-index 900
+        -webkit-border-bottom-right-radius 10px
+        -webkit-border-bottom-left-radius 10px
+        -moz-border-radius-bottomright 10px
+        -moz-border-radius-bottomleft 10px
+        border-bottom-right-radius 10px
+        border-bottom-left-radius 10px
+        overflow hidden
+        .welcome
+          color #8c8c8c
+          height 40px
+          padding 0 0 0 14px
+          line-height 40px
+          text-align left
+          font-size 1.3em
+          min-height 51px
+          height auto
+          padding-top 4px
+          position relative
+          padding-left 0
+          a
+            background none
+            width 100%
+            color #cfcfcf
+            background none
+            color #cfcfcf
+            width 100%
+          .bien
+            display block
+            padding-left 6px
+          .user_icon
+            display block
+          span
+            display block
+            position absolute
+            height 40px
+            width 40px
+            background url("/../assets/images/sprite.png") -96px -817px
+            right 8px
+            top 4px
+          &.log_in
+            span
+              left 50%
+              margin-left -20px
+            .iniciar_sesion
+              text-align center
+              padding-top 55px
+              form
+                padding 0 20px
+              .registrate
+                background #333
+                float left
+                width 320px
+                color #fff
+                padding-bottom 10px
+                font-size 1.2em
+                width 100%
+                .registrate_btn
+                  display initial
+                  color #fff
+                  padding 4px 10px
+                  width auto
+                  background #ee8435
+                  float none
+                  width 110px
+                  font-size .9em
+                  text-decoration none
+            .registro_form
+              text-align center
+              padding-top 33px
+              .sel1
+                height 33px
+                width 54px
+                padding 0
+                margin-right 7px
+                font-size .9em
+              .sel2
+                height 33px
+                width 144px
+                font-size .9em
+                margin-left -48px
+              .finalizar_btn
+                display initial
+                color #fff
+                padding 4px 10px
+                width auto
+                background #ee8435
+                float none
+                width 110px
+                font-size .9em
+                text-decoration none
+              .redes_sociales
+                background #333
+                float left
+                width 100%
+                color #fff
+                padding-bottom 10px
+                font-size 1.2em
+                margin-top 25px
+                padding-bottom 10px
+                a
+                  height 40px
+                  width 40px
+                  display inline-block
+                  margin 0 8px
+                  vertical-align top
+                  background url("/../assets/images/sprite.png")
+                  float none
+                  &.fb
+                    background-position -2px -818px
+                  &.tw
+                    background-position -50px -818px
+                  &.gp
+                    background-position -188px -818px
+          .login_input
+            width 189px
+            height 33px
+            margin-top 12px
+            padding 0
+            padding-left 5px
+            line-height 1em
+          .btn_login
+            width 80px
+            color #fff
+            text-align left
+            background url("/../assets/images/sprite.png") -155px -780px
+            border none
+            height 27px
+            padding 0
+            line-height 1em
+            font-size .9em
+            margin-top 12px
+            margin-left 108px
+          .lnk1
+            color #8c8c8c
+            font-size .9em
+            height auto
+        .pick_color
+          border-top 1px solid #3d3d3d
+          width 100%
+          background-color #353535
+          padding-left 14px
+          text-align left
+          font-size .9em
+          .t1
+            display block
+            text-align left
+            color #cfcfcf
+            padding 3px 0 1px
+          ul
+            width 100%
+            text-align left
+            li
+              display inline-block
+              -webkit-border-radius 10px
+              -moz-border-radius 10px
+              border-radius 10px
+              overflow hidden
+              margin-right 7px
+              a
+                background none
+                width 20px
+                height 20px
+                display block
+          .t2
+            display inline-block
+            color #cfcfcf
+            padding 5px 0
+            text-align left
+          .save
+            background-position -3px -499px
+          .cancel
+            background-position -33px -499px
+            margin-right 16px
+        .share
+          height 56px
+          border-top 1px solid #3d3d3d
+          width 100%
+          background-color #353535
+          text-align left
+          font-size .9em
+          span
+            display inline-block
+            padding 17px 0 0 15px
+            color #cfcfcf
+          a
+            float right
+            color #cfcfcf
+            text-decoration none
+            margin-right 2px
+            text-align center
+            width 42px
+            height 45px
+            margin-top 5px
+            text-align center
+            background none
+            font-size 11px
+            display inline-block
+            span
+              width 32px
+              height 29px
+              display inline-block
+              background url("/../assets/images/sprite.png")
+          .fb
+            span
+              background-position 3px -461px
+          .tw
+            span
+              background-position -35px -461px
+          .gp
+            margin-right 8px
+            span
+              background-position -71px -461px
+        .change
+          height 47px
+          width 100%
+          padding-left 15px
+          color #cfcfcf
+          text-align left
+          font-size .85em
+          span
+            display inline-block
+            padding-top 13px
+          a
+            float right
+            width 25px
+            height 25px
+            display inline-block
+            margin-right 15px
+            margin-top 10px
+            background url("/../assets/images/sprite.png")
+            &.v3
+              background-position -144px -509px
+            &.v2
+              margin-right 6px
+              background-position -113px -509px
+        .cerrar_sesion
+          padding 10px 0
+          a
+            float right
+            margin-right 10px
+            text-decoration none
+            width 100%
+            background none
+            font-size 1.2em
+            color #cfcfcf
+        .log_in_mobile
+          display block !important
+          height auto
+      .search_box
+        width 688px
+        float left
+        display block
+        top 5px
+        position relative
+        text-align center
+        width 240px
+        top 0
+        .bg_search
+          width 190px
+          height 23px
+          background-color #000
+          opacity .2
+          filter progid:DXImageTransform.Microsoft.Alpha(Opacity=20)
+          position absolute
+          top 2px
+          left 50%
+          margin-left -90px
+          -webkit-border-radius 13px
+          -moz-border-radius 13px
+          border-radius 13px
+          top 6px
+          width 232px
+          margin-left -116px
+          height 24px
+        input
+          border 0
+          background none
+          color #fff
+          outline 0
+          height 23px
+          vertical-align top
+          padding-left 20px
+          z-index 1000
+          position relative
+          padding-left 0
+          margin-top 6px !important
+          width 190px
+        .btn_search
+          background url("/../assets/images/sprite.png") -129px -733px
+          width 20px
+          height 23px
+          margin-top 0
+          background-position -129px -736px
+          width 20px
+      a
+        height 35px
+        margin-top 1px
+        width 40px
+        display block
+        float left
+        background url("/../assets/images/sprite.png")
+        padding 0 5px 0
+        height 35px
+        margin-top 1px
+        width 40px
+        &.show_menu
+          background-position -198px -731px
+          background-position -198px -731px
+          &.active
+            background-color #3d3d3d
+        &.config
+          background-position -157px -730px
+          background-position -157px -730px
+          &.active
+            background-color #3d3d3d
+        &:hover
+          background-color #3d3d3d
+      .circles
+        width 200px
+      .showing_menu
+        padding-top 0
+        .opt_menu
+          height 32px
+          a
+            height 30px
+            font-size 1.3em
+            background-position 289px -781px
+          &:last-child
+            font-size 1.3em
+            height 62px
+            padding-top 5px
+            a
+              width 40px
+              height 41px
+              &.gp
+                display none
+              &.tw
+                background-position -50px -818px
+                &:hover
+                  background-position -50px -818px
+              &.fb
+                background-position -2px -818px
+                &:hover
+                  background-position -2px -818px
+  .showing_menu
+    display block !important
+    position absolute
+    background-color #3a3a3a
+    top 71px
+    left 0
+    width 100%
+    z-index 900
+    padding-top 0
+    -webkit-border-bottom-right-radius 10px
+    -webkit-border-bottom-left-radius 10px
+    -moz-border-radius-bottomright 10px
+    -moz-border-radius-bottomleft 10px
+    border-bottom-right-radius 10px
+    border-bottom-left-radius 10px
+    overflow hidden
+    padding-top 0
+    margin-right 0 !important
+    .opt_menu
+      width 100%
+      line-height 24px
+      background-color #353535
+      border-top 1px solid #3d3d3d
+      height 32px
+      margin-left 0
+      -webkit-border-radius 0
+      -moz-border-radius 0
+      border-radius 0
+      height 32px
+      &:last-child
+        height 43px
+        background-color #3a3a3a
+        color #cfcfcf
+        line-height 43px
+        padding-left 15px
+        text-align left
+        font-size 1.3rem
+        height 62px
+        padding-top 5px
+        a
+          height 30px
+          width 29px
+          display inline-block
+          margin-right 8px
+          margin-top 6px
+          background url("/../assets/images/sprite.png") no-repeat
+          float right
+          width 40px
+          height 41px
+          &.fb
+            background-position -1px -461px
+            background-position -2px -818px
+            &:hover
+              background-position -108px -461px
+              background-position -2px -818px
+          &.tw
+            background-position -37px -461px
+            background-position -50px -818px
+            &:hover
+              background-position -144px -461px
+              background-position -50px -818px
+          &.gp
+            background-position -73px -461px
+            display none
+            &:hover
+              background-position -180px -461px
+      a
+        height 24px
+        width 100%
+        display block
+        color #cfcfcf
+        background none
+        text-align left
+        padding-left 15px
+        font-size .9em
+        background-image url("/../assets/images/sprite.png")
+        background-repeat no-repeat
+        background-position right -568px
+        height 30px
+        font-size 1.3em
+        background-position 737px -781px
 
-	.menu
-		margin-right 11px
-		font-size 0
-		position relative
+#main_nav .menu .li_menu:hover,#main_nav .menu .li_menu.active
+  height 31px
+  background-image url("/../assets/images/sprite_fondos.png")
+  background-position 0 -37px
+  background-repeat repeat-x
 
-		.li_menu 
-			margin-left 4px
-			display inline-block
-			height 35px
-			border-radius(0 0 10px 10px)
-			font-size 1rem			
+#main_nav .menu .li_menu:hover a,#main_nav .menu .li_menu.active a
+  text-decoration none
+  color #fff
 
-			>a
-				padding 0 8px 
-				display block
-				height 32px
-				color #6D6D6D
-				font-size 1em
-				margin-top 5px			
-			
-			&:hover
-			&.active
-				height 31px
-				background-image url('../images/sprite_fondos.png')
-				background-position 0 -37px
-				background-repeat repeat-x
+#main_nav .user_options .view_options li.v1,#main_nav .user_options .view_options li.v2,#main_nav .user_options .view_options li.v3
+  margin-top 6px
+  padding 0
+  height 29px
+  background-color #a5a5a5
 
-				a
-				    text-decoration none
-				    color #fff
-
-			.dropdown
-				background-color #5b5b5b
-				position absolute
-				top 35px
-				left 10px
-				padding-bottom 8px
-				width 960px
-				z-index 999
-				overflow hidden
-				border-top 1px solid #e0e0e0
-
-				ul 
-					width 203px
-					padding-top 32px
-					float left
-					li
-						display block						
-						a 
-							height 20px
-							width 100%
-							display block
-							line-height 20px
-							text-align center
-						
-
-				.videos_drop					
-					width 751px
-					background-color #fff
-					float left
-					border-radius(10px)
-					margin-top -10px
-					padding-top 25px
-					padding-bottom 18px
-					text-align center
-
-					
-					.video_item
-						width 158px
-						display inline-block
-						margin-left 13px
-						vertical-align top
-
-						&:first-child
-							margin-left 0						
-						figure
-							width 158px
-							height 100px
-							position relative
-
-							img
-								width 100%
-								height auto
-							
-							.play 
-								background-image: url("../images/sprite.png");
-								background-position: -71px -180px;
-								background-repeat: no-repeat;
-								width: 38px;
-								height: 38px;
-								display: block;
-								position: absolute;
-								border-radius(19px)
-								box-shadow()
-								top 50%
-								left 50%
-								margin-top -19px
-								margin-left -19px
-								opacity(0.8)
-								transition all 0.4s ease
-								&:hover
-									width 45px
-									height 45px
-									margin-top -22.5px
-									margin-left -22.5px
-									background-position -67px -176px
-
-						.description
-							width 158px 
-							line-height 1.3em
-
-	.user_options
-		height 42px
-		border-bottom 1px solid #d8d8d8
-		background-color #F1F1F1
-		margin 0		
-
-		.view_options	
-			text-align left
-			margin 0 0 0 10px
-			font-size 0	
-
-			li 
-				display inline-block
-				margin 0 13px 0 0
-				padding-top 6px
-				height 42px
-				vertical-align top
-				font-size 1rem
-
-				&.v1
-				&.v2
-				&.v3
-					margin-top 6px
-					padding 0
-					height 29px
-					background-color #a5a5a5
-
-				a 
-					width 28px
-					height 29px
-					display inline-block					
-					vertical-align top
-					background-image url('../images/sprite.png')
-										
-			
-					
-			.v1 a 
-				background-position -58px -142px
-			.v2 a 
-				background-position -101px -142px
-			.v3 a 
-				background-position -142px -142px
-			.v4
-				border-left 1px solid #d8d8d8
-				text-align right
-				width 767px		
-				padding-top 0		
-
-				a 
-					width auto
-					background none!important
-					color #6D6D6D
-
-					span
-						vertical-align top
-						margin 10px 8px 0 0
-						display inline-block
-
-					.icon_v4
-						height 38px
-						width 38px
-						border-radius(20px)
-						background-image url('../images/sprite.png')
-						background-position -186px -93px
-						display inline-block
-						vertical-align top
-						margin-top 2px
-						overflow hidden
-
-				a:hover
-					background-color #F1F1F1
-			
-
-			.v5
-				border-left 1px solid #d8d8d8
-				padding-left 10px
-				margin-right 8px
-
-				a
-					background-position -192px -142px
-
-	&.menu_fixed
-		position fixed 
-		top 0
-		z-index 1000
-		background #383838 url('../images/sprite.png') -96px -369px no-repeat
-
-		.user_options
-			display none
-
-		.li_menu
-			&:hover
-			&.active
-				height 35px
-			>a 
-				color #fff
-				padding-top 8px
-				margin-top 0
-
-		.menu
-			height 40px
-			float left
-			width 870px
-
-		.options_menu_fixed
-			display block!important
-			margin-right 7px
-			width 72px
-			float left
-
-			li 
-				margin-left 4px
-				display inline-block
-				position relative
-
-				&:first-child
-					margin-left 0
-				a 
-					width 32px
-					height 32px
-					display block
-					background url('../images/sprite.png') 
-					margin-top 5px
-					
-					&.search
-						background-position -4px -375px
-						-webkit-border-top-left-radius: 5px;
-						-webkit-border-top-right-radius: 5px;
-						-moz-border-radius-topleft: 5px;
-						-moz-border-radius-topright: 5px;
-						border-top-left-radius: 5px;
-						border-top-right-radius: 5px;
-						height 37px
-						margin-bottom -5px
-					&.config
-						background-position -41px -370px
-						-webkit-border-bottom-right-radius: 5px
-						-webkit-border-bottom-left-radius: 5px
-						-moz-border-radius-bottomright: 5px
-						-moz-border-radius-bottomleft: 5px
-						border-bottom-right-radius: 5px
-						border-bottom-left-radius: 5px
-						margin-top 0
-						padding-top 37px
-				&.active
-					background color_lila
-				.search_box
-					width 288px
-					height 38px
-					position absolute
-					top 42px
-					left -256px
-					-webkit-border-bottom-right-radius: 10px;
-					-webkit-border-bottom-left-radius: 10px;
-					-moz-border-radius-bottomright: 10px;
-					-moz-border-radius-bottomleft: 10px;
-					border-bottom-right-radius: 10px;
-					border-bottom-left-radius: 10px;
-
-					.bg_search
-						background-color: #000;
-						width: 213px;
-						height: 26px;
-						opacity(.2)
-						position absolute
-						top 4px
-						left 36px
-						border-radius(13px)
-					input
-						border: 0;
-						color: #fff;
-						background: none;
-						position: absolute;
-						z-index: 10;
-						outline: 0;
-						left: 50px;
-						width: 174px;
-						height: 18px;
-						top: 5px;
-						font-size: 1em;
-						line-height: 18px;
-
+#main_nav.menu_fixed .li_menu:hover,#main_nav.menu_fixed .li_menu.active
+  height 35px
 
 .destacado
-	padding 10px 10px 40px 10px
-	background #fff
-	border-bottom 1px solid #d8d8d8
-	width 960px
-	margin-bottom 14px
+  padding 10px 10px 40px 10px
+  background #fff
+  border-bottom 1px solid #d8d8d8
+  width 960px
+  margin-bottom 14px
+  width 768px
+  padding 0
+  margin-bottom 0
+  width 320px
+  .image_destacado
+    -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+    -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+    box-shadow 1px 1px 4px 0 #6d6d6d
+    width 935px
+    height 393px
+    position relative
+    height auto
+    width 768px
+    width 320px
+    .txt
+      position absolute
+      left 0
+      bottom 0
+      border-bottom 1px solid #000
+      color #fff
+      font-size 1.85em
+      font-weight 700
+      text-align center
+      width 100%
+      padding 25px 0 30px
+      background url("/../assets/images/sombra-destacado.png") repeat-x
+      line-height 1.4em
+      position relative
+      color #727171
+      height auto
+      border none
+      padding 20px 10px
+      color #727171
+      bottom 0
+      background none
+      font-size 1em
+    .link
+      left 0
+      bottom 4px
+      position absolute
+      width 100%
+      text-align right
+      padding-right 7px
+      display none
+      a
+        color #fff
+      span
+        width 22px
+        height 22px
+        -webkit-border-radius 11px
+        -moz-border-radius 11px
+        border-radius 11px
+        display inline-block
+        text-align center
+        margin-left 3px
+    img
+      width 100%
+      height auto
 
-	.image_destacado
-		box-shadow()
-		width 935px
-		height 393px
-		position relative
-
-		.txt 
-			position absolute
-			left 0
-			bottom 0
-			border-bottom 1px solid #000
-			color #fff
-			font-size 1.85em
-			font-weight 700
-			text-align center
-			width 100%
-			padding 25px 0 30px
-			background url('../images/sombra-destacado.png') repeat-x
-			line-height 1.4em
-		.link
-			left 0
-			bottom 4px
-			position absolute
-			width 100%
-			text-align right
-			padding-right 7px
-
-			a
-				color #fff
-
-			span
-				width 22px
-				height 22px
-				border-radius(11px)
-				display inline-block
-				text-align center
-				margin-left 3px
 .bx-wrapper
-	margin 0 auto!important
-.bx-wrapper .bx-viewport
-	left 0!important
-	border 0!important
-.bx-wrapper .bx-caption
-	background transparent url('../images/sombra-destacado.png') 0 -10px repeat-x!important
-	text-align center
-.bx-wrapper .bx-caption span
-	font-family 'Open Sans', sans-serif!important
-	font-size 2em!important
-.bx-wrapper .bx-pager.bx-default-pager a
-	margin -15px 4px 0!important
-	float left
-	box-shadow()
-.bx-wrapper .bx-pager.bx-default-pager a:hover, .bx-wrapper .bx-pager.bx-default-pager a.active
-	width 20px!important
-	height 20px!important
-	border-radius(10px)
-	margin 0 4px!important
-.bx-wrapper .bx-pager.bx-default-pager .bx-pager-item:nth-child(1) a
-	background-color #cd9318
-.bx-wrapper .bx-pager.bx-default-pager .bx-pager-item:nth-child(2) a
-	background-color #a1b33d
-.bx-wrapper .bx-pager.bx-default-pager .bx-pager-item:nth-child(3) a
-	background-color #1175b3
-.bx-wrapper .bx-pager.bx-default-pager .bx-pager-item:nth-child(4) a
-	background-color #a14181
-.bx-wrapper .bx-pager.bx-default-pager .bx-pager-item:nth-child(5) a
-	background-color #d44b41
-.bx-wrapper .bx-viewport
-	box-shadow none!important
-	-moz-box-shadow none!important
-	-webkit-box-shadow none!important
+  margin 0 auto !important
+  .bx-viewport
+    left 0 !important
+    border 0 !important
+    -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+    -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+    box-shadow 1px 1px 4px 0 #6d6d6d
+    -moz-box-shadow none !important
+    -webkit-box-shadow none !important
+  .bx-caption
+    background transparent url("/../assets/images/sombra-destacado.png") 0 -10px repeat-x !important
+    text-align center
+    span
+      font-family 'Open Sans',sans-serif !important
+      font-size 2em !important
+  .bx-pager
+    &.bx-default-pager
+      a
+        margin -15px 4px 0 !important
+        float left
+        -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+        -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+        box-shadow 1px 1px 4px 0 #6d6d6d
+      .bx-pager-item
+        &:nth-child(1)
+          a
+            background-color #cd9318
+        &:nth-child(2)
+          a
+            background-color #a1b33d
+        &:nth-child(3)
+          a
+            background-color #1175b3
+        &:nth-child(4)
+          a
+            background-color #a14181
+        &:nth-child(5)
+          a
+            background-color #d44b41
+
+.bx-wrapper .bx-pager.bx-default-pager a:hover,.bx-wrapper .bx-pager.bx-default-pager a.active
+  width 20px !important
+  height 20px !important
+  -webkit-border-radius 10px
+  -moz-border-radius 10px
+  border-radius 10px
+  margin 0 4px !important
 
 #banner
-	padding 10px 10px 40px 10px
-	background #fff
-	border-bottom 1px solid #d8d8d8
-	width 960px
-	font-size 0
-	margin-bottom 14px
+  padding 10px 10px 40px 10px
+  background #fff
+  border-bottom 1px solid #d8d8d8
+  width 960px
+  font-size 0
+  margin-bottom 14px
+  display none
+  img
+    width 100%
+    height 100%
+  .left_banner
+    width 300px
+    margin-right 15px
+    display inline-block
+    vertical-align top
+    font-size 1rem
+    .monster_box
+      width 300px
+      height 618px
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+      padding 9px 0
+    .p1
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+    .p2
+      margin-top 14px
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+  .right_banner
+    font-size 1rem
+    width 624px
+    display inline-block
+    vertical-align top
+    .slider
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+    .p1
+      width 298px
+      height 165px
+      margin-top 20px
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+      display inline-block
+      margin-right 24px
+    .fb
+      margin-top 20px
+      width 298px
+      height 165px
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+      display inline-block
+    .paginate
+      height 34px
+      text-align center
 
-	img 
-		width 100%
-		height 100%
+.v_news
+  background #fff
+  width 960px
+  margin-bottom 14px
+  border-top 1px solid #d8d8d8
+  padding 28px 10px 0
+  width 768px
+  margin 0 auto 14px
+  background-color #e2e2e2
+  padding-top 0
+  width 320px
+  padding 0
+  overflow hidden
+  .title_news
+    font-size 2.25em
+    text-align center
+    line-height 38px
+    padding-bottom 10px
+    text-align left
+    width 690px
+    margin 0 auto
+    background-color #fff
+    padding 10px 10px 0
+    height 60px
+  .list_articles
+    font-size 0
+    padding-bottom 10px
+    width 690px
+    margin 0 auto
+    background-color #fff
+    text-align center
+    width 320px
+    article
+      width 300px
+      display inline-block
+      vertical-align top
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+      margin 0 0 20px 20px
+      font-size 1rem
+      margin 0 0 20px
+      .add_in_news
+        width 300px
+        height 250px
+        background-color #333
+        margin 20px 0
+      .media
+        height 187px
+        width 300px
+        display block
+        position relative
+        overflow hidden
+        img
+          width 100%
+          height auto
+        .play_video
+          background-image url("/../assets/images/sprite.png")
+          background-position -71px -180px
+          background-repeat no-repeat
+          width 38px
+          height 38px
+          display block
+          position absolute
+          top 50%
+          left 50%
+          margin-left -19px
+          margin-top -19px
+          -webkit-border-radius 19px
+          -moz-border-radius 19px
+          border-radius 19px
+          opacity .8
+          filter progid:DXImageTransform.Microsoft.Alpha(Opacity=80)
+          -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+          -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+          box-shadow 1px 1px 4px 0 #6d6d6d
+          z-index 10
+          transition all .4s ease
+          &:hover
+            width 45px
+            height 45px
+            margin-top -22px
+            margin-left -22px
+            background-position -67px -176px
+        .exclusive_label
+          width 140px
+          height 140px
+          -webkit-border-radius 70px
+          -moz-border-radius 70px
+          border-radius 70px
+          position absolute
+          -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+          -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+          box-shadow 1px 1px 4px 0 #6d6d6d
+          color #fff
+          font-size 1.1em
+          top -109px
+          left -9px
+          padding 109px 0 0 39px
+          opacity .7
+          filter progid:DXImageTransform.Microsoft.Alpha(Opacity=70)
+          padding-left 10px
+      .text
+        height 77px
+        font-size 1.2em
+        line-height 21px
+        padding 10px 10px 5px
+      .opt
+        height 27px
+        background-color #e2e2e2
+        width 300px
+        padding 0 10px
+      &:nth-child(3n
+        & + 1)
+          margin-left 0
+          margin-left 20px
+          margin-left 0
+      &:nth-child(odd)
+        margin-left 0
+    .opt
+      text-align left
+  .list_mode
+    article
+      width 457px
+      margin-left 26px
+      width 301px !important
+      height 98px !important
+      margin-left 20px
+      &:nth-child(3n
+        & + 1)
+          margin-left 26px
+          margin-left 20px
+      &:nth-child(odd)
+        margin-left 0
+        margin-left 0 !important
+      .media
+        width 194px
+        height 120px
+        float left
+        width 116px
+        height 71px
+      .text
+        width 263px
+        float left
+        height 93px
+        width 185px
+        height 71px
+        padding-top 4px
+        text-align left
+      .opt
+        width 263px
+        float left
+        width 301px
+        text-align left
+    .adding
+      display none
+  .include_add
+    article
+      &:last-child
+        margin-left 26px
+      .add_in_news
+        height 240px
+        text-align center
+        margin 10px auto
+  .paginate
+    border-bottom 1px solid #d8d8d8
+    border-top 1px solid #d8d8d8
+    height 40px
+    margin-left -10px
+    margin-right -10px
+    padding 9px 15px 0 0
+    text-align right
+    display none
+    ul
+      font-size 0
+      li
+        display inline-block
+        height 16px
+        -webkit-border-radius 8px
+        -moz-border-radius 8px
+        border-radius 8px
+        text-align center
+        line-height 15px
+        font-size 1rem
+        margin-left 2px
+        a
+          font-size .9em
+          display inline-block
+          color #6d6d6d
+          line-height auto
+          padding-right 5px
+          padding-left 5px
+  .no_title
+    padding-top 25px
 
-	.left_banner
-		width 300px
-		margin-right 15px
-		display inline-block
-		vertical-align top
-		font-size 1rem
-		
-		.monster_box
-			width 300px
-			height 618px
-			box-shadow()
-			padding 9px 0
+#topics_day
+  background-color #FFFFFF
+  border-bottom 1px solid #D8D8D8
+  margin-bottom 15px
+  width 960px
+  width 768px
+  width 320px
+  .row
+    margin-left 0
+    margin-right 0
+  .option_news
+    margin-top 10px
+    height 32px
+    font-size 0
+    li
+      display inline-block
+      vertical-align top
+      font-size .98rem
+      padding-left 20px
+      &:first-child
+        padding-left 25px
+        .circle
+          display none
+      a
+        margin 0 8px 0
+        display inline-block
+        vertical-align top
+      .circle
+        display inline-block
+        height 6px
+        width 6px
+        -webkit-border-radius 3px
+        -moz-border-radius 3px
+        border-radius 3px
+        vertical-align top
+        margin-top 7px
 
-		.p1
-			box-shadow()
-		.p2
-			margin-top 14px
-			box-shadow()
+#topics_day .option_news li a:hover,#topics_day .option_news li .active
+  text-decoration none
 
-	.right_banner
-		font-size 1rem
-		width 624px
-		display inline-block
-		vertical-align top		
-			
-		.slider
-			box-shadow()
-		.p1			
-			width 298px
-			height 165px
-			margin-top 20px
-			box-shadow()
-			display inline-block
-			margin-right 24px
-			
-		.fb			
-			margin-top 20px
-			width 298px
-			height 165px
-			box-shadow()
-			display inline-block
+.v_news .paginate ul li:hover a,.v_news .paginate ul .active a
+  color #fff
+  text-decoration none
 
-		.paginate
-			height 34px
-			text-align center
-
-#news
-	background #fff
-	width 960px
-	margin-bottom 14px
-	border-top 1px solid #d8d8d8
-	padding 28px 10px 0
-
-	.title_news
-		height 32px
-		font-size 2.25em
-		text-align center
-		line-height 38px
-
-	.option_news
-		margin-top 15px
-		height 32px
-		font-size 0
-
-		li 
-			display inline-block
-			vertical-align top
-			font-size 0.95rem
-
-			a				
-				margin 0 8px 0
-				display inline-block
-				vertical-align top
-
-			a:hover, .active
-				text-decoration none
-
-			.circle
-				display inline-block
-				height 6px
-				width 6px
-				border-radius(3px)				
-				vertical-align top
-				margin-top 7px
-
-		li:first-child .circle
-			display none
-
-	.list_articles
-		 
-		font-size 0
-		padding-bottom 10px
-		
-		article
-			width 300px
-			display inline-block
-			vertical-align top		
-			box-shadow()
-			margin 0 0 20px 20px
-			font-size 1rem
-			
-			.add_in_news 
-				width 300px
-				height 250px
-				background-color #333
-				margin 20px 0
-
-			.media 
-				height 187px
-				width 300px
-				display block
-				position relative
-				overflow hidden
-
-				img
-					width 100%
-					height auto
-
-				.play_video
-					background-image url('../images/sprite.png') 
-					background-position -71px -180px
-					background-repeat no-repeat
-					width 38px
-					height 38px
-					display block
-					position absolute
-					top 50%
-					left 50%
-					margin-left -19px
-					margin-top -19px
-					border-radius(19px)
-					opacity(0.8)
-					box-shadow()
-					z-index 10
-					transition all 0.4s ease
-					&:hover
-						width 45px
-						height 45px
-						margin-top -22px
-						margin-left -22px
-						background-position -67px -176px
-
-				.exclusive_label
-					width 140px
-					height 140px
-					border-radius (70px)	
-					position absolute	
-					box-shadow()
-					color #fff
-					font-size 1.1em
-					top -109px 
-					left -9px
-					padding 109px 0 0 39px
-					opacity(0.7)
-
-			.text 
-				height 77px 
-				font-size 1.2em
-				line-height 21px
-				padding 10px 10px 5px
-			.opt
-				height 27px
-				background-color #e2e2e2
-				width 300px
-				padding 0 10px
-				
-								
-
-			&:nth-child(3n+1)
-				margin-left 0 
-
-	.list_mode
-		article
-			width 457px
-			margin-left 26px
-
-			
-			&:nth-child(3n+1)
-				margin-left 26px
-			&:nth-child(odd)
-				margin-left 0
-
-			.media
-				width 194px 
-				height 120px
-				float left
-			.text
-				width 263px
-				float left
-				height 93px
-			.opt
-				width 263px
-				float left
-			
-	
-	.include_add
-		article
-			&:last-child
-				margin-left 26px
-			.add_in_news
-				height 240px
-				text-align center
-				margin 10px auto
-
-
-	.paginate
-		border-bottom 1px solid #d8d8d8
-		border-top 1px solid #d8d8d8
-		height 40px
-		margin-left -10px
-		margin-right -10px
-		padding 9px 15px 0 0 
-		text-align right
-		ul
-			font-size 0
-			li 
-				display inline-block				
-				height 16px
-				border-radius(8px)
-				text-align center
-				line-height 15px
-				font-size 1rem
-				margin-left 2px
-
-				a 
-					font-size 0.9em
-					display inline-block
-					color #6d6d6d
-					line-height auto
-					padding-right 5px
-					padding-left 5px
-									
-			li:hover, .active			
-
-				a
-					color #fff
-					text-decoration none
 #big_banner
-	width 960px
-	height 90px
-	margin 14px 0
-	display block
-	background-color #5d5d5d
-	text-align center
+  width 960px
+  height 90px
+  margin 14px 0
+  display block
+  background-color #5d5d5d
+  text-align center
+  width 690px
+  margin 0 auto 14px
+  background-color #fff
+  padding-top 0
+  border-bottom 1px solid #d8d8d8
+  border-top 1px solid #d8d8d8
+  text-align center
+  padding-top 20px
+  width 320px
+  padding-top 0
+  height auto
+  &.fullbanner
+    margin-bottom 0
+  img
+    width 100%
 
 #videos
-	margin-bottom 14px
-	width 960px
-	background-color #fff
-	padding 10px 10px 40px
-	border-bottom 1px solid #d8d8d8
-	border-top 1px solid #d8d8d8
-	font-size 0
+  margin-bottom 14px
+  width 960px
+  background-color #fff
+  padding 10px 10px 40px
+  border-bottom 1px solid #d8d8d8
+  border-top 1px solid #d8d8d8
+  font-size 0
+  display none
+  .left_video
+    width 604px
+    display inline-block
+    vertical-align top
+    font-size 1rem
+    .video_animation
+      .bxslider_video
+        margin-left 42px
+        li
+          img
+            -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+            -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+            box-shadow 1px 1px 4px 0 #6d6d6d
+          &:nth-child(1)
+            img
+              border-bottom 4px solid #cd9318
+          &:nth-child(2)
+            img
+              border-bottom 4px solid #a1b33d
+          &:nth-child(3)
+            img
+              border-bottom 4px solid #1175b3
+          &:nth-child(4)
+            img
+              border-bottom 4px solid #a14181
+          &:nth-child(5)
+            img
+              border-bottom 4px solid #d44b41
+      .bx-wrapper
+        .bx-pager
+          padding-top 10px !important
+          border-top 1px solid #e1e1e1 !important
+          bottom -100px
+        .bx-viewport
+          overflow visible !important
+        .bx-caption
+          bottom 0 !important
+          top 312px !important
+          width 520px !important
+          span
+            color #6b6b6b
+            font-size 1.4em !important
+            padding 0 !important
+            line-height 3em !important
+    .video_paginate
+      text-align center
+  .right_video
+    margin-left 16px
+    width 320px
+    display inline-block
+    vertical-align top
+    font-size 1rem
+    .playing
+      text-align center
+      padding-right 31px
+      padding-left 23px
+      background url("/../assets/images/module-cine.jpg") no-repeat
+      height 411px
+      position relative
+      margin-left 5px
+      .release_date
+        text-align center
+        font-size 1.1em
+        position absolute
+        width 83%
+        bottom 8px
+        a
+          height 22px
+          padding 0 10px
+          display inline-block
+          color #fff
+          -webkit-border-radius 11px
+          -moz-border-radius 11px
+          border-radius 11px
+          margin-left 5px
+          &:hover
+            text-decoration none
+  .video_title
+    font-size 1.9em
+    text-align center
+    line-height 30px
+    height 38px
 
-	.left_video
-		width 604px
-		display inline-block
-		vertical-align top
-		font-size 1rem
-		.video_animation
-			.bxslider_video
-				margin-left 42px
-				li 
-					img
-						box-shadow()
-				li:nth-child(1) img
-					border-bottom 4px solid #cd9318
-				li:nth-child(2) img
-					border-bottom 4px solid #a1b33d
-				li:nth-child(3) img
-					border-bottom 4px solid #1175b3
-				li:nth-child(4) img
-					border-bottom 4px solid #a14181
-				li:nth-child(5) img
-					border-bottom 4px solid #d44b41
-			.bx-wrapper 
-				.bx-pager
-					padding-top 10px!important
-					border-top 1px solid #e1e1e1!important
-					bottom -100px
-				.bx-viewport
-					overflow visible!important
-				.bx-caption
-					bottom 0px!important
-					top 312px!important
-					width 520px!important
-					span
-						color #6b6b6b
-						font-size 1.4em!important	
-						padding 0!important
-						line-height 3em!important
-
-		.video_paginate
-			text-align center
-
-	.right_video
-		margin-left 16px
-		width 320px
-		display inline-block
-		vertical-align top
-		font-size 1rem
-
-		.playing
-			text-align center
-			padding-right 31px
-			padding-left 23px
-			background url('../images/module-cine.jpg') no-repeat
-			height 411px
-			position relative
-			margin-left 5px
-
-			.release_date
-				text-align center
-				font-size 1.1em
-				position absolute
-				width 83%
-				bottom 8px
-
-
-				a
-					height 22px 
-					padding 0 10px
-					display inline-block
-					color #fff
-					border-radius(11px)
-					margin-left 5px
-				a:hover
-					text-decoration none
-	
-	.video_title
-		font-size 1.9em
-		text-align center
-		line-height 30px 
-		height 38px
-#ads	
-	width 960px
-	margin-bottom 14px
-	padding 10px 10px 40px
-	border-bottom 1px solid #d8d8d8
-	border-top 1px solid #d8d8d8
-	background-color #fff
-	font-size 0
-
-	img 
-		width 100%
-		height 100%
-
-	.item
-		width 216px
-		display inline-block
-		vertical-align top
-		margin-left 24px	
-		font-size 1.1rem
-
-		.add_title
-			font-size 1.4em
-			line-height 22px
-			height 27px
-			text-align center 
-
-		.add_content				
-			box-shadow()
-
-			.link
-				height 27px
-				background-color #e3e3e3
-				text-align right
-				padding 3px 5px 0 0
-
-				a 
-					color #6D6D6D
-
-					span
-						width 22px
-						height 22px
-						border-radius(11px)
-						margin-left 7px
-						display inline-block
-						color #fff
-						text-align center
-				a:hover
-					text-decoration none
-	.item:first-child
-		margin-left 0
+#ads
+  width 960px
+  margin-bottom 14px
+  padding 10px 10px 40px
+  border-bottom 1px solid #d8d8d8
+  border-top 1px solid #d8d8d8
+  background-color #fff
+  font-size 0
+  width 690px
+  text-align center
+  margin 0 auto 14px
+  width 320px
+  padding-bottom 20px
+  img
+    width 100%
+    height 100%
+  .item
+    width 216px
+    display inline-block
+    vertical-align top
+    margin-left 24px
+    font-size 1.1rem
+    width 140px
+    margin-left 20px
+    margin-bottom 20px
+    .add_title
+      font-size 1.4em
+      line-height 22px
+      height 27px
+      text-align center
+      display none
+    .add_content
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+      .link
+        height 27px
+        background-color #e3e3e3
+        text-align right
+        padding 3px 5px 0 0
+        a
+          color #6d6d6d
+          span
+            width 22px
+            height 22px
+            -webkit-border-radius 11px
+            -moz-border-radius 11px
+            border-radius 11px
+            margin-left 7px
+            display inline-block
+            color #fff
+            text-align center
+          &:hover
+            text-decoration none
+    &:first-child
+      margin-left 0
+    &:nth-child(odd)
+      margin-left 0
 
 footer
-	margin 14px 0 40px 0
-	width 960px
-	border-top 1px solid #d8d8d8
-	font-family 'Open Sans', sans-serif
-	font-weight 400
-	color #5b5b5b
-	background  url('../images/sombra_footer.png') no-repeat 0 bottom
-	padding-bottom 22px
-
-	.sponsors
-		border-bottom 1px solid #d8d8d8
-		border-top 1px solid #d8d8d8
-		background-color #fff
-		height 130px
-		background url('../images/sponsors.jpg') no-repeat
-		ul
-			margin 42px 0 0
-			padding 0
-			li 
-				margin 0
-				padding 0
-				float left
-				a 
-					display block
-					background url('../images/footer.png') no-repeat
-					height 60px
-					&.sp1
-						width 116px
-						margin-left 19px
-						&:hover
-							background-position -1px -120px
-					&.sp2
-						width 129px
-						margin-left 26px
-						background-position -130px 6px
-						&:hover
-							background-position -143px -114px
-					&.sp3
-						width 130px
-						margin-left 76px
-						background-position -448px -116px
-					&.sp4
-						width 132px
-						margin-left 7px
-						background-position -458px -2px
-					&.sp5
-						width 128px
-						margin-left 179px
-						background-position -295px 0
-						&:hover
-							background-position -295px -119px
-
-	.footer_rights
-		height 25px
-		font-size 0.75em
-		text-align center
-		line-height 25px
-		background-color #fff
-
-	#footer_nav
-		text-align center
-		background-color #fff
-		
-		ul
-			font-size 0
-
-			li
-				display inline-block
-				vertical-align top
-				font-size 0.85rem
-				line-height 40px
-
-				a
-					
-					.icon
-						display inline-block
-						width 6px
-						height 6px
-						border-radius(3px)
-						margin 17px 5px 0
-						vertical-align top
-
-				a:hover
-					text-decoration none
-
-				&:first-child .icon
-					display none
-	
-	.search_footer
-		background-color #fff
-		height 70px
-		text-align center
-
-		label 
-			font-weight 400
-			line-height 14px
-			font-size 0.95em
-			margin-bottom 0
-		.box
-			width 284px
-			height 26px
-			background-color #c5c5c5
-			margin-left 338px
-			line-height 17px
-			line-height 15px
-			text-align left
-			border-radius(13px)
-
-			.input_search 
-				border 0
-				background none
-				color #6D6D6D
-				margin 3px 0 0 13px
-				outline 0
-				display inline-block
-				vertical-align top
-				width 238px
-
-			.btn_search
-				border 0
-				background url('../images/sprite.png') -2px -337px
-				outline 0
-				width 23px
-				height 20px
-				display inline-block
-				vertical-align top
-				margin-top 2px
-
-	.footer_social
-		background-color #fff
-		padding-left 45px
-		width 634px
-		vertical-align top
-		float left
-		
-		ul
-			font-size 0
-			li 
-				width 145px
-				vertical-align top
-				display inline-block
-				text-align right
-				color #5b5b5b
-				font-size 0.85rem
-
-				a
-					display inline-block
-					width 40px
-					height 40px
-					background url('../images/sprite.png')
-				.d1
-					display inline-block
-					margin-right 10px
-					vertical-align top
-					margin-top 9px
-			.fb a
-				background-position 0 -291px
-			.fb a:hover
-				background-position 0 -249px
-			.tw a 
-				background-position -46px -291px
-			.tw a:hover
-				background-position -46px -249px
-			.gp a
-				background-position -95px -289px
-			.gp a:hover
-				background-position -95px -247px
-	.tags
-		font-size 0.75em
-		text-align center
-		padding 13px 0 25px 0
-		line-height 15px
-		background-color #fff
-
-	.footer_devices
-		width 326px
-		vertical-align top
-		float left
-		padding 12px 0 0 18px
-		background-color #fff
-
-		span
-			line-height 17px
-			text-align right
-			font-size 0.85em
-			display inline-block
-			vertical-align top
-
-		.fd2
-			background url('../images/sprite.png') -144px -188px no-repeat
-			width 84px
-			height 73px
-			margin-left 8px
+  margin 14px 0 40px 0
+  width 960px
+  border-top 1px solid #d8d8d8
+  font-family 'Open Sans',sans-serif
+  font-weight 400
+  color #5b5b5b
+  background url("/../assets/images/sombra_footer.png") no-repeat 0 bottom
+  padding-bottom 22px
+  display none
+  .sponsors
+    border-bottom 1px solid #d8d8d8
+    border-top 1px solid #d8d8d8
+    background-color #fff
+    height 130px
+    background url("/../assets/images/sponsors.jpg") no-repeat
+    ul
+      margin 42px 0 0
+      padding 0
+      li
+        margin 0
+        padding 0
+        float left
+        a
+          display block
+          background url("/../assets/images/footer.png") no-repeat
+          height 60px
+          &.sp1
+            width 116px
+            margin-left 19px
+            &:hover
+              background-position -1px -120px
+          &.sp2
+            width 129px
+            margin-left 26px
+            background-position -130px 6px
+            &:hover
+              background-position -143px -114px
+          &.sp3
+            width 130px
+            margin-left 76px
+            background-position -448px -116px
+          &.sp4
+            width 132px
+            margin-left 7px
+            background-position -458px -2px
+          &.sp5
+            width 128px
+            margin-left 179px
+            background-position -295px 0
+            &:hover
+              background-position -295px -119px
+  .footer_rights
+    height 25px
+    font-size .75em
+    text-align center
+    line-height 25px
+    background-color #fff
+  #footer_nav
+    text-align center
+    background-color #fff
+    ul
+      font-size 0
+      li
+        display inline-block
+        vertical-align top
+        font-size .85rem
+        line-height 40px
+        a
+          .icon
+            display inline-block
+            width 6px
+            height 6px
+            -webkit-border-radius 3px
+            -moz-border-radius 3px
+            border-radius 3px
+            margin 17px 5px 0
+            vertical-align top
+          &:hover
+            text-decoration none
+        &:first-child
+          .icon
+            display none
+  .search_footer
+    background-color #fff
+    height 70px
+    text-align center
+    label
+      font-weight 400
+      line-height 14px
+      font-size .95em
+      margin-bottom 0
+    .box
+      width 284px
+      height 26px
+      background-color #c5c5c5
+      margin-left 338px
+      line-height 17px
+      line-height 15px
+      text-align left
+      -webkit-border-radius 13px
+      -moz-border-radius 13px
+      border-radius 13px
+      .input_search
+        border 0
+        background none
+        color #6d6d6d
+        margin 3px 0 0 13px
+        outline 0
+        display inline-block
+        vertical-align top
+        width 238px
+      .btn_search
+        border 0
+        background url("/../assets/images/sprite.png") -2px -337px
+        outline 0
+        width 23px
+        height 20px
+        display inline-block
+        vertical-align top
+        margin-top 2px
+  .footer_social
+    background-color #fff
+    padding-left 45px
+    width 634px
+    vertical-align top
+    float left
+    ul
+      font-size 0
+      li
+        width 145px
+        vertical-align top
+        display inline-block
+        text-align right
+        color #5b5b5b
+        font-size .85rem
+        a
+          display inline-block
+          width 40px
+          height 40px
+          background url("/../assets/images/sprite.png")
+        .d1
+          display inline-block
+          margin-right 10px
+          vertical-align top
+          margin-top 9px
+      .fb
+        a
+          background-position 0 -291px
+          &:hover
+            background-position 0 -249px
+      .tw
+        a
+          background-position -46px -291px
+          &:hover
+            background-position -46px -249px
+      .gp
+        a
+          background-position -95px -289px
+          &:hover
+            background-position -95px -247px
+  .tags
+    font-size .75em
+    text-align center
+    padding 13px 0 25px 0
+    line-height 15px
+    background-color #fff
+  .footer_devices
+    width 326px
+    vertical-align top
+    float left
+    padding 12px 0 0 18px
+    background-color #fff
+    span
+      line-height 17px
+      text-align right
+      font-size .85em
+      display inline-block
+      vertical-align top
+    .fd2
+      background url("/../assets/images/sprite.png") -144px -188px no-repeat
+      width 84px
+      height 73px
+      margin-left 8px
+      &:hover
+        background-position -48px -629px
 
 .custom_color_bg
-	background-color color_lila
+  background-color #ee8435
 
 .custom_color_text
-	color color_lila!important
+  color #ee8435
 
 #bottom_responsive
-	height 86px
-	display none
-	width 768px
-
-	.paginate
-		height 51px
-		border-top 1px solid #d8d8d8
-		text-align center
-		width 100%
-		background-color #fff
-		width 690px
-		margin 0 auto
-		ul
-			margin-top 16px
-
-			li
-				display inline-block
-				margin 0 2px
-				border-radius(8px)
-				overflow hidden
-
-				a 
-					width 16px
-					height 16px
-					display block
-					border-radius(8px)
-
-	.go_top
-		height 35px
-		background-color #8d8d8d
-		width 768px
-		text-align right
-		a 
-			background url('../images/sprite.png') -127px -417px
-			width 36px
-			height 28px
-			display inline-block
-			margin-right 20px
-			margin-top 7px
+  height 86px
+  display none
+  width 768px
+  display block
+  height 65px
+  width 320px
+  .paginate
+    height 51px
+    border-top 1px solid #d8d8d8
+    text-align center
+    width 100%
+    background-color #fff
+    width 690px
+    margin 0 auto
+    margin 0
+    width 320px
+    height 32px
+    ul
+      margin-top 16px
+      margin-top 8px
+      li
+        display inline-block
+        margin 0 2px
+        -webkit-border-radius 8px
+        -moz-border-radius 8px
+        border-radius 8px
+        overflow hidden
+        a
+          width 16px
+          height 16px
+          display block
+          -webkit-border-radius 8px
+          -moz-border-radius 8px
+          border-radius 8px
+  .go_top
+    height 35px
+    background-color #8d8d8d
+    width 768px
+    text-align right
+    width 320px
+    height 26px
+    a
+      background url("/../assets/images/sprite.png") -127px -417px
+      width 36px
+      height 28px
+      display inline-block
+      margin-right 20px
+      margin-top 7px
+      margin-top 1px
+      margin-right 10px
 
 #add_and_plugin_fb
-	width 690px
-	margin 0 auto 14px	
-	background #fff
-	text-align center
-	padding 15px 0 44px
-	border-top 1px solid #d8d8d8
-	border-bottom 1px solid #d8d8d8
-	display none
-	.add
-		display inline-block
-		vertical-align top
-		margin-right 21px
-	.plugin_fb	
-		display inline-block
-		vertical-align top
-		box-shadow()
-				
+  width 690px
+  margin 0 auto 14px
+  background #fff
+  text-align center
+  padding 15px 0 44px
+  border-top 1px solid #d8d8d8
+  border-bottom 1px solid #d8d8d8
+  display none
+  display block
+  display none
+  .add
+    display inline-block
+    vertical-align top
+    margin-right 21px
+  .plugin_fb
+    display inline-block
+    vertical-align top
+    -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+    -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+    box-shadow 1px 1px 4px 0 #6d6d6d
 
-
-
-.close_popup	
-	//background-color #3D3D3D
-	width 18px
-	height 18px
-	border-radius(9px)
-	position absolute
-	right 0
-	top 0
-
-	a 
-		width 18px
-		height 18px
-		border-radius(9px)
-		display block
-		color #CECECE
-		text-align center
-		text-decoration none
-
+.close_popup
+  width 18px
+  height 18px
+  -webkit-border-radius 9px
+  -moz-border-radius 9px
+  border-radius 9px
+  position absolute
+  right 0
+  top 0
+  a
+    width 18px
+    height 18px
+    -webkit-border-radius 9px
+    -moz-border-radius 9px
+    border-radius 9px
+    display block
+    color #cecece
+    text-align center
+    text-decoration none
 
 #popup_login
-	
-	padding 19px
-	position relative
-	width 359px
+  .options_login
+    background-color #3a3a3a
+    width 450px
+    -webkit-border-radius 5px
+    -moz-border-radius 5px
+    border-radius 5px
+    overflow hidden
+    .welcome
+      color #8c8c8c
+      height 40px
+      padding 0 0 0 14px
+      line-height 40px
+      text-align left
+      a
+        width 100%
+        color #3d3d3d
+        background none
+      .user_av
+        background url("/../assets/images/sprite.png") -71px -497px no-repeat
+        float right
+        margin-right 15px
+        width 21px
+        height 21px
+        display block
+        margin-top 10px
+    .pick_color
+      border-top 1px solid #3d3d3d
+      width 100%
+      background-color #353535
+      padding-left 14px
+      padding-top 10px
+      text-align left
+      font-size .9em
+      .t1
+        display block
+        text-align left
+        color #cfcfcf
+        padding 3px 0 1px
+      ul
+        width 100%
+        text-align left
+        li
+          display inline-block
+          -webkit-border-radius 10px
+          -moz-border-radius 10px
+          border-radius 10px
+          overflow hidden
+          margin-right 7px
+          a
+            background none
+            cursor pointer
+            width 20px
+            height 20px
+            display block
+      .t2
+        display inline-block
+        color #cfcfcf
+        padding 5px 0
+        text-align left
+      .save
+        background-position -3px -499px
+        &:hover
+          background-position -3px -523px
+      .cancel
+        background-position -33px -499px
+        margin-right 16px
+        &:hover
+          background-position -35px -523px
+    .change
+      height 47px
+      width 100%
+      padding-left 15px
+      color #cfcfcf
+      text-align left
+      font-size .85em
+      span
+        display inline-block
+        padding-top 13px
+      a
+        float right
+        width 25px
+        height 25px
+        display inline-block
+        margin-right 15px
+        margin-top 10px
+        background url("/../assets/images/sprite.png")
+        &.v3
+          background-position -207px -509px
+          &:hover
+            background-position -144px -509px
+        &.v2
+          margin-right 6px
+          background-position -176px -509px
+          &:hover
+            background-position -113px -509px
+    .col-md-12
+      padding 15px
+      text-align center
+      a
+        color #FFFFFF
 
-	.options_login
-		background-color #3a3a3a		
-		width 321px
-		border-radius(10px)
-		overflow hidden
+#popup_login .options_login .welcome .iniciar_sesion,#popup_login .options_login .welcome .registro_form
+  display none
 
-		.welcome
-			color #8C8C8C
-			height 40px
-			padding 0 0 0 14px
-			line-height 40px
-			text-align left
-			a 
-				width 100%
-				color #3D3D3D
-				background none
-			.user_av
-				background url('../images/sprite.png') -71px -497px no-repeat
-				float right
-				margin-right 15px
-				width 21px
-				height 21px
-				display block
-				margin-top 10px
-			.iniciar_sesion
-			.registro_form
-				display none
+#popup_login .options_login .pick_color .save,#popup_login .options_login .pick_color .cancel
+  background url("/../assets/images/sprite.png")
+  display inline-block
+  width 21px
+  height 21px
+  float right
+  margin-right 7px
+  margin-top 4px
 
-		.pick_color
-			border-top 1px solid #3d3d3d
-			width 100%
-			background-color #353535
-			padding-left 14px
-			text-align left
-			font-size 0.9em
+#popup_login .options_login .share, #popup_show_login .show_login  .iniciar_sesion .share
+  height 56px
+  border-top 1px solid #3d3d3d
+  width 100%
+  background-color #353535
+  text-align left
+  font-size .9em
 
-			.t1
-				display block
-				text-align left
-				color #cfcfcf
-				padding 3px 0 1px				
-			ul
-				width 100%
-				text-align left
-				
-				li 
-					display inline-block
-					border-radius(10px)
-					overflow hidden
-					margin-right 7px
-					a 
-						background none
-						width 20px
-						height 20px
-						display block
-			
-			.t2
-				display inline-block							
-				color #cfcfcf
-				padding 5px 0
-				text-align left
+#popup_login .options_login .share span, #popup_show_login .show_login  .iniciar_sesion .share span
+  display inline-block
+  padding 17px 0 0 15px
+  color #cfcfcf
 
-			.save
-			.cancel
-				background url('../images/sprite.png')
-				display inline-block							
-				width 21px
-				height 21px
-				float right
-				margin-right 7px
-				margin-top 4px
-			.save
-				background-position -3px -499px
-				&:hover
-					background-position -3px -523px
-			.cancel
-				background-position -33px -499px
-				margin-right 16px
-				&:hover
-					background-position -35px -523px
-		.share
-			height 56px 
-			border-top 1px solid #3d3d3d
-			width 100%
-			background-color #353535
-			text-align left
-			font-size 0.9em
+#popup_login .options_login .share a , #popup_show_login .show_login  .iniciar_sesion .share a
+  float right
+  color #cfcfcf
+  text-decoration none
+  margin-right 2px
+  text-align center
+  width 42px
+  height 45px
+  margin-top 5px
+  text-align center
+  background none
+  font-size 11px
+  display inline-block
 
-			span
-				display inline-block
-				padding  17px 0 0 15px
-				color #cfcfcf
+#popup_login .options_login .share a span, #popup_show_login .show_login  .iniciar_sesion .share a span
+  width 32px
+  height 29px
+  display inline-block
+  background url("/../assets/images/sprite.png")
 
-			a 
-				float right 
-				color #cfcfcf
-				text-decoration none
-				margin-right 2px
-				text-align center
-				width 42px
-				height 45px
-				margin-top 5px
-				text-align center
-				background none
-				font-size 11px
-				display inline-block
-				
-				span
-					width 32px
-					height 29px
-					display inline-block
-					background url('../images/sprite.png')
+#popup_login .options_login .share .fb span, #popup_show_login .show_login  .iniciar_sesion .share .fb span
+  background-position 3px -461px
 
-			.fb
-				span
-					background-position 3px -461px
-					&:hover
-						background-position -104px -461px
+#popup_login .options_login .share .fb span:hover, #popup_show_login .show_login  .iniciar_sesion .share .fb span:hover
+  background-position -104px -461px
 
-			.tw
-				span
-					background-position -35px -461px
-					&:hover
-						background-position -142px -461px
+#popup_login .options_login .share .tw span, #popup_show_login .show_login  .iniciar_sesion .share .tw span
+  background-position -35px -461px
 
-			.gp
-				margin-right 8px
-				span
-					background-position -71px -461px
-					&:hover
-						background-position -178px -461px
+#popup_login .options_login .share .tw span:hover, #popup_show_login .show_login  .iniciar_sesion .share .tw span:hover
+  background-position -142px -461px
 
-		.change
-			height 47px 
-			width 100%
-			padding-left 15px
-			color #cfcfcf
-			text-align left
-			font-size 0.85em
+#popup_login .options_login .share .gp, #popup_show_login .show_login  .iniciar_sesion .share .gp
+  margin-right 8px
 
-			span
-				display inline-block
-				padding-top 13px
-			a 
-				float right
-				width 25px
-				height 25px
-				display inline-block
-				margin-right 15px
-				margin-top 10px
-				background url('../images/sprite.png')
-				&.v3
-					background-position -207px -509px
-					&:hover
-						background-position -144px -509px
-				&.v2
-					margin-right 6px
-					background-position -176px -509px
-					&:hover
-						background-position -113px -509px
+#popup_login .options_login .share .gp span , #popup_show_login .show_login  .iniciar_sesion .share .gp span
+  background-position -71px -461px
 
-#popup_usuario_no_registrado	
-	padding 19px
-	position relative
-	width 364px
+#popup_login .options_login .share .gp span:hover, #popup_show_login .show_login  .iniciar_sesion .share .gp span:hover
+  background-position -178px -461px
 
-	.message
-		border-radius(10px)
-		border 1px solid #e1e1e1
-		background #fff
-		width 326px
-		text-align center
-		padding-top 10px
-		overflow hidden 
-		.no_user
-			display inline-block
-			width 41px
-			height 41px
-			background url('../images/sprite.png') -189px -291px no-repeat
-		.red 
-			color #CE3038
-		.share
-			width 324px
-			height 45px
-			background-color #f1f1f1
-			padding-top 6px
-			margin-top 10px
-			a
-				background url('../images/sprite.png') -189px -291px no-repeat
-				width 32px
-				height 31px
-				display inline-block
-				margin 0 4px
-				&.fb
-					background-position 3px -461px
-					&:hover
-						background-position -104px -461px
-				&.tw 
-					background-position -35px -461px
-					&:hover
-						background-position -142px -461px
-				&.gp
-					background-position -71px -461px
-					&:hover
-						background-position -178px -461px
+#popup_show_login
+  .show_login
+    background-color #3A3A3A
+    border-radius 5px
+    overflow hidden
+    width 325px
+    .welcome
+      min-height 51px
+      height auto
+      padding-top 4px
+      color #8C8C8C
+      height 40px
+      line-height 40px
+      padding 0 0 0 14px
+      text-align left
+      span
+        background none repeat scroll 0 0 rgba(0, 0, 0, 0)
+        color #CFCFCF
+        width 100%
+        &.user_icon
+          background url("/../assets/images/sprite.png") repeat scroll -96px -817px rgba(0, 0, 0, 0)
+          display block
+          float right
+          height 40px
+          margin-right 180px
+          margin-top 5px
+          width 40px
+    .login_input
+      display inline
+      height 30px
+      line-height 1em
+      margin-top 12px
+      padding 0 0 0 5px
+      width 250px
+    .btn_login
+      width 80px
+      color #fff
+      display inline
+      text-align left
+      background url("/../assets/images/sprite.png") -155px -780px
+      border none
+      height 27px
+      padding 0
+      line-height 1em
+      margin-top 12px
+    .lnk1
+      color #8C8C8C
+      display inline-block
+      height 25px
+      margin-top 5px
+      width 100%
+    .registrate
+      height 60px
+      line-height 25px
+      a
+        color #FFFFFF
+      .registrate_btn
+        display initial
+        color #fff
+        padding 4px 10px
+        width auto
+        background #ee8435
+        float none
+        width 110px
+        text-decoration none
 
+#popup_show_login .show_login  .iniciar_sesion, #popup_login .show_login  .registro_form
+  display inline-block
+  float left
+  font-size 0.9em
+  text-align center
+  width 100%
 
-			
+#popup_usuario_no_registrado
+  padding 19px
+  position relative
+  width 364px
+  .message
+    -webkit-border-radius 10px
+    -moz-border-radius 10px
+    border-radius 10px
+    border 1px solid #e1e1e1
+    background #fff
+    width 326px
+    text-align center
+    padding-top 10px
+    overflow hidden
+    .no_user
+      display inline-block
+      width 41px
+      height 41px
+      background url("/../assets/images/sprite.png") -189px -291px no-repeat
+    .red
+      color #ce3038
+    .share
+      width 324px
+      height 45px
+      background-color #f1f1f1
+      padding-top 6px
+      margin-top 10px
+      a
+        background url("/../assets/images/sprite.png") -189px -291px no-repeat
+        width 32px
+        height 31px
+        display inline-block
+        margin 0 4px
+        &.fb
+          background-position 3px -461px
+          &:hover
+            background-position -104px -461px
+        &.tw
+          background-position -35px -461px
+          &:hover
+            background-position -142px -461px
+        &.gp
+          background-position -71px -461px
+          &:hover
+            background-position -178px -461px
 
 #popup_usuario_logueado
-	width 504px
-	padding 19px
-	position relative
-
-	.message
-		width 466px
-		background #fff
-		text-align center
-		padding-top 10px
-		border 1px solid #e1e1e1
-		border-radius(10px)
-		overflow hidden
-
-		figure
-			border-radius(20px)
-			margin-top 10px
-			overflow hidden
-			width 40px
-			height 40px
-			display inline-block
-		.f1
-			font-size 1.5em
-		.f2 
-			font-size 0.9em
-		.f3
-			font-size 1.35em
-		.share
-			height 65px
-			padding-top 7px
-			background-color #f1f1f1
-			font-size 0.80em
-			line-height 1.1em
-			.f4 
-				width 21px
-				height 22px
-				display inline-block
-				margin-top 5px
-				background url('../images/sprite.png') -198px -339px no-repeat
-				&:hover
-					background-position -3px -521px
-
+  width 504px
+  padding 19px
+  position relative
+  .message
+    width 466px
+    background #fff
+    text-align center
+    padding-top 10px
+    border 1px solid #e1e1e1
+    -webkit-border-radius 10px
+    -moz-border-radius 10px
+    border-radius 10px
+    overflow hidden
+    figure
+      -webkit-border-radius 20px
+      -moz-border-radius 20px
+      border-radius 20px
+      margin-top 10px
+      overflow hidden
+      width 40px
+      height 40px
+      display inline-block
+    .f1
+      font-size 1.5em
+    .f2
+      font-size .9em
+    .f3
+      font-size 1.35em
+    .share
+      height 65px
+      padding-top 7px
+      background-color #f1f1f1
+      font-size .8em
+      line-height 1.1em
+      .f4
+        width 21px
+        height 22px
+        display inline-block
+        margin-top 5px
+        background url("/../assets/images/sprite.png") -198px -339px no-repeat
+        &:hover
+          background-position -3px -521px
 
 #popup_personaliza_pagina
-	padding 19px
-	position relative
-	width 525px
-	.message
-		width 487px
-		background #fff
-		text-align center
-		padding-top 10px
-		border-radius(10px)
-		border 1px solid #e1e1e1
-		overflow hidden
-		
-		.opt_2
-		.opt_3
-		.opt_1
-			display: inline-block;
-			width: 29px;
-			height: 29px;
-			background: url('../images/sprite.png') -175px -509px
-			margin-top 15px
-			margin-bottom 2px
-		.opt_3
-			background-position -204px -509px
-		.opt_1
-			background-position -147px -335px
-		
-		.view
-			width 300px
-			display inline-block
-			vertical-align top		
-			box-shadow()
-			margin 0 0 20px 0
-			font-size 1rem
+  padding 19px
+  position relative
+  width 525px
+  .message
+    width 487px
+    background #fff
+    text-align center
+    padding-top 10px
+    -webkit-border-radius 10px
+    -moz-border-radius 10px
+    border-radius 10px
+    border 1px solid #e1e1e1
+    overflow hidden
+    .opt_3
+      background-position -204px -509px
+    .opt_1
+      background-position -147px -335px
+    .view
+      width 300px
+      display inline-block
+      vertical-align top
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+      margin 0 0 20px 0
+      font-size 1rem
+      .media
+        height 187px
+        width 300px
+        display block
+        position relative
+        overflow hidden
+        img
+          width 100%
+          height auto
+      .text
+        height 77px
+        font-size 1.2em
+        line-height 21px
+        padding 10px 10px 5px
+        text-align left
+      .opt
+        height 27px
+        background-color #e2e2e2
+        width 300px
+        padding 0 10px
+        text-align left
+      &.view_3
+        width 457px
+        .media
+          width 194px
+          height 120px
+          float left
+        .text
+          width 263px
+          float left
+          height 93px
+        .opt
+          width 263px
+          float left
+    .save_cancel_opt
+      height 35px
+      background-color #f1f1f1
+      font-size .95em
+      padding-top 7px
+      .cancel
+        float left
+        margin-left 20px
+        span
+          margin-right 10px
+          background-position -34px -499px
+          float left
+          &:hover
+            background-position -36px -523px
+        &:hover
+          text-decoration none
+      .save
+        float right
+        margin-right 20px
+        span
+          margin-left 10px
+          background-position -4px -499px
+          float right
+          &:hover
+            background-position -4px -523px
+        &:hover
+          text-decoration none
+      span
+        width 20px
+        height 21px
+        background url("/../assets/images/sprite.png") no-repeat
+    .f1
+      font-size 1.5em
+    .f2
+      display inline-block
+      text-align left
+      padding 0 20px
+      line-height 1.3em
+      .f3
+        color #ef8535
+    .f4
+      font-size .85em
+      padding 10px 0 5px
+      display inline-block
+    .f5
+      font-size 1.2em
+      display inline-block
+      margin-bottom 10px
+      text-align center
+    .congrats
+      color #ef8535
+      font-size 1.9em
+      display inline-block
+    .share
+      height 65px
+      padding-top 7px
+      background-color #f1f1f1
+      font-size .8em
+      line-height 1.1em
+      .f6
+        width 21px
+        height 22px
+        display inline-block
+        margin-top 5px
+        background url("/../assets/images/sprite.png") -198px -339px no-repeat
+        &:hover
+          background-position -3px -521px
 
-			.media 
-				height 187px
-				width 300px
-				display block
-				position relative
-				overflow hidden
-
-				img
-					width 100%
-					height auto
-			.text 
-				height 77px 
-				font-size 1.2em
-				line-height 21px
-				padding 10px 10px 5px
-				text-align left
-			.opt
-				height 27px
-				background-color #e2e2e2
-				width 300px
-				padding 0 10px
-				text-align left
-				
-							
-		
-		
-			&.view_3	
-				width 457px
-
-				.media
-					width 194px 
-					height 120px
-					float left
-				.text
-					width 263px
-					float left
-					height 93px
-				.opt
-					width 263px
-					float left
-				
-
-		.save_cancel_opt
-			height 35px
-			background-color #f1f1f1
-			font-size 0.95em
-			padding-top 7px
-
-			.cancel
-				float left
-				margin-left 20px	
-				span
-					margin-right 10px
-					background-position -34px -499px
-					float left
-					&:hover
-						background-position -36px -523px
-				&:hover
-					text-decoration none
-			.save
-				float right
-				margin-right 20px
-				span
-					margin-left 10px
-					background-position -4px -499px
-					float right
-					&:hover
-						background-position -4px -523px
-						
-				&:hover
-					text-decoration none
-			span
-				width 20px
-				height 21px				
-				background url('../images/sprite.png') no-repeat
-			
-
-		.f1
-			font-size 1.5em
-		.f2
-			display inline-block
-			text-align left
-			padding 0 20px
-			line-height 1.3em
-			.f3
-				color #EF8535
-		.f4
-			font-size 0.85em
-			padding 10px 0 5px
-			display inline-block
-		.f5
-			font-size 1.2em
-			display inline-block
-			margin-bottom 10px
-			text-align center
-		.congrats
-			color #EF8535
-			font-size 1.9em
-			display inline-block
-		.share
-			height 65px
-			padding-top 7px
-			background-color #f1f1f1
-			font-size 0.80em
-			line-height 1.1em
-			.f6 
-				width 21px
-				height 22px
-				display inline-block
-				margin-top 5px
-				background url('../images/sprite.png') -198px -339px no-repeat
-				&:hover
-					background-position -3px -521px
+#popup_personaliza_pagina .message .opt_2,#popup_personaliza_pagina .message .opt_3,#popup_personaliza_pagina .message .opt_1
+  display inline-block
+  width 29px
+  height 29px
+  background url("/../assets/images/sprite.png") -175px -509px
+  margin-top 15px
+  margin-bottom 2px
 
 #portada_espectaculos
-	width 960px
-	margin-bottom 14px
-	background #fff
-	font-size 0
-	padding-bottom 40px
-	overflow hidden
-	
-	figure
-		text-align left
-	.desc
-		color #6D6D6D
-		font-size 1.2em
-		text-align left
-		height 75px
-		padding 4px 5px 0
-	.opt
-		height 27px
-		background-color #e2e2e2
-		width 100%
-		padding 0 10px
-		text-align left
-		
-		
+  width 960px
+  margin-bottom 14px
+  background #fff
+  font-size 0
+  padding-bottom 40px
+  overflow hidden
+  width 768px
+  width 320px
+  figure
+    text-align left
+  .desc
+    color #6d6d6d
+    font-size 1.2em
+    text-align left
+    height 75px
+    padding 4px 5px 0
+  .opt
+    height 27px
+    background-color #e2e2e2
+    width 100%
+    padding 0 10px
+    text-align left
+  .title
+    width 100%
+    height 50px
+    border-bottom 1px solid #d9d9d9
+    text-align center
+    font-size 2.1rem
+  .left_column
+    width 612px
+    margin-right 23px
+    vertical-align top
+    display inline-block
+    font-size 1rem
+    margin-left 12px
+    margin-top 12px
+    width 768px
+    margin 0
+    width 320px
+    margin 0
+    .portada_destacado
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+      display inline-block
+      width 100%
+      figure
+        width 100%
+        img
+          width 100%
+          height auto
+      .desc
+        color #6d6d6d
+        font-size 2.4em
+        text-align center
+        height 192px
+        padding-top 10px
+        font-size 1.3em
+        height 102px
+  .left2_column
+    width 300px
+    vertical-align top
+    display inline-block
+    font-size 1rem
+    margin-top 12px
+    margin-right 8px
+    margin-left 9px
+    margin 0
+    .add
+      height 290px
+      padding 20px 0
+      width 300px
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+      img
+        width 100%
+        height auto
+    .plugin_fb
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+      margin-top 21px
+    .monsterbox
+      width 300px
+      height 600px
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+      background-color #666
+    .monster_box
+      display none
+  .left3_column
+    margin-left 14px
+    margin-right 10px
+  &.view_3
+    .portada_destacado
+      margin-top 16px
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+      figure
+        width 251px
+        height 155px
+        margin 10px 0 0 10px
+        float left
+        width 300px
+        height auto
+      .desc
+        width 345px
+        font-size 2em
+        float left
+        text-align left
+        padding-left 10px
+        line-height 1.2em
+        height 182px
+        width 300px !important
+        height auto
+      .opt
+        float left
+        width 100%
+      .dummy
+        width 100%
+        float left
+        font-size 1em
+        padding 10px
+      &:first-child
+        margin-top 0
+    .more_news
+      .news
+        width 457px
+        height 120px
+        &:nth-child(3n
+          & + 1)
+            margin-left 18px
+        &:nth-child(2n
+          & + 1)
+            margin-left 0
+        figure
+          width 194px
+          height 120px
+          float left
+        .desc
+          float left
+          width 262px
+          height 93px
+        .opt
+          float left
+          width 263px
+    .features
+      width 457px
+      width 300px !important
+      margin 20px 10px 0
+      .mas_visto
+        -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+        -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+        box-shadow 1px 1px 4px 0 #6d6d6d
+        width 457px
+        .item
+          width 457px
+          .des
+            width 320px
+      .add
+        width 457px
+        height 261px
+        display inline-block
+        -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+        -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+        box-shadow 1px 1px 4px 0 #6d6d6d
+        text-align center
+        padding-top 3px
+        margin 15px 0
+        img
+          width 300px
+          height 251px
+      .news
+        width 457px
+        margin 0 0 13px !important
+        &.nth-child(2n
+          & + 1)
+            margin 0 !important
+        &.nth-child(2n)
+          margin 0 !important
+        figure
+          width 194px
+          height 120px
+          float left
+        .desc
+          float left
+          width 262px
+          height 93px
+        .opt
+          float left
+          width 263px
+    .more_news_v2
+      width 457px
+      width 768px
+      width 320px
+      .news
+        width 457px
+        margin 0 0 13px !important
+        &.nth-child(2n
+          & + 1)
+            margin 0 !important
+        &.nth-child(2n)
+          margin 0 !important
+        figure
+          width 194px
+          height 120px
+          float left
+        .desc
+          float left
+          width 262px
+          height 93px
+        .opt
+          float left
+          width 263px
+    .plugin_fb
+      width 457px
+      height 261px
+      display inline-block
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+      margin 2px 0 16px
+    .add
+      display none !important
+      display none !important
+    .news
+      width 300px !important
+      display inline-block !important
+      vertical-align top !important
+      font-size 1rem !important
+      margin-left 0 !important
+      margin-top 20px !important
+      height auto !important
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+      width 300px !important
+      display inline-block !important
+      vertical-align top !important
+      font-size 1rem !important
+      margin-left 0 !important
+      margin-top 20px !important
+      height auto !important
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+      figure
+        width 100% !important
+        height auto !important
+        width 100% !important
+        height auto !important
+        img
+          width 100% !important
+          height auto !important
+          width 100% !important
+          height auto !important
+      &:first-child
+        margin-left 0 !important
+        margin-left 0 !important
+      &:nth-child(3n
+        & + 1)
+          margin-left 0 !important
+          margin-left 0 !important
+      &:nth-child(even)
+        margin-left 50px !important
+        margin-left 0 !important
+      .desc
+        width 300px !important
+        width 300px !important
+      .opt
+        width 300px !important
+        width 300px !important
+    .mas_visto
+      width 300px !important
+      margin-bottom 20px
+  .right_column
+    width 300px
+    vertical-align top
+    display inline-block
+    font-size 1rem
+    margin-top 12px
+    width 768px
+    text-align center
+    width 320px
+    .news
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+      width 300px
+      display inline-block
+      margin-left 18px
+      display inline-block
+      margin-left 0
+      figure
+        width 100%
+        img
+          width 100%
+          height auto
+      &:first-child
+        margin-bottom 21px
+  .more_news
+    background #fff
+    font-size 0
+    text-align center
+    padding-bottom 27px
+    width 768px
+    text-align center
+    width 320px
+    margin-left 0
+    .news
+      width 300px
+      display inline-block
+      vertical-align top
+      font-size 1rem
+      margin-left 18px
+      margin-top 20px
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+      margin-left 0
+      text-align center
+      figure
+        width 100%
+        img
+          width 100%
+          height auto
+      &:first-child
+        margin-left 0
+      &:nth-child(3n
+        & + 1)
+          margin-left 0
+          margin-left 18px
+          margin-left 0
+  .features
+    margin-top 20px
+    width 300px
+    margin-right 28px
+    margin-left 9px
+    display inline-block
+    vertical-align top
+    font-size 1rem
+    width 750px !important
+    margin-right 9px
+    width 300px !important
+    text-align left
+    #slider_more
+      height 100%
+      margin 0 auto
+      overflow hidden
+      padding 0
+      position relative
+      width 100%
+    .add
+      height 290px
+      padding 20px 0
+      width 300px
+      margin-bottom 40px
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+      img
+        width 100%
+        height auto
+    .monsterbox
+      width 300px
+      height 600px
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+      background-color #666
+      margin-bottom 40px
+    .mas_visto
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+      width 750px !important
+      margin-bottom 20px
+      width 300px !important
+      .tab
+        height 26px
+        font-size 1.3em
+        padding-left 11px
+        background #e3e3e3
+        text-align left !important
+      .list
+        .item
+          padding 7px 0 7px 11px
+          width 300px
+          font-size 0
+          border-bottom 1px solid #d9d9d9
+          width 750px !important
+          width 300px !important
+          figure
+            vertical-align top
+            display inline-block
+            font-size 1rem
+            img
+              width 120px
+              height 74px
+          .des
+            width 162px
+            vertical-align top
+            display inline-block
+            font-size 1rem
+            padding-left 7px
+            height 74px
+            width 83%
+            text-align left
+            width 165px !important
+          &:nth-child(even)
+            background-color #f1f1f1
+      .pagine
+        height 49px
+        text-align center
+    .plugin_fb
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+      margin-top 21px
+    .view2
+      width 300px
+      display inline-block
+      vertical-align top
+      font-size 1rem
+      margin-top 29px
+      margin-bottom 30px
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+      figure
+        width 300px
+        img
+          width 100%
+          height auto
+      .desc
+        color #6d6d6d
+        font-size 1.2em
+        text-align left
+        height 75px
+        padding 4px 5px 0
+        width 300px
+      .opt
+        width 300px
+    &.subseccion_modular
+      margin-left 9px
+    &.subseccion_modular_listado
+      margin-left 9px
+  .more_news_v2
+    margin-top 20px
+    width 608px
+    display inline-block
+    vertical-align top
+    font-size 1rem
+    width 768px
+    text-align center
+    width 320px
+    &.subseccion_modular
+      margin-left 20px
+    &.subseccion_modular_listado
+      margin-left 11px
+      margin-left 0
+    .news
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+      float left
+      margin-top 21px
+      width 700px
+      display inline-block
+      float none
+      width 300px
+      display inline-block
+      vertical-align top
+      font-size 1rem
+      margin-left 0
+      margin-top 20px
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+      &:first-child
+        margin-top 0
+        margin-left 0
+      figure
+        width 194px
+        float left
+        width 100%
+        img
+          width 100%
+          height 120px
+          width 100%
+          height auto
+      .desc
+        float left
+        width 414px
+        height 93px
+        font-size 1.4em
+        width 504px
+        width 300px
+      .opt
+        float left
+        width 414px
+        height 27px
+        width 506px
+        width 300px
+      &:nth-child(3n
+        & + 1)
+          margin-left 0
+    .view2
+      width 300px
+      display inline-block
+      vertical-align top
+      font-size 1rem
+      margin-top 0
+      margin-bottom 30px
+      display none !important
+      figure
+        width 300px
+        img
+          width 100%
+          height auto
+      .desc
+        color #6d6d6d
+        font-size 1.2em
+        text-align left
+        height 75px
+        padding 4px 5px 0
+        width 300px
+      .opt
+        width 300px
+  .paginate
+    border-top 1px solid #d8d8d8
+    height 40px
+    padding 9px 15px 0 0
+    text-align right
+    margin-bottom -35px
+    margin-top 10px
+    ul
+      font-size 0
+      li
+        display inline-block
+        width 16px
+        height 16px
+        -webkit-border-radius 8px
+        -moz-border-radius 8px
+        border-radius 8px
+        text-align center
+        line-height 15px
+        font-size 1rem
+        margin-left 2px
+        a
+          font-size .9em
+          display inline-block
+          color #6d6d6d
+          line-height auto
+  .monsterbox
+    display none
+  .add
+    display none
+  .plugin_fb
+    display none
+
+#portada_espectaculos .features.subseccion_modular_listado,#portada_espectaculos .features.subseccion_modular
+  margin-left 22px
+  margin-right 9px
+
+#portada_espectaculos .features .view2:first-child,#portada_espectaculos .features .view2:nth-child(2n+1)
+  margin-right 18px
+  margin-left -10px
+
+#portada_espectaculos .more_news_v2 .view2:first-child,#portada_espectaculos .more_news_v2 .view2:nth-child(2n+1)
+  margin-right 18px
+  margin-left -10px
+
+#portada_espectaculos .paginate ul li:hover a,#portada_espectaculos .paginate ul .active a
+  color #fff
+  text-decoration none
+
+#notes
+  width 960px
+  background #fff
+  padding-top 15px
+  font-size 0
+  overflow hidden
+  width 690px
+  overflow hidden
+  margin 0 auto 14px
+  width 320px
+  .left_notes
+    width 300px
+    display inline-block
+    vertical-align top
+    margin 0 26px 0 9px
+    font-size 1rem
+    width 690px
+    margin 0
+    width 320px
+    margin 0
+    .monster_box
+      width 300px
+      height 618px
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+      padding 9px 0
+      margin-bottom 15px
+    .add
+      width 300px
+      height 290px
+      padding 20px 0
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+      margin-bottom 15px
+      img
+        width 100%
+        height auto
+    .mas_visto
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+      width 300px
+      .tab
+        height 26px
+        font-size 1.3em
+        padding-left 11px
+        background #e3e3e3
+      .list
+        .item
+          padding 7px 0 7px 11px
+          width 300px
+          font-size 0
+          border-bottom 1px solid #d9d9d9
+          float left
+          figure
+            vertical-align top
+            display inline-block
+            font-size 1rem
+            img
+              width 120px
+              height 74px
+          .des
+            width 162px
+            vertical-align top
+            display inline-block
+            font-size 1rem
+            padding-left 7px
+            height 74px
+          &:nth-child(even)
+            background-color #f1f1f1
+            border-left 1px solid #d9d9d9
+            background none
+          &.bg_class
+            background-color #f1f1f1
+      .pagine
+        height 49px
+        text-align center
+    .plugin_fb
+      width 300px
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+      margin 15px 0
+    #ads
+      width 300px
+      border 0
+      padding 0
+      .item
+        width 140px
+        margin-left 20px
+        margin-bottom 20px
+        &:nth-child(odd)
+          margin-left 0
+    &.pichanga_juerga
+      display none
+  .right_notes
+    width 600px
+    display inline-block
+    vertical-align top
+    font-size 1rem
+    float right
+    margin-right 25px
+    width 690px
+    padding-bottom 10px
+    float none
+    width 320px
+    .group_title
+      font-size 2.8em
+      line-height 30px
+    .title_nota
+      font-size 1.9em
+      margin-top 5px
+    .image
+      .opt
+        height 27px
+        background-color #e2e2e2
+        width 100%
+        padding 0 10px
+        text-align left
+        margin-top 30px
+      .gallery
+        position relative
+        a
+          position absolute
+          display block
+          bottom 2%
+          margin-left 6px
+          &.next
+            background-position -200px -637px
+            left 0
+          &.prev
+            background-position -157px -637px
+            right 0
+      figure
+        img
+          width 100%
+          height auto
+    .text_note
+      font-size 1.13em
+      margin-top 15px
+      padding-left 10px
+      padding-right 10px
+      padding-bottom 10px
+    .author
+      font-size .88em
+      text-align center
+      margin-top 25px
+      span
+        height 8px
+        width 8px
+        -webkit-border-radius 4px
+        -moz-border-radius 4px
+        border-radius 4px
+        display inline-block
+        margin-right 7px
+        margin-top 2px
+    .social
+      text-align center
+      padding 15px 0
+      border-top 1px solid #d9d9d9
+      border-bottom 1px solid #d9d9d9
+      li
+        display inline-block
+        line-height 20px
+        padding-left 5px
+        vertical-align top
+    .tags
+      font-size .88em
+      text-align left
+      padding 5px 0 22px
+      span
+        font-size 1.14em
+        font-weight 700
+      li
+        display inline-block
+        line-height 20px
+        vertical-align top
+    .action
+      text-align center
+      .btn_volver
+        text-align center
+        margin 0 auto
+        padding 0 18px
+        font-size 1.2em
+        color #fff
+        display inline-block
+        -webkit-border-radius 12px
+        -moz-border-radius 12px
+        border-radius 12px
+        text-decoration none
+    .buscar_otro
+      border-bottom 1px solid #d9d9d9
+      padding-bottom 6px
+      display none
+      .tit
+        font-size 2em
+        text-align center
+      .box_form
+        background-color #ececec
+        height 40px
+        border-bottom 1px solid #bababa
+        select
+          display inline-block
+          margin-left 50px
+          margin-right 142px
+          height 28px
+          width 162px
+          border 1px solid #a5a5a5
+          vertical-align top
+          margin-top 5px
+        .box_search
+          display inline-block
+          background #bdbdbd
+          width 213px
+          height 26px
+          -webkit-border-radius 13px
+          -moz-border-radius 13px
+          border-radius 13px
+          vertical-align top
+          margin-top 6px
+          .ipt
+            background none
+            border 0
+            height 20px
+            padding-left 20px
+            width 172px
+            margin-left 5px
+            outline none
+          .btn
+            background url("/../assets/images/sprite.png") -1px -146px
+            height 26px
+    &.pichanga_y_juerga
+      margin-right 0
+      .image
+        margin-top 26px
+        -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+        -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+        box-shadow 1px 1px 4px 0 #6d6d6d
+        width 600px
+        margin-left 41px
+        margin-left 0
+        figure
+          width 600px
+          width 320px
+        &.p2
+          margin-left 0
+          figure
+            width 690px
+            width 320px
+      .title_nota
+        margin-top 10px
+        margin-bottom -15px
+      .subtitle
+        font-size 2em
+        padding 10px 0
+        padding-left 40px
+      .text_note
+        font-size 1em
+        span
+          font-size 1.13em
+      .address
+        font-size 2.8em
+        margin-bottom -30px
+        margin-top 20px
+      .author
+        margin-top 40px
+      .list_content
+        background #ececec
+        border-left 1px solid #d8d8d8
+        border-right 1px solid #d8d8d8
+        padding-top 16px
+        margin-left -6px
+        margin-right -11px
+        border-bottom 1px solid #d8d8d8
+        width 618px
+        margin-left 36px
+        margin-bottom 30px
+        margin-left 0
+        width 320px
+        border none
+        .tabs
+          background #fff
+          height 38px
+          border 1px solid #bdbdbd
+          border-top 1px solid #e5e5e5
+          margin 0 -1px
+          ul
+            li
+              float left
+              width auto
+              margin-left 10px
+              height 36px
+              a
+                padding 0 5px
+                display block
+                height 36px
+                line-height 33px
+                text-decoration none
+          .buscar_otro
+            float left
+            margin-left 12px
+            border-bottom 0
+            .box_form
+              background #fff
+              height 37px
+              .box_search
+                margin-top 5px
+        .list_articles
+          font-size 0
+          padding 0 7px 10px 6px
+          padding-left 0
+          .filter
+            height 45px
+            font-size 1rem
+            padding-top 8px
+            position relative
+            background #fff
+            margin-bottom 30px
+            width 320px
+            padding 8px
+            height auto
+            select
+              width 181px
+              height 27px
+              margin-left 10px
+            a
+              width 18px
+              height 18px
+              display inline-block
+              -webkit-border-radius 9px
+              -moz-border-radius 9px
+              border-radius 9px
+              text-align center
+              text-decoration none
+            .pestanas
+              position absolute
+              height 20px
+              background #fff
+              border 1px solid #aeaeae
+              border-top none
+              right -8px
+              top 0
+              .p1
+                float left
+                margin 0 6px
+                .p2
+                  display block
+                  font-size 1rem
+                  width auto
+                  height auto
+                  -webkit-border-radius 0
+                  -moz-border-radius 0
+                  border-radius 0
+                  padding 0 6px
+                  line-height 18px
+                  &:hover
+                    height 23px
+                    -webkit-border-bottom-left-radius 5px
+                    -webkit-border-bottom-right-radius 5px
+                    -moz-border-radius-bottomleft 5px
+                    -moz-border-radius-bottomright 5px
+                    border-bottom-left-radius 5px
+                    border-bottom-right-radius 5px
+          article
+            width 600px
+            display inline-block
+            vertical-align top
+            -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+            -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+            box-shadow 1px 1px 4px 0 #6d6d6d
+            margin 0 0 20px 0
+            font-size 1rem
+            width 300px
+            margin-left 10px
+            margin-right 10px
+            .add_in_news
+              width 406px
+              height 250px
+              background-color #333
+              margin 20px 0
+            .media
+              height 120px
+              width 194px
+              float left
+              position relative
+              overflow hidden
+              width 116px
+              height auto
+              img
+                width 100%
+                height auto
+              .play_video
+                background-image url("/../assets/images/sprite.png")
+                background-position -71px -180px
+                background-repeat no-repeat
+                width 38px
+                height 38px
+                display block
+                position absolute
+                top 50%
+                left 50%
+                margin-left -19px
+                margin-top -19px
+                -webkit-border-radius 19px
+                -moz-border-radius 19px
+                border-radius 19px
+                opacity .8
+                filter progid:DXImageTransform.Microsoft.Alpha(Opacity=80)
+                -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+                -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+                box-shadow 1px 1px 4px 0 #6d6d6d
+                z-index 10
+                transition all .4s ease
+                &:hover
+                  width 45px
+                  height 45px
+                  margin-top -22px
+                  margin-left -22px
+                  background-position -67px -176px
+              .exclusive_label
+                width 140px
+                height 140px
+                -webkit-border-radius 70px
+                -moz-border-radius 70px
+                border-radius 70px
+                position absolute
+                -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+                -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+                box-shadow 1px 1px 4px 0 #6d6d6d
+                color #fff
+                font-size 1.1em
+                top -109px
+                left -9px
+                padding 109px 0 0 39px
+                opacity .7
+                filter progid:DXImageTransform.Microsoft.Alpha(Opacity=70)
+            .text
+              height 93px
+              font-size 1.6em
+              line-height 1.35em
+              padding 10px 10px 5px
+              width 406px
+              float left
+              background #fff
+              width 183px
+              height 72px
+              font-size 1.2em
+              display inline-block
+            .opt
+              height 27px
+              background-color #e2e2e2
+              width 406px
+              padding 0 10px
+              float left
+              width 299px
+        .paginate
+          border-top 1px solid #d8d8d8
+          height 40px
+          padding 9px 15px 0 0
+          text-align right
+          margin-top 10px
+          width 100%
+          border-bottom #a9a9a9
+          ul
+            font-size 0
+            li
+              display inline-block
+              width 16px
+              height 16px
+              -webkit-border-radius 8px
+              -moz-border-radius 8px
+              border-radius 8px
+              text-align center
+              line-height 15px
+              font-size 1rem
+              margin-left 2px
+              a
+                font-size .9em
+                display inline-block
+                color #6d6d6d
+                line-height auto
+      .group_title
+        padding-left 40px
+        &.p2
+          padding-left 10px
+      .pag_pichanga
+        width 320px
+    .form_fail
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+      width 100%
+      margin-top 40px
+      -webkit-border-radius 12px
+      -moz-border-radius 12px
+      border-radius 12px
+      overflow hidden
+      .title_form
+        height 40px
+        width 100%
+        text-align center
+        line-height 40px
+        font-size 1.6em
+        color #fff
+        font-weight 700
+        margin-bottom 16px
+      .left_fail
+        width 45%
+        float left
+        margin-left 5%
+        border-right 1px solid #cacdcd
+        padding-bottom 20px
+        label
+          width 100%
+          margin-bottom 1px
+        input
+          width 214px
+          padding-left 10px
+          height 30px
+          border 1px solid #d9d9d9
+      .right_fail
+        width 44%
+        float left
+        margin-left 6%
+        .file
+          font-size 11px
+        .text_desc
+          border 1px solid #d9d9d9
+          height 30px
+          width 250px
+      .actions
+        width 100%
+        float left
+        margin-top 5px
+        text-align right
+        padding-bottom 20px
+        padding-right 13px
+        .cancel
+          margin-right 43px
+    .fails
+      width 100%
+      .fail_item
+        padding 20px 13px
+        width 100%
+        margin-bottom 15px
+        margin-top 20px
+        -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+        -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+        box-shadow 1px 1px 4px 0 #6d6d6d
+        float left
+        .fail_item_title
+          width 100%
+          line-height 18px
+          font-size 1.5em
+          font-weight 700
+          margin-bottom 15px
+        figure
+          max-width 100%
+          text-align center
+          img
+            max-width 100%
+            border 1px solid #d9d9d9
+        .thanks
+          width 100%
+          border-bottom 1px solid #d9d9d9
+          font-size 1em
+          height 18px
+          margin-top 10px
+          text-align center
+          height 23px
+        .sociales
+          padding-top 10px
+    figure
+      width 690px
+      width 320px
+  .paginate_fail
+    border-top 1px solid #d8d8d8
+    height 72px
+    padding 9px 15px 0 0
+    text-align right
+    margin-bottom -35px
+    margin-top 10px
+    clear both
+    ul
+      font-size 0
+      li
+        display inline-block
+        width 16px
+        height 16px
+        -webkit-border-radius 8px
+        -moz-border-radius 8px
+        border-radius 8px
+        text-align center
+        line-height 15px
+        font-size 1rem
+        margin-left 2px
+        a
+          font-size .9em
+          display inline-block
+          color #6d6d6d
+          line-height auto
+  &.facebook_fail
+    margin-top 20px
+    .right_notes
+      padding 20px 10px 0
+      margin-right 0
+    .group_title
+      font-size 2em
+      padding 0
+      .show_form_upload
+        display block !important
+        -webkit-border-radius 11px
+        -moz-border-radius 11px
+        border-radius 11px
+        padding 0 12px
+        height 22px
+        line-height 22px
+        font-size 17px
+        color #fff
+        background-color #666
+        float right
+        margin-top 6px
+    .form_fail
+      .left_fail
+        width 100%
+        padding-left 12px
+      .right_fail
+        width 100%
+        padding-left 12px
+      .actions
+        padding-right 0
+        text-align center
+  .mas_visto
+    width 600px
+    margin 0 auto
+    margin-top 40px
+    margin-bottom 20px
+    .list
+      overflow hidden
+      .item
+        float left
+        &:nth-child(even)
+          border-left 1px solid #d9d9d9
+          background none
+        &.bg_class
+          background-color #f1f1f1
+
+#notes .right_notes.pichanga_y_juerga .list_content .tabs ul li.active,#notes .right_notes.pichanga_y_juerga .list_content .tabs ul li:hover
+  margin-top -5px
+  height 41px
+  background #ee8435
+  padding-top 5px
+  -webkit-border-top-left-radius 5px
+  -webkit-border-top-right-radius 5px
+  -moz-border-radius-topleft 5px
+  -moz-border-radius-topright 5px
+  border-top-left-radius 5px
+  border-top-right-radius 5px
+
+#notes .right_notes.pichanga_y_juerga .list_content .tabs ul li.active a,#notes .right_notes.pichanga_y_juerga .list_content .tabs ul li:hover a
+  color #fff
+
+#notes .right_notes.pichanga_y_juerga .list_content .list_articles .filter a:hover,#notes .right_notes.pichanga_y_juerga .list_content .list_articles .filter a.active
+  background #ee8435
+  color #fff
+  line-height 16px
+
+#notes .right_notes.pichanga_y_juerga .list_content .paginate ul li:hover a,#notes .right_notes.pichanga_y_juerga .list_content .paginate ul .active a
+  color #fff
+  text-decoration none
+
+#notes .right_notes .form_fail .actions .cancel,#notes .right_notes .form_fail .actions .listo
+  -webkit-border-radius 11px
+  -moz-border-radius 11px
+  border-radius 11px
+  height 22px
+  border 0
+  line-height 22px
+  padding 0 15px
+  color #fff
+  font-size 1.3
+
+#notes .paginate_fail ul li:hover a,#notes .paginate_fail ul .active a
+  color #fff
+  text-decoration none
+
+#horoscopo_resultados
+  width 960px
+  background #fff
+  font-size 0
+  overflow hidden
+  width 690px
+  overflow hidden
+  margin 0 auto 14px
+  width 320px
+  .big_title
+    height 50px
+    border-bottom 1px solid #d8d8d8
+    margin-bottom 10px
+    text-align center
+    line-height 50px
+    font-size 2.4rem
+  .paginate
+    border-top 1px solid #d8d8d8
+    height 40px
+    padding 9px 15px 0 0
+    text-align right
+    margin-top 10px
+    width 100%
+    float left
+    ul
+      font-size 0
+      li
+        display inline-block
+        width 16px
+        height 16px
+        -webkit-border-radius 8px
+        -moz-border-radius 8px
+        border-radius 8px
+        text-align center
+        line-height 15px
+        font-size 1rem
+        margin-left 2px
+        &.active
+          color #FFFFFF
+        a
+          font-size .9em
+          display inline-block
+          color #6d6d6d
+          line-height auto
+  .right_horoscopo
+    width 600px
+    display inline-block
+    vertical-align top
+    font-size 1rem
+    float right
+    margin-right 24px
+    width 690px
+    padding-bottom 10px
+    float none
+    text-align center
+    width 320px
+    .list_articles
+      font-size 0
+      padding-bottom 10px
+      padding-top 10px
+      article
+        width 600px
+        display inline-block
+        vertical-align top
+        -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+        -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+        box-shadow 1px 1px 4px 0 #6d6d6d
+        margin 0 0 20px 0
+        font-size 1rem
+        width 320px
+        .add_in_news
+          width 406px
+          height 250px
+          background-color #333
+          margin 20px 0
+        .media
+          height 120px
+          width 194px
+          float left
+          position relative
+          overflow hidden
+          width 320px
+          height auto
+          img
+            width 100%
+            height auto
+          .play_video
+            background-image url("/../assets/images/sprite.png")
+            background-position -71px -180px
+            background-repeat no-repeat
+            width 38px
+            height 38px
+            display block
+            position absolute
+            top 50%
+            left 50%
+            margin-left -19px
+            margin-top -19px
+            -webkit-border-radius 19px
+            -moz-border-radius 19px
+            border-radius 19px
+            opacity .8
+            filter progid:DXImageTransform.Microsoft.Alpha(Opacity=80)
+            -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+            -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+            box-shadow 1px 1px 4px 0 #6d6d6d
+            z-index 10
+            transition all .4s ease
+            &:hover
+              width 45px
+              height 45px
+              margin-top -22px
+              margin-left -22px
+              background-position -67px -176px
+          .exclusive_label
+            width 140px
+            height 140px
+            -webkit-border-radius 70px
+            -moz-border-radius 70px
+            border-radius 70px
+            position absolute
+            -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+            -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+            box-shadow 1px 1px 4px 0 #6d6d6d
+            color #fff
+            font-size 1.1em
+            top -109px
+            left -9px
+            padding 109px 0 0 39px
+            opacity .7
+            filter progid:DXImageTransform.Microsoft.Alpha(Opacity=70)
+        .text
+          height 93px
+          font-size 1.3em
+          line-height 1.35em
+          padding 10px 10px 5px
+          width 406px
+          float left
+          width 320px
+        .opt
+          height 27px
+          background-color #e2e2e2
+          width 406px
+          padding 0 10px
+          float left
+          width 100%
+    article
+      text-align left
+      figure
+        width 690px
+      .text_note
+        padding-left 10px
+        padding-right 10px
+        text-align left
+        padding-bottom 10px
+    .buscar_otro
+      display none
+  .left_horoscopo
+    width 300px
+    display inline-block
+    vertical-align top
+    margin 0 26px 0 10px
+    font-size 1rem
+    width 690px
+    width 320px
+    margin 0
+    .monster_box
+      width 300px
+      height 618px
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+      padding 9px 0
+      margin-bottom 15px
+    .add
+      width 300px
+      height 290px
+      padding 20px 0
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+      margin-bottom 15px
+      img
+        width 100%
+        height auto
+    .mas_visto
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+      width 300px
+      .tab
+        height 26px
+        font-size 1.3em
+        padding-left 11px
+        background #e3e3e3
+      .list
+        .item
+          padding 7px 0 7px 11px
+          width 300px
+          font-size 0
+          border-bottom 1px solid #d9d9d9
+          float left
+          figure
+            vertical-align top
+            display inline-block
+            font-size 1rem
+            img
+              width 120px
+              height 74px
+          .des
+            width 162px
+            vertical-align top
+            display inline-block
+            font-size 1rem
+            padding-left 7px
+            height 74px
+          &:nth-child(even)
+            background-color #f1f1f1
+            border-left 1px solid #d9d9d9
+            background none
+          &.bg_class
+            background-color #f1f1f1
+      .pagine
+        height 49px
+        text-align center
+    .plugin_fb
+      width 300px
+      -webkit-box-shadow 1px 1px 4px 0 #6d6d6d
+      -moz-box-shadow 1px 1px 4px 0 #6d6d6d
+      box-shadow 1px 1px 4px 0 #6d6d6d
+      margin 15px 0
+    #ads
+      width 300px
+      border 0
+      padding 0
+      .item
+        width 140px
+        margin-left 20px
+        margin-bottom 20px
+        &:nth-child(odd)
+          margin-left 0
+  .mas_visto
+    width 600px
+    margin 0 auto
+    margin-top 40px
+    margin-bottom 20px
+    .list
+      overflow hidden
+      .item
+        float left
+        &:nth-child(even)
+          border-left 1px solid #d9d9d9
+          background none
+        &.bg_class
+          background-color #f1f1f1
+
+#horoscopo_resultados .paginate ul li:hover a,#horoscopo_resultados .paginate ul .active a
+  color #fff
+  text-decoration none
+
+.wrapper_slider_gallery
+  width 600px
+  background #fff
+  text-align center
+  padding 8px
+  -webkit-border-radius 10px
+  -moz-border-radius 10px
+  border-radius 10px
+  overflow hidden
+  width 100%
+  width 100%
+  .close_popup
+    font-size 20px
+    position absolute
+    right 10px
+    top 7px
+    z-index 99
+  li
+    background-color #000
+    text-align center
+  figure
+    display inline-block
+  img
+    width 90%
+    width 90%
+
+.video-container
+  position relative
+  padding-bottom 56.25%
+  padding-top 30px
+  height 0
+  overflow hidden
+
+.video-container iframe,.video-container object,.video-container embed
+  position absolute
+  top 0
+  left 0
+  width 100%
+  height 100%
+
+@media
+  screen
+    and
+      (max-width
+        &:1000px)
+          .container{width 768px
+          margin 0 auto
+          padding 0
+
+header .social,header .search
+  display none
+
+#main_nav .menu_responsive .options .showing_config .welcome .iniciar_sesion,#main_nav .menu_responsive .options .showing_config .welcome .registro_form,#main_nav .menu_responsive .options .showing_config .welcome .log_in_mobile
+  display none
+
+#main_nav .menu_responsive .options .showing_config .pick_color .save,#main_nav .menu_responsive .options .showing_config .pick_color .cancel
+  background url("/../assets/images/sprite.png")
+  display inline-block
+  width 21px
+  height 21px
+  float right
+  margin-right 7px
+  margin-top 4px
+
+#main_nav .menu_responsive .options .showing_config,#main_nav .menu_responsive .options .showing_menu
+  top 36px
+
+#main_nav .menu_responsive .options .showing_config .pick_color,#main_nav .menu_responsive .options .showing_config .share,#main_nav .menu_responsive .options .showing_config .change
+  display none
+  background #333
+  padding-bottom 10px
+  overflow hidden
+  height 107px
+
+#main_nav .menu_responsive .options .showing_config .pick_color span,#main_nav .menu_responsive .options .showing_config .share span,#main_nav .menu_responsive .options .showing_config .change span
+  font-size 1.4em
+
+#main_nav .menu_responsive .options .showing_config .pick_color a,#main_nav .menu_responsive .options .showing_config .share a,#main_nav .menu_responsive .options .showing_config .change a
+  float none
+
+#main_nav.menu_fixed .options_menu_fixed,#main_nav.menu_fixed .menu
+  display none !important
+  height auto
+
+#main_nav.menu_fixed .showing_menu .opt_menu.active,#main_nav.menu_fixed .showing_menu .opt_menu:hover
+  background-color none !important
+
+#main_nav .showing_menu .opt_menu.active,#main_nav .showing_menu .opt_menu:hover
+  background-color none !important
+
+.view_3
+  .plugin_fb
+    width 300px !important
+    overflow hidden
+  .portada_destacado
+    .desc
+      width 495px !important
+  .features
+    text-align center
+  .more_news_v2
+    .news
+      &:nth-child(even)
+        margin 50px !important
+
+.view_3 .more_news_v2 .news:nth-child(3n+1),.view_3 .more_news_v2 .news:nth-child(2n+1),.view_3 .more_news_v2 .news:first-child
+  margin 0 !important
+
+#notes .add,#notes #ads,#notes .plugin_fb,#notes .monster_box
+  display none
+
+#notes .right_notes .group_title,#notes .right_notes .title_nota
+  padding-left 10px
+  padding-right 10px
+
+#horoscopo_resultados .add,#horoscopo_resultados #ads,#horoscopo_resultados .plugin_fb,#horoscopo_resultados .monster_box
+  display none
+
+#horoscopo_resultados .right_horoscopo article .group_title,#horoscopo_resultados .right_horoscopo article .title_nota
+  padding-left 10px
+  padding-right 10px
+
+}@media
+  screen
+    and
+      (max-width
+        &:480px)
+          .container,header,#main_nav{width 320px
+
+#notes .right_notes.pichanga_y_juerga .group_title,#notes .right_notes.pichanga_y_juerga .subtitle
+  padding-left 10px
+
+#notes .right_notes.pichanga_y_juerga .list_content .tabs,#notes .right_notes.pichanga_y_juerga .list_content .paginate
+  display none
 
-	.title 
-		width 100%
-		height 50px
-		border-bottom 1px solid #d9d9d9
-		text-align center
-		font-size 2.1rem
-    
-	.left_column
-		width 612px
-		margin-right 23px
-		vertical-align top
-		display inline-block
-		font-size 1rem		
-		margin-left 12px
-		margin-top 12px
-
-		.portada_destacado
-			box-shadow()
-			display inline-block
-			width 100%
-			figure
-				width 100%
-				img 
-					width 100%
-					height auto
-			.desc 
-				color #6D6D6D
-				font-size 2.4em
-				text-align center
-				height 192px
-				padding-top 10px
-	
-	.left2_column
-		width 300px
-		vertical-align top
-		display inline-block
-		font-size 1rem
-		margin-top 12px
-		margin-right 8px
-		margin-left 9px
-		.add
-			height 290px
-			padding 20px 0
-			width 300px
-			box-shadow()
-			img
-				width 100%
-				height auto
-		.plugin_fb
-			box-shadow()
-			margin-top 21px
-		.monsterbox
-			width 300px
-			height 600px
-			box-shadow()
-			background-color #666
-			
-
-	.left3_column
-		margin-left 14px
-		margin-right 10px
-
-	&.view_3
-	
-		.portada_destacado			
-			margin-top 16px
-			box-shadow()
-			figure
-				width 251px
-				height 155px
-				margin 10px 0 0 10px
-				float left
-			.desc
-				width 345px
-				font-size 2em
-				float left
-				text-align left
-				padding-left 10px
-				line-height 1.2em
-				height 182px
-			.opt
-				float left
-				width 100%
-			.dummy
-				width 100%
-				float left
-				font-size 1em
-				padding 10px
-			&:first-child
-				margin-top 0
-
-
-	.right_column
-		width 300px
-		vertical-align top
-		display inline-block
-		font-size 1rem		
-		margin-top 12px		
-
-		.news
-			box-shadow()
-			figure
-				width 100%
-				img 
-					width 100%
-					height auto			
-			
-			&:first-child
-				margin-bottom 21px
-
-	.more_news
-		background #fff
-		
-		font-size 0
-		text-align center
-		padding-bottom 27px
-		.news
-			width 300px
-			display inline-block
-			vertical-align top
-			font-size 1rem
-			margin-left 18px
-			margin-top 20px
-			box-shadow()
-			figure
-				width 100%
-				img 
-					width 100%
-					height auto
-			&:first-child
-				margin-left 0
-			&:nth-child(3n+1)
-				margin-left 0
-			
-
-	&.view_3		
-		.more_news
-			.news
-				width 457px
-				height 120px				
-				&:nth-child(3n+1)
-					margin-left 18px
-				&:nth-child(2n+1)
-					margin-left 0
-				figure
-					width 194px
-					height 120px
-					float left
-				.desc
-					float left
-					width 262px
-					height 93px
-				.opt 
-					float left
-					width 263px
-					
-
-	.features
-		margin-top 20px
-		width 300px
-		margin-right 28px
-		margin-left 9px
-		display inline-block
-		vertical-align top
-		font-size 1rem
-		&.subseccion_modular_listado
-		&.subseccion_modular
-			margin-left 22px
-			margin-right 9px
-		.add
-			height 290px
-			padding 20px 0
-			width 300px
-			margin-bottom 40px
-			box-shadow()
-			img
-				width 100%
-				height auto
-		.monsterbox
-			width 300px
-			height 600px
-			box-shadow()
-			background-color #666
-			margin-bottom 40px
-
-		.mas_visto
-			box-shadow()
-			.tab
-				height 26px
-				font-size 1.3em
-				padding-left 11px
-				background #e3e3e3 
-				
-			.list 
-				.item
-					padding 7px 0 7px 11px
-					width 300px
-					font-size 0
-					border-bottom 1px solid #d9d9d9
-					figure
-						vertical-align top
-						display inline-block
-						font-size 1rem
-						img
-							width 120px
-							height 74px
-					.des
-						width 162px 
-						vertical-align top
-						display inline-block
-						font-size 1rem
-						padding-left 7px
-						height 74px
-					&:nth-child(even)
-						background-color #f1f1f1
-
-			.pagine
-				height 49px 
-				text-align center
-
-		.plugin_fb
-			box-shadow()
-			margin-top 21px
-
-		.view2
-			width 300px
-			display inline-block
-			vertical-align top
-			font-size 1rem
-			margin-top 29px
-			margin-bottom 30px
-			box-shadow()
-			&:first-child 
-			&:nth-child(2n+1)
-				margin-right 18px
-				margin-left -10px
-			figure
-				width 300px
-				img 
-					width 100%
-					height auto
-			.desc
-				color #6D6D6D
-				font-size 1.2em
-				text-align left
-				height 75px
-				padding 4px 5px 0
-				width 300px
-			.opt 
-				width 300px
-				
-
-
-	.more_news_v2
-		margin-top 20px
-		width 608px
-		display inline-block
-		vertical-align top
-		font-size 1rem
-		&.subseccion_modular
-			margin-left 20px
-		&.subseccion_modular_listado
-			margin-left 11px
-		.news
-			box-shadow()
-			float left
-			margin-top 21px
-			&:first-child
-				margin-top 0
-			figure
-				width 194px
-				float left
-				img
-					width 100%
-					height 120px
-			.desc
-				float left 
-				width 414px
-				height 93px
-				font-size 1.4em
-			.opt
-				float left
-				width 414px
-				height 27px
-				
-		.view2
-			width 300px
-			display inline-block
-			vertical-align top
-			font-size 1rem
-			margin-top 0
-			margin-bottom 30px
-			&:first-child 
-			&:nth-child(2n+1)
-				margin-right 18px
-				margin-left -10px
-			figure
-				width 300px
-				img 
-					width 100%
-					height auto
-			.desc
-				color #6D6D6D
-				font-size 1.2em
-				text-align left
-				height 75px
-				padding 4px 5px 0
-				width 300px
-			.opt 
-				width 300px
-				
-
-	&.view_3
-		.features
-			width 457px
-			.mas_visto
-				box-shadow()
-				width 457px
-				.item
-					width 457px
-					.des
-						width 320px
-			.add
-				width 457px
-				height 261px
-				display inline-block
-				box-shadow()
-				text-align center
-				padding-top 3px
-				margin 15px 0
-				img
-					width 300px
-					height 251px
-			.news
-				width 457px
-				margin 0 0 13px!important
-				&.nth-child(2n+1)
-					margin 0!important
-				&.nth-child(2n)
-					margin 0!important
-				figure
-					width 194px
-					height 120px
-					float left
-				.desc
-					float left
-					width 262px
-					height 93px
-				.opt 
-					float left
-					width 263px
-					
-		.more_news_v2
-			width 457px
-			.news
-				width 457px
-				margin 0 0 13px!important
-				&.nth-child(2n+1)
-					margin 0!important
-				&.nth-child(2n)
-					margin 0!important
-				figure
-					width 194px
-					height 120px
-					float left
-				.desc
-					float left
-					width 262px
-					height 93px
-				.opt 
-					float left
-					width 263px
-					
-		
-		.plugin_fb
-			width 457px
-			height 261px
-			display inline-block
-			box-shadow()
-			margin 2px 0 16px
-
-		
-
-	.paginate
-		border-top 1px solid #d8d8d8
-		height 40px
-		padding 9px 15px 0 0 
-		text-align right
-		margin-bottom -35px
-		margin-top 10px
-		ul
-			font-size 0
-			li 
-				display inline-block
-				width 16px
-				height 16px
-				border-radius(8px)
-				text-align center
-				line-height 15px
-				font-size 1rem
-				margin-left 2px
-
-				a 
-					font-size 0.9em
-					display inline-block
-					color #6d6d6d
-					line-height auto
-									
-			li:hover, .active			
-
-				a
-					color #fff
-					text-decoration none
-
-
-#notes 
-	width 960px
-	background #fff
-	padding-top 15px
-	font-size 0
-	overflow hidden
-	.left_notes
-		width 300px
-		display inline-block
-		vertical-align top
-		margin 0 26px 0 9px
-		font-size 1rem
-		.monster_box
-			width 300px
-			height 618px
-			box-shadow()		
-			padding 9px 0
-			margin-bottom 15px
-		.add
-			width 300px
-			height 290px
-			padding 20px 0
-			box-shadow()
-			margin-bottom 15px
-
-			img
-				width 100%
-				height auto
-
-		.mas_visto
-			box-shadow()
-			.tab
-				height 26px
-				font-size 1.3em
-				padding-left 11px
-				background #e3e3e3 
-			.list 
-				.item
-					padding 7px 0 7px 11px
-					width 300px
-					font-size 0
-					border-bottom 1px solid #d9d9d9
-					figure
-						vertical-align top
-						display inline-block
-						font-size 1rem
-						img
-							width 120px
-							height 74px
-					.des
-						width 162px 
-						vertical-align top
-						display inline-block
-						font-size 1rem
-						padding-left 7px
-						height 74px
-					&:nth-child(even)
-						background-color #f1f1f1
-
-			.pagine
-				height 49px 
-				text-align center
-
-		.plugin_fb
-			width 300px
-			box-shadow()
-			margin 15px 0
-		#ads
-			width 300px
-			border 0
-			padding 0
-			.item
-				width 140px
-				margin-left 20px
-				margin-bottom 20px
-				&:nth-child(odd)
-					margin-left 0
-
-	.right_notes
-		width 600px
-		display inline-block
-		vertical-align top
-		font-size 1rem
-		float right
-		margin-right 25px
-		.group_title
-			font-size 2.8em
-			line-height 30px
-		.title_nota
-			font-size 1.9em
-			margin-top 5px
-		.image 
-			.opt
-				height 27px
-				background-color #e2e2e2
-				width 100%
-				padding 0 10px
-				text-align left
-				margin-top 30px
-				
-				
-			.gallery
-				position relative
-				a 
-					position absolute
-					width 38px
-					height 38px
-					display block
-					border-radius(19px)
-					background url('../images/sprite.png')
-					top 50%
-					margin-top -19px
-					opacity(0.7)
-					&.next
-						background-position -200px -637px
-						left 0
-					&.prev
-						background-position -157px -637px
-						right 0
-			figure 				
-				img
-					width 100%
-					height auto
-		.text_note
-			font-size 1.13em
-			margin-top 15px
-		.author
-			font-size 0.88em
-			text-align center
-			margin-top 25px
-			span 
-				height 8px
-				width 8px
-				border-radius(4px)
-				display inline-block
-				margin-right 7px
-				margin-top 2px
-
-		.social
-			text-align center
-			padding 15px 0
-			border-top 1px solid #d9d9d9
-			border-bottom 1px solid #d9d9d9
-		.tags
-			font-size 0.88em
-			text-align center
-			padding 5px 0 22px		
-			span 
-				font-size 1.14em
-				font-weight 700
-		.action
-			text-align center
-			.btn_volver
-				text-align center
-				margin 0 auto
-				padding 0 18px
-				font-size 1.2em
-				color #fff
-				display inline-block
-				border-radius(12px)
-				text-decoration none
-		.buscar_otro
-			border-bottom 1px solid #d9d9d9
-			padding-bottom 6px
-			.tit 
-				font-size 2em
-				text-align center
-			.box_form
-				background-color #ececec
-				height 40px
-				border-bottom 1px solid #bababa
-				select
-					display inline-block
-					margin-left 50px
-					margin-right 142px
-					height 28px
-					width 162px
-					border 1px solid #a5a5a5
-					vertical-align top
-					margin-top 5px
-				.box_search
-					display inline-block
-					background #bdbdbd
-					width 213px
-					height 26px
-					border-radius(13px)	
-					vertical-align top
-					margin-top 6px	
-					.ipt 
-						background none
-						border 0
-						height 20px
-						padding-left 20px
-						width 172px
-						margin-left 5px
-					.btn 
-						background url('../images/sprite.png') -1px -146px
-						height 26px
-
-		&.pichanga_y_juerga
-			.image
-				margin-top 26px
-				box-shadow()
-			.title_nota
-				margin-top 10px
-				margin-bottom -15px
-			.subtitle
-				font-size 2em				
-				padding 10px 0
-			.text_note
-				font-size 1em
-				span
-					font-size 1.13em
-			.address
-				font-size 2.8em
-				margin-bottom -30px
-				margin-top 20px		
-			.author 
-				margin-top 40px		
-			.list_content
-				background #ececec
-				border-left 1px solid #d8d8d8
-				border-right 1px solid #d8d8d8
-				padding-top 16px
-				margin-left -6px
-				margin-right -11px
-				border-bottom 1px solid #d8d8d8
-				.tabs
-					background #fff
-					height 38px
-					border 1px solid #bdbdbd
-					border-top 1px solid #e5e5e5
-					margin 0 -1px 
-					border-radius(3px)
-					ul
-						
-						li
-							float left 
-							width auto
-							margin-left 10px
-							height 36px
-							a 
-								padding 0 5px
-								display block
-								height 36px
-								line-height 33px
-								text-decoration none
-							&.active
-							&:hover
-								margin-top -5px
-								height 41px
-								background color_lila
-								padding-top 5px
-								-webkit-border-top-left-radius: 5px;
-								-webkit-border-top-right-radius: 5px;
-								-moz-border-radius-topleft: 5px;
-								-moz-border-radius-topright: 5px;
-								border-top-left-radius: 5px;
-								border-top-right-radius: 5px;
-								a
-									color #fff
-								
-
-					.buscar_otro
-						float left
-						margin-left 12px
-						border-bottom 0
-						.box_form
-							background #fff
-							height 37px
-							.box_search
-								margin-top 5px
-				
-				.list_articles		 
-					font-size 0		
-					padding 0 7px 10px 6px
-					.filter
-						height 45px
-						font-size 1rem
-						padding-top 8px
-						select
-							width 181px
-							height 27px
-							margin-left 10px
-						a 
-							width 18px
-							height 18px
-							display inline-block
-							border-radius(9px)
-							text-align center
-							text-decoration none
-							&:hover
-							&.active
-								background color_lila
-								color #fff
-								line-height 16px
-
-					article
-						width 600px
-						display inline-block
-						vertical-align top		
-						box-shadow()
-						margin 0 0 20px 0
-						font-size 1rem
-						
-						.add_in_news 
-							width 406px
-							height 250px
-							background-color #333
-							margin 20px 0
-
-						.media 
-							height 120px
-							width 194px
-							float left
-							position relative
-							overflow hidden
-
-							img
-								width 100%
-								height auto
-
-							.play_video
-								background-image url('../images/sprite.png') 
-								background-position -71px -180px
-								background-repeat no-repeat
-								width 38px
-								height 38px
-								display block
-								position absolute
-								top 50%
-								left 50%
-								margin-left -19px
-								margin-top -19px
-								border-radius(19px)
-								opacity(0.8)
-								box-shadow()
-								z-index 10
-								transition all 0.4s ease
-								&:hover
-									width 45px
-									height 45px
-									margin-top -22px
-									margin-left -22px
-									background-position -67px -176px
-
-							.exclusive_label
-								width 140px
-								height 140px
-								border-radius (70px)	
-								position absolute	
-								box-shadow()
-								color #fff
-								font-size 1.1em
-								top -109px 
-								left -9px
-								padding 109px 0 0 39px
-								opacity(0.7)
-
-						.text 
-							height 93px 
-							font-size 1.6em
-							line-height 1.35em
-							padding 10px 10px 5px
-							width 406px
-							float left
-							background  #fff
-						.opt
-							height 27px
-							background-color #e2e2e2
-							width 406px
-							padding 0 10px
-							float left
-							
-
-				.paginate
-					border-top 1px solid #d8d8d8
-					height 40px
-					padding 9px 15px 0 0 
-					text-align right
-					margin-top 10px
-					width 100%
-					border-bottom #a9a9a9
-					ul
-						font-size 0
-						li 
-							display inline-block
-							width 16px
-							height 16px
-							border-radius(8px)
-							text-align center
-							line-height 15px
-							font-size 1rem
-							margin-left 2px
-
-							a 
-								font-size 0.9em
-								display inline-block
-								color #6d6d6d
-								line-height auto
-												
-						li:hover, .active			
-
-							a
-								color #fff
-								text-decoration none
-
-
-		
-
-
-
-
-
-
-#horoscopo_resultados 
-	width 960px
-	background #fff
-	font-size 0	
-	overflow hidden
-	.big_title
-		height 50px
-		border-bottom 1px solid #d8d8d8
-		margin-bottom 10px
-		text-align center
-		line-height 50px
-		font-size 2.4rem
-	.paginate
-		border-top 1px solid #d8d8d8
-		height 40px
-		padding 9px 15px 0 0 
-		text-align right
-		margin-top 10px
-		width 100%
-		float left
-		ul
-			font-size 0
-			li 
-				display inline-block
-				width 16px
-				height 16px
-				border-radius(8px)
-				text-align center
-				line-height 15px
-				font-size 1rem
-				margin-left 2px
-
-				a 
-					font-size 0.9em
-					display inline-block
-					color #6d6d6d
-					line-height auto
-									
-			li:hover, .active			
-
-				a
-					color #fff
-					text-decoration none
-			
-	.right_horoscopo
-		width 600px
-		display inline-block
-		vertical-align top
-		font-size 1rem
-		float right
-		margin-right 24px			
-		.list_articles		 
-			font-size 0
-			padding-bottom 10px			
-			padding-top 10px
-			article
-				width 600px
-				display inline-block
-				vertical-align top		
-				box-shadow()
-				margin 0 0 20px 0
-				font-size 1rem
-				
-				.add_in_news 
-					width 406px
-					height 250px
-					background-color #333
-					margin 20px 0
-
-				.media 
-					height 120px
-					width 194px
-					float left
-					position relative
-					overflow hidden
-
-					img
-						width 100%
-						height auto
-
-					.play_video
-						background-image url('../images/sprite.png') 
-						background-position -71px -180px
-						background-repeat no-repeat
-						width 38px
-						height 38px
-						display block
-						position absolute
-						top 50%
-						left 50%
-						margin-left -19px
-						margin-top -19px
-						border-radius(19px)
-						opacity(0.8)
-						box-shadow()
-						z-index 10
-						transition all 0.4s ease
-						&:hover
-							width 45px
-							height 45px
-							margin-top -22px
-							margin-left -22px
-							background-position -67px -176px
-
-					.exclusive_label
-						width 140px
-						height 140px
-						border-radius (70px)	
-						position absolute	
-						box-shadow()
-						color #fff
-						font-size 1.1em
-						top -109px 
-						left -9px
-						padding 109px 0 0 39px
-						opacity(0.7)
-
-				.text 
-					height 93px 
-					font-size 1.3em
-					line-height 1.35em
-					padding 10px 10px 5px
-					width 406px
-					float left
-				.opt
-					height 27px
-					background-color #e2e2e2
-					width 406px
-					padding 0 10px
-					float left
-					
-
-				
-	.left_horoscopo
-		width 300px
-		display inline-block
-		vertical-align top
-		margin 0 26px 0 10px
-		font-size 1rem
-		.monster_box
-			width 300px
-			height 618px
-			box-shadow()		
-			padding 9px 0
-			margin-bottom 15px
-		.add
-			width 300px
-			height 290px
-			padding 20px 0
-			box-shadow()
-			margin-bottom 15px
-
-			img
-				width 100%
-				height auto
-
-		.mas_visto
-			box-shadow()
-			.tab
-				height 26px
-				font-size 1.3em
-				padding-left 11px
-				background #e3e3e3 
-			.list 
-				.item
-					padding 7px 0 7px 11px
-					width 300px
-					font-size 0
-					border-bottom 1px solid #d9d9d9
-					figure
-						vertical-align top
-						display inline-block
-						font-size 1rem
-						img
-							width 120px
-							height 74px
-					.des
-						width 162px 
-						vertical-align top
-						display inline-block
-						font-size 1rem
-						padding-left 7px
-						height 74px
-					&:nth-child(even)
-						background-color #f1f1f1
-
-			.pagine
-				height 49px 
-				text-align center
-
-		.plugin_fb
-			width 300px
-			box-shadow()
-			margin 15px 0
-		#ads
-			width 300px
-			border 0
-			padding 0
-			.item
-				width 140px
-				margin-left 20px
-				margin-bottom 20px
-				&:nth-child(odd)
-					margin-left 0
-
-
-		
-
-
-@media screen and (max-width:1000px)
-
-	.container
-		width 768px
-		margin 0 auto
-		padding 0
-	header
-		overflow hidden
-		width 768px
-		.social
-		.search
-			display none
-	#main_nav
-		width 768px
-
-		&.menu_fixed
-			
-			.options_menu_fixed
-			.menu
-				display none!important
-			
-			.search_box
-				display none
-				position absolute!important
-				top 25px
-				right 34px
-				background-color #3a3a3a
-				width 248px!important
-				height 35px!important
-				-webkit-border-bottom-right-radius: 10px;
-				-webkit-border-bottom-left-radius: 10px;
-				-moz-border-radius-bottomright: 10px;
-				-moz-border-radius-bottomleft: 10px;
-				border-bottom-right-radius: 10px;
-				border-bottom-left-radius: 10px;
-
-				.bg_search
-					top 7px!important
-				input
-					margin-top 4px!important
-
-
-			.circles
-				display block!important
-				float left
-				width 666px
-				background url('../images/sprite.png') center -598px no-repeat
-				height 24px
-			.search
-				display block!important
-				float left
-				background-position -4px -377px!important
-				&.active 
-					background-color #3a3a3a
-
-			
-		.menu_desktop
-			display none
-		.menu_responsive
-			display block!important	
-
-			.menu						
-				margin-left 10px
-				text-align left
-			.options 
-				height 25px
-				background-color #5d5d5d
-				margin 0 10px
-				position relative
-				
-				.showing_config
-					position absolute
-					background-color #3a3a3a
-					top 25px
-					left 0
-					width 100%
-					z-index 900
-					-webkit-border-bottom-right-radius: 10px;
-					-webkit-border-bottom-left-radius: 10px;
-					-moz-border-radius-bottomright: 10px;
-					-moz-border-radius-bottomleft: 10px;
-					border-bottom-right-radius: 10px;
-					border-bottom-left-radius: 10px;
-					overflow hidden
-
-					.welcome
-						color #8C8C8C
-						height 40px
-						padding 0 0 0 14px
-						line-height 40px
-						text-align left
-						a 
-							background none
-							width 100%
-							color #cfcfcf
-						.iniciar_sesion
-						.registro_form
-						.log_in_mobile
-							display none
-
-					.pick_color
-						border-top 1px solid #3d3d3d
-						width 100%
-						background-color #353535
-						padding-left 14px
-						text-align left
-						font-size 0.9em
-
-						.t1
-							display block
-							text-align left
-							color #cfcfcf
-							padding 3px 0 1px				
-						ul
-							width 100%
-							text-align left
-							
-							li 
-								display inline-block
-								border-radius(10px)
-								overflow hidden
-								margin-right 7px
-								a 
-									background none
-									width 20px
-									height 20px
-									display block
-						
-						.t2
-							display inline-block							
-							color #cfcfcf
-							padding 5px 0
-							text-align left
-
-						.save
-						.cancel
-							background url('../images/sprite.png')
-							display inline-block							
-							width 21px
-							height 21px
-							float right
-							margin-right 7px
-							margin-top 4px
-						.save
-							background-position -3px -499px
-						.cancel
-							background-position -33px -499px
-							margin-right 16px
-					.share
-						height 56px 
-						border-top 1px solid #3d3d3d
-						width 100%
-						background-color #353535
-						text-align left
-						font-size 0.9em
-
-						span
-							display inline-block
-							padding  17px 0 0 15px
-							color #cfcfcf
-
-						a 
-							float right 
-							color #cfcfcf
-							text-decoration none
-							margin-right 2px
-							text-align center
-							width 42px
-							height 45px
-							margin-top 5px
-							text-align center
-							background none
-							font-size 11px
-							display inline-block
-							
-							span
-								width 32px
-								height 29px
-								display inline-block
-								background url('../images/sprite.png')
-
-						.fb
-							span
-								background-position 3px -461px
-
-						.tw
-							span
-								background-position -35px -461px
-
-						.gp
-							margin-right 8px
-							span
-								background-position -71px -461px
-					.change
-						height 47px 
-						width 100%
-						padding-left 15px
-						color #cfcfcf
-						text-align left
-						font-size 0.85em
-
-						span
-							display inline-block
-							padding-top 13px
-						a 
-							float right
-							width 25px
-							height 25px
-							display inline-block
-							margin-right 15px
-							margin-top 10px
-							background url('../images/sprite.png')
-							&.v3
-								background-position -144px -509px
-							&.v2
-								margin-right 6px
-								background-position -113px -509px
-
-
-								
-				.showing_menu
-					position absolute
-					background-color #3a3a3a
-					top 25px
-					left 0
-					width 100%
-					z-index 900
-					padding-top 20px
-					-webkit-border-bottom-right-radius: 10px;
-					-webkit-border-bottom-left-radius: 10px;
-					-moz-border-radius-bottomright: 10px;
-					-moz-border-radius-bottomleft: 10px;
-					border-bottom-right-radius: 10px;
-					border-bottom-left-radius: 10px;
-					overflow hidden
-					
-					.opt_menu 
-						width 100%
-						line-height 24px
-						background-color #353535
-						border-top 1px solid #3d3d3d
-						height 24px
-
-						&:last-child
-							height 43px
-							background-color #3a3a3a
-							color #cfcfcf
-							line-height 43px
-							padding-left 15px
-							text-align left
-
-							a 
-								height 30px
-								width 29px
-								display inline-block
-								margin-right 8px
-								margin-top 6px
-								background url('../images/sprite.png') no-repeat 
-								float right
-								&.fb
-									background-position -1px -461px
-									&:hover
-										background-position -108px -461px	
-								&.tw
-									background-position -37px -461px
-									&:hover
-										background-position -144px -461px
-								&.gp
-									background-position -73px -461px
-									&:hover
-										background-position -180px -461px
-						
-						a
-							height 24px
-							width 100%
-							display block
-							color #cfcfcf
-							background none
-							text-align left
-							padding-left 15px
-							font-size 0.9em
-							background-image url('../images/sprite.png')
-							background-repeat no-repeat
-							background-position right -568px
-
-				
-
-				.search_box
-					width 700px
-					float left
-					display block
-				a 
-					width 34px
-					height 25px
-					display block
-					float left
-					background url('../images/sprite.png')
-					padding 0 5px 0
-					
-					&.show_menu
-						background-position -175px -416px
-						&.active
-							background-color #3d3d3d
-					&.config
-						background-position -40px -377px
-						&.active
-							background-color #3d3d3d
-					&:hover
-						background-color #3d3d3d
-				
-				.search_box
-					position relative
-					text-align center
-					
-					.bg_search
-						width 190px
-						height 23px
-						background-color: #000;					
-						opacity(.2)
-						position absolute
-						top 2px
-						left 50%
-						margin-left -90px
-						border-radius(13px)						
-
-					input
-						border 0
-						background none
-						color #fff
-						outline 0
-						height 23px
-						vertical-align top
-						padding-left 20px
-					.btn_search
-						background url('../images/sprite.png') -129px -733px
-						width 20px
-						height 23px
-						margin-top 0
-
-
-		.user_options
-			display none
-	footer
-		display none
-
-	#banner
-		display none
-	#news
-		width 768px
-		margin 0  auto 14px
-		background-color #e2e2e2
-		padding-top 0
-		.paginate
-			display none
-		.option_news
-			display none
-		.title_news
-			text-align left
-			width 690px
-			margin 0 auto
-			background-color #fff
-			padding 10px 10px 0
-			height 60px
-		.list_articles
-			width 690px
-			margin 0 auto
-			background-color #fff
-			text-align center			
-
-			article
-				&:nth-child(3n+1)
-					margin-left 20px
-				&:nth-child(odd)
-					margin-left 0
-				.media
-					.exclusive_label
-						padding-left 10px
-									
-			.opt
-				text-align left
-						
-
-		.list_mode
-			article
-				width 301px!important
-				height 98px!important
-				margin-left 20px
-				&:nth-child(3n+1)
-					margin-left 20px
-				&:nth-child(odd)
-					margin-left 0!important
-
-				.media
-					width 116px
-					height 71px					
-				.text
-					width 185px
-					height 71px
-					padding-top 4px
-					text-align left
-				.opt
-					width 301px
-					text-align left
-					
-			.adding
-				display none
-		.no_title
-			padding-top 25px
-
-
-	#big_banner
-		width 690px
-		margin 0 auto 14px
-		background-color #fff
-		padding-top 0
-		border-bottom: 1px solid #d8d8d8;
-		border-top: 1px solid #d8d8d8;
-		text-align center
-		padding-top 20px
-
-		&.fullbanner
-			margin-bottom 0
-
-	#videos 
-		display none
-
-	#ads
-		width 690px
-		text-align center
-		margin 0 auto 14px
-
-		.item
-			width 140px
-
-	#bottom_responsive
-		display block
-	
-	
-
-	.destacado
-		width: 768px;
-		padding: 0;
-		margin-bottom: 0;
-
-		.image_destacado
-			height: auto;
-			width: 768px;
-			.txt
-				position relative
-				color #727171
-				height auto
-				border none
-				padding 20px 10px
-				color #727171
-				bottom 0
-			img
-				width 100%
-				height auto
-			.link
-				display none		
-
-	#add_and_plugin_fb
-		display block
-
-	#portada_espectaculos
-		width 768px
-
-		.monsterbox
-			display none
-		.more_news_v2 
-			.view2
-				display none!important
-
-		.left_column
-			width 768px
-			margin 0
-		.left2_column
-			margin 0
-			.monster_box
-				display none
-		
-		.right_column
-			width 768px
-			text-align center
-			.news
-				width 300px
-				display inline-block
-				margin-left 18px
-		.more_news
-			width 768px
-			text-align center
-			.news
-				&:nth-child(3n+1)
-					margin-left 18px
-		.add
-			display none
-
-		.features
-			width 750px!important
-			margin-right 9px
-			&.subseccion_modular
-				margin-left 9px
-			&.subseccion_modular_listado
-				margin-left 9px
-			.mas_visto 				
-				width 750px!important
-				margin-bottom 20px
-				
-				.list 
-					.item
-						width 750px!important
-						.des
-							width 83%
-							text-align left
-				
-
-		.plugin_fb
-			display none
-		.more_news_v2
-			width 768px
-			text-align center
-			&.subseccion_modular_listado
-				margin-left 0
-			.news
-				width 700px
-				display inline-block
-				float none
-				.desc
-					width 504px
-				.opt
-					width 506px
-					
-		&.view_3
-			
-		
-			.add
-				display none!important
-			.more_news_v2 			
-				width 768px
-			.news
-				width 300px!important
-				display inline-block!important
-				vertical-align top!important
-				font-size 1rem!important
-				margin-left 0!important
-				margin-top 20px!important
-				height auto !important
-				box-shadow()
-				figure
-					width 100%!important
-					height auto!important
-					img 
-						width 100%!important
-						height auto!important
-				&:first-child
-					margin-left 0!important
-				&:nth-child(3n+1)
-					margin-left 0!important
-				&:nth-child(even)
-					margin-left 50px!important
-				.desc
-					width 300px!important
-				.opt 
-					width 300px!important
-					
-
-	.view_3 
-		.plugin_fb
-			width 300px!important
-			overflow hidden
-				
-		.portada_destacado 
-			.desc
-				width 495px!important		
-		.features
-			text-align center
-		.more_news_v2
-			.news				
-				&:nth-child(3n+1)
-				&:nth-child(2n+1)
-				&:first-child
-					margin 0!important
-				&:nth-child(even)
-					margin 50px!important
-	
-
-	#notes 
-		width 690px
-		overflow hidden
-		margin 0 auto 14px
-		.add
-		#ads
-		.plugin_fb
-		.monster_box
-			display none
-		.left_notes
-			width 690px
-			margin 0
-		.right_notes
-			width 690px	
-			padding-bottom 10px	
-			float none	
-			
-			figure
-				width 690px
-			.text_note
-				padding-left  10px
-				padding-right 10px
-
-				padding-bottom 10px
-			.group_title
-			.title_nota
-				padding-left 10px
-				padding-right 10px
-			
-
-			&.pichanga_y_juerga
-				margin-right 0
-				.group_title 
-					padding-left 40px
-					&.p2 
-						padding-left 10px
-				.image
-					width 600px
-					margin-left 41px
-					figure
-						width 600px
-					&.p2
-						margin-left 0
-						figure
-							width 690px
-
-				.list_content
-					width 618px
-					margin-left 36px
-					margin-bottom 30px
-				.subtitle
-					padding-left 40px
-
-		.mas_visto
-			width 600px
-			margin 0 auto
-			margin-top 40px
-			margin-bottom 20px
-			.list
-				overflow hidden
-				.item
-					float left
-					&:nth-child(even)
-						border-left 1px solid #d9d9d9
-						background none
-					&.bg_class
-						background-color #f1f1f1
-
-	#horoscopo_resultados 
-		width 690px
-		overflow hidden
-		margin 0 auto 14px
-		.add
-		#ads
-		.plugin_fb
-		.monster_box
-			display none
-		.left_horoscopo
-			width 690px
-			
-		.right_horoscopo
-			width 690px	
-			padding-bottom 10px	
-			float none	
-			text-align center
-			article
-				text-align left			
-				figure
-					width 690px
-				.text_note
-					padding-left  10px
-					padding-right 10px
-					text-align left
-					padding-bottom 10px
-				
-				.group_title
-				.title_nota
-					padding-left 10px
-					padding-right 10px
-				
-		.mas_visto
-			width 600px
-			margin 0 auto
-			margin-top 40px
-			margin-bottom 20px
-	
-			.list
-				overflow hidden
-				.item
-					float left
-					&:nth-child(even)
-						border-left 1px solid #d9d9d9
-						background none
-					&.bg_class
-						background-color #f1f1f1
-
-	
-
-
-@media screen and (max-width:480px)
-
-	.container
-	header
-	#main_nav
-		width 320px
-
-	#main_nav
-		
-		.menu_responsive
-			.menu						
-				margin-left 0
-				text-align center
-			.options 				
-				height 36px
-				background-color #5d5d5d
-
-				a 
-					height 35px
-					margin-top 1px
-					width 40px
-					&.show_menu
-						background-position -198px -731px						
-					&.config
-						background-position -157px -730px
-				.search_box
-					width 240px
-					.bg_search
-						top 6px
-						width 232px
-						margin-left -116px
-						height 24px
-					input
-						padding-left 0
-						margin-top 6px!important
-						width 190px
-					.btn_search						
-						background-position -129px -736px
-						width 20px
-
-				.circles
-					width 200px
-				.showing_config
-				.showing_menu
-					top 36px
-				.showing_config
-					.pick_color
-					.share
-					.change
-						display none
-						background #333
-						padding-bottom 10px
-						overflow hidden
-						height 107px
-						span
-							font-size 1.4em
-						a 
-							float none
-					.cerrar_sesion
-						padding 10px 0
-						a 
-							float right
-							margin-right 10px
-							text-decoration none
-							width: 100%;
-							background: none;
-							font-size: 1.2em;
-							color #cfcfcf
-					.log_in_mobile
-						display block!important
-					.welcome
-						font-size 1.3em
-						min-height 51px
-						height auto
-						padding-top 4px
-						position relative
-						.bien
-							display none
-						.user_icon
-							display block
-						
-						a 
-							background none
-							color #cfcfcf
-							width 100%
-						span
-							display block
-							position absolute
-							height 40px
-							width 40px
-							background url('../images/sprite.png') -96px -817px
-							right 8px
-							top 4px
-						&.log_in
-							span								
-								left 50%
-								margin-left -20px
-							.iniciar_sesion
-								text-align center
-								.registrate
-									background #333
-									float left
-									margin: 0 0 0 -14px;
-									width: 320px;
-									color #fff
-									padding-bottom 10px
-									font-size 1.2em
-									.registrate_btn
-										display initial
-										color #fff										
-										padding 4px 10px
-										width auto
-										background #EE8435
-										float none
-										width 110px
-										font-size 0.9em
-										text-decoration none
-							.registro_form
-								text-align center
-								padding-top 33px
-								.sel1
-									height 33px
-									width 54px
-									padding 0
-									margin-right 7px
-									font-size 0.9em
-								.sel2
-									height 33px
-									width 144px
-									font-size 0.9em
-									margin-left -48px
-								.finalizar_btn
-									display initial
-									color #fff										
-									padding 4px 10px
-									width auto
-									background #EE8435
-									float none
-									width 110px
-									font-size 0.9em
-									text-decoration none
-								.redes_sociales
-									background #333
-									float left
-									margin: 0 0 0 -14px;
-									width: 320px;
-									color #fff
-									padding-bottom 10px
-									font-size 1.2em
-									margin-top 25px
-									padding-bottom 10px
-									a 
-										height 40px
-										width 40px
-										display inline-block
-										margin 0px 8px
-										vertical-align top
-										background url('../images/sprite.png') 
-										float none
-										&.fb
-											background-position -2px -818px
-										&.tw
-											background-position -50px -818px
-										&.gp
-											background-position -188px -818px
-
-						.login_input
-							width 189px
-							height 33px
-							margin-top 12px
-							padding 0
-							padding-left 5px
-							line-height 1em
-						.btn_login
-							width 80px
-							color #fff
-							display block
-							text-align left
-							background url('../images/sprite.png') -155px -780px
-							border none
-							height 27px
-							padding 0
-							line-height 1em
-							font-size 0.9em
-							margin-left 167px
-							margin-top 12px
-						.lnk1
-							color #8C8C8C
-							font-size 0.9em
-
-				.showing_menu
-					padding-top 0
-					.opt_menu
-						height 32px						
-						a 
-							height 30px
-							font-size 1.3em
-							background-position 289px -781px
-						&:last-child
-							font-size 1.3em
-							height 62px
-							padding-top 5px
-							a 
-								width 40px
-								height 41px
-								&.gp
-									display none
-								&.tw
-									background-position -50px -818px
-									&:hover
-										background-position -50px -818px
-								&.fb
-									background-position -2px -818px
-									&:hover
-										background-position -2px -818px
-
-		&.menu_fixed
-			.options
-				.search_box
-					top 36px
-					height 38px!important
-					right 39px				
-					display none
-			.search
-				background-position -1px -372px !important
-
-
-	#news
-		width 320px
-		padding 0
-		overflow hidden
-
-		.list_articles
-			width 320px
-			article
-				margin 0 0 20px
-
-				&:nth-child(3n+1)
-					margin-left 0
-
-
-
-	#big_banner
-		width 320px
-		padding-top 0
-		height auto
-
-		img
-			width 100%
-
-	#ads
-		width 320px
-		padding-bottom 20px
-
-		.item
-			margin-left 20px
-			margin-bottom 20px
-
-			&:nth-child(odd)
-				margin-left 0
-
-			.add_title
-				display none
-
-	#bottom_responsive 
-		height: 65px;
-		width 320px
-		.paginate
-			margin 0
-			width 320px
-			height 32px 
-
-			ul
-				margin-top 8px
-
-		.go_top
-			width 320px
-			height 26px
-
-			a 
-				margin-top 1px
-				margin-right 10px
-	
-	.destacado
-		width: 320px;
-		
-
-		.image_destacado
-			width: 320px;
-
-			.txt
-				font-size 1em
-
-	#add_and_plugin_fb
-		display none
-
-	#portada_espectaculos
-		width 320px
-		.left_column
-			width 320px
-			margin 0
-			.portada_destacado 
-						.desc
-							font-size 1.3em
-							height 102px
-			
-		.right_column
-			width 320px
-			.news
-				display inline-block
-				margin-left 0
-		.more_news
-			width 320px
-			margin-left 0
-			.news
-				margin-left 0
-				text-align center
-				&:nth-child(3n+1)
-					margin-left 0
-		.features
-			width 300px!important
-			text-align left			
-			.mas_visto
-				width 300px!important
-				
-				.list
-					.item
-						width 300px!important
-						.des
-							width 165px!important
-
-		.more_news_v2
-			width 320px
-
-			.news
-				width 300px
-				display inline-block
-				vertical-align top
-				font-size 1rem
-				margin-left 0
-				margin-top 20px
-				box-shadow()
-				figure
-					width 100%
-					img 
-						width 100%
-						height auto
-				&:first-child
-					margin-left 0
-				&:nth-child(3n+1)
-					margin-left 0
-				.desc
-					width 300px
-				.opt 
-					width 300px
-					
-
-		&.view_3
-			.portada_destacado
-				figure
-					width 300px
-					height auto
-				.desc
-					width 300px!important
-					height auto
-			.features
-				width 300px!important
-				margin 20px 10px 0
-			.mas_visto
-				width 300px!important
-				margin-bottom 20px
-			.add
-				display none!important
-			.more_news_v2 			
-				width 320px
-			.news
-				width 300px!important
-				display inline-block!important
-				vertical-align top!important
-				font-size 1rem!important
-				margin-left 0!important
-				margin-top 20px!important
-				height auto !important
-				box-shadow()
-				figure
-					width 100%!important
-					height auto!important
-					img 
-						width 100%!important
-						height auto!important
-				&:first-child
-					margin-left 0!important
-				&:nth-child(3n+1)
-					margin-left 0!important
-				&:nth-child(even)
-					margin-left 0!important
-				.desc
-					width 300px!important
-				.opt 
-					width 300px!important
-					
-
-	#notes 
-		width 320px
-		.right_notes
-			width 320px
-			.buscar_otro
-				display none
-			figure 
-				width 320px
-							
-
-			&.pichanga_y_juerga
-				.group_title
-				.subtitle
-					padding-left 10px
-				.image
-					margin-left 0
-					figure 
-						width 320px
-					&.p2
-						figure
-							width 320px
-				.pag_pichanga
-					width 320px
-				.list_content
-					margin-left 0
-					.tabs
-					.paginate
-						display none
-					.list_articles
-						padding-left 0
-						.filter
-							background #fff
-							margin-bottom 30px
-						article
-							width 300px
-							margin-left 10px
-							margin-right 10px
-							.media
-								width 116px
-								height auto
-							.text 
-								width 183px
-								height 72px
-								font-size 1.2em
-								display inline-block
-							.opt 
-								width 299px
-											
-				
-		.left_notes
-			width 320px
-			margin 0
-			&.pichanga_juerga
-				display none				
-				
-			.mas_visto
-				width 300px	
-						
-				.list
-					
-					.item
-						float left
-						&:nth-child(even)
-							border-left 1px solid #d9d9d9
-							background none
-						&.bg_class
-							background-color #f1f1f1
-
-	#horoscopo_resultados 
-		width 320px
-		.right_horoscopo
-			width 320px
-			.buscar_otro
-				display none
-			.list_articles
-				article
-					width 320px
-					.media
-						width 320px
-						height auto	
-					.text 
-						width 320px	
-					.opt 
-						width 100%				
-					
-		.left_horoscopo
-			width 320px
-			margin 0
-			.mas_visto
-				width 300px	
-					
-				.list
-					
-					.item
-						float left
-						&:nth-child(even)
-							border-left 1px solid #d9d9d9
-							background none
-						&.bg_class
-							background-color #f1f1f1
