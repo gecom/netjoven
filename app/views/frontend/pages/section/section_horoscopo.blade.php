@@ -35,9 +35,7 @@
 				</div>
 			</div>
 			<div class="left_horoscopo">
-				<div class="add">
-					<img src="{{asset('assets/images/maq/banner1.jpg')}}" alt="">
-				</div>
+				@include('frontend.pages.partials.banner_cuadrado')
 				@include('frontend.pages.partials.slider_section')
 				<div class="plugin_fb">
 					@include('frontend.pages.partials.likebox')

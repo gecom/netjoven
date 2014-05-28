@@ -19,9 +19,7 @@
 		</div>		
 	</div>
 	<div class="left_notes pichanga_juerga">
-		<div class="add">
-			<img src="{{asset('assets/images/maq/add_1.png')}}" alt="">
-		</div>
+		@include('frontend.pages.partials.banner_cuadrado')
 		@include('frontend.pages.partials.slider_section')
 		<div class="plugin_fb">
 			@include('frontend.pages.partials.likebox')

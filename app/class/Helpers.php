@@ -256,7 +256,17 @@ class Helpers {
 	public static function getCountryData(){
 
 		$ip_num = sprintf("%u",ip2long(self::getClientIp()));
-		$dbr_country_data = DB::select("SELECT country_code,country_name FROM njv_ip2c WHERE ". $ip_num." BETWEEN begin_ip_num AND end_ip_num LIMIT 1 ");
+
+		$key = "dbr_country_data" . $ip_num;
+
+		if (!Cache::has($key)) {
+			$dbr_country_data = DB::select("SELECT country_code,country_name FROM njv_ip2c WHERE ". $ip_num." BETWEEN begin_ip_num AND end_ip_num LIMIT 1 ");
+
+			Cache::forever($key, $dbr_country_data);
+		}
+
+		$dbr_country_data = Cache::get($key);
+	
 		return $dbr_country_data;
 	}
 

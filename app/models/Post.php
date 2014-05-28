@@ -84,6 +84,7 @@ class Post extends Eloquent {
 		$params = array_merge($params_default, $params);
 
     	$query->select('njv_post.id',
+    					DB::raw('(SELECT image FROM njv_post_multimedia WHERE post_id = njv_post.id and is_principal = 1) AS image_featured'), 
 						'njv_post.title',
 						'njv_post.slug',
 						'njv_post.content',
@@ -101,7 +102,6 @@ class Post extends Eloquent {
 						'njv_category.slug as category_slug')
     			->join('njv_category', 'njv_category.id', '=', 'njv_post.category_id')
     			->orderBy('njv_post.post_at', 'desc');
-
 
 		if(is_array($params['id'])){
 			$query->whereIn('njv_post.id', $params['id']);
@@ -148,6 +148,20 @@ class Post extends Eloquent {
 
 	public function newQuery($excludeDeleted = true){
 	    return parent::newQuery()->addSelect('*',DB::raw('(SELECT parent_id FROM njv_category WHERE id = category_id) category_parent_id'));
+	}
+
+	public static function getLastTag($post_ids = array()){
+
+		if(!count($post_ids)){
+			return array();
+		}
+
+		return Post::select(DB::raw("GROUP_CONCAT(njv_tag.tag) as tags_name"))
+			->leftJoin('njv_post_tag', 'njv_post_tag.post_id','=', 'njv_post.id')
+			->leftJoin('njv_tag', 'njv_tag.id','=', 'njv_post_tag.tag_id')
+			->whereIn('njv_post.id', $post_ids)
+			->where('njv_post.status', '=', Status::STATUS_PUBLICADO);
+
 	}
 
 }

@@ -22,7 +22,7 @@ class FrontendHomeController extends BaseController {
 
 	public function viewMoreNews(){
 
-		$params['type'] =  array(Helpers::TYPE_POST_NEWS,Helpers::TYPE_POST_VIDEO);
+		//$params['type'] =  array(Helpers::TYPE_POST_NEWS,Helpers::TYPE_POST_VIDEO);
 		$params['with_post_at'] =  true;
 		$params['display'] =  1;
 
@@ -39,7 +39,7 @@ class FrontendHomeController extends BaseController {
 
 	protected function getPostByTypeModule($type_module){
 
-		$params['type'] =  array(Helpers::TYPE_POST_NEWS,Helpers::TYPE_POST_VIDEO);
+		//$params['type'] =  array(Helpers::TYPE_POST_NEWS,Helpers::TYPE_POST_VIDEO);
 		$params['view_index'] =  1;
 		$params['with_post_at'] =  true;
 		$params['display'] =  1;
@@ -64,12 +64,29 @@ class FrontendHomeController extends BaseController {
 			$total_post_v2 = 10;
 		}
 
-		$dbl_last_post = Post::getPostNews($params)->get();
+		$key = 'home';
+
+		if (!Cache::has($key)) {
+			$dbl_last_post = Cache::remember($key, 3, function() use ($params) {
+				$dbl_last_post = Post::getPostNews($params)->get();
+
+				return $dbl_last_post;
+			});
+		}else{
+			$dbl_last_post = Cache::get($key);
+		}
 
 		$dbl_post_view1 = array();
 		$dbl_post_view2 = array();
+		$data_post_id = array();
+		$limit_post_tags = 6;
+		$last_tags = null;
 
-		foreach ($dbl_last_post as $dbr_last_post) {
+		foreach ($dbl_last_post as $key => $dbr_last_post) {
+			if($key <= $limit_post_tags){
+				$data_post_id[] = $dbr_last_post->id;
+			}
+
 			if(count($dbl_post_view1) < $total_post_v1){
 				$dbl_post_view1[] = $dbr_last_post;
 			}elseif(count($dbl_post_view2) < $total_post_v2){
@@ -77,6 +94,21 @@ class FrontendHomeController extends BaseController {
 			}
 		}
 
+		$key = 'home_tags_seo';
+
+		if (!Cache::has($key)) {
+			$dbr_last_tag = Cache::remember($key, 3, function() use ($data_post_id) {
+				$dbr_last_tag = Post::getLastTag($data_post_id)->first();
+
+				return $dbr_last_tag;
+			});
+		}else{
+			$dbr_last_tag = Cache::get($key);
+		}
+
+		$last_tags = ucwords(strtolower($dbr_last_tag->tags_name));
+		
+		$data['title_page'] = Lang::get('messages.frontend.title_page', array('message' => 'Noticias Peru', 'tags' => $last_tags));
 		$data['dbl_last_post'] = $dbl_post_view1;
 		$data['dbl_more_post'] = $dbl_post_view2;
 

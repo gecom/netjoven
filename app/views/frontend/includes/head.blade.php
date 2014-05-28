@@ -1,16 +1,12 @@
 <!-- Basic Page Needs
 	================================================== -->
 <meta charset="utf-8" />
+
 <title>
 	@section('title')
-		Netjoven
+		{{(isset($title_page) ? $title_page : 'Netjoven')}}
 	@show
 </title>
-
-<!-- Mobile Specific Metas
-================================================== -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<link href="{{URL::asset('assets/ico/favicon.ico')}}" type="image/x-icon" rel="shortcut icon">
 
 <!-- CSS
 ================================================== -->
@@ -24,6 +20,35 @@
 
 @section('css')
 @show
+
+<meta name="google-site-verification" content="Wd_PpdFPEsJ4Qy20g7Tad1OYhA0ApnlPKUkvlZE2xR4" />
+@if (isset( $canonical ))
+	<link rel="canonical" href="{{$canonical}}" />	
+@endif
+
+
+<meta property="og:title" content="{{(isset($title_page) ? $title_page : 'Netjoven')}}"/>
+@if (isset($description))
+	<meta property="og:description" content="{{trim($description)}}"/>
+@endif
+<meta property="fb:app_id" content="126125754071428"/>
+<meta property="og:site_name" content="Netjoven.pe"/>
+
+<meta name="application-name" content="Netjoven.pe" />
+<meta name="msapplication-starturl" content="http://www.netjoven.pe/" />
+<meta name="msapplication-window" content="width=1024;height=768" />
+<meta name="msapplication-navbutton-color" content="#ff0d0f" />
+<meta name="msapplication-tooltip" content="Netjoven.pe" />
+{{ HTML::script('assets/js/fn/smart_ad_server.js'); }}
+
+
+<!-- Mobile Specific Metas
+================================================== -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<link href="{{URL::asset('assets/ico/favicon.ico')}}" type="image/x-icon" rel="shortcut icon">
+
+
 
 <style>
 	@section('styles')

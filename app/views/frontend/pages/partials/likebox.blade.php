@@ -1,4 +1,9 @@
 <?php
+	
+	if(!isset($meter_likebox)){
+		$meter_likebox = array(500,250);
+	}
+
 	$width = $meter_likebox[0];
 	$height = $meter_likebox[1];
  ?>

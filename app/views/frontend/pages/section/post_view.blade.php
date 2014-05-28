@@ -62,9 +62,7 @@
                 </div>
             </div>
             <div class="left_notes">
-                <div class="add">
-                    <img src="/assets/images/maq/banner1.png" alt="">
-                </div>
+                @include('frontend.pages.partials.banner_cuadrado')
                 @include('frontend.pages.partials.slider_section')
                 <div class="plugin_fb">
                     @include('frontend.pages.partials.likebox')

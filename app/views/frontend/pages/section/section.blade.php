@@ -9,9 +9,7 @@
 
     @if ($type_module == Helpers::TYPE_MODULE_MODULAR || $type_module == Helpers::TYPE_MODULE_LISTADO)
         <div class="left2_column">
-            <div class="add">
-                <img src="{{asset('assets/images/maq/add_1.png')}}" alt="">
-            </div>
+            @include('frontend.pages.partials.banner_cuadrado')
             @if ($type_module == Helpers::TYPE_MODULE_MODULAR)
                 <div class="plugin_fb">
                     @include('frontend.pages.partials.likebox')
@@ -46,9 +44,7 @@
 
     <div class="features">
         @if ($type_module == Helpers::TYPE_MODULE_ESTANDAR)
-            <div class="add">
-                <img src="{{asset('assets/images/maq/add_1.png')}}" alt="">
-            </div>
+            @include('frontend.pages.partials.banner_cuadrado')
             @include('frontend.pages.partials.slider_section')
             <div class="plugin_fb">
                 @include('frontend.pages.partials.likebox')
@@ -60,9 +56,7 @@
             @if ($type_module == Helpers::TYPE_MODULE_MODULAR)
                 @include('frontend.pages.partials.news_list', array('dbl_post_view'=> $dbl_post_view2, 'is_section_facebook' => false))
             @endif
-            <div class="add">
-                <img src="{{asset('assets/images/maq/add_1.png')}}" alt="">
-            </div>
+            @include('frontend.pages.partials.banner_cuadrado')
             @if ($type_module == Helpers::TYPE_MODULE_LISTADO)
                 @include('frontend.pages.partials.news_list', array('dbl_post_view'=> $dbl_post_view3, 'is_section_facebook' => false))
             @endif

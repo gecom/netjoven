@@ -67,8 +67,6 @@ class BannerHelper{
 			$params['tags']		= $tags;
 		}
 
-
-
 		return self::loadBanner($params, $do);		
 	}
 

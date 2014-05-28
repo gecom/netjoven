@@ -10,13 +10,13 @@
 	                <a href="{{route('frontend.post.view', $data_url)}}" class="play_video custom_color_bg"></a>
 	            @endif
 	            <?php
-	                $dbr_image_featured = Gallery::getImageFeaturedByPostId($dbr_post_view->id)->first();
-	                $image_featured = ($dbr_image_featured ? $dbr_image_featured->image : null);
+	                //$dbr_image_featured = Gallery::getImageFeaturedByPostId($dbr_post_view->id)->first();
+	                //$image_featured = ($dbr_image_featured ? $dbr_image_featured->image : null);
 
 	                if(!empty($dbr_post_view->id_video)){
 	                    $image_featured = Helpers::getThumbnailYoutubeByIdVideo($dbr_post_view->id_video);
 	                }else{
-	                    $image_featured = Helpers::getImage($image_featured, 'noticias');
+	                    $image_featured = Helpers::getImage($dbr_post_view->image_featured, 'noticias');
 	                }
 	            ?>
 	            <a href="{{route('frontend.post.view', $data_url)}}" ><img src="{{$image_featured}}" /></a>

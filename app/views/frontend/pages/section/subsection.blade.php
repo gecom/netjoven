@@ -8,10 +8,7 @@
 <section id="portada_espectaculos" class="{{$type_module == Helpers::TYPE_MODULE_LISTADO ? 'view_3' : '' }}">
 	<div class="title custom_color_text">{{$title_section}}</div>
 	<div class="left2_column">
-		<div class="add">
-			<img src="{{asset('assets/images/maq/add_1.png')}}" alt="">
-		</div>
-
+		@include('frontend.pages.partials.banner_cuadrado')
 		@if ($type_module != Helpers::TYPE_MODULE_LISTADO)
 			<div class="plugin_fb">
 				@include('frontend.pages.partials.likebox')
@@ -34,15 +31,11 @@
 		<div class="features {{ $type_module == Helpers::TYPE_MODULE_MODULAR ? 'subseccion_modular' : 'subseccion_modular_listado'}}">
 			@include('frontend.pages.partials.slider_section')
 			@if($type_module == Helpers::TYPE_MODULE_LISTADO)
-				<div class="add">
-					<img src="{{asset('assets/images/maq/add_1.png')}}" alt="">
-				</div>
+				@include('frontend.pages.partials.banner_cuadrado')
 				@include('frontend.pages.partials.news_list', array('dbl_post_view'=> $dbl_post_view3, 'is_section_facebook' => false))
 			@else
 				@include('frontend.pages.partials.news_list', array('dbl_post_view'=> $dbl_post_view3, 'is_section_facebook' => false))
-				<div class="add">
-						<img src="{{asset('assets/images/maq/add_1.png')}}" alt="">
-				</div>
+				@include('frontend.pages.partials.banner_cuadrado')
 			@endif
 		</div>
 	@endif
