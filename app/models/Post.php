@@ -54,6 +54,9 @@ class Post extends Eloquent {
 
     	return $query->select('njv_post.id',
 					DB::raw("GROUP_CONCAT(njv_tag.tag) as tags_name"),
+					DB::raw('(SELECT id FROM njv_category WHERE id = njv_category.parent_id) category_parent_id'),
+					DB::raw('(SELECT name FROM njv_category WHERE id = njv_category.parent_id) category_parent_name'),
+					DB::raw('(SELECT slug FROM njv_category WHERE id = njv_category.parent_id) category_parent_slug'),
 					'njv_post.category_id',
 					'njv_category.name as category_name',
 					'njv_category.slug as category_slug',
@@ -160,7 +163,8 @@ class Post extends Eloquent {
 			->leftJoin('njv_post_tag', 'njv_post_tag.post_id','=', 'njv_post.id')
 			->leftJoin('njv_tag', 'njv_tag.id','=', 'njv_post_tag.tag_id')
 			->whereIn('njv_post.id', $post_ids)
-			->where('njv_post.status', '=', Status::STATUS_PUBLICADO);
+			->where('njv_post.status', '=', Status::STATUS_PUBLICADO)
+			->orderBy('njv_post.id', 'desc');
 
 	}
 

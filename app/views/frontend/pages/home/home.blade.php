@@ -39,3 +39,14 @@
     {{ HTML::script('assets/js/bxslider/jquery.bxslider.min.js'); }}
     {{ HTML::script('assets/js/fn/home.js'); }}
 @stop
+
+@section('script')
+    $(document).ready(function() {
+        setTimeout("refresh_t();", 300000);
+    });
+
+    function refresh_t(){
+        url = '{{Request::url()}}?refresh=1';
+        $(location).attr('href',url);
+    }
+@stop

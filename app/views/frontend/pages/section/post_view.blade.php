@@ -10,6 +10,7 @@
             <div class="right_notes">
                 <div class="group_title custom_color_text">{{$dbr_post->category_name}}</div>
                 <div class="title_nota">{{$dbr_post->title}}</div>
+                @include('frontend.pages.partials.banner_half')
                 <div class="image">
                     <div class="opt">
                         <div class="opt1"><a href="{{route('frontend.section.list', array($dbr_post->category_slug))}}">+ {{$dbr_post->category_name}}</a></div>
@@ -48,11 +49,10 @@
                 <div class="social">
                     @include('frontend.pages.section.post_button_social')
                 </div>
-                <div class="tags">
-                     @if ($dbr_post->tags)
-                        <?php $tags = $dbr_post->tags; ?>
-                        <span class="custom_color_text">Tags:</span>{{Helpers::formatTags($tags)}}
-                     @endif
+                <div class="tags">                    
+                    @if ($dbr_post->tags_name)
+                        <span class="custom_color_text">Tags:</span>{{Helpers::formatTags($dbr_post->tags_name)}}
+                    @endif                     
                 </div>
                 <div class="action">
                     <a href="{{$redirect}}" class="btn_volver custom_color_bg">Volver</a>

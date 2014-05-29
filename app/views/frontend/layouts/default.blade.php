@@ -64,5 +64,13 @@
         </script>
         @section('append_html')
         @show
+
+        <?php $refresh = Input::get('refresh', null); ?>
+
+        @if (!$refresh)
+            @include('frontend.pages.partials.com_score')
+        @endif
+
+        @include('frontend.pages.partials.google_analytics')
     </body>
 </html>

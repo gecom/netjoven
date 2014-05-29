@@ -343,6 +343,37 @@ class Helpers {
 		return $content;
 	}
 
+	public static function getDescriptionPost($content){
+
+		$content = preg_replace("/<img[^>]+\>/i", "", $content);
+		if(empty($content)){return '';}
+
+		$article = explode("<br />", $content);
+		if(count($article)){
+			$i = 0;
+			while($i < count($article)){
+
+				if(isset($article[$i])){
+					$html = $article[$i];
+					$html_reg = '/<+\s*\/*\s*([A-Z][A-Z0-9]*)\b[^>]*\/*\s*>+/i';
+					$content_html = htmlentities( preg_replace( $html_reg, '', $html ) );
+
+					if(trim($content_html) !='' && strpos($content_html , "Foto:") === FALSE){
+						$caracteres = array("&amp;aacute;","&amp;eacute;","&amp;iacute;","&amp;oacute;","&amp;uacute;","&amp;Aacute;",
+						"&amp;Eacute;","&amp;Iacute;","&amp;Oacute;","&amp;Uacute;","&amp;ntilde;","&amp;Ntilde;","&aacute;","&eacute;","&iacute;","&oacute;","&uacute;","&Aacute;",
+						"&Eacute;","&Iacute;","&Oacute;","&Uacute;","&ntilde;","&Ntilde;");
+						$normales   = array("á","é","í","ó","ú","Á","É","Í","Ó","Ú","ñ","Ñ","á","é","í","ó","ú","Á","É","Í","Ó","Ú","ñ","Ñ");
+						return str_replace($caracteres, $normales , $content_html);
+					}
+
+					$i++;
+				}
+			}
+		}
+
+		return '';
+	}
+
 	public static function getTagIds($data_tags, $is_return_ids = true){
 		$data_return_tags = array();
 		foreach ($data_tags as $tag) {
@@ -503,7 +534,14 @@ class Helpers {
 		$params = array_merge($params_default, $params);
 
 		$query = DB::table('njv_slider_more')
-			->select('njv_slider_more.post_id', 'njv_slider_more.title', 'njv_slider_more.slug', 'njv_slider_more.category_id' ,'njv_slider_more.category_parent_id', 'njv_slider_more.tags')
+			->select('njv_slider_more.post_id', 
+						Db::raw('(SELECT image FROM njv_post_multimedia WHERE post_id = njv_slider_more.post_id and is_principal = 1 ) as image') ,
+						DB::raw('(SELECT slug FROM njv_category WHERE id = njv_slider_more.category_parent_id) category_parent_slug'),
+						'njv_slider_more.title',
+						'njv_slider_more.slug',
+						'njv_slider_more.category_id' ,
+						'njv_slider_more.category_parent_id' ,
+						'njv_slider_more.tags')
 			->take($limit);
 
 		if($params['tags']){

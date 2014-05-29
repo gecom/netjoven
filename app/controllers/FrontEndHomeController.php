@@ -22,7 +22,6 @@ class FrontendHomeController extends BaseController {
 
 	public function viewMoreNews(){
 
-		//$params['type'] =  array(Helpers::TYPE_POST_NEWS,Helpers::TYPE_POST_VIDEO);
 		$params['with_post_at'] =  true;
 		$params['display'] =  1;
 

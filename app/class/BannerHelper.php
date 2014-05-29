@@ -25,16 +25,8 @@ class BannerHelper{
 
 			if($data_route_action[0] == 'FrontendSectionController' && $data_route_action[1] == 'viewPost'){
 				$type = self::TYPE_BANNER_VIEW;
-				$dbr_post = Route::getCurrentRoute()->getParameter('post');
-
-				$data_tags = array();
-				$dbl_post_tags = Tag::getTagByPostId($dbr_post->id)->get();
-
-				foreach ($dbl_post_tags as $dbr_post_tag) {
-					$data_tags[] = $dbr_post_tag->tag;
-				}
-
-				$tags = implode(',', $data_tags);
+				$dbr_post = Route::getCurrentRoute()->getParameter('dbr_post');
+				$tags = $dbr_post->tags_name;
 			}
 
 			if($data_route_action[0] == 'FrontendSectionController' &&  in_array($data_route_action[1], array('viewDirectoryPublication', 'listDirectorate'))){

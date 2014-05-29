@@ -391,31 +391,28 @@ class FrontendSectionController extends BaseController {
 
 	public function viewPost($slug_category, $post, $slug){
 
-		$dbr_category = Category::where('slug',$slug_category)->first();
-
-		if(!$dbr_category || !$post || ($post->slug != $slug)){
-			App::abort(404);
-		}
-
 		$http_referer = Request::server('HTTP_REFERER');
+		$key = 'dbl_post_view_' . $post->id;
 
-		if (!Cache::has('dbl_post_view_' . $post->id)){
+		if (!Cache::has($key)) {
+			$data_params = Cache::remember($key, 10, function() use ($post) { 
+				$dbr_post = $post;
+				$dbr_post_gallery = ($dbr_post->has_gallery ? $dbr_post->galleries()->select('image', 'title')->where('is_gallery', '=', 1)->first() : null);
+				$dbr_post->content = Helpers::bbcodes($dbr_post->content);			
 
-			$dbr_post = Post::getPostById($post->id)->first();
-			$dbr_post_gallery = ($dbr_post->has_gallery ? $dbr_post->galleries()->select('image', 'title')->where('is_gallery', '=', 1)->first() : null);
-			$dbr_post->content = Helpers::bbcodes($dbr_post->content);
-			$data_tags = explode(',', $dbr_post->tags_name);
+				$params_template['meter_likebox'] = array(300, 300);
+				$params_template['dbr_post'] = $dbr_post;
+				$params_template['title_page'] = $dbr_post->title;
+				$params_template['description'] = Helpers::getDescriptionPost($dbr_post->content);
+				$params_template['dbr_post_gallery'] = $dbr_post_gallery;
 
-			$params_template['meter_likebox'] = array(300, 300);
-			$params_template['dbr_post'] = $dbr_post;
-			$params_template['dbr_post_gallery'] = $dbr_post_gallery;
-			$params_template['tags'] = $data_tags;
-
-			Cache::forever('dbl_post_view_' . $post->id, $params_template);
+				return $params_template;
+			});
+		}else{
+			$data_params = Cache::get($key);
 		}
 
 		Post::updateCounterRead($post->id);
-		$data_params = Cache::get('dbl_post_view_' . $post->id);
 
 		$params_template = $data_params;
 		$params_template['redirect'] = ($http_referer ? $http_referer : route('home')) ;

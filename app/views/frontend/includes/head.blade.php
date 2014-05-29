@@ -48,8 +48,6 @@
 
 <link href="{{URL::asset('assets/ico/favicon.ico')}}" type="image/x-icon" rel="shortcut icon">
 
-
-
 <style>
 	@section('styles')
 	@show
