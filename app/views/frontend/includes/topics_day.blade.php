@@ -1,10 +1,14 @@
 <?php
 
-	if (!Cache::has('dbl_theme_day')){
-		Cache::forever('dbl_theme_day', ThemeDay::getThemeDay()->get());
-	}
+    $key = 'dbl_theme_day';
 
-	$dbl_theme_day = Cache::get('dbl_theme_day');
+    if (!Cache::has($key)) {
+        $dbl_theme_day = Cache::remember($key, 30, function() {
+            return ThemeDay::getThemeDay()->get();
+        });
+    }else{
+        $dbl_theme_day = Cache::get($key);
+    }
 
  ?>
 @if (count($dbl_theme_day))

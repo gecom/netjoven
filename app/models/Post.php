@@ -88,6 +88,9 @@ class Post extends Eloquent {
 
     	$query->select('njv_post.id',
     					DB::raw('(SELECT image FROM njv_post_multimedia WHERE post_id = njv_post.id and is_principal = 1) AS image_featured'), 
+						DB::raw('(SELECT id FROM njv_category WHERE id = njv_category.parent_id) category_parent_id'),
+						DB::raw('(SELECT name FROM njv_category WHERE id = njv_category.parent_id) category_parent_name'),
+						DB::raw('(SELECT slug FROM njv_category WHERE id = njv_category.parent_id) category_parent_slug'),
 						'njv_post.title',
 						'njv_post.slug',
 						'njv_post.content',
@@ -100,7 +103,6 @@ class Post extends Eloquent {
 						'njv_post.type',
 						'njv_post.has_gallery',
 						'njv_category.id as category_id',
-						'njv_category.parent_id as category_parent_id',
 						'njv_category.name as category_name',
 						'njv_category.slug as category_slug')
     			->join('njv_category', 'njv_category.id', '=', 'njv_post.category_id')

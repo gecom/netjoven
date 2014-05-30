@@ -7,13 +7,18 @@
 			$bs = str_replace('$bannerpush = \"','$bannerpush = "',$bs);
 			$bs = str_replace('\";','";',$bs);
 			
-			eval($bs);
-			$bannersuperior =  	stripslashes($bannersuperior);
-			$bannerpush =  	stripslashes($bannerpush);
-			$bannerpush .= '<script type="text/javascript">
-			function Ocultar(){ $("#Layer1M").css("height","90px"); }
-			function Abrir(){$("#Layer1M").css("height","400px");}
-			</script>';
+			try {
+				eval($bs);
+				$bannersuperior =  	stripslashes($bannersuperior);
+				$bannerpush =  	stripslashes($bannerpush);
+				$bannerpush .= '<script type="text/javascript">
+				function Ocultar(){ $("#Layer1M").css("height","90px"); }
+				function Abrir(){$("#Layer1M").css("height","400px");}
+				</script>';				
+			} catch (Exception $e) {
+				$bannersuperior = null;
+				$bannerpush = null;
+			}
 
 		}else{
 			$bannersuperior = $bs;
@@ -30,7 +35,7 @@
 </section>
 
 <section class="fullbanner">
-	@if (isset ($bannerpush))
+	@if (isset ($bannerpush) && !empty($bannerpush))
 			<div id="Layer1M" style="clear:both;">{{$bannerpush}}</div>
 	@endif
 </section>

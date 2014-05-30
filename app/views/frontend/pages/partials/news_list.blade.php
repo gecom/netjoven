@@ -5,8 +5,7 @@
 		</div>
 	@endif
 	<?php
-		$dbr_parent_category = Category::getParentCategoryById($dbr_post_view->category_parent_id)->first();
-		$data_url = array($dbr_parent_category->slug, $dbr_post_view->id, $dbr_post_view->slug);
+		$data_url = array($dbr_post_view->category_parent_slug, $dbr_post_view->id, $dbr_post_view->slug);
 	?>
 	<div class="news {{$type_module == Helpers::TYPE_MODULE_MODULAR || $type_module == Helpers::TYPE_MODULE_LISTADO ? 'view2' : ''}}">
 	    <figure>
@@ -14,7 +13,6 @@
 				if(!empty($dbr_post_view->id_video)){
 					$image_featured = Helpers::getThumbnailYoutubeByIdVideo($dbr_post_view->id_video);
 				}else{
-					//$dbr_image_featured = Gallery::getImageFeaturedByPostId($dbr_post_view->id)->first();
 					$image_featured = Helpers::getImage($dbr_post_view->image_featured, 'noticias');
 				}
 			?>

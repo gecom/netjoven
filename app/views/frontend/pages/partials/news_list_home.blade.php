@@ -1,8 +1,7 @@
 <div class="list_articles {{($type_module == Helpers::TYPE_MODULE_LISTADO ? 'list_mode' : '')}}">
 	@foreach ($dbl_post_view as $dbr_post_view)
 		<?php
-			$dbr_parent_category = Category::getParentCategoryById($dbr_post_view->category_parent_id)->first();
-			$data_url = array($dbr_parent_category->slug, $dbr_post_view->id, $dbr_post_view->slug);
+			$data_url = array($dbr_post_view->category_parent_slug, $dbr_post_view->id, $dbr_post_view->slug);
 		?>
 	    <article >
 	        <div class="media">
@@ -10,9 +9,6 @@
 	                <a href="{{route('frontend.post.view', $data_url)}}" class="play_video custom_color_bg"></a>
 	            @endif
 	            <?php
-	                //$dbr_image_featured = Gallery::getImageFeaturedByPostId($dbr_post_view->id)->first();
-	                //$image_featured = ($dbr_image_featured ? $dbr_image_featured->image : null);
-
 	                if(!empty($dbr_post_view->id_video)){
 	                    $image_featured = Helpers::getThumbnailYoutubeByIdVideo($dbr_post_view->id_video);
 	                }else{

@@ -5,6 +5,25 @@ class InstallController extends BaseController {
 	public function getGenerate(){
 		set_time_limit(0);
 
+		$user = array(
+  'email'=>'neo2318@gmail.com',
+  'name'=>'Laravelovich'
+);
+ 
+// the data that will be passed into the mail view blade template
+$data = array(
+  'detail'=>'Your awesome detail here',
+  'name'  => $user['name']
+);
+ 
+// use Mail::send function to send email passing the data and using the $user variable in the closure
+Mail::send('emails.welcome', $data, function($message) use ($user)
+{
+
+  $message->to($user['email'], $user['name'])->subject('Welcome to My Laravel app!');
+});
+
+
 		/*$dbl_category = DB::select('SELECT id, name, description FROM njv_category');
 		$num_categories_update = 0;
 

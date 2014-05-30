@@ -539,6 +539,8 @@ class Helpers {
 						DB::raw('(SELECT slug FROM njv_category WHERE id = njv_slider_more.category_parent_id) category_parent_slug'),
 						'njv_slider_more.title',
 						'njv_slider_more.slug',
+						'njv_slider_more.id_video',
+						'njv_slider_more.type_video',
 						'njv_slider_more.category_id' ,
 						'njv_slider_more.category_parent_id' ,
 						'njv_slider_more.tags')
@@ -611,6 +613,38 @@ class Helpers {
 
 		return implode(', ', $tags_html);
 
+	}
+
+	public static function getNameComScore(){
+		$current_route_action = Route::currentRouteAction();
+		$data_route_action = explode('@', $current_route_action);
+		$url_current = null;
+
+		if($data_route_action[0] == 'FrontendSectionController' && $data_route_action[1] == 'viewPost'){
+			$dbr_post = Route::getCurrentRoute()->getParameter('dbr_post');
+			$url_current = Request::path();
+			$url_current = preg_replace('/[0-9]+/', Str::slug($dbr_post->category_name) . '.articulo', $url_current);
+			
+		}else{
+			$data_segments = Request::segments();
+
+			switch (count($data_segments)) {
+				case 0: 
+					$url_current = 'inicio.portada';
+					break;	
+				case 1 : 
+					$url_current = $data_segments[0].'.portada';
+					break;		
+				default:
+					$url_current = implode('/', $data_segments);
+					break;
+			}
+		}
+
+		$url_current = str_replace('/', '.' , $url_current);
+		$url_current = str_replace('.html', '', $url_current);
+
+		return $url_current;
 	}
 
 }

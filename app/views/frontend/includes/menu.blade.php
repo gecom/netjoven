@@ -1,10 +1,15 @@
 <?php
 
-if (!Cache::has('dbl_categories_home')){
-    Cache::forever('dbl_categories_home', Helpers::getCategoriesHome());
-}
+$key = 'dbl_categories_home';
 
-$dbl_categories_home = Cache::get('dbl_categories_home');
+if (!Cache::has($key)){
+
+    $dbl_categories_home = Cache::remember($key, 240, function() {
+            return Helpers::getCategoriesHome();
+    });
+}else{
+    $dbl_categories_home = Cache::get($key);
+}
 
  ?>
 <div class="row">
@@ -39,23 +44,18 @@ $dbl_categories_home = Cache::get('dbl_categories_home');
                                     }
                                 ?>
                                 @foreach ($dbl_post_category as $dbr_post_category)
-                                    <?php
-                                        $dbr_parent_category = Category::getParentCategoryById($dbr_post_category->category_parent_id)->first();
-                                        $data_url = array($dbr_parent_category->slug, $dbr_post_category->id, $dbr_post_category->slug);
-                                    ?>
-                                    <?php
-                                        $dbr_image_featured = Gallery::getImageFeaturedByPostId($dbr_post_category->id)->first();
-                                        $image_featured = ($dbr_image_featured ? $dbr_image_featured->image : null);
+                                    <?php 
+                                        $data_url = array($dbr_post_category->category_parent_slug, $dbr_post_category->id, $dbr_post_category->slug); 
 
                                         if(!empty($dbr_post_category->id_video)){
                                             $image_featured = Helpers::getThumbnailYoutubeByIdVideo($dbr_post_category->id_video);
                                         }else{
-                                            $image_featured = Helpers::getImage($image_featured, 'noticias');
+                                            $image_featured = Helpers::getImage($dbr_post_category->image, 'noticias');
                                         }
                                     ?>
                                     <div class="video_item">
                                         <figure>
-                                            <a href="{{ route('frontend.post.view', $data_url) }}"><img src="{{$image_featured}}" alt="{{$dbr_post_category->image}}">
+                                            <a href="{{ route('frontend.post.view', $data_url) }}"><img src="{{$image_featured}}" alt="{{$dbr_post_category->title}}">
                                                 @if ($dbr_post_category->type == Helpers::TYPE_POST_VIDEO)
                                                     <div class="play  custom_color_bg"></div>
                                                 @endif
