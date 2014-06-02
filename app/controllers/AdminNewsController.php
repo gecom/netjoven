@@ -5,6 +5,7 @@ class AdminNewsController extends BaseController {
 
     public function listNews($type_post)
     {
+
         $params['type'] = array($type_post);
         $dbl_post = Post::getPostNews($params)->paginate(15);
 
@@ -89,6 +90,12 @@ class AdminNewsController extends BaseController {
 
     public function news($type_post, $post = null)
     {
+
+
+        Config::set('settings.dir_user', 'usuario');
+
+
+        echo Config::get('settings.dir_user');
 
         $params['is_new'] = $is_new =  false;
         if(empty($post)){

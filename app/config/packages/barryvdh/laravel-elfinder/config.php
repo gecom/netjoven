@@ -11,7 +11,7 @@ return array(
     |
     */
 
-    'dir' => 'files',
+    'dir' =>  '_files',
 
     /*
     |--------------------------------------------------------------------------
@@ -34,6 +34,13 @@ return array(
     |
     */
 
-    'roots' => null,
+    'roots' =>  array(
+                    array(
+                        'driver' => 'LocalFileSystem', // driver for accessing file system (REQUIRED)
+                        'path' => Config::get('settings.upload').'noticias', // path to files (REQUIRED)
+                        'URL' => Config::get('settings.urlupload').'noticias' , // URL to files (REQUIRED),
+                        'access' => 'Barryvdh\Elfinder\Elfinder::checkAccess'
+                    )
+            ),
 
 );

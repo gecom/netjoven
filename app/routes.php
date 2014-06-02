@@ -69,6 +69,9 @@ Route::group(array('prefix' => 'backend'), function()
         Route::post('/publicaciones/nota/{post}/galeria/guardar', array('as' => 'backend.register.save.gallery', 'uses' => 'AdminNewsController@saveNewsGallery' ));
         Route::get('/publicaciones/{post}/destacar', array('as' => 'backend.register.featured', 'uses' => 'AdminNewsController@newsFeatured' ));
         Route::post('/publicaciones/{post}/destacar', array('as' => 'backend.register.save.featured', 'uses' => 'AdminNewsController@saveFeatured' ));
+        Route::get('/fotos', array('as' => 'backend.fotos.list', 'uses' => 'AdminPhotosController@listPhotosUser'));
+        Route::post('/fotos/guardar', array('as' => 'backend.fotos.save', 'uses' => 'AdminPhotosController@savePhoto'));
+        
 
         /*******Registro de categorias*******/
         Route::get('/categorias', array('as' => 'list_categories', 'uses' => 'AdminCategoryController@listCategories' ));

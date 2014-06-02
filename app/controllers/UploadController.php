@@ -115,7 +115,7 @@ class UploadController extends BaseController{
         $response['success'] = 0;
         $response['message'] = 'Error al recortar la imagen';
 
-        if(Helpers::cropInmage($path,$data_pos)){
+        if(Helpers::cropImage($path,$data_pos)){
             $response['filename'] = Config::get('settings.urlupload') . 'noticias/' . $filename;
             $response['success'] = 1;
             $response['message'] = 'Recorte de Imagen satisfactoriamente';

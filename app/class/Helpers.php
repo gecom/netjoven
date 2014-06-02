@@ -173,7 +173,9 @@ class Helpers {
         	return false;
         }
 
-        if($image->resize($size['width'], $size['height'], true)->save($path . $name)){
+        if($image->resize($size['width'], $size['height'], function($constraint){
+        	 $constraint->aspectRatio();
+        })->save($path . $name)){
         	$image->destroy();
         	return true;
         }
@@ -181,8 +183,13 @@ class Helpers {
         return false;
     }
 
-    public static function cropInmage($path, $data_pos){
+    public static function cropImage($path, $data_pos){
 		$img = Image::make($path);
+
+		$data_pos['width'] = intval($data_pos['width']);
+		$data_pos['height'] = intval($data_pos['height']);
+		$data_pos['x'] = intval($data_pos['x']);
+		$data_pos['y'] = intval($data_pos['y']);
 
 		$img->crop($data_pos['width'], $data_pos['height'], $data_pos['x'], $data_pos['y']);
 

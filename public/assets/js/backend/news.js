@@ -142,10 +142,8 @@ var $parent_category = $('#frm_news_category'), $subcategory = $('#frm_news_subc
 	registerPost.uploadImage('#fileupload_gallery', '/backend/upload_file_gallery', function(response){
 		if(response.result.success == 1){
 			var $wrapper_image_data = $('#images-data').html(), data = {};
-
 			data.image = response.result;
 			data.is_gallery = true;
-
 			$wrapper_gallery.find('ul').append(_.template($wrapper_image_data,{item:data}));
 		}
 	});
