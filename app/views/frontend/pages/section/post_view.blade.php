@@ -51,7 +51,7 @@
                 </div>
                 <div class="tags">                    
                     @if ($dbr_post->tags_name)
-                        <span class="custom_color_text">Tags:</span>{{Helpers::formatTags($dbr_post->tags_name)}}
+                        <span class="custom_color_text">Tags: </span>{{Helpers::formatTags($dbr_post->tags_name)}}
                     @endif                     
                 </div>
                 <div class="action">

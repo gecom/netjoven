@@ -8,7 +8,7 @@ class AdminPhotosController extends BaseController {
 	}
 
 	public function savePhoto(){
-		if(Auth::check() && Request::ajax()){
+		if(Request::ajax()){
 			$image = Input::get('image', null);
 			if(!empty($image)){
 

@@ -395,7 +395,7 @@ class FrontendSectionController extends BaseController {
 		$key = 'dbl_post_view_' . $post->id;
 
 		if (!Cache::has($key)) {
-			$data_params = Cache::remember($key, 10, function() use ($post) { 
+			$data_params = Cache::remember($key, 240, function() use ($post) { 			
 				$dbr_post = $post;
 				$dbr_post_gallery = ($dbr_post->has_gallery ? $dbr_post->galleries()->select('image', 'title')->where('is_gallery', '=', 1)->first() : null);
 				$dbr_post->content = Helpers::bbcodes($dbr_post->content);			

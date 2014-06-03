@@ -81,7 +81,12 @@ class Helpers {
 		$data_sidebar = array(
 			array('name' => 'Dashboard', 'class'=>'fa-dashboard', 'url' => '#' ),
 			array('name' => 'Estadisticas', 'class'=>'fa-bar-chart-o', 'url' => '#' ),
-			array('name' => 'Administrar Banners', 'class'=>'fa-table', 'url' => '#' ),
+			array('name' => 'Administrar Banners', 'class'=>'fa-table', 'url' => '#' ,	
+					'subcategories'=> array(
+						array('name' => 'Listado de Banners', 'url' => '#'),
+						array('name' => 'Banners', 'url' => url('backend/banners'))
+					)
+			),
 			array('name' => 'Publicaciones', 'class'=>'fa-table', 'url' => '#',
 				'subcategories'=> array(
 						array('name' => 'Noticias', 'url' => url('backend/publicaciones/' . mb_strtolower(self::TYPE_POST_NEWS))),
@@ -92,7 +97,7 @@ class Helpers {
 						array('name' => 'Cartelera', 'url' => url('backend/publicaciones/' . mb_strtolower(self::TYPE_POST_CARTELERA))),
 						array('name' => 'Horoscopo', 'url' => url('backend/publicaciones/' . mb_strtolower(self::TYPE_POST_HOROSCOPO))),
 						array('name' => 'Paranormal', 'url' => url('backend/publicaciones/' . mb_strtolower(self::TYPE_POST_PARANORMAL))),
-						array('name' => 'Fotos', 'url' => '#')
+						array('name' => 'Fotos', 'url' => url('backend/fotos'))
 					)
 			),
 			array('name' => 'Directorio', 'class'=>'fa-table', 'url' => '#',
@@ -342,7 +347,7 @@ class Helpers {
 		preg_match_all("#\[tag\](.*?)\[/tag\]#si", $content , $matches);
 
 		foreach($matches[1] as $value){
-			$url = '';
+			$url = route('frontend.post.tags', array(Str::slug($value))) ;
 			$pre_replace = '[tag='.$url.']'.$value.'[/tag]';
 			$content =  preg_replace("#\[tag\]$value\[/tag\]#si", $pre_replace , $content);
 		}

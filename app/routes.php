@@ -17,6 +17,7 @@
  */
 Route::model('post', 'Post');
 Route::model('directorate', 'Directorate');
+Route::model('banner', 'Banner');
 Route::model('category', 'Category');
 Route::model('parent_category', 'Category');
 Route::model('directory_publication', 'DirectoryPublication');
@@ -92,6 +93,14 @@ Route::group(array('prefix' => 'backend'), function()
         Route::get('/directorio/{directorate}/{slug?}/nuevo', array('as' => 'backend.directory.new', 'uses' => 'AdminDirectoryController@directoryPublicationEdit' ));
         Route::post('/directorio/{directorate}/{slug?}/nuevo', array('as' => 'backend.directory.save_new', 'uses' => 'AdminDirectoryController@directoryPublicationSave' ));
         Route::post('/directorio/{directorate}/{slug?}/{directory_publication}/guardar_imagen', array('as' => 'backend.directory.save_images', 'uses' => 'AdminDirectoryController@directoryPublicationImageSave' ));
+
+
+        /*******Banners*******/
+
+        Route::get('/banners', array('as' => 'backend.banner.list', 'uses' => 'AdminBannerController@listBanners' ));
+        Route::get('/banners/registrar/{banner?}', array('as' => 'backend.banner.register', 'uses' => 'AdminBannerController@bannerRegister' ));
+        Route::post('/banners/registrar/{banner?}', array('as' => 'backend.banner.save', 'uses' => 'AdminBannerController@bannerSave' ));
+
 
         /*******Temas del día*******/
         Route::get('/temas_del_dia', array('as' => 'backend.theme_day.list', 'uses' => 'AdminThemeDayController@listThemeDay' ));

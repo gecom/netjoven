@@ -43,9 +43,10 @@
 													<input type="url" class="form-control" name="frm_news_gallery[title][]" value="{{$image}}" placeholder="Ingrese URL" readonly="readonly">
 													<input type="hidden" name="frm_news_gallery[name][]" value="1401747934-239.jpg">
 												</div>
-												<div>
-															
-												</div>	
+												<div class="panel-footer text-center">
+													<a><span class="glyphicon glyphicon-file"></span></a>
+													<a href="#remove"><span class="glyphicon glyphicon-trash"></span></a>
+												</div>
 											</div>
 										</li>
 						    		@endforeach
@@ -84,5 +85,6 @@
     {{ HTML::script('assets/js/jquery_file_upload/jquery.fileupload-process.js'); }}
     {{ HTML::script('assets/js/jquery_file_upload/jquery.fileupload-validate.js'); }}
     {{ HTML::script('assets/js/underscore.js'); }}
+    {{ HTML::script('assets/js/backend/jquery.zclip.js'); }}
     {{ HTML::script('assets/js/backend/photos.js'); }}
 @stop

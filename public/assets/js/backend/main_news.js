@@ -49,13 +49,34 @@ var registerPost = (function(){
 	}
 })();
 
-$(document).ready(function(){
+
+
+$(function(){
 
 	var $frm_news_register = $('#frm_news_register');
 
+	$('#datetimepicker_post_at').datetimepicker({
+	 	language: 'es'
+	 });
+
+    var elt = $('#frm_news_keywords');
+
+    elt.tagsinput();
+    elt.tagsinput('input').typeahead({
+        name: 'user-search',
+	    remote: '/backend/autocompletar_tag?keyword=%QUERY',
+	    limit: 10 // limit to show only 10 results
+    }).bind('typeahead:selected', $.proxy(function (obj, datum) {
+        this.tagsinput('add', datum.value);
+        this.tagsinput('input').typeahead('setQuery', '');
+    }, elt));
+
+
 	$frm_news_register.on('submit', function(e){
 		e.preventDefault();
-		var $this = $(this);
+		var $this = $(this), text_content = tinyMCE.activeEditor.getContent();
+
+		$('#frm_news_description').val(text_content);
 
 		$.ajax({
 			url: $this.attr('action') ,
@@ -80,30 +101,11 @@ $(document).ready(function(){
 					}
 				});
 
-			}
+			};
 
 			$.notify(message, (is_error == true ? "error" : "success"));
 		});
 
 	});
 
-	$('#datetimepicker_post_at').datetimepicker({
-	 	language: 'es'
-	 });
-
-
-
-    var elt = $('#frm_news_keywords');
-
-    elt.tagsinput();
-    elt.tagsinput('input').typeahead({
-        name: 'user-search',
-	    remote: '/backend/autocompletar_tag?keyword=%QUERY',
-	    limit: 10 // limit to show only 10 results
-    }).bind('typeahead:selected', $.proxy(function (obj, datum) {
-        this.tagsinput('add', datum.value);
-        this.tagsinput('input').typeahead('setQuery', '');
-    }, elt));
-
-
-})
+});

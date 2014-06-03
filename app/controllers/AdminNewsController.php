@@ -91,12 +91,6 @@ class AdminNewsController extends BaseController {
     public function news($type_post, $post = null)
     {
 
-
-        Config::set('settings.dir_user', 'usuario');
-
-
-        echo Config::get('settings.dir_user');
-
         $params['is_new'] = $is_new =  false;
         if(empty($post)){
             $params['is_new'] = $is_new = true;
@@ -226,11 +220,13 @@ class AdminNewsController extends BaseController {
                     $post->display = $data_frm_news['display'];
                 }
 
-                if(isset($data_frm_news['description'])){
-                    $post->content = Helpers::prepareContent($data_frm_news['description']);
+                $content = '';
+                if(!empty($data_frm_news['description'])){
+                    $content = Helpers::prepareContent($data_frm_news['description']);                    
                 }
 
                 $post->summary = $data_frm_news['summary'];
+                $post->content = $content;
                 $post->category_id = $data_frm_news['subcategory'];
                 $data_image_principal = !empty($data_frm_news['image_principal']) ? array(json_decode($data_frm_news['image_principal'], true)) : array();
 
@@ -244,6 +240,13 @@ class AdminNewsController extends BaseController {
                         if($is_new){
                             $response['redirect'] =  route('backend.register.edit', array(strtolower($type_post), $post->id));
                         }
+
+                        $key = 'dbl_post_view_' . $post->id;
+
+                        if(Cache::has($key)){
+                            Cache::forget($key);
+                        }
+
                     }else{
                         $response['success'] = false;
                         $response['errors'] =  ['Error: Hubo un error al registrar la nota'];
@@ -289,6 +292,19 @@ class AdminNewsController extends BaseController {
             $this->saveGalleryByPost($data_images, $post);
             $response['success'] = true;
             $response['message'] =  'Galeria guardada satisfactoriamente';
+
+            $key = 'dbl_post_view_' . $post->id;
+
+            if(Cache::has($key)){
+                Cache::forget($key);
+            }
+
+            $key_gallery = 'dbr_post_gallery_' . $post->id;
+
+            if(Cache::has($key_gallery)){
+                Cache::forget($key_gallery);
+            }
+
         } catch (Exception $e) {
             $response['success'] = false;
             $response['errors'] =  ['Error:' . $e->getMessage()];

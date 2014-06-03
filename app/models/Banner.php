@@ -7,6 +7,7 @@ class Banner extends Eloquent {
     {
         return $this->hasMany('BannerDetail');
     }
+	
 
 }
 

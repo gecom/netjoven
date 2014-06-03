@@ -1,6 +1,5 @@
-$(document).ready(function(){
-
-var $parent_category = $('#frm_news_category'), $subcategory = $('#frm_news_subcategory'),
+$(function(){
+	var $parent_category = $('#frm_news_category'), $subcategory = $('#frm_news_subcategory'),
 	$preview_image_principal = $('#preview_image_principal'), $wrapper_gallery = $('#wrapper_gallery'),
 	$frm_news_image_principal = $('#frm_news_image_principal'),
 	$frm_news_gallery = $('#frm_news_gallery');
@@ -148,8 +147,8 @@ var $parent_category = $('#frm_news_category'), $subcategory = $('#frm_news_subc
 		}
 	});
 
-
 	tinymce.init({
+		mode : "textareas",
 	    selector: "#frm_news_description",
 	    theme: "modern",
 	    plugins: [
@@ -163,7 +162,5 @@ var $parent_category = $('#frm_news_category'), $subcategory = $('#frm_news_subc
 	    image_advtab: true,
 	    file_browser_callback : registerPost.elFinderBrowser
 	});
-
-
 
 });

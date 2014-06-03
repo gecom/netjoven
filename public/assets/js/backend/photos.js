@@ -38,5 +38,16 @@ $(function(){
 	}).prop('disabled', !$.support.fileInput)
 	.parent().addClass($.support.fileInput ? undefined : 'disabled');
 
+	$('.glyphicon-file', '#wrapper_gallery ').zclip({
+		path:'/assets/ZeroClipboard.swf',
+		copy:function(){
+			var $this = $(this);
+			return $this.parents('.thumbnail').find('input').val();
+		},
+		afterCopy:function(){
+			$.notify("URL copiada",  "success");
+		}
+	});
+
 
 });
