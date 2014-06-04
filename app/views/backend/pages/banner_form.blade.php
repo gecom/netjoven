@@ -8,17 +8,17 @@
 			<div class="col-lg-10">
 	            <div class="form-group">
 	                {{ Form::label('frm_banner_title', 'Titulo') }}
-	                {{ Form::text('frm_banner[title]', null, array('id' => 'frm_banner_title', 'placeholder' => 'Ingrese titulo', 'class' => 'form-control')) }}
+	                {{ Form::text('frm_banner[title]', (!$is_new ? $dbr_banner->title : null), array('id' => 'frm_banner_title', 'placeholder' => 'Ingrese titulo', 'class' => 'form-control')) }}
 	            </div>
 	        </div>
 			<div class="col-lg-10">
 	            <div class="form-group">
 	                {{ Form::label('frm_banner_code', 'Codigo') }}
-	                {{ Form::textarea('frm_banner[code]', null, array('id' => 'frm_banner_code', 'placeholder' => 'Ingrese codigo', 'class' => 'form-control')) }}
+	                {{ Form::textarea('frm_banner[code]', (!$is_new ? $dbr_banner->code : null), array('id' => 'frm_banner_code', 'placeholder' => 'Ingrese codigo', 'class' => 'form-control')) }}
 	            </div>
 	        </div>
 	        <div class="col-lg-10">
-	        	<button type="submit" data-dismiss="modal" class="btn btn-success">Guardar</button>
+	        	<button type="submit" class="btn btn-success">Guardar</button>
 	        </div>
 		{{ Form::close() }} 
 	</div>

@@ -22,7 +22,7 @@
                 	<a href="{{ route('backend.banner.register') }}" id="register_banner" class="btn btn-primary pull-right"><b>+</b> Agregar {{$title}}</a>
                 </div>
                 <div class="show-grid col-lg-12">
-					<table class="table table-striped table-bordered table-hover dataTable no-footer">
+					<table id="grid_banner" class="table table-striped table-bordered table-hover dataTable no-footer">
 						<thead>
 							<tr>
 								<th class="col-md-6">Titulo</th>
@@ -34,8 +34,8 @@
 								<tr>
 									<td>{{$dbr_banner->title}}</td>
 									<td class="text-center">
-										<a href="{{ route('backend.banner.register', array($dbr_banner->id)) }}" title="Editar" class="btn btn-primary btn-xs" ><span class="glyphicon glyphicon-edit"></span></a>
-										<a href="#" title="Eliminar" class="btn btn-primary btn-xs" ><span class="glyphicon glyphicon-trash"></span></a>
+										<a href="{{ route('backend.banner.register', array($dbr_banner->id)) }}" title="Editar" class="btn btn-primary btn-xs edit" ><span class="glyphicon glyphicon-edit"></span></a>
+										<a href="#" title="Eliminar delete" class="btn btn-primary btn-xs" ><span class="glyphicon glyphicon-trash"></span></a>
 									</td>
 								</tr>
 							@endforeach

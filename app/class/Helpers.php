@@ -83,8 +83,8 @@ class Helpers {
 			array('name' => 'Estadisticas', 'class'=>'fa-bar-chart-o', 'url' => '#' ),
 			array('name' => 'Administrar Banners', 'class'=>'fa-table', 'url' => '#' ,	
 					'subcategories'=> array(
-						array('name' => 'Listado de Banners', 'url' => '#'),
-						array('name' => 'Banners', 'url' => url('backend/banners'))
+						array('name' => 'Banners', 'url' => url('backend/banners')),
+						array('name' => 'Detalle de Banners', 'url' => url('backend/detalle_banners'))
 					)
 			),
 			array('name' => 'Publicaciones', 'class'=>'fa-table', 'url' => '#',

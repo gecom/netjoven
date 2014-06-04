@@ -5,7 +5,7 @@ class BannerHelper{
 	const TYPE_BANNER_ALL 		= 'ALL';
 	const TYPE_BANNER_VIEW		= 'VIEW';
 
-	public static $type_video = array(
+	public static $type_banner = array(
 		self::TYPE_BANNER_ALL => 'Todos',
 		self::TYPE_BANNER_VIEW => 'Ver'
 	);
@@ -146,6 +146,27 @@ class BannerHelper{
 	private static function getBannerById($id){
 		$dbr_banner = Banner::where('id', '=', $id)->first();
 		return stripslashes($dbr_banner->code); 
+	}
+
+	public static function getBannerModuleParent(){
+		return DB::table('njv_banner_module')
+						->select('id','parent_id','name')
+						->whereNull('parent_id')
+						->orderBy('order', 'asc')->get();
+	}
+
+	public static function getBannerModuleByParentId($parent_id){
+		return DB::table('njv_banner_module')
+						->select('id','parent_id','name')
+						->where('parent_id', '=', $parent_id)
+						->orderBy('id', 'asc')->get();
+	}
+
+	public static function getSector(){
+		return DB::table('njv_banner_sector')
+						->select('id','name')
+						->where('status', '=', Status::STATUS_ACTIVO)
+						->orderBy('id', 'asc')->get();
 	}
 
 }

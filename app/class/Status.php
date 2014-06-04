@@ -14,6 +14,11 @@ class Status {
 		self::STATUS_INACTIVO => 'Inactivo',
 		self::STATUS_SPAM => 'Spam'
 	);
+
+	public static $statuses_banner = array(
+		self::STATUS_ACTIVO => 'Activo',
+		self::STATUS_INACTIVO => 'Inactivo'
+	);
 	
 }
 

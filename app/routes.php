@@ -100,7 +100,9 @@ Route::group(array('prefix' => 'backend'), function()
         Route::get('/banners', array('as' => 'backend.banner.list', 'uses' => 'AdminBannerController@listBanners' ));
         Route::get('/banners/registrar/{banner?}', array('as' => 'backend.banner.register', 'uses' => 'AdminBannerController@bannerRegister' ));
         Route::post('/banners/registrar/{banner?}', array('as' => 'backend.banner.save', 'uses' => 'AdminBannerController@bannerSave' ));
-
+        Route::post('/banners/load_submodule', array('as' => 'backend.banner_submodule.load', 'uses' => 'AdminBannerController@bannerSubmodule' ));
+        Route::get('/detalle_banners', array('as' => 'backend.banner_detail.list', 'uses' => 'AdminBannerController@listBannersDetail' ));
+        Route::post('/detalle_banners', array('as' => 'backend.banner_detail.list_search', 'uses' => 'AdminBannerController@listBannersDetail' ));
 
         /*******Temas del día*******/
         Route::get('/temas_del_dia', array('as' => 'backend.theme_day.list', 'uses' => 'AdminThemeDayController@listThemeDay' ));
