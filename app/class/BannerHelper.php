@@ -26,7 +26,8 @@ class BannerHelper{
 			if($data_route_action[0] == 'FrontendSectionController' && $data_route_action[1] == 'viewPost'){
 				$type = self::TYPE_BANNER_VIEW;
 				$dbr_post = Route::getCurrentRoute()->getParameter('dbr_post');
-				$tags = $dbr_post->tags_name;
+				$data_tags = explode(',', $dbr_post->tags_name);
+				$tags = Str::slug($data_tags[0]);
 			}
 
 			if($data_route_action[0] == 'FrontendSectionController' &&  in_array($data_route_action[1], array('viewDirectoryPublication', 'listDirectorate'))){
@@ -83,8 +84,7 @@ class BannerHelper{
 
 		
 			if(!empty($dbr_banner_detail->start) and ($dbr_banner_detail->start <= $today and $dbr_banner_detail->end >= $today) ){
-
-				if($dbr_banner_detail->time_start <= $time and $dbr_banner_detail->time_end >= $time ){
+				if($dbr_banner_detail->time_start <= $time and $dbr_banner_detail->time_end >= $time ){					
 				   	
 					if( Helpers::getCountrycode() == $dbr_banner_detail->country){						
 						$bFP['id'][] = $dbr_banner_detail->banner_id;
@@ -115,6 +115,7 @@ class BannerHelper{
 				}
 			}
 		}
+
 
 		if(is_array($bFP) and count($bFP) >= 1){
 			return self::getBannerById(self::bannerRandon($bFP['id'], $bFP['weight']));

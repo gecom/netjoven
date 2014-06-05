@@ -18,6 +18,7 @@
 Route::model('post', 'Post');
 Route::model('directorate', 'Directorate');
 Route::model('banner', 'Banner');
+Route::model('banner_detail', 'BannerDetail');
 Route::model('category', 'Category');
 Route::model('parent_category', 'Category');
 Route::model('directory_publication', 'DirectoryPublication');
@@ -100,9 +101,12 @@ Route::group(array('prefix' => 'backend'), function()
         Route::get('/banners', array('as' => 'backend.banner.list', 'uses' => 'AdminBannerController@listBanners' ));
         Route::get('/banners/registrar/{banner?}', array('as' => 'backend.banner.register', 'uses' => 'AdminBannerController@bannerRegister' ));
         Route::post('/banners/registrar/{banner?}', array('as' => 'backend.banner.save', 'uses' => 'AdminBannerController@bannerSave' ));
-        Route::post('/banners/load_submodule', array('as' => 'backend.banner_submodule.load', 'uses' => 'AdminBannerController@bannerSubmodule' ));
         Route::get('/detalle_banners', array('as' => 'backend.banner_detail.list', 'uses' => 'AdminBannerController@listBannersDetail' ));
         Route::post('/detalle_banners', array('as' => 'backend.banner_detail.list_search', 'uses' => 'AdminBannerController@listBannersDetail' ));
+        Route::get('/detalle_banners/registrar/{banner_detail?}', array('as' => 'backend.banner_detail.register', 'uses' => 'AdminBannerController@bannerDetailRegister' ));
+        Route::post('/detalle_banners/registrar/{banner_detail?}', array('as' => 'backend.banner_detail.register', 'uses' => 'AdminBannerController@bannerDetailSave' ));
+        Route::post('/detalle_banners/cambiar_estado/{banner_detail}', array('as' => 'backend.banner_detail.change_status', 'uses' => 'AdminBannerController@changeStatusBannerDetail' ));
+        Route::post('/detalle_banners/eliminar/{banner_detail}', array('as' => 'backend.banner_detail.delete', 'uses' => 'AdminBannerController@deleteBannerDetail' ));
 
         /*******Temas del día*******/
         Route::get('/temas_del_dia', array('as' => 'backend.theme_day.list', 'uses' => 'AdminThemeDayController@listThemeDay' ));

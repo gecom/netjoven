@@ -35,7 +35,7 @@
 									<td>{{$dbr_banner->title}}</td>
 									<td class="text-center">
 										<a href="{{ route('backend.banner.register', array($dbr_banner->id)) }}" title="Editar" class="btn btn-primary btn-xs edit" ><span class="glyphicon glyphicon-edit"></span></a>
-										<a href="#" title="Eliminar delete" class="btn btn-primary btn-xs" ><span class="glyphicon glyphicon-trash"></span></a>
+										<a href="#" title="Eliminar" class="btn btn-primary btn-xs" ><span class="glyphicon glyphicon-trash"></span></a>
 									</td>
 								</tr>
 							@endforeach
@@ -49,6 +49,7 @@
     </div>
 </div>
 <div style="display: none;" tabindex="-1" class="modal fade" data-width="500" id="ajax-modal"></div>
+
 @stop
 
 @section('js')

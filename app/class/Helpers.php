@@ -659,6 +659,11 @@ class Helpers {
 		return $url_current;
 	}
 
+	public static function getCountry(){
+		$dbl_country = DB::select("SELECT DISTINCT country_code,country_name FROM njv_ip2c ORDER BY country_name");
+		return $dbl_country;		
+	}
+
 }
 
 ?>

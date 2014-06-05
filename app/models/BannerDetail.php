@@ -11,6 +11,7 @@ class BannerDetail extends Eloquent {
 
 		$params_default = array('module_id' => null, 'status' => array(Status::STATUS_ACTIVO), 'sector_id' => null, 'type' => null ,  'tags' => null, 'join_banner' => false);
 		$params = array_merge($params_default, $params);
+		$query->select('njv_banner_detail.*');
 
 		if($params['status'] &&  is_array($params['status'])){
 			$query->whereIn('status',  $params['status']);
@@ -18,7 +19,7 @@ class BannerDetail extends Eloquent {
 
 		if($params['join_banner'] == true){
 			$query->join('njv_banner', 'njv_banner.id','=', 'njv_banner_detail.banner_id');
-			$query->addSelect('njv_banner.title as banner_title', 'njv_banner.code as banner_code');
+			$query->addSelect('njv_banner.id as banner_id', 'njv_banner.title as banner_title', 'njv_banner.code as banner_code');
 		}
 
 		if($params['module_id']){
