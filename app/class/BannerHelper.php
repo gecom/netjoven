@@ -25,7 +25,8 @@ class BannerHelper{
 
 			if($data_route_action[0] == 'FrontendSectionController' && $data_route_action[1] == 'viewPost'){
 				$type = self::TYPE_BANNER_VIEW;
-				$dbr_post = Route::getCurrentRoute()->getParameter('dbr_post');
+				$post_id = Route::getCurrentRoute()->getParameter('post_id');
+				$dbr_post = Post::getPostById($post_id)->first();
 				$data_tags = explode(',', $dbr_post->tags_name);
 				$tags = Str::slug($data_tags[0]);
 			}

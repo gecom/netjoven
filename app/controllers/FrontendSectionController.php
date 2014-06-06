@@ -392,11 +392,16 @@ class FrontendSectionController extends BaseController {
 	public function viewPost($slug_category, $post, $slug){
 
 		$http_referer = Request::server('HTTP_REFERER');
-		$key = 'dbl_post_view_' . $post->id;
+		$key = 'dbl_post_view_' . $post;
 
 		if (!Cache::has($key)) {
 			$data_params = Cache::remember($key, 240, function() use ($post) { 			
-				$dbr_post = $post;
+				$dbr_post = Post::getPostById($post)->first();
+
+				if(!$dbr_post){
+					App::abort(404);
+				}
+
 				$dbr_post_gallery = ($dbr_post->has_gallery ? $dbr_post->galleries()->select('image', 'title')->where('is_gallery', '=', 1)->first() : null);
 				$dbr_post->content = Helpers::bbcodes($dbr_post->content);			
 
@@ -412,7 +417,7 @@ class FrontendSectionController extends BaseController {
 			$data_params = Cache::get($key);
 		}
 
-		Post::updateCounterRead($post->id);
+		Post::updateCounterRead($data_params['dbr_post']->id);
 
 		$params_template = $data_params;
 		$params_template['redirect'] = ($http_referer ? $http_referer : route('home')) ;

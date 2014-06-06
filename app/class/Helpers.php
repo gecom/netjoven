@@ -80,7 +80,13 @@ class Helpers {
 
 		$data_sidebar = array(
 			array('name' => 'Dashboard', 'class'=>'fa-dashboard', 'url' => '#' ),
-			array('name' => 'Estadisticas', 'class'=>'fa-bar-chart-o', 'url' => '#' ),
+			array('name' => 'Estadisticas', 'class'=>'fa-bar-chart-o', 'url' => '#', 					
+				'subcategories'=> array(
+						array('name' => 'Noticias', 'url' => url('backend/estadisticas/noticias')),
+						array('name' => 'Categorias', 'url' => url('backend/estadisticas/categorias')),
+						array('name' => 'Redactores', 'url' => url('backend/estadisticas/redactores'))
+					) 
+			),
 			array('name' => 'Administrar Banners', 'class'=>'fa-table', 'url' => '#' ,	
 					'subcategories'=> array(
 						array('name' => 'Banners', 'url' => url('backend/banners')),
@@ -501,10 +507,14 @@ class Helpers {
 
 		$pattern[0] = "#\[video\](.*?)\[/video\]#si";
 		$pre_replace[0] = '<div class="video-container">
-		<object width="455" height="344"><param name="movie" value="http://www.youtube.com/v/\1&hl=es&fs=1&showinfo=0&rel=0&"></param><param name="allowFullScreen"
-		value="true"></param><param name="allowscriptaccess" value="always"></param>
-		<param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/\1&hl=es&fs=1&showinfo=0&rel=0&" type="application/x-shockwave-flash"
-		allowscriptaccess="always" wmode="transparent" allowfullscreen="true" width="580" height="350"></embed></object></div>';
+		<object width="455" height="344">
+		<param name="movie" value="http://www.youtube.com/v/\1&hl=es&fs=1&showinfo=0&rel=0&"></param>
+		<param name="allowFullScreen" value="true"></param>
+		<param name="allowscriptaccess" value="always"></param>
+		<param name="wmode" value="transparent"></param>
+		<embed src="http://www.youtube.com/v/\1&hl=es&fs=1&showinfo=0&rel=0&" type="application/x-shockwave-flash" allowscriptaccess="always" wmode="transparent" allowfullscreen="true" width="580" height="350"></embed>
+		</object>
+		</div>';
 
 		$pattern[1] = '#<span style="font-weight: bold;">(.*?)</span>#si';
 		$pre_replace[1] = '<strong>\1</strong>';
@@ -633,7 +643,9 @@ class Helpers {
 		$url_current = null;
 
 		if($data_route_action[0] == 'FrontendSectionController' && $data_route_action[1] == 'viewPost'){
-			$dbr_post = Route::getCurrentRoute()->getParameter('dbr_post');
+			//$dbr_post = Route::getCurrentRoute()->getParameter('dbr_post');
+			$post_id = Route::getCurrentRoute()->getParameter('post_id');
+			$dbr_post = Post::getPostById($post_id)->first();
 			$url_current = Request::path();
 			$url_current = preg_replace('/[0-9]+/', Str::slug($dbr_post->category_name) . '.articulo', $url_current);
 			

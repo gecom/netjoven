@@ -24,20 +24,13 @@ Route::model('parent_category', 'Category');
 Route::model('directory_publication', 'DirectoryPublication');
 Route::model('theme_day', 'ThemeDay');
 
-Route::bind('dbr_post', function ($value) {
-    $dbr_post = Post::getPostById($value)->first();
-
-    if(!$dbr_post) App::abort(404);
-
-    return $dbr_post;
-});
-
 
 /** ------------------------------------------
  *  Route constraint patterns
  *  ------------------------------------------
  */
 Route::pattern('post', '[0-9]+');
+Route::pattern('post_id', '[0-9]+');
 Route::pattern('category', '[0-9]+');
 Route::pattern('parent_category', '[0-9]+');
 Route::pattern('directorate', '[0-9]+');
@@ -108,6 +101,11 @@ Route::group(array('prefix' => 'backend'), function()
         Route::post('/detalle_banners/cambiar_estado/{banner_detail}', array('as' => 'backend.banner_detail.change_status', 'uses' => 'AdminBannerController@changeStatusBannerDetail' ));
         Route::post('/detalle_banners/eliminar/{banner_detail}', array('as' => 'backend.banner_detail.delete', 'uses' => 'AdminBannerController@deleteBannerDetail' ));
 
+        /*******Estadisticas*******/
+        Route::get('/estadisticas/noticias', array('as' => 'backend.statistics_news.list', 'uses' => 'AdminStatisticsController@statisticsNews' ));
+        Route::get('/estadisticas/redactores', array('as' => 'backend.statistics_redactores.list', 'uses' => 'AdminStatisticsController@statisticsRedactores' ));
+        Route::get('/estadisticas/categorias', array('as' => 'backend.statistics_categorias.list', 'uses' => 'AdminStatisticsController@statisticsCategories' ));
+
         /*******Temas del día*******/
         Route::get('/temas_del_dia', array('as' => 'backend.theme_day.list', 'uses' => 'AdminThemeDayController@listThemeDay' ));
         Route::get('/temas_del_dia/nuevo', array('as' => 'backend.theme_day.register_new', 'uses' => 'AdminThemeDayController@registerThemeDay' ));
@@ -152,7 +150,7 @@ Route::get('/pichanga/{args?}/{page?}', array('as' => 'frontend.pichanga.list', 
 
 Route::get('{slug}', array('as' => 'frontend.section.list', 'uses' => 'FrontendSectionController@listSection' ));
 Route::get('{slug}/{page}', array('as' => 'frontend.section.pagination', 'uses' => 'FrontendSectionController@listSection' ));
-Route::get('{slug_category}/{dbr_post}/{slug}.html', array('as' => 'frontend.post.view', 'uses' => 'FrontendSectionController@viewPost' ));
+Route::get('{slug_category}/{post_id}/{slug}.html', array('as' => 'frontend.post.view', 'uses' => 'FrontendSectionController@viewPost' ));
 Route::get('/tag/{keyword?}', array('as' => 'frontend.post.tags', 'uses' => 'FrontendSectionController@searchTag' ));
 Route::get('/tag/{keyword?}/{page}', array('as' => 'frontend.post.tags.pagination', 'uses' => 'FrontendSectionController@searchTag' ));
 Route::get('/{slug_category}/{keyword?}', array('as' => 'frontend.post.redirect_tags', 'uses' => 'FrontendSectionController@redirectTag' ));

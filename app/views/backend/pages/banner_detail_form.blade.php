@@ -73,7 +73,8 @@
 						<div class="form-group ">
 							<label for="frm_banner_detail_date_start">Fech. Inicio</label> 
 							<div id="datetimepicker_date_start" class="input-group date"  data-date-format="DD/MM/YYYY">
-								<input type="date" value="{{(!$is_new && $dbr_banner_detail->date_start ? Helpers::getDateFormat($dbr_banner_detail->date_start, 'd/m/Y') : '')}}" id="frm_banner_detail_date_start" name="frm_banner_detail[date_start]" class="form-control" />
+								<?php $date_start = (!$is_new && $dbr_banner_detail->date_start != '0000-00-00' ? Helpers::getDateFormat($dbr_banner_detail->date_start, 'd/m/Y') : ''); ?>
+								<input type="date" value="{{$date_start}}" id="frm_banner_detail_date_start" name="frm_banner_detail[date_start]" class="form-control" />
 								<span class="input-group-addon"><span class="glyphicon-calendar glyphicon"></span></span>
 							</div>									
 						</div>
@@ -82,7 +83,8 @@
 						<div class="form-group ">
 						<label for="frm_banner_detail_date_end">Fech. Fin</label> 
 						<div id="datetimepicker_date_end" class="input-group date" data-date-format="DD/MM/YYYY" >
-							<input type="date" value="{{(!$is_new && $dbr_banner_detail->date_end ? Helpers::getDateFormat($dbr_banner_detail->date_end, 'd/m/Y') : '')}}" id="frm_banner_detail_date_end" name="frm_banner_detail[date_end]"  class="form-control" />
+							<?php $date_end = (!$is_new && $dbr_banner_detail->date_end != '0000-00-00' ? Helpers::getDateFormat($dbr_banner_detail->date_end, 'd/m/Y') : ''); ?>
+							<input type="date" value="{{$date_end}}" id="frm_banner_detail_date_end" name="frm_banner_detail[date_end]"  class="form-control" />
 							<span class="input-group-addon"><span class="glyphicon-calendar glyphicon"></span></span>
 						</div>	
 						</div>

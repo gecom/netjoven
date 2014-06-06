@@ -30,15 +30,22 @@
                     @endif
                 </div>
                 <div class="text_note">
-                    @if ($dbr_post->id_video)
+                    @if ($dbr_post->id_video)                        
                         <div  class="video-container">
-                            <object width="455" height="344">
-                            <param name="wmode" value="transparent"></param>
-                            <param name="movie" value="http://www.youtube.com/v/{{$dbr_post->id_video}}&hl=es&fs=1&showinfo=0&rel=0"></param>
-                            <param name="allowFullScreen" value="true"></param>
-                            <param name="allowscriptaccess" value="always"></param>
-                            <embed src="http://www.youtube.com/v/{{$dbr_post->id_video}}&hl=es&fs=1&showinfo=0&rel=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="600" height="350" wmode="transparent"></embed>
-                            </object>
+                            @if ($dbr_post->type_video == Helpers::TYPE_VIDEO_YOUTUBE)
+                                <?php $url_video = 'http://www.youtube.com/v/'.$dbr_post->id_video.'&hl=es&fs=1&showinfo=0&rel=0' ?>
+                                <object width="455" height="344">
+                                    <param name="wmode" value="transparent"></param>
+                                    <param name="movie" value="{{$url_video}}"></param>
+                                    <param name="allowFullScreen" value="true"></param>
+                                    <param name="allowscriptaccess" value="always"></param>
+                                    <embed src="{{$url_video}}" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="600" height="350" wmode="transparent"></embed>
+                                </object>
+                            @endif
+
+                            @if ($dbr_post->type_video == Helpers::TYPE_VIDEO_DAILYMOTION)
+                                <iframe frameborder="0" width="480" height="270" src="//www.dailymotion.com/embed/video/{{$dbr_post->id_video}}" allowfullscreen></iframe>
+                            @endif
                         </div>
                     @endif
                     {{$dbr_post->content}}
