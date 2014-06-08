@@ -23,7 +23,7 @@ class UserController extends BaseController {
         if(!Auth::check()){
             return Redirect::route('home');
         }
-        
+
         $dbr_user = Auth::user();
 
         $params_template['meter_likebox'] = array(300, 286);
@@ -130,12 +130,12 @@ class UserController extends BaseController {
         $http_referer = Request::server('HTTP_REFERER');
 
         if(Request::ajax()){
-            if (Auth::attempt($input)) {                
+            if (Auth::attempt($input)) {
                 $response['success'] = true;
                 $response['message'] =  'Usuario Logeado Satisfactoriamente';
                 $response['redirect'] = ($http_referer ? $http_referer : route('home')) ;
             } else {
- 
+
                 $user = User::where('email', Input::get('email'))->first();
 
                 if( $user && $user->password == md5(Input::get('password')) ){
@@ -146,7 +146,7 @@ class UserController extends BaseController {
                     $response['redirect'] = ($http_referer ? $http_referer : route('home')) ;
                     return Response::json($response);
                 }
-                
+
                 $response['success'] = false;
                 $response['message'] =  'Correo o contraseña no es correcta';
             }
@@ -172,7 +172,7 @@ class UserController extends BaseController {
            return Redirect::to('backend')->with('message', 'You are now logged in!');
         } else {
 
-            $user = User::where('email', Input::get('email'))->first();
+            $user = User::getAdmin()->where('email', Input::get('email'))->first();
 
             if( $user && $user->password == md5(Input::get('password')) ){
                 $user->password = Hash::make(Input::get('password'));
@@ -189,7 +189,13 @@ class UserController extends BaseController {
     {
 
         Auth::logout();
-        return Redirect::to('backend/login')->with('success', 'Logged out with success!');
+
+        if(Request::segment(1) == 'backend'){
+            return Redirect::to('backend/login')->with('success', 'Logged out with success!');
+        }else{
+            return Redirect::to('/');
+        }
+
     }
 
 

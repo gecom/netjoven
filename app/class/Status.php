@@ -1,6 +1,6 @@
-<?php 
+<?php
 class Status {
-	
+
 	const STATUS_PUBLICADO = 'pbl';
 	const STATUS_DESPUBLICADO = 'dpl';
 	const STATUS_ACTIVO = 'act';
@@ -19,7 +19,7 @@ class Status {
 		self::STATUS_ACTIVO => 'Activo',
 		self::STATUS_INACTIVO => 'Inactivo'
 	);
-	
+
 }
 
 ?>

@@ -25,7 +25,9 @@ return array(
         'user_form_register_title'              => 'Registrate',
         'user_group_edit_title'                 => 'Edita tu Perfil',
         'user_form_edit_title'                  => 'Editar',
-        'title_page'                            =>  ':message : :tags | Netjoven.pe'
+        'title_page'                            =>  ':message : :tags | Netjoven.pe',
+        'radio_title'                           =>  'Netjoven Radio en Vivo',
+        'radio_title_content'                   =>  'Radio',
 
     )
 

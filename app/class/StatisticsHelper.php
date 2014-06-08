@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class StatisticsHelper {
 
@@ -6,12 +6,12 @@ class StatisticsHelper {
 
 	public static function statisticsPost($params = array()){
 
-		$params_default = array('date_start' => self::$current_date, 'date_end' => null, 'sort_dir' => 'desc', 'sort_by' => 'views');
+		$params_default = array('date_start' => self::$current_date, 'date_end' => null, 'user_id' => null, 'category_parent_id' => null,  'category_id' => null, 'sort_dir' => 'desc', 'sort_by' => 'views');
 		$params = array_merge($params_default, $params);
 
 		$orders_by = array('title' => 'njv_post.title',
-							'category_name' => 'category_name', 
-							'redactor' 	=> 'njv_user_profile.first_name', 
+							'category_name' => 'category_name',
+							'redactor' 	=> 'njv_user_profile.first_name',
 							'date' 		=> 'njv_post.post_at',
 							'views' 	=> 'page_views'
 						);
@@ -19,8 +19,8 @@ class StatisticsHelper {
 		$sort_by = $orders_by[$params['sort_by']];
 		$sort_dir = $params['sort_dir'];
 
-		$dbl_post = Post::select('njv_post.id', 'njv_post.title', 'njv_post.slug', 'njv_post.post_at', 'njv_category.id as category_id', 
-							DB::raw('(select slug from njv_category c1 where c1.id = njv_category.parent_id) as category_parent_slug'), 
+		$dbl_post = Post::select('njv_post.id', 'njv_post.user_id', 'njv_post.title', 'njv_post.slug', 'njv_post.post_at', 'njv_category.id as category_id',
+							DB::raw('(select c1.slug from njv_category c1 where c1.id = njv_category.parent_id) as category_parent_slug'),
 							'njv_category.name as category_name', 'njv_user_profile.first_name', 'njv_user_profile.last_name',
 							DB::raw('( SELECT count(id) FROM njv_post_visits where njv_post_visits.post_id = njv_post.id) as page_views'))
 							->join('njv_category', 'njv_category.id', '=', 'njv_post.category_id')
@@ -28,12 +28,27 @@ class StatisticsHelper {
 							->where('njv_post.is_deleted','=', 0)
 							->orderBy($sort_by, $sort_dir);
 
-		if(!$params['date_end']){
+		if(empty($params['date_end'])){
+			$params['date_start'] = empty($params['date_start']) ? self::$current_date : $params['date_start'];
 			$dbl_post->where('njv_post.post_at' , '=', $params['date_start']);
 		}else{
 			$dbl_post->where('njv_post.post_at' , '>=', $params['date_start']);
 			$dbl_post->where('njv_post.post_at' , '<=', $params['date_end']);
 		}
+
+		if(!empty($params['user_id'])){
+			$dbl_post->where('njv_post.user_id' , '=', $params['user_id']);
+		}
+
+		if(!empty($params['category_id'])){
+			$dbl_post->where('njv_post.category_id' , '=', $params['category_id']);
+		}
+
+		if(!empty($params['category_parent_id'])){
+			$dbl_post->where('njv_category.parent_id' , '=', $params['category_parent_id']);
+		}
+
+		//dd($params);
 
 		return $dbl_post;
 
@@ -44,7 +59,7 @@ class StatisticsHelper {
 		$params_default = array('date_start' => self::$current_date , 'date_end' => null);
 		$params = array_merge($params_default, $params);
 
-		$dbl_post = Post::select(DB::raw('COUNT(njv_post.id) AS total_post'), 
+		$dbl_post = Post::select(DB::raw('COUNT(njv_post.id) AS total_post'),
 							DB::raw('(select name from njv_category c1 where c1.id = njv_category.parent_id) as category_parent_name'),
 							'njv_category.id', 'njv_category.parent_id', 'njv_category.name'
 							)

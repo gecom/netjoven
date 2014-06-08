@@ -3,7 +3,6 @@
 $key = 'dbl_categories_home';
 
 if (!Cache::has($key)){
-
     $dbl_categories_home = Cache::remember($key, 240, function() {
             return Helpers::getCategoriesHome();
     });
@@ -11,12 +10,14 @@ if (!Cache::has($key)){
     $dbl_categories_home = Cache::get($key);
 }
 
+$current_url = Request::segment(1);
+
  ?>
 <div class="row">
     <ul class="menu menu_desktop">
-        <li class="li_menu active custom_color_bg"><a href="{{ route('home') }}" >INICIO</a></li>
+        <li class="li_menu {{ empty($current_url) ? 'active custom_color_bg' : ''}}"><a href="{{ route('home') }}" >INICIO</a></li>
         @foreach ($dbl_categories_home as $key => $dbr_category_home)
-            <li class="li_menu">
+            <li class="li_menu {{ !empty($current_url) && strpos($current_url, $dbr_category_home['slug'])   !== false ? 'active custom_color_bg' : ''}}">
                 <a href="{{ route('frontend.section.list', array($dbr_category_home['slug'])) }}" >{{ mb_strtoupper($dbr_category_home['name']) }}</a>
                 @if(isset($dbr_category_home['children_category']))
                     <div style="display:none" class="dropdown">
@@ -44,8 +45,8 @@ if (!Cache::has($key)){
                                     }
                                 ?>
                                 @foreach ($dbl_post_category as $dbr_post_category)
-                                    <?php 
-                                        $data_url = array($dbr_post_category->category_parent_slug, $dbr_post_category->id, $dbr_post_category->slug); 
+                                    <?php
+                                        $data_url = array($dbr_post_category->category_parent_slug, $dbr_post_category->id, $dbr_post_category->slug);
 
                                         if(!empty($dbr_post_category->id_video)){
                                             $image_featured = Helpers::getThumbnailYoutubeByIdVideo($dbr_post_category->id_video);

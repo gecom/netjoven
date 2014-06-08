@@ -362,10 +362,10 @@ class FrontendSectionController extends BaseController {
 		}
 
 		$text_search = Helpers::cleanStopWords($keyword);
-		$key = 'search_tag_e' . $keyword .'_'. $page;
+		$key = 'search_tag_' . $keyword .'_'. $page;
 
 		if (!Cache::has($key)) {
-			$dbl_post_search = Cache::remember($key, 120, function() use ($text_search) {
+			$dbl_post_search = Cache::remember($key, 3, function() use ($text_search) {
 				$dbl_post_search = Search::getPostTags($text_search)->paginate(12)->route('frontend.post.tags.pagination', array($text_search));
 
 				return ['list' => $dbl_post_search->getItems(), 'links' => (string) $dbl_post_search->links('frontend.pages.partials.paginator')];
@@ -395,7 +395,7 @@ class FrontendSectionController extends BaseController {
 		$key = 'dbl_post_view_' . $post;
 
 		if (!Cache::has($key)) {
-			$data_params = Cache::remember($key, 240, function() use ($post) { 			
+			$data_params = Cache::remember($key, 240, function() use ($post) {
 				$dbr_post = Post::getPostById($post)->first();
 
 				if(!$dbr_post){
@@ -403,13 +403,14 @@ class FrontendSectionController extends BaseController {
 				}
 
 				$dbr_post_gallery = ($dbr_post->has_gallery ? $dbr_post->galleries()->select('image', 'title')->where('is_gallery', '=', 1)->first() : null);
-				$dbr_post->content = Helpers::bbcodes($dbr_post->content);			
+				$dbr_post->content = Helpers::bbcodes($dbr_post->content);
 
 				$params_template['meter_likebox'] = array(300, 300);
 				$params_template['dbr_post'] = $dbr_post;
 				$params_template['title_page'] = $dbr_post->title;
 				$params_template['description'] = Helpers::getDescriptionPost($dbr_post->content);
 				$params_template['dbr_post_gallery'] = $dbr_post_gallery;
+				$params_template['dbr_redactor'] = UserHelper::getUserRedactor($dbr_post->user_id);
 
 				return $params_template;
 			});
@@ -417,7 +418,9 @@ class FrontendSectionController extends BaseController {
 			$data_params = Cache::get($key);
 		}
 
-		Post::updateCounterRead($data_params['dbr_post']->id);
+		$dbr_post = $data_params['dbr_post'];
+		App::instance('singleton_dbr_post', $dbr_post);
+		Post::updateCounterRead($dbr_post->id);
 
 		$params_template = $data_params;
 		$params_template['redirect'] = ($http_referer ? $http_referer : route('home')) ;
@@ -478,6 +481,13 @@ class FrontendSectionController extends BaseController {
 			return View::make('frontend.pages.partials.post_gallery',array('dbl_post_gallery'=>$dbl_post_gallery))->render();
 		}
 
+	}
+
+	public function radio(){
+		$params_template['meter_likebox'] = array(300, 300);
+		$params_template['title_page'] = 'Radio En Vivo - Netjoven Radio - Música Online';
+		$params_template['description'] = 'Escucha nuestra Netjoven Radio En Vivo que tiene la Mejor Música Online del Pop, Pachanga, Hip-Hop, Electro-Pop, Latin y Rock en Inglés y Español.';
+		return View::make('frontend.pages.section.radio', $params_template);
 	}
 
 }

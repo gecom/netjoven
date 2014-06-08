@@ -9,6 +9,7 @@
     </head>
     <body>
         {{ BannerHelper::getBanner(7)}}
+        @include('frontend.pages.partials.floating_radio')
         <div id="container" class="container">
             <header class="custom_color_bg">
                 @include('frontend.includes.header')
@@ -42,7 +43,7 @@
         </div>
 
         <div id="ajax-modal" class="modal fade" tabindex="-1" style="display: none;"></div>
-        
+
         {{ HTML::script('http://tags.crwdcntrl.net/c/3868/cc.js?ns=_cc3868', array('id'=>'LOTCC_3868')); }}
         <script type="text/javascript" language="javascript">_cc3868.bcp();</script>
 

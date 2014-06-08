@@ -75,4 +75,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return $this->hasOne('UserTool');
     }
 
+    public function scopeGetAdmin($query){
+    	return $query->whereIn('level', array(UserHelper::LEVEL_USER_ADMIN, UserHelper::LEVEL_USER_GOOD, UserHelper::LEVEL_USER_MODE));
+    }
+
+
+
 }

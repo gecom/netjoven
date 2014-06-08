@@ -31,6 +31,7 @@ header .social ul li a{height:36px;width:36px;display:inline-block;background-im
 header .social ul li .tw{background-position:-4px -90px}
 header .social ul li .fb{background-position:-67px -90px}
 header .social ul li .gp{background-position:-129px -90px}
+.floating_radio{position:fixed;top:40%;right:0;width:83px;height:158px;-webkit-box-shadow:1px 1px 4px 0 #6d6d6d;-moz-box-shadow:1px 1px 4px 0 #6d6d6d;box-shadow:1px 1px 4px 0 #6d6d6d}
 #main_nav{width:960px;background:url("/../assets/images/sprite_fondos.png") repeat-x;text-align:right;position:relative;}
 #main_nav .row{margin-left:0}
 #main_nav .menu{margin-right:11px;font-size:0;position:relative;-webkit-box-shadow:1px 1px 4px 0 #6d6d6d;-moz-box-shadow:1px 1px 4px 0 #6d6d6d;box-shadow:1px 1px 4px 0 #6d6d6d;}
@@ -146,10 +147,13 @@ header .social ul li .gp{background-position:-129px -90px}
 .v_news .paginate ul li{display:inline-block;height:16px;-webkit-border-radius:8px;-moz-border-radius:8px;border-radius:8px;text-align:center;line-height:15px;font-size:1rem;margin-left:2px;}
 .v_news .paginate ul li a{font-size:.9em;display:inline-block;color:#6d6d6d;line-height:auto;padding-right:5px;padding-left:5px}
 .v_news .paginate ul li:hover a,.v_news .paginate ul .active a{color:#fff;text-decoration:none}
-.banner_view{width:468px;min-height:0;margin:14px 66px;display:block;background-color:#5d5d5d;text-align:center}
-.fullbanner{width:960px;min-height:0;margin:14px 0;display:block;background-color:#5d5d5d;text-align:center}
-.banner_view iframe,.banner_view object,.banner_view embed, .fullbanner iframe,.fullbanner object,.fullbanner embed {position: absolute;top: 0;left: 0;width: 100%;height: 100%;}
-.banner_view img, .fullbanner img{width: 100%; height: 100%;}
+.banner_view{width:468px;min-height:0;margin:14px 66px;display:block;text-align:center}
+.banner_view iframe,.banner_view object,.banner_view embed{top: 0;left: 0;width: 100%;}
+#notes iframe img{ width: 100% !important;}
+.fullbanner{width:960px;min-height:0;margin:14px 0;display:block;background-color:#5d5d5d;text-align:center;position: relative;}
+.fullbanner iframe, .fullbanner object,.fullbanner embed {position: absolute;top: 0;left: 0;width: 100%;}
+.fullbanner .banner-flotante{height:0;width:750px;position:absolute;left:50%;margin-left:-375px;z-index:100;}
+.fullbanner iframe img{width: 100% !important;}
 #videos{margin-bottom:14px;width:960px;background-color:#fff;padding:10px 10px 40px;border-bottom:1px solid #d8d8d8;border-top:1px solid #d8d8d8;font-size:0;}
 #videos .left_video{width:604px;display:inline-block;vertical-align:top;font-size:1rem;}
 #videos .left_video .video_animation .bxslider_video{margin-left:42px;}
@@ -180,6 +184,9 @@ header .social ul li .gp{background-position:-129px -90px}
 #ads .item .add_content .link a span{width:22px;height:22px;-webkit-border-radius:11px;-moz-border-radius:11px;border-radius:11px;margin-left:7px;display:inline-block;color:#fff;text-align:center}
 #ads .item .add_content .link a:hover{text-decoration:none}
 #ads .item:first-child{margin-left:0}
+.wrapper_radio{background: url("/../assets/images/bg_radio.jpg") no-repeat scroll 0 0 rgba(0, 0, 0, 0);display: inline-block;height: 200px;margin: 0 auto;padding: 0;}
+.wrapper_radio div{padding: 20px;}
+.radio_comment{padding: 5px;}
 footer{margin:14px 0 40px 0;width:960px;border-top:1px solid #d8d8d8;font-family:'Open Sans',sans-serif;font-weight:400;color:#5b5b5b;background:url("/../assets/images/sombra_footer.png") no-repeat 0 bottom;padding-bottom:22px;}
 footer .sponsors{border-bottom:1px solid #d8d8d8;border-top:1px solid #d8d8d8;background-color:#fff;height:130px;background:url("/../assets/images/sponsors.jpg") no-repeat;}
 footer .sponsors ul{margin:42px 0 0;padding:0;}
@@ -456,7 +463,7 @@ footer .footer_devices .fd2{background:url("/../assets/images/sprite.png") -144p
 #notes .right_notes{width:600px;display:inline-block;vertical-align:top;font-size:1rem;float:right;margin-right:25px;}
 #notes .right_notes .group_title{font-size:2.8em;line-height:30px}
 #notes .right_notes .title_nota{font-size:1.9em;margin-top:5px}
-#notes .right_notes .image .opt{height:27px;background-color:#e2e2e2;width:100%;padding:0 10px;text-align:left;margin-top:30px}
+#notes .right_notes .image .opt{height:27px;background-color:#e2e2e2;width:100%;padding:0 10px;text-align:left;margin-top:5px}
 #notes .right_notes .image .gallery{position:relative;}
 #notes .right_notes .image .gallery a{position:absolute;display:block;bottom:2%;margin-left: 6px;}
 #notes .right_notes .image .gallery a.next{background-position:-200px -637px;left:0}
@@ -583,7 +590,8 @@ footer .footer_devices .fd2{background:url("/../assets/images/sprite.png") -144p
 .wrapper_slider_gallery figure{display: inline-block;}
 .video-container {position: relative;padding-bottom: 56.25%;padding-top: 30px;height: 0;overflow: hidden;}
 .video-container iframe,.video-container object,.video-container embed {position: absolute;top: 0;left: 0;width: 100%;height: 100%;}
-@media screen and (max-width:1000px){.container{width:768px;margin:0 auto;padding:0}
+@media screen and (max-width:1000px){.floating_radio{display:none}
+.container{width:768px;margin:0 auto;padding:0}
 header{overflow:hidden;width:768px;}
 header .social,header .search{display:none}
 #main_nav{width:768px;}
@@ -729,6 +737,7 @@ footer{display:none}
 .v_news .list_mode .adding{display:none}
 .v_news .no_title{padding-top:25px}
 .banner_view{width: 95%;margin:0 auto 14px}
+.banner_view iframe img, .fullbanner img{width: 100% !important;}
 .fullbanner{width:690px;margin:0 auto 14px;margin-bottom:0;min-height:0;background-color:#fff;padding-top:0;border-bottom:1px solid #d8d8d8;border-top:1px solid #d8d8d8;text-align:center;}
 #videos{display:none}
 #ads{width:690px;text-align:center;margin:0 auto 14px;}

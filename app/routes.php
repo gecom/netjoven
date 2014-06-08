@@ -66,7 +66,7 @@ Route::group(array('prefix' => 'backend'), function()
         Route::post('/publicaciones/{post}/destacar', array('as' => 'backend.register.save.featured', 'uses' => 'AdminNewsController@saveFeatured' ));
         Route::get('/fotos', array('as' => 'backend.fotos.list', 'uses' => 'AdminPhotosController@listPhotosUser'));
         Route::post('/fotos/guardar', array('as' => 'backend.fotos.save', 'uses' => 'AdminPhotosController@savePhoto'));
-        
+
 
         /*******Registro de categorias*******/
         Route::get('/categorias', array('as' => 'list_categories', 'uses' => 'AdminCategoryController@listCategories' ));
@@ -102,7 +102,7 @@ Route::group(array('prefix' => 'backend'), function()
         Route::post('/detalle_banners/eliminar/{banner_detail}', array('as' => 'backend.banner_detail.delete', 'uses' => 'AdminBannerController@deleteBannerDetail' ));
 
         /*******Estadisticas*******/
-        Route::get('/estadisticas/noticias', array('as' => 'backend.statistics_news.list', 'uses' => 'AdminStatisticsController@statisticsNews' ));
+        Route::any('/estadisticas/noticias', array('as' => 'backend.statistics_news.list', 'uses' => 'AdminStatisticsController@statisticsNews' ));
         Route::get('/estadisticas/redactores', array('as' => 'backend.statistics_redactores.list', 'uses' => 'AdminStatisticsController@statisticsRedactores' ));
         Route::get('/estadisticas/categorias', array('as' => 'backend.statistics_categorias.list', 'uses' => 'AdminStatisticsController@statisticsCategories' ));
 
@@ -141,12 +141,12 @@ Route::get('/noticias/page/{page}', array('as' => 'frontend.post.more_news_pagin
 Route::any('/noticias/buscar/{keyword?}', array('as' => 'frontend.post.search', 'uses' => 'FrontendSectionController@searchPost' ));
 Route::any('/noticias/buscar/{keyword?}/{page}', array('as' => 'frontend.post.search.pagination', 'uses' => 'FrontendSectionController@searchPost' ));
 
+Route::get('/radio', array('as' => 'frontend.radio', 'uses' => 'FrontendSectionController@radio' ));
+
 Route::get('/juerga/{directory_publication}/{slug}.html', array('as' => 'frontend.juerga.view', 'uses' => 'FrontendSectionController@viewDirectoryPublication' ));
 Route::get('/juerga/{args?}/{page?}', array('as' => 'frontend.juerga.list', 'uses' => 'FrontendSectionController@listDirectorate' ))->where('args', '(.*)');
 Route::get('/pichanga/{directory_publication}/{slug}.html', array('as' => 'frontend.pichanga.view', 'uses' => 'FrontendSectionController@viewDirectoryPublication' ));
 Route::get('/pichanga/{args?}/{page?}', array('as' => 'frontend.pichanga.list', 'uses' => 'FrontendSectionController@listDirectorate' ))->where('args', '(.*)');
-
-
 
 Route::get('{slug}', array('as' => 'frontend.section.list', 'uses' => 'FrontendSectionController@listSection' ));
 Route::get('{slug}/{page}', array('as' => 'frontend.section.pagination', 'uses' => 'FrontendSectionController@listSection' ));

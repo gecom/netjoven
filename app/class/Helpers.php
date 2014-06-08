@@ -80,14 +80,14 @@ class Helpers {
 
 		$data_sidebar = array(
 			array('name' => 'Dashboard', 'class'=>'fa-dashboard', 'url' => '#' ),
-			array('name' => 'Estadisticas', 'class'=>'fa-bar-chart-o', 'url' => '#', 					
+			array('name' => 'Estadisticas', 'class'=>'fa-bar-chart-o', 'url' => '#',
 				'subcategories'=> array(
 						array('name' => 'Noticias', 'url' => url('backend/estadisticas/noticias')),
 						array('name' => 'Categorias', 'url' => url('backend/estadisticas/categorias')),
 						array('name' => 'Redactores', 'url' => url('backend/estadisticas/redactores'))
-					) 
+					)
 			),
-			array('name' => 'Administrar Banners', 'class'=>'fa-table', 'url' => '#' ,	
+			array('name' => 'Administrar Banners', 'class'=>'fa-table', 'url' => '#' ,
 					'subcategories'=> array(
 						array('name' => 'Banners', 'url' => url('backend/banners')),
 						array('name' => 'Detalle de Banners', 'url' => url('backend/detalle_banners'))
@@ -284,7 +284,7 @@ class Helpers {
 		}
 
 		$dbr_country_data = Cache::get($key);
-	
+
 		return $dbr_country_data;
 	}
 
@@ -556,7 +556,7 @@ class Helpers {
 		$params = array_merge($params_default, $params);
 
 		$query = DB::table('njv_slider_more')
-			->select('njv_slider_more.post_id', 
+			->select('njv_slider_more.post_id',
 						Db::raw('(SELECT image FROM njv_post_multimedia WHERE post_id = njv_slider_more.post_id and is_principal = 1 ) as image') ,
 						DB::raw('(SELECT slug FROM njv_category WHERE id = njv_slider_more.category_parent_id) category_parent_slug'),
 						'njv_slider_more.title',
@@ -643,22 +643,20 @@ class Helpers {
 		$url_current = null;
 
 		if($data_route_action[0] == 'FrontendSectionController' && $data_route_action[1] == 'viewPost'){
-			//$dbr_post = Route::getCurrentRoute()->getParameter('dbr_post');
-			$post_id = Route::getCurrentRoute()->getParameter('post_id');
-			$dbr_post = Post::getPostById($post_id)->first();
+			$dbr_post = App::make('singleton_dbr_post');
 			$url_current = Request::path();
 			$url_current = preg_replace('/[0-9]+/', Str::slug($dbr_post->category_name) . '.articulo', $url_current);
-			
+
 		}else{
 			$data_segments = Request::segments();
 
 			switch (count($data_segments)) {
-				case 0: 
+				case 0:
 					$url_current = 'inicio.portada';
-					break;	
-				case 1 : 
+					break;
+				case 1 :
 					$url_current = $data_segments[0].'.portada';
-					break;		
+					break;
 				default:
 					$url_current = implode('/', $data_segments);
 					break;
@@ -673,7 +671,7 @@ class Helpers {
 
 	public static function getCountry(){
 		$dbl_country = DB::select("SELECT DISTINCT country_code,country_name FROM njv_ip2c ORDER BY country_name");
-		return $dbl_country;		
+		return $dbl_country;
 	}
 
 }

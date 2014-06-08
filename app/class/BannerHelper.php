@@ -25,14 +25,13 @@ class BannerHelper{
 
 			if($data_route_action[0] == 'FrontendSectionController' && $data_route_action[1] == 'viewPost'){
 				$type = self::TYPE_BANNER_VIEW;
-				$post_id = Route::getCurrentRoute()->getParameter('post_id');
-				$dbr_post = Post::getPostById($post_id)->first();
+				$dbr_post = App::make('singleton_dbr_post');
 				$data_tags = explode(',', $dbr_post->tags_name);
 				$tags = Str::slug($data_tags[0]);
 			}
 
 			if($data_route_action[0] == 'FrontendSectionController' &&  in_array($data_route_action[1], array('viewDirectoryPublication', 'listDirectorate'))){
-					
+
 				if($data_route_action[1] == 'viewDirectoryPublication'){
 					$type = self::TYPE_BANNER_VIEW;
 				}
@@ -44,15 +43,15 @@ class BannerHelper{
 			if($data_route_action[0] == 'FrontendSectionController' && $data_route_action[1] == 'listSection'){
 				$slug = Route::getCurrentRoute()->getParameter('slug');
 				$dbr_banner_nodule = BannerModule::where('slug', '=', $slug)->first();
-				$module = $dbr_banner_nodule->id;
+				$module = ($dbr_banner_nodule ? $dbr_banner_nodule->id : 1);
 			}
 
 			if(($data_route_action[0] == 'FrontendSectionController' && $data_route_action[1] == 'searchTag') || $tags){ // esto se puede cambiar por el route de tags
 				$tags = (!$tags ? Route::getCurrentRoute()->getParameter('keyword') : $tags);
-				$module = 2;			
+				$module = 2;
 			}
 		}
-		
+
 		$params['module_id'] 	= $module;
 		$params['sector_id'] 	= $sector_id;
 		$params['type'] 		= $type;
@@ -61,7 +60,7 @@ class BannerHelper{
 			$params['tags']		= $tags;
 		}
 
-		return self::loadBanner($params, $do);		
+		return self::loadBanner($params, $do);
 	}
 
 	private static function loadBanner($params, $do){
@@ -83,11 +82,11 @@ class BannerHelper{
 
 		foreach ($dbl_banner_detail as $dbr_banner_detail) {
 
-		
+
 			if(!empty($dbr_banner_detail->start) and ($dbr_banner_detail->start <= $today and $dbr_banner_detail->end >= $today) ){
-				if($dbr_banner_detail->time_start <= $time and $dbr_banner_detail->time_end >= $time ){					
-				   	
-					if( Helpers::getCountrycode() == $dbr_banner_detail->country){						
+				if($dbr_banner_detail->time_start <= $time and $dbr_banner_detail->time_end >= $time ){
+
+					if( Helpers::getCountrycode() == $dbr_banner_detail->country){
 						$bFP['id'][] = $dbr_banner_detail->banner_id;
 						$bFP['weight'][] = $dbr_banner_detail->weight;
 					}else{
@@ -129,25 +128,25 @@ class BannerHelper{
 		return ;
 	}
 
-	private static function bannerRandon($values, $weights){ 
-		
-		$count = count($values); 
-		$i = 0; 
-		$n = 0; 
-		$num = mt_rand(0, array_sum($weights)); 
+	private static function bannerRandon($values, $weights){
+
+		$count = count($values);
+		$i = 0;
+		$n = 0;
+		$num = mt_rand(0, array_sum($weights));
 		while($i < $count){
-		    $n += $weights[$i]; 
+		    $n += $weights[$i];
 		    if($n >= $num){
-		        break; 
+		        break;
 		    }
-		    $i++; 
-		} 
-		return $values[$i]; 
+		    $i++;
+		}
+		return $values[$i];
 	}
 
 	private static function getBannerById($id){
 		$dbr_banner = Banner::where('id', '=', $id)->first();
-		return stripslashes($dbr_banner->code); 
+		return stripslashes($dbr_banner->code);
 	}
 
 	public static function getBannerModuleParent(){

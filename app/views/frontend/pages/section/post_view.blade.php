@@ -30,7 +30,7 @@
                     @endif
                 </div>
                 <div class="text_note">
-                    @if ($dbr_post->id_video)                        
+                    @if ($dbr_post->id_video)
                         <div  class="video-container">
                             @if ($dbr_post->type_video == Helpers::TYPE_VIDEO_YOUTUBE)
                                 <?php $url_video = 'http://www.youtube.com/v/'.$dbr_post->id_video.'&hl=es&fs=1&showinfo=0&rel=0' ?>
@@ -51,15 +51,15 @@
                     {{$dbr_post->content}}
                 </div>
                 <div class="author">
-                    <span class="custom_color_bg"></span>Samantha Cervantes / NetJoven
+                    <span class="custom_color_bg"></span> {{$dbr_redactor->userProfile-> first_name . ' ' . $dbr_redactor->userProfile->last_name }} / NetJoven
                 </div>
                 <div class="social">
                     @include('frontend.pages.section.post_button_social')
                 </div>
-                <div class="tags">                    
+                <div class="tags">
                     @if ($dbr_post->tags_name)
                         <span class="custom_color_text">Tags: </span>{{Helpers::formatTags($dbr_post->tags_name)}}
-                    @endif                     
+                    @endif
                 </div>
                 <div class="action">
                     <a href="{{$redirect}}" class="btn_volver custom_color_bg">Volver</a>

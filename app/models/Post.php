@@ -64,6 +64,7 @@ class Post extends Eloquent {
 					'njv_post.has_gallery',
 					'njv_post.id_video',
 					'njv_post.type_video',
+					'njv_post.user_id',
 					'njv_post.title',
 					'njv_post.slug',
 					'njv_post.content',
@@ -87,7 +88,7 @@ class Post extends Eloquent {
 		$params = array_merge($params_default, $params);
 
     	$query->select('njv_post.id',
-    					DB::raw('(SELECT image FROM njv_post_multimedia WHERE post_id = njv_post.id and is_principal = 1) AS image_featured'), 
+    					DB::raw('(SELECT image FROM njv_post_multimedia WHERE post_id = njv_post.id and is_principal = 1) AS image_featured'),
 						DB::raw('(SELECT id FROM njv_category c WHERE id = njv_category.parent_id) category_parent_id'),
 						DB::raw('(SELECT name FROM njv_category c WHERE id = njv_category.parent_id) category_parent_name'),
 						DB::raw('(SELECT slug FROM njv_category c WHERE id = njv_category.parent_id) category_parent_slug'),
