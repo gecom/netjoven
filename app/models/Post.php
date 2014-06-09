@@ -87,6 +87,7 @@ class Post extends Eloquent {
 				->where('njv_post.id', '=', $post_id)
 				->where('njv_post.status', '=', Status::STATUS_PUBLICADO)
 				->where('njv_post.post_at', '<=', DB::raw("NOW()"))
+				->where('njv_post.is_deleted', '=', 0)
 				->groupBy('njv_post.id');
     }
 
@@ -115,6 +116,7 @@ class Post extends Eloquent {
 						'njv_category.id as category_id',
 						'njv_category.name as category_name',
 						'njv_category.slug as category_slug')
+    			->where('njv_post.is_deleted', '=', 0)
     			->join('njv_category', 'njv_category.id', '=', 'njv_post.category_id')
     			->orderBy('njv_post.post_at', 'desc');
 

@@ -82,5 +82,13 @@ Route::filter('csrf', function()
 
 Route::filter('auth_admin', function()
 {
+  	 $dbr_user = Auth::User();
+
 	if (!Auth::check())  return Redirect::to('backend/login');
+	else{
+		if($dbr_user->level == UserHelper::LEVEL_USER_NORMAL ){
+			Auth::logout();
+			return Redirect::to('backend/login');
+		}
+	}
 });

@@ -244,12 +244,12 @@ class AdminBannerController extends BaseController {
 
     public function deleteBannerDetail($dbr_banner_detail){
         if(Request::ajax()){
-
-            if (!$dbr_banner_detail) {
-                throw new Exception('Error : no se puedo eliminar el banner');
-            }
-
             try {
+
+                if (!$dbr_banner_detail) {
+                    throw new Exception('Error : no se puedo eliminar el banner');
+                }
+
                 $dbr_banner_detail->delete();
                 $response['success'] = true;
                 $response['message'] =  'Banner eliminado satisfactoriamente';

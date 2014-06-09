@@ -59,6 +59,7 @@ Route::group(array('prefix' => 'backend'), function()
         Route::get('/publicaciones/{type_post}', array('as' => 'backend.post.list', 'uses' => 'AdminNewsController@listNews' ));
         Route::get('/publicacion/{type_post}/{post}/editar/', array('as' => 'backend.register.edit', 'uses' => 'AdminNewsController@news' ));
         Route::post('/publicacion/{type_post}/{post}/editar', array('as' => 'backend.register.save.edit', 'uses' => 'AdminNewsController@saveNews' ));
+        Route::post('/publicacion/{post}/eliminar', array('as' => 'backend.post.delete', 'uses' => 'AdminNewsController@deletePost' ));
         Route::get('/publicaciones/{type_post}/nuevo', array('as' => 'backend.register.new', 'uses' => 'AdminNewsController@news' ));
         Route::post('/publicaciones/{type_post}/nuevo', array('as' => 'backend.register.save.new', 'uses' => 'AdminNewsController@saveNews' ));
         Route::post('/publicaciones/nota/{post}/galeria/guardar', array('as' => 'backend.register.save.gallery', 'uses' => 'AdminNewsController@saveNewsGallery' ));

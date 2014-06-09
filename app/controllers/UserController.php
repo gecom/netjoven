@@ -57,6 +57,7 @@ class UserController extends BaseController {
         $dbr_user->user = uniqid();
         $dbr_user->email = $params_form['email'];
         $dbr_user->password = Hash::make($params_form['password']);
+        $dbr_user->level = UserHelper::LEVEL_USER_NORMAL;
         $dbr_user->save();
 
         $dbr_user_profile = new UserProfile();
@@ -169,6 +170,14 @@ class UserController extends BaseController {
         );
 
         if (Auth::attempt($input)) {
+
+            $dbr_user = Auth::User();
+
+            if($dbr_user->level == UserHelper::LEVEL_USER_NORMAL){
+                Auth::logout();
+                return Redirect::to('backend/login')->with('message', 'Your username/password combination was incorrect')->withInput();
+            }
+
            return Redirect::to('backend')->with('message', 'You are now logged in!');
         } else {
 
@@ -180,7 +189,7 @@ class UserController extends BaseController {
                 return Redirect::to('backend')->with('message', 'You are now logged in!');
             }
 
-            return Redirect::to('backend/login')->with('message', 'Your username/password combination was incorrect')->withInput();
+            return Redirect::to('backend/login')->with('message', 'Your username/password combination was incorrect fff')->withInput();
         }
 
     }

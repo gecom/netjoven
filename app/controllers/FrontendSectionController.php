@@ -455,7 +455,12 @@ class FrontendSectionController extends BaseController {
 
 		$dbr_post = $data_params['dbr_post'];
 		App::instance('singleton_dbr_post', $dbr_post);
-		Post::updateCounterRead($dbr_post->id);
+
+		$dbr_user_login = Auth::check() ? Auth::User() : null;
+
+		if(!$dbr_user_login || ($dbr_user_login && $dbr_user_login->level == UserHelper::LEVEL_USER_NORMAL)){
+			Post::updateCounterRead($dbr_post->id);			
+		}
 
 		$params_template = $data_params;
 		$params_template['redirect'] = ($http_referer ? $http_referer : route('home')) ;
@@ -531,4 +536,3 @@ class FrontendSectionController extends BaseController {
 
 }
 
-?>

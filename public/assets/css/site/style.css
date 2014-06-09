@@ -7,12 +7,12 @@ a:hover{text-decoration: none;}
 .opt1{float:left;padding-top:8px;font-size:.8rem}
 .opt2,.opt4{width:28px;height:20px;background:url("/../assets/images/sprite.png") 0 -191px no-repeat;margin-top:4px;left:50%;margin-left:-14px;position:absolute}
 .opt4{background-position:-41px -191px}
-.opt3{float:right;padding:8px 20px 0 0;font-size:.8em;background:url("/../assets/images/sprite.png") 69px -216px no-repeat}
+.opt3{float:right;padding:8px 26px 0 0;font-size:.8em;background:url("/../assets/images/sprite.png") 69px -216px no-repeat}
 .mas_visto .tab .t1,.mas_visto .tab .t2,.mas_visto .tab .t3,.mas_visto .tab .t4{float:right;display:block;width:70px;height:26px;background:url("/../assets/images/sprite.png") 30px -639px no-repeat}
 .mas_visto .tab .t2{background-position:30px -671px}
 .mas_visto .tab .t3{background-position:30px -704px}
 .mas_visto .tab .t4{background-position:0 -734px}
-.list_articles .text a:hover{color:#6d6d6d !important}
+.list_articles .text a:hover{color:#6d6d6d}
 .busqueda_left{width:337px;float:left}
 .busqueda_right{float:left;width:608px}
 header{background-image:url("/../assets/images/bg_banner.png");background-repeat:no-repeat;height:94px;width:960px;-webkit-box-shadow:1px 1px 4px 0 #6d6d6d;-moz-box-shadow:1px 1px 4px 0 #6d6d6d;box-shadow:1px 1px 4px 0 #6d6d6d;z-index:1;}
@@ -32,6 +32,7 @@ header .social ul li .tw{background-position:-4px -90px}
 header .social ul li .fb{background-position:-67px -90px}
 header .social ul li .gp{background-position:-129px -90px}
 .floating_radio{position:fixed;top:40%;right:0;width:83px;height:158px;-webkit-box-shadow:1px 1px 4px 0 #6d6d6d;-moz-box-shadow:1px 1px 4px 0 #6d6d6d;box-shadow:1px 1px 4px 0 #6d6d6d}
+.progress{background:url("/../assets/images/bx_loader.gif") no-repeat;width: 32px;height: 32px;border: none;}
 #main_nav{width:960px;background:url("/../assets/images/sprite_fondos.png") repeat-x;text-align:right;position:relative;}
 #main_nav .row{margin-left:0}
 #main_nav .menu{margin-right:11px;font-size:0;position:relative;-webkit-box-shadow:1px 1px 4px 0 #6d6d6d;-moz-box-shadow:1px 1px 4px 0 #6d6d6d;box-shadow:1px 1px 4px 0 #6d6d6d;}
@@ -150,7 +151,7 @@ header .social ul li .gp{background-position:-129px -90px}
 .banner_view{width:468px;min-height:0;margin:14px 66px;display:block;text-align:center}
 .banner_view iframe,.banner_view object,.banner_view embed{top: 0;left: 0;width: 100%;}
 #notes iframe img{ width: 100% !important;}
-.fullbanner{width:960px;min-height:0;margin:14px 0;display:block;background-color:#5d5d5d;text-align:center;position: relative;}
+.fullbanner{width:960px;min-height:0;margin:14px 0;display:block;text-align:center;position: relative;}
 .fullbanner iframe, .fullbanner object,.fullbanner embed {position: absolute;top: 0;left: 0;width: 100%;}
 .fullbanner .banner-flotante{height:0;width:750px;position:absolute;left:50%;margin-left:-375px;z-index:100;}
 .fullbanner iframe img{width: 100% !important;}
@@ -504,7 +505,7 @@ footer .footer_devices .fd2{background:url("/../assets/images/sprite.png") -144p
 #notes .right_notes.pichanga_y_juerga .list_content .tabs .buscar_otro .box_form{background:#fff;height:37px;}
 #notes .right_notes.pichanga_y_juerga .list_content .tabs .buscar_otro .box_form .box_search{margin-top:5px}
 #notes .right_notes.pichanga_y_juerga .list_content .list_articles{font-size:0;padding:0 7px 10px 6px;}
-#notes .right_notes.pichanga_y_juerga .list_content .list_articles .filter{height:45px;font-size:1rem;padding-top:8px;position:relative;}
+#notes .right_notes.pichanga_y_juerga .list_content .list_articles .filter{height:65px;font-size:1rem;padding-top:8px;position:relative;}
 #notes .right_notes.pichanga_y_juerga .list_content .list_articles .filter select{width:181px;height:27px;margin-left:10px}
 #notes .right_notes.pichanga_y_juerga .list_content .list_articles .filter a{width:18px;height:18px;display:inline-block;-webkit-border-radius:9px;-moz-border-radius:9px;border-radius:9px;text-align:center;text-decoration:none;}
 #notes .right_notes.pichanga_y_juerga .list_content .list_articles .filter a:hover,#notes .right_notes.pichanga_y_juerga .list_content .list_articles .filter a.active{background:#ee8435;color:#fff;line-height:16px}
@@ -738,7 +739,7 @@ footer{display:none}
 .v_news .no_title{padding-top:25px}
 .banner_view{width: 95%;margin:0 auto 14px}
 .banner_view iframe img, .fullbanner img{width: 100% !important;}
-.fullbanner{width:690px;margin:0 auto 14px;margin-bottom:0;min-height:0;background-color:#fff;padding-top:0;border-bottom:1px solid #d8d8d8;border-top:1px solid #d8d8d8;text-align:center;}
+.fullbanner{width:690px;margin:0 auto 14px;margin-bottom:0;min-height:0;padding-top:0;border-bottom:1px solid #d8d8d8;border-top:1px solid #d8d8d8;text-align:center;}
 #videos{display:none}
 #ads{width:690px;text-align:center;margin:0 auto 14px;}
 #ads .item{width:140px}

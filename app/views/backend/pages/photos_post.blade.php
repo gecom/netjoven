@@ -44,8 +44,8 @@
 													<input type="hidden" name="frm_news_gallery[name][]" value="1401747934-239.jpg">
 												</div>
 												<div class="panel-footer text-center">
-													<a><span class="glyphicon glyphicon-file"></span></a>
-													<a href="#remove"><span class="glyphicon glyphicon-trash"></span></a>
+													<a title="Copiar"><span class="glyphicon glyphicon-file"></span></a>
+													<a href="#remove" title="Eliminar"><span class="glyphicon glyphicon-trash"></span></a>
 												</div>
 											</div>
 										</li>

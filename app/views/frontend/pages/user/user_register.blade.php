@@ -72,27 +72,31 @@
 						</select>
 					</div>
 				@endif
+				<?php  $date_birthday  = isset($dbr_user) ? date_parse_from_format('Y-m-d' ,$dbr_user_profile->birthday) : null; ?>
 
 				<div class="form-group">
 					<div class="col-md-12">
 						<label for="frm_user_gender">Fecha de Nacimiento</label>
 					</div>
 					<div class="col-md-2">
-						{{Form::selectRange('frm_user[day]', 1, 31, null, ['class' => 'form-control'])}}
+						{{Form::selectRange('frm_user[day]', 1, 31, $date_birthday ? intval($date_birthday['day']) : 1, ['class' => 'form-control'])}}
 					</div>
 					<div class="col-md-3">
-						{{ Form::selectMonth('frm_user[month]', 1, ['class' => 'form-control']) }}
+						{{ Form::selectMonth('frm_user[month]', $date_birthday ? $date_birthday['month'] : 1, ['class' => 'form-control']) }}
 					</div>
 					<div class="col-md-3">
-						{{ Form::selectYear('frm_user[year]', date('Y')-100, date('Y'), date('Y') - 1 , ['class' => 'form-control']) }}
+						{{ Form::selectYear('frm_user[year]', date('Y')-100, date('Y'), $date_birthday ? $date_birthday['year'] : date('Y')-1 , ['class' => 'form-control']) }}
 					</div>
 				</div>
+				<?php $data_gender = array('M' => 'Hombre', 'F' => 'Mujer'); ?>
 				<div class="form-group col-md-8">
 					<label for="frm_user_gender">Sexo</label>
 					<select class="form-control" id="frm_user_gender" name="frm_user[gender]">
 						<option value="">--Seleccione--</option>
-						<option value="M">Hombre</option>
-						<option value="F">Mujer</option>
+						@foreach ($data_gender as $key => $gender)
+						<?php $selected = isset($dbr_user) && $dbr_user_profile->gender == $key ? 'selected="selected"' : ''  ?>
+							<option {{$selected}} value="{{$key}}">{{$gender}}</option>
+						@endforeach
 					</select>
 				</div>
 				<div class="actions form-group col-md-8">

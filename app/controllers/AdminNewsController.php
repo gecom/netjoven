@@ -393,6 +393,39 @@ class AdminNewsController extends BaseController {
         }
     }
 
+    public function deletePost($post){
+
+        if(Request::ajax()){
+            $response = array();
+
+            try {
+                if(!$post){
+                     throw new Exception('por favor ingrese una nota');
+                }
+
+                $post->is_deleted = 1;
+                if($post->save()){
+
+                    $key = 'dbl_post_view_' . $post->id;
+
+                    if(Cache::has($key)){
+                        Cache::forget($key);
+                    }
+
+                    $response['success'] = true;
+                    $response['message'] = 'Nota eliminada satisfactoriamente';
+                }
+
+            } catch (Exception $e) {
+                $response['success'] = false;
+                $response['errors'] =  ['Error:' . $e->getMessage()];
+            }
+
+                return Response::json($response);
+        }
+
+    }
+
 }
 
 ?>

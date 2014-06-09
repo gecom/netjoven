@@ -42,7 +42,7 @@
                                 {{ Form::hidden('frm_news[image_principal]', null, array('id' => 'frm_news_image_principal')) }}
                                 <div class="form-group">
                                     {{ Form::label('frm_news_title', 'Titulo') }}
-                                    {{ Form::text('frm_news[title]', ($is_new ? null: $dbr_post->title ), array('id' => 'frm_news_title', 'placeholder' => 'Ingrese un titulo', 'class' => 'form-control')) }}
+                                    {{ Form::text('frm_news[title]', ($is_new ? null: $dbr_post->title ), array('id' => 'frm_news_title', 'placeholder' => 'Ingrese un titulo', 'class' => 'form-control', 'maxlength'=> 70)) }}
                                 </div>
                                 @if ($dbr_category)
                                     {{ Form::hidden('frm_news[subcategory]', $dbr_category->id, array('id' => 'frm_news_subcategory')) }}
