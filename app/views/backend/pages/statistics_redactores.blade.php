@@ -24,8 +24,8 @@
 						    <div class="col-lg-4">
 						        <div class="form-group ">
 						            <label for="frm_statistics_filter_date_start">Desde</label> 
-						            <div id="datetimepicker_date_start" class="input-group date"  data-date-format="DD/MM/YYYY">
-									{{Form::text('frm_statistics_filter[date_start]', null, array('id' => 'frm_statistics_filter_date_start', 'class' => 'form-control'))}}
+						            <div id="datetimepicker_date_start" class="input-group date"  data-date-format="YYYY/MM/DD">
+									{{Form::text('frm_statistics_filter[date_start]', (!empty($data_params['date_start']) ? $data_params['date_start'] : null), array('id' => 'frm_statistics_filter_date_start', 'class' => 'form-control'))}}
 									<span class="input-group-addon"><span class="glyphicon-calendar glyphicon"></span></span>
 									</div>
 						        </div>
@@ -33,8 +33,8 @@
 						    <div class="col-lg-4 ">
 						        <div class="form-group">
 									<label for="frm_statistics_filter_date_end">Hasta</label>  
-									<div id="datetimepicker_date_start" class="input-group date"  data-date-format="DD/MM/YYYY">                                             
-									{{Form::text('frm_statistics_filter[date_end]', null, array('id' => 'frm_statistics_filter_date_end', 'class' => 'form-control'))}}
+									<div id="datetimepicker_date_start" class="input-group date"  data-date-format="YYYY/MM/DD">                                             
+									{{Form::text('frm_statistics_filter[date_end]', (!empty($data_params['date_end']) ? $data_params['date_end'] : null), array('id' => 'frm_statistics_filter_date_end', 'class' => 'form-control'))}}
 									<span class="input-group-addon"><span class="glyphicon-calendar glyphicon"></span></span>
 									</div>
 						        </div>
@@ -68,7 +68,6 @@
 									<span class="glyphicon glyphicon-chevron-up"></span> 
 									<span class="glyphicon glyphicon-chevron-down"></span>
 								</th>
-								<th class="td-actions">Opciones</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -78,7 +77,6 @@
 								<td>{{$dbr_statistics_post->total_post}}</td>
 								<td>{{$dbr_statistics_post->page_views}}</td>
 								<td>{{$dbr_statistics_post->page_views}}</td>
-								<td><a  title="Vista Previa" class="btn btn-primary btn-xs" ><span class=" glyphicon glyphicon-eye-open"></span></a></td>
 							</tr>
 							@endforeach
 						</tbody>

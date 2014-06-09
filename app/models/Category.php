@@ -40,7 +40,7 @@ class Category extends Eloquent {
         $params_default = array('id' => null, 'is_menu' => false, 'category_not_id' => array() );
         $params = array_merge($params_default, $params);
 
-        $query->where('parent_id')
+        $query->whereNull('parent_id')
             ->where('status', '=', Status::STATUS_ACTIVO);
 
 
@@ -61,7 +61,7 @@ class Category extends Eloquent {
 
     public function scopeGetParentCategoryById($query, $parent_id){
         return $query->where('id','=', $parent_id)
-                    ->where('parent_id');
+                    ->whereNull('parent_id');
     }
 
     public function scopeGetChildrenCategoryByParentId($query, $parent_id, $category_not_id = array()){

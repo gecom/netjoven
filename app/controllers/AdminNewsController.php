@@ -161,7 +161,6 @@ class AdminNewsController extends BaseController {
 
         $rules = array(
             'title'   => 'required|min:3',
-            'subcategory'   => 'required|numeric',
             'summary'       => 'required',
             'keywords'       => 'required',
         );
@@ -170,8 +169,12 @@ class AdminNewsController extends BaseController {
             $rules['id_video'] = 'required';
         }
 
-        if($type_post != Helpers::TYPE_POST_FAIL){
+        if($type_post != Helpers::TYPE_POST_FAIL && isset($data_frm_news['category'])){
             $rules['category']  = 'required|numeric';
+        }
+
+        if(isset($data_frm_news['subcategory'])){
+            $rules['subcategory'] = 'required|numeric';
         }
 
         $validator = Validator::make($data_frm_news, $rules);
@@ -188,6 +191,7 @@ class AdminNewsController extends BaseController {
                 $post->title = $data_frm_news['title'];
                 $data_frm_news['post_at'] = Helpers::changeToMysql( $data_frm_news['post_at']);
                 $post->post_at     =   $data_frm_news['post_at'];
+                $post->status = Status::STATUS_PUBLICADO;
 
                 if($is_new == true){
                     $post->slug = $data_frm_news['title'];
@@ -357,8 +361,13 @@ class AdminNewsController extends BaseController {
 
         if(Request::ajax()){
             $category_id = Input::get('category_id');
-            $category_not_id = array(2,24,30,34,35,40,42);
-            $dbl_category = Category::getChildrenCategoryByParentId($category_id, $category_not_id)->select('id', 'name')->get()->toArray();
+            $has_category_not_in = Input::get('has_category_not_in', 0);
+            $category_not_id = array();
+            if($has_category_not_in == 1){
+                $category_not_id = array(2,24,30,34,35,40,42);
+            }
+
+            $dbl_category = CategoryHelper::getCategoryChildrenByParent($category_id, $category_not_id)->select('id', 'name')->get()->toArray();
 
             return Response::json($dbl_category);
         }

@@ -17,6 +17,7 @@ class FrontendHomeController extends BaseController {
 				$params_template['dbl_last_post_video_featured'] = PostFeatured::GetFeaturedPost(Helpers::TYPE_VIDEO_FEATURED)->limit(5)->get();
 				$params_template['dbr_post_cartelera'] = Post::getPostNews(array('type' => array(Helpers::TYPE_POST_CARTELERA), 'with_post_at' => true))->first();
 
+
 				$params_template = array_merge($params_template, $this->getPostByTypeModule($type_module));
 				$params_template['type_module'] = $type_module;
 
@@ -29,17 +30,48 @@ class FrontendHomeController extends BaseController {
 		return View::make('frontend.pages.home.home', $params_template);
 	}
 
-	public function viewMoreNews(){
+	public function viewMoreNews($page = null){
 
 		$params['with_post_at'] =  true;
 		$params['display'] =  1;
+		$key = 'view_more_news_'.$page;
 
-		$dbl_post = Post::getPostNews($params)->paginate(12)->route('frontend.post.more_news_paginate');
+		if (!Cache::has($key)) {
+			$params_template = Cache::remember($key, 3, function() use ($params) {
+				$dbl_post = Post::getPostNews($params)->paginate(12)->route('frontend.post.more_news_paginate');
 
+				$params_template['dbl_post_search'] = $dbl_post->getItems();
+				$params_template['dbl_post_search_links'] = (string) $dbl_post->links('frontend.pages.partials.paginator');
+
+				$limit_post_tags = 6;
+				$data_post_id = array();
+				foreach ($dbl_post as $key => $dbr_post) {
+					if($key <= $limit_post_tags){
+						$data_post_id[] = $dbr_post->id;
+					}else{
+						break;
+					}
+				}
+
+				$last_tags = null;
+				if(count($data_post_id)){
+					$dbr_last_tag = Post::getLastTag($data_post_id)->first();
+					$last_tags = $dbr_last_tag ? ucwords(strtolower($dbr_last_tag->tags_name)) : null;
+				}
+
+				$params_template['last_tags'] = $last_tags;
+
+				return $params_template;
+
+			});
+		}else{
+			$params_template = Cache::get($key);
+		}
+		
+		$params_template['title_page'] = Lang::get('messages.frontend.title_page', array('message' => 'Noticias Peru ' , 'tags' => $params_template['last_tags']));
 		$params_template['dbl_slider_more'] = Helpers::viewMoreSlider();
 		$params_template['meter_likebox'] = array(300, 300);
 		$params_template['title_text_search'] = 'Noticias';
-		$params_template['dbl_post_search'] = $dbl_post;
 
 		return View::make('frontend.pages.search.search', $params_template);
 	}

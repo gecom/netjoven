@@ -5,6 +5,14 @@ class Post extends Eloquent {
 
 	public static $rules = array();
 
+	public static function boot(){
+        parent::boot();
+
+        static::creating(function($post){
+            $post->user_id = Auth::user()->id;
+        });
+    }
+
 	public function category()
 	{
 		return $this->belongsTo('Category');
@@ -101,6 +109,7 @@ class Post extends Eloquent {
 						'njv_post.view_index',
 						'njv_post.id_video',
 						'njv_post.type_video',
+						'njv_post.user_id',
 						'njv_post.type',
 						'njv_post.has_gallery',
 						'njv_category.id as category_id',

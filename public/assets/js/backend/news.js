@@ -52,7 +52,8 @@ $(function(){
 			type:'post',
 			dataType: 'json',
 			data: {
-				'category_id' : category_id
+				'category_id' : category_id,
+				'has_category_not_in' : 1
 			}
 		}).done(function(response){
 
@@ -76,7 +77,7 @@ $(function(){
 
 	registerPost.uploadImage('#fileupload_principal','/backend/upload_file_image/noticias', function(response){
 		if(response.result.success == 1){
-			var $wrapper_image_data = $('#images-data').html(), data = {};
+			var $wrapper_image_data = $('#images-data').html(), data = {}, category_id = $('#frm_news_subcategory').val();
 
 			data.image = response.result;
 			data.is_principal = true;
@@ -86,21 +87,26 @@ $(function(){
 
 			var $image_principal = $preview_image_principal.find('img');
 
+			var width = 300; height = 187;
+			if(category_id == 42){
+				width = 260; 
+				height = 370;
+			}
+
 			 $image_principal.load(function(){
-			 		//s$image_principal.imgAreaSelect({remove:true});
 				var ias = $image_principal.imgAreaSelect({
-					x1: 0, y1: 0, x2: 300, y2: 187,
+					x1: 0, y1: 0, x2: width, y2: height,
 					resizable:false,
 					aspectRatio: "12:8",
 					handles: true,
 					instance: true,
 					onInit:function (img, selection){
-						selection.width = 300;
-						selection.height = 187;
+						selection.width = width;
+						selection.height = height;
 					},
 					onSelectChange:function(img, selection){
 						if(selection.width == 0 && selection.height == 0){
-							ias.setSelection(0, 0, 300, 187);
+							ias.setSelection(0, 0, width, height);
 							ias.setOptions({ show: true });
 							ias.update();
 						}

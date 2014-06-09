@@ -53,7 +53,7 @@
 		</div>
 	</div>
 	<div class="paginate">
-		@if (!empty($dbl_post_search))
+		@if (isset($dbl_post_search) && !empty($dbl_post_search))
 			{{$dbl_post_search_links}}
 		@endif
 	</div>

@@ -153,7 +153,7 @@
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
                                 </div>
-                                @if (in_array($type_post, array(Helpers::TYPE_POST_NEWS, Helpers::TYPE_POST_FAIL)))
+                                @if (!in_array($type_post, array(Helpers::TYPE_POST_VIDEO)))
                                     <div class="form-group">
                                         <span class="btn btn-success fileinput-button">
                                             <i class="glyphicon glyphicon-plus"></i>

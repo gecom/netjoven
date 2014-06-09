@@ -22,9 +22,10 @@
 						<img src="{{$image_featured}}" alt="{{$dbr_post_view->title}}" />
 					</figure>
 					<div class="thanks">
-						Gracias por tu publicación Harry Potter
+						<?php $dbr_user = UserHelper::getUserRedactor($dbr_post_view->user_id); ?>
+						Gracias por tu publicación {{$dbr_user->userProfile->first_name . ' ' . $dbr_user->userProfile->last_name}}
 					</div>
-					<div class="sociales">
+					<div class="social">
 						@include('frontend.pages.section.post_button_social', array('url' => URL::current() .'#'.$dbr_post_view->slug))
 					</div>
 				</article>

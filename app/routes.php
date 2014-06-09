@@ -103,8 +103,9 @@ Route::group(array('prefix' => 'backend'), function()
 
         /*******Estadisticas*******/
         Route::any('/estadisticas/noticias', array('as' => 'backend.statistics_news.list', 'uses' => 'AdminStatisticsController@statisticsNews' ));
-        Route::get('/estadisticas/redactores', array('as' => 'backend.statistics_redactores.list', 'uses' => 'AdminStatisticsController@statisticsRedactores' ));
-        Route::get('/estadisticas/categorias', array('as' => 'backend.statistics_categorias.list', 'uses' => 'AdminStatisticsController@statisticsCategories' ));
+        Route::any('/estadisticas/redactores', array('as' => 'backend.statistics_redactores.list', 'uses' => 'AdminStatisticsController@statisticsRedactores' ));
+        Route::any('/estadisticas/categorias', array('as' => 'backend.statistics_categorias.list', 'uses' => 'AdminStatisticsController@statisticsCategories' ));
+
 
         /*******Temas del día*******/
         Route::get('/temas_del_dia', array('as' => 'backend.theme_day.list', 'uses' => 'AdminThemeDayController@listThemeDay' ));

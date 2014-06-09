@@ -57,12 +57,25 @@
 							</div>
 							<div class="col-lg-4 form-group">
 								<label for="frm_statistics_filter_categories">Categorias</label>
-								<select class="form-control" id="frm_statistics_filter_category_parent_id" name="frm_statistics_filter[category_parent_id]"></select>
+								<select class="form-control" id="frm_statistics_filter_category_parent_id" name="frm_statistics_filter[category_parent_id]">
+									<option value="">--Seleccione--</option>
+									@foreach ($dbl_categories as $dbr_category)
+										<?php $selected = (isset($data_params['category_parent_id']) && $data_params['category_parent_id'] == $dbr_category->id  ? 'selected="selected"' : '') ?>
+										<option {{$selected}} value="{{$dbr_category->id}}">{{$dbr_category->name}}</option>
+									@endforeach
+
+								</select>
 							</div>
 							<div class="col-lg-4 form-group">
 								<label for="frm_statistics_filter_subcategories">Sub categorias</label>
 								<select class="form-control" id="frm_statistics_filter_category_id" name="frm_statistics_filter[category_id]">
 									<option value="" >--Seleccione--</option>
+									@if (isset($dbl_children_categories))
+										@foreach ($dbl_children_categories as $dbr_children_category)
+											<?php $selected = (isset($data_params['category_id']) && $data_params['category_id'] == $dbr_children_category->id  ? 'selected="selected"' : '') ?>
+											<option {{$selected}} value="{{$dbr_children_category->id}}">{{$dbr_children_category->name}}</option>
+										@endforeach
+									@endif
 								</select>
 							</div>
 						</div>

@@ -153,10 +153,10 @@ class FrontendSectionController extends BaseController {
 			}
 		}
 
-		$key = 'post_' . $dbr_category->slug . '_' . $keyword . '_' . $type_module . '_' . $page;
+		$key = 'post_' . $dbr_category->slug . '__' . $keyword . '_' . $type_module . '_' . $page;
 
 		if (!Cache::has($key)) {
-			$dbl_post = Cache::remember($key, 120, function() use ($params, $paginate, $keyword, $slug) {
+			$dbl_post = Cache::remember($key, 3, function() use ($params, $paginate, $keyword, $slug) {
 
 				$dbl_post = Post::getPostNews($params)
 					->paginate($paginate)
@@ -172,9 +172,15 @@ class FrontendSectionController extends BaseController {
 		$dbl_post_view1 = array();
 		$dbl_post_view2 = array();
 		$dbl_post_view3 = array();
+		$limit_post_tags = 6;
+		$data_post_id = array();
 
 		if($total_post_v1 || $total_post_v2 || $total_post_v3){
-			foreach ($dbl_post['list'] as $dbr_post) {
+			foreach ($dbl_post['list'] as $key => $dbr_post) {
+				if($key <= $limit_post_tags){
+					$data_post_id[] = $dbr_post->id;
+				}
+
 				if(count($dbl_post_view1) < $total_post_v1){
 					$dbl_post_view1[] = $dbr_post;
 				}elseif(count($dbl_post_view2) < $total_post_v2){
@@ -190,8 +196,23 @@ class FrontendSectionController extends BaseController {
 
 		}else{
 			$params_template['dbl_post_view'] = $dbl_post['list'];
+
+			foreach ($dbl_post['list'] as $key => $dbr_post) {
+				if($key <= $limit_post_tags){
+					$data_post_id[] = $dbr_post->id;
+				}else{
+					break;
+				}
+			}
 		}
 
+		$last_tags = null;
+		if(count($data_post_id)){
+			$dbr_last_tag = Post::getLastTag($data_post_id)->first();
+			$last_tags = $dbr_last_tag ? ucwords(strtolower($dbr_last_tag->tags_name)) : null;
+		}
+		
+		$params_template['title_page'] = Lang::get('messages.frontend.title_page', array('message' => 'Noticias ' . $dbr_category->name , 'tags' => $last_tags));
 		$params_template['dbl_post_links'] = $dbl_post['links'];
 
 		return $params_template;
@@ -208,7 +229,7 @@ class FrontendSectionController extends BaseController {
 		$key = 'directory_' . $dbr_directory->slug  . '_' . implode('_', $data_segments) . '_'.  $page;
 
 		if (!Cache::has($key)) {
-			$dbl_directory_publications = Cache::remember($key, 120, function() use ($dbr_directory, $data_segments, $keyword) {
+			$dbl_directory_publications = Cache::remember($key, 5, function() use ($dbr_directory, $data_segments, $keyword) {
 
 				$params['status'] = array(Status::STATUS_ACTIVO);
 				$params['id'] = $dbr_directory->id;
@@ -282,7 +303,7 @@ class FrontendSectionController extends BaseController {
 				$dbl_directory_publications = DirectoryPublication::getPublicationsByDirectoryId($params)
 									->paginate(5)
 									->useCurrentRoute()
-									->pagesProximity(3);
+									->pagesProximity(3);				
 
 				return ['list' => $dbl_directory_publications->getItems(), 'links' => (string) $dbl_directory_publications->links('frontend.pages.partials.paginator')];
 			});
@@ -291,6 +312,17 @@ class FrontendSectionController extends BaseController {
 			$dbl_directory_publications = Cache::get($key);
 		}
 
+		$limit_post_tags = 6;
+		$data_post_id = array();
+		foreach ($dbl_directory_publications['list'] as $key => $dbr_publication) {
+			if($key <= $limit_post_tags){
+				$data_post_id[] = $dbr_publication->title;
+			}else{
+				break;
+			}
+		}
+
+		$params_template['title_page'] = Lang::get('messages.frontend.title_page', array('message' => $dbr_directory->title .' '. implode(' ', $data_segments) , 'tags' => implode(',', $data_post_id)));
 		$params_template['meter_likebox'] = array(300, 286);
 		$params_template['dbl_district'] = Helpers::getDistrict();
 		$params_template['is_juerga'] = ($dbr_directory->id == 2 ? true : false );
@@ -348,6 +380,7 @@ class FrontendSectionController extends BaseController {
 			$params_template['message'] = 'Su búsqueda no produjo ningún resultado';
 		}
 
+		$params_template['title_page'] = $text_search .'| Noticias '. $text_search;
 		$params_template['meter_likebox'] = array(300, 300);
 		$params_template['title_text_search'] = $text_search;
 		$params_template['dbl_slider_more'] = Helpers::viewMoreSlider();
@@ -382,6 +415,8 @@ class FrontendSectionController extends BaseController {
 			$params_template['message'] = 'Su búsqueda no produjo ningún resultado';
 		}
 
+
+		$params_template['title_page'] = $text_search .'| Noticias '. $text_search;
 		$params_template['meter_likebox'] = array(300, 300);
 		$params_template['title_text_search'] = $text_search;
 		$params_template['dbl_slider_more'] = Helpers::viewMoreSlider();
@@ -439,20 +474,24 @@ class FrontendSectionController extends BaseController {
 		}
 
 		$http_referer = Request::server('HTTP_REFERER');
+		$key = 'dbl_directory_publication__' . $directory_publication->id;
 
-		if (!Cache::has('dbl_directory_publication_' . $directory_publication->id)){
 
-			$params['meter_likebox'] = array(300, 300);
-			$params['dbr_directory_publication'] = $directory_publication;
-			$params['dbr_directory'] = $dbr_directory;
-			$params['dbl_slider_more'] = Helpers::viewMoreSlider();
+		if (!Cache::has($key)) {
+			$data_params = Cache::remember($key, 3, function() use ($directory_publication, $dbr_directory) {
+				$params['meter_likebox'] = array(300, 300);
+				$params['dbr_directory_publication'] = $directory_publication;
+				$params['dbr_directory'] = $dbr_directory;
+				$params['dbl_slider_more'] = Helpers::viewMoreSlider();
 
-			Cache::forever('dbl_directory_publication_' . $directory_publication->id, $params);
-		}
-
-		$data_params = Cache::get('dbl_directory_publication_' . $directory_publication->id);
+				return $params;
+			});
+		}else{
+			$data_params = Cache::get($key);
+		}		
 
 		$params_template = $data_params;
+		$params_template['title_page'] = $directory_publication->title;
 		$params_template['redirect'] = ($http_referer ? $http_referer : route('home')) ;
 
 		return View::make('frontend.pages.directorate.directory_view', $params_template);

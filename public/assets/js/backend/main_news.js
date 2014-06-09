@@ -53,7 +53,7 @@ var registerPost = (function(){
 
 $(function(){
 
-	var $frm_news_register = $('#frm_news_register');
+	var $frm_news_register = $('#frm_news_register'), $frm_news_description = $('#frm_news_description');
 
 	$('#datetimepicker_post_at').datetimepicker({
 	 	language: 'es'
@@ -74,9 +74,11 @@ $(function(){
 
 	$frm_news_register.on('submit', function(e){
 		e.preventDefault();
-		var $this = $(this), text_content = tinyMCE.activeEditor.getContent();
+		var $this = $(this)
 
-		$('#frm_news_description').val(text_content);
+		if($frm_news_description.length){
+			$('#frm_news_description').val(tinyMCE.activeEditor.getContent());
+		}
 
 		$.ajax({
 			url: $this.attr('action') ,
