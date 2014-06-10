@@ -1,7 +1,15 @@
 #container .custom_color_bg{background-color: #35b1c1}
 #container .custom_color_text{color: #35b1c1}
 #container .menu li:hover, #container .paginate li:hover, #container .view_options .v1 a:hover, #container .view_options .v2 a:hover, #container .view_options .v3 a:hover{background-color: #35b1c1;}
+#container .v_news a:hover{color: #35b1c1;}
+#topics_day a:hover{color: #35b1c1;}
 #main_nav .options_menu_fixed .config:hover{background-color: #35b1c1}
 #main_nav .search.custom_color_bg.active{background-color: #35b1c1}
+#notes .right_notes.pichanga_y_juerga .list_content .list_articles .filter a:hover,#notes .right_notes.pichanga_y_juerga .list_content .list_articles .filter a.active{background:#35b1c1;color:#fff;line-height:16px}
+.list_articles .text a:hover{color : #35b1c1;}
+.list_content .tabs ul li.active,.list_content .tabs ul li:hover{background:#35b1c1 !important};
 .v_news .option_news a:hover{color : #35b1c1;}
+.tags a:hover{color: #35b1c1;}
+.right_notes .opt1 a:hover{color: #35b1c1;}
+#slider_more a:hover{color: #35b1c1;}
 #footer_nav ul li a:hover{color: #35b1c1};

@@ -1,7 +1,15 @@
 #container .custom_color_bg{background-color: #e588ac}
 #container .custom_color_text{color: #e588ac}
 #container .menu li:hover, #container .paginate li:hover, #container .view_options .v1 a:hover, #container .view_options .v2 a:hover, #container .view_options .v3 a:hover{background-color: #e588ac;}
+#container .v_news a:hover{color: #e588ac;}
+#topics_day a:hover{color: #e588ac;}
 #main_nav .options_menu_fixed .config:hover{background-color: #e588ac}
 #main_nav .search.custom_color_bg.active{background-color: #e588ac}
+#notes .right_notes.pichanga_y_juerga .list_content .list_articles .filter a:hover,#notes .right_notes.pichanga_y_juerga .list_content .list_articles .filter a.active{background:#e588ac;color:#fff;line-height:16px}
+.list_articles .text a:hover{color : #e588ac;}
+.list_content .tabs ul li.active,.list_content .tabs ul li:hover{background:#e588ac !important};
 .v_news .option_news a:hover{color : #e588ac;}
+.tags a:hover{color: #e588ac;}
+.right_notes .opt1 a:hover{color: #e588ac;}
+#slider_more a:hover{color: #e588ac;}
 #footer_nav ul li a:hover{color: #e588ac};

@@ -5,8 +5,9 @@
 #topics_day a:hover{color: #ee8435;}
 #main_nav .options_menu_fixed .config:hover{background-color: #ee8435}
 #main_nav .search.custom_color_bg.active{background-color: #ee8435}
+#notes .right_notes.pichanga_y_juerga .list_content .list_articles .filter a:hover,#notes .right_notes.pichanga_y_juerga .list_content .list_articles .filter a.active{background:#ee8435;color:#fff;line-height:16px}
 .list_articles .text a:hover{color : #ee8435;}
-#notes .right_notes.pichanga_y_juerga .list_content .tabs ul li.active,#notes .right_notes.pichanga_y_juerga .list_content .tabs ul li:hover{background:#ee8435};
+.list_content .tabs ul li.active,.list_content .tabs ul li:hover{background:#ee8435 !important};
 .v_news .option_news a:hover{color : #ee8435;}
 .tags a:hover{color: #ee8435;}
 .right_notes .opt1 a:hover{color: #ee8435;}
