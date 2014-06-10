@@ -79,7 +79,7 @@ class Helpers {
 	public static function sidebarBackend(){
 
 		$data_sidebar = array(
-			array('name' => 'Dashboard', 'class'=>'fa-dashboard', 'url' => '#' ),
+			array('name' => 'Dashboard', 'class'=>'fa-dashboard', 'url' => url('/backend') ),
 			array('name' => 'Estadisticas', 'class'=>'fa-bar-chart-o', 'url' => '#',
 				'subcategories'=> array(
 						array('name' => 'Noticias', 'url' => url('backend/estadisticas/noticias')),
