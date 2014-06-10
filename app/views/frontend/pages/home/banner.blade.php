@@ -2,11 +2,13 @@
     <article class="p1">
         @include('frontend.pages.partials.banner_cuadrado')
     </article>
+    @if ($is_monsterbox == false)
+        @include('frontend.pages.partials.likebox', array('meter_likebox' => array(300,500)));
+    @endif
 </div>
 <div class="right_banner">
     <div class="slider">
         <ul id="slider_featured" class="bxslider">
-
             @if (isset($dbl_last_post_featured_slider))
                 @foreach($dbl_last_post_featured_slider as $dbr_post_featured_slider)
                     <?php
@@ -21,10 +23,11 @@
                     </li>
                 @endforeach
             @endif
-
         </ul>
     </div>
-    <div class="fb">
-        @include('frontend.pages.partials.likebox')
-    </div>
+    @if ($is_monsterbox == true)
+        <div class="fb">
+            @include('frontend.pages.partials.likebox')
+        </div>
+    @endif
 </div>

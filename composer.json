@@ -14,7 +14,8 @@
 		"gigablah/sphinxphp": "2.0.8",
 		"scalia/sphinxsearch": "dev-master",
 		"artdarek/oauth-4-laravel": "dev-master",
-		"torann/geoip": "dev-master"
+		"torann/geoip": "dev-master",
+		"roumen/sitemap": "dev-master"
 	},
 	"require-dev": {
 		"barryvdh/laravel-debugbar": "1.*"

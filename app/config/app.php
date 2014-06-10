@@ -114,6 +114,7 @@ return array(
 		'Scalia\SphinxSearch\SphinxSearchServiceProvider',
 		'Artdarek\OAuth\OAuthServiceProvider',
 		'Barryvdh\Debugbar\ServiceProvider',
+		'Roumen\Sitemap\SitemapServiceProvider',
 
 	),
 

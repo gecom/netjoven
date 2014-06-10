@@ -27,6 +27,11 @@ class FrontendHomeController extends BaseController {
 			$params_template = Cache::get($key);
 		}
 
+		$banner_cuadrado = BannerHelper::getBanner(2);
+		$pos = strpos($banner_cuadrado,'id="monsterbox"');
+		$params_template['is_monsterbox'] = ($pos === false ? false : true);
+		$params_template['banner_cuadrado']  = $banner_cuadrado;
+
 		return View::make('frontend.pages.home.home', $params_template);
 	}
 

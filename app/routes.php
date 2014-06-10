@@ -145,6 +145,11 @@ Route::any('/noticias/buscar/{keyword?}/{page}', array('as' => 'frontend.post.se
 
 Route::get('/radio', array('as' => 'frontend.radio', 'uses' => 'FrontendSectionController@radio' ));
 
+Route::get('/sitemap', array('as' => 'sitemap', 'uses' => 'SitemapsController@index' ));
+Route::get('/sitemap-netjoven.xml', array('as' => 'sitemap.netjoven', 'uses' => 'SitemapsController@netjoven' ));
+Route::get('/sitemap-noticias.xml', array('as' => 'sitemap.news', 'uses' => 'SitemapsController@news' ));
+Route::get('/sitemap-news.xml', array('as' => 'sitemap.news.tag', 'uses' => 'SitemapsController@newsTag' ));
+
 Route::get('/juerga/{directory_publication}/{slug}.html', array('as' => 'frontend.juerga.view', 'uses' => 'FrontendSectionController@viewDirectoryPublication' ));
 Route::get('/juerga/{args?}/{page?}', array('as' => 'frontend.juerga.list', 'uses' => 'FrontendSectionController@listDirectorate' ))->where('args', '(.*)');
 Route::get('/pichanga/{directory_publication}/{slug}.html', array('as' => 'frontend.pichanga.view', 'uses' => 'FrontendSectionController@viewDirectoryPublication' ));
@@ -172,3 +177,4 @@ Route::post('/cambiar_color', array('as' => 'frontend.user.tools.savechangecolor
 Route::get('/cambiar_tipo_vista/{type_module}', array('as' => 'frontend.change_view', 'uses' => 'FrontendUserToolsController@changeTypeModule' ));
 Route::post('/cambiar_tipo_vista/{type_module}', array('as' => 'frontend.save.change_view', 'uses' => 'FrontendUserToolsController@saveTypeModule' ));
 Route::get('/galeria_imagenes/{post}', array('as' => 'frontend.post.gallery', 'uses' => 'FrontendSectionController@viewPostGallery' ));
+

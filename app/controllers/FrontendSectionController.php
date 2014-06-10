@@ -301,7 +301,7 @@ class FrontendSectionController extends BaseController {
 				}
 
 				$dbl_directory_publications = DirectoryPublication::getPublicationsByDirectoryId($params)
-									->paginate(5)
+									->paginate(10)
 									->useCurrentRoute()
 									->pagesProximity(3);				
 
