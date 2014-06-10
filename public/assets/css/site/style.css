@@ -91,6 +91,8 @@ header .social ul li .gp{background-position:-129px -90px}
 .destacado .image_destacado .link span{width:22px;height:22px;-webkit-border-radius:11px;-moz-border-radius:11px;border-radius:11px;display:inline-block;text-align:center;margin-left:3px}
 .bx-wrapper{margin:0 auto !important}
 .bx-wrapper .bx-viewport{left:0 !important;border:0 !important}
+.bx-wrapper .bx-viewport figure a img{ display: inline-block !important;}
+.bx-wrapper .bx-viewport figure a{background: #000 !important; display: block !important;text-align: center !important;}
 .bx-wrapper .bx-caption{background:transparent url("/../assets/images/sombra-destacado.png") 0 -10px repeat-x !important;text-align:center}
 .bx-wrapper .bx-caption span{font-family:'Open Sans',sans-serif !important;font-size:2em !important}
 .bx-wrapper .bx-pager{-webkit-box-shadow:1px 1px 4px 0 #6d6d6d;-moz-box-shadow:1px 1px 4px 0 #6d6d6d;box-shadow:1px 1px 4px 0 #6d6d6d}

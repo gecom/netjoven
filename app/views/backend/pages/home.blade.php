@@ -1,7 +1,5 @@
 @extends('backend.layouts.default')
 @section('css')
-	{{ HTML::style('assets/css/plugins/morris/morris-0.4.3.min.css')}}
-	{{ HTML::style('assets/css/plugins/timeline/timeline.css')}}
 @stop
 
 @section('title_content')
