@@ -15,7 +15,11 @@
 			</div>
 			<div class="wrapper_radio col-md-12" style="background: url('http://www.netjoven.pe/images/bg_radio.jpg') no-repeat scroll 0 0 rgba(0, 0, 0, 0)">
 				<div>
-					<iframe src="http://portgrafperu.com/clientes/player/netjoven.php" name="portgrafperu=""" width="340" marginwidth="0" height="105" marginheight="0" align="middle" scrolling="No" frameborder="0" id="atmosfera="portgrafstreaming="portgrafstreaming"></iframe>
+					@if ($is_mobile)				
+						<iframe allowtransparency="allowtransparency" src="http://portgrafperu.com/clientes/accesos/Reproductores-Radio-NetJoven.php" name="portgrafperu" scrolling="no" frameborder="0" marginheight="0px" marginwidth="0px" height="58px" width="270px"></iframe>
+					@else
+						<iframe src="http://portgrafperu.com/clientes/player/netjoven.php" name="portgrafperu=""" width="340" marginwidth="0" height="105" marginheight="0" align="middle" scrolling="No" frameborder="0" id="atmosfera="portgrafstreaming="portgrafstreaming"></iframe>
+					@endif
 				</div>
 			</div>
             <div class="radio_comment">

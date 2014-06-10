@@ -9,7 +9,10 @@
     </head>
     <body>
         {{ BannerHelper::getBanner(7)}}
-        @include('frontend.pages.partials.floating_radio')
+
+        @if ( Route::currentRouteName() != 'frontend.radio')
+            @include('frontend.pages.partials.floating_radio')
+        @endif
         <div id="container" class="container">
             <header class="custom_color_bg">
                 @include('frontend.includes.header')

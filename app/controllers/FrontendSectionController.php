@@ -529,6 +529,7 @@ class FrontendSectionController extends BaseController {
 
 	public function radio(){
 		$params_template['meter_likebox'] = array(300, 300);
+		$params_template['is_mobile'] = (Agent::isMobile() || Agent::isTablet() ? true : false);
 		$params_template['title_page'] = 'Radio En Vivo - Netjoven Radio - Música Online';
 		$params_template['description'] = 'Escucha nuestra Netjoven Radio En Vivo que tiene la Mejor Música Online del Pop, Pachanga, Hip-Hop, Electro-Pop, Latin y Rock en Inglés y Español.';
 		return View::make('frontend.pages.section.radio', $params_template);

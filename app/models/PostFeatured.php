@@ -10,10 +10,7 @@ class PostFeatured extends Eloquent {
 
 	public function scopeGetFeaturedActiveByPostId($query, $post_id)
 	{
-		return $query
-				->where('post_id', '=', $post_id)
-				->where('expired_at','>=', DB::raw("NOW()"))
-				->orderBy('id', 'desc');
+		return $query->where('post_id', '=', $post_id);
 	}
 
 

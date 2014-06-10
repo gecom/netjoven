@@ -27,25 +27,17 @@
 							<tr>
 								<th >Titulo</th>
 								<th >Categoria</th>
-								<th >Tags</th>
+								<!--<th >Tags</th>-->
 								<th >Fec. Publicación</th>
 								<th >Destacado</th>
-								<th class="text-center">Acciones</th>
+								<th class="text-center col-md-2">Acciones</th>
 							</tr>
 						</thead>
 						<tbody>
 							@foreach($dbl_post as $dbr_post)
 								<tr>
 									<td>{{$dbr_post->title}}</td>
-									<td>{{$dbr_post->parent_category}}</td>
-									<?php $tags = Tag::getTagByPostId($dbr_post->id)->get(); ?>
-									<?php $data_tags = array(); ?>
-									@if($tags)
-										@foreach($tags as $tag)
-											<?php $data_tags[] = $tag->tag; ?>
-										@endforeach
-									@endif
-									<td>{{ implode( ", ",$data_tags)}}</td>
+									<td>{{$dbr_post->category_parent_name . ' > ' . $dbr_post->category_name}}</td>
 									<td>{{Helpers::getDateFormat($dbr_post->post_at)}}</td>
 									<?php
 										$dbr_post_featured = PostFeatured::getFeaturedActiveByPostId($dbr_post->id)->first();
