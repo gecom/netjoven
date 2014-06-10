@@ -54,6 +54,17 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
+			'host'      => 's1.netjoven.pe',
+			'database'  => 'netjoven_dev',
+			'username'  => 'xyz',
+			'password'  => 'n3tj0v3n.db',
+			'charset'   => 'utf8',
+			'collation' => 'utf8_unicode_ci',
+			'prefix'    => '',
+		)
+
+		/*'mysql' => array(
+			'driver'    => 'mysql',
 			'host'      => 'localhost',
 			'database'  => 'netjoven3',
 			'username'  => 'root',
@@ -61,7 +72,7 @@ return array(
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
-		)
+		)*/
 	),
 
 	/*
