@@ -7,7 +7,10 @@
 
 <div id="notes">
 	<div class="right_notes pichanga_y_juerga">
-		<div class="group_title custom_color_text">{{$dbr_directory->title}}</div>	
+		<div class="group_title custom_color_text">{{$dbr_directory->title}}</div>
+		<!--<div class="image">					
+			@include('frontend.pages.directorate.directory_featured')
+		</div>-->		
 		<div class="subtitle">
 			{{Lang::get('messages.frontend.directory_sub_title_'. mb_strtolower($dbr_directory->title))}}
 		</div>
