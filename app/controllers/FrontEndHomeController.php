@@ -39,6 +39,14 @@ class FrontendHomeController extends BaseController {
 
 		$params['with_post_at'] =  true;
 		$params['display'] =  1;
+		$params['type'] =  array(Helpers::TYPE_POST_NEWS, 
+					Helpers::TYPE_POST_VIDEO,
+					Helpers::TYPE_POST_HOROSCOPO,
+					Helpers::TYPE_POST_PARANORMAL,
+					Helpers::TYPE_POST_JUEGOS,
+					Helpers::TYPE_POST_BLOGS,
+				);
+		
 		$key = 'view_more_news_'.$page;
 
 		if (!Cache::has($key)) {

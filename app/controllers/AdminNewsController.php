@@ -192,10 +192,7 @@ class AdminNewsController extends BaseController {
                 $data_frm_news['post_at'] = Helpers::changeToMysql( $data_frm_news['post_at']);
                 $post->post_at     =   $data_frm_news['post_at'];
                 $post->status = Status::STATUS_PUBLICADO;
-
-                if($is_new == true){
-                    $post->slug = $data_frm_news['title'];
-                }
+                $post->slug = $data_frm_news['title'];
 
                 if(!empty($data_frm_news['type_video']) && !empty($data_frm_news['id_video'])){
                     $post->type_video =  $data_frm_news['type_video'];

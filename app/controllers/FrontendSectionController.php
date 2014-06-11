@@ -102,6 +102,15 @@ class FrontendSectionController extends BaseController {
 		$params_template['type_module'] = $type_module = Helpers::getTypeModule();
 
 		if($is_parent_category){
+			
+			$params['type'] =  array(Helpers::TYPE_POST_NEWS, 
+								Helpers::TYPE_POST_VIDEO,
+								Helpers::TYPE_POST_HOROSCOPO,
+								Helpers::TYPE_POST_PARANORMAL,
+								Helpers::TYPE_POST_JUEGOS,
+								Helpers::TYPE_POST_BLOGS,
+							);
+
 			if($type_module == Helpers::TYPE_MODULE_ESTANDAR){
 				$params_template['meter_likebox'] = array(300, 286);
 				$paginate = 14;
