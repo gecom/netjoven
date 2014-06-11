@@ -28,48 +28,87 @@ class UserController extends BaseController {
 
         $params_template['meter_likebox'] = array(300, 286);
         $params_template['dbr_user'] = ($dbr_user ? $dbr_user : null);
-        $params_template['dbr_user_profile'] = ($dbr_user ? $dbr_user->userProfile()->first() : null);
+        $params_template['dbr_user_profile'] = $dbr_user_profile = ($dbr_user ? $dbr_user->userProfile()->first() : null);
+        $params_template['dbl_country'] = UserHelper::getCountry();
+        $country_current_user = null;
+
+        if($dbr_user_profile){
+            $country_current_user = $dbr_user_profile->country;
+        }else{
+            $dbr_country_data = Helpers::getCountryData();      
+            $country_current_user = $dbr_country_data->country_name;
+        }
+
+        $params_template['country_current_user'] = (empty($country_current_user) ? 'Peru' : $country_current_user);
+        $params_template['dbl_department'] = UserHelper::getDepartment();
+
+        if($country_current_user == 'Peru'){
+            $params_template['dbl_city'] = UserHelper::getProvinceByDepartment($dbr_user_profile->department);
+        }else{
+            $params_template['dbl_city'] = UserHelper::getCityByCountry($country_current_user);
+        }
+
         return View::make('frontend.pages.user.user_register', $params_template);
     }
 
 
     public function saveUserProfile(){
 
-        $params_form = Input::all();
+        $is_new_user = (Auth::check() ? false: true);
+
         $rules = array(
-            'first_name'=>'required|alpha|min:2',
-            'last_name'=>'required|alpha|min:2',
-            'email'=>'required|email|unique:njv_user',
-            'password'=>'required|alpha_num|between:6,12',
+            'first_name'=>'required|min:2',
+            'last_name'=>'required|min:2',
+            'password'=>'',
             'day'=>'required',
             'month'=>'required',
             'year'=>'required',
             'gender'=>'required',
+            'country'=>'required',
+            'city'=>'required'            
         );
-        $params_form = $params_form['frm_user'];
+        
+        $params_form = Input::get('frm_user');
+
+        if(isset($params_form['department'])){
+            $rules['department'] = 'required';
+        }
+
+        if($is_new_user){
+            $rules['password'] = 'required|alpha_num|between:6,12';
+            $rules['email'] = 'required|email|unique:njv_user';
+        }
 
         $validation = Validator::make($params_form, $rules);
         if ($validation->fails()) {
-            return Redirect::route('frontend.user.register')->with('message', 'The following errors occurred')->withErrors($validation)->withInput();
+            return Redirect::route(Route::currentRouteName())->with('message', 'The following errors occurred')->withErrors($validation)->withInput();
         }
 
-        $dbr_user = new User();
-        $dbr_user->user = uniqid();
-        $dbr_user->email = $params_form['email'];
-        $dbr_user->password = Hash::make($params_form['password']);
-        $dbr_user->level = UserHelper::LEVEL_USER_NORMAL;
-        $dbr_user->save();
+        $dbr_user = $is_new_user == false ? Auth::User() : new User() ;
+        if($is_new_user == true){
+            $dbr_user->user = uniqid();
+            $dbr_user->email = $params_form['email'];
+            $dbr_user->password = Hash::make($params_form['password']);
+            $dbr_user->level = UserHelper::LEVEL_USER_NORMAL;
+            $dbr_user->save();
+        }
 
-        $dbr_user_profile = new UserProfile();
+        $dbr_user_profile = (!$is_new_user ? Auth::User()->userProfile()->first() : new UserProfile()) ;
         $dbr_user_profile->first_name = $params_form['first_name'];
         $dbr_user_profile->last_name = $params_form['last_name'];
         $dbr_user_profile->gender = $params_form['gender'];
+        $dbr_user_profile->country = $params_form['country'];
+        $dbr_user_profile->department = $params_form['department'];
+        $dbr_user_profile->city = $params_form['city'];
         $dbr_user_profile->birthday = $params_form['year'].'-'.$params_form['month'].'-'.$params_form['day'];
 
-        $dbr_user->userProfile()->save($dbr_user_profile);
+        if($is_new_user == true){
+            $dbr_user->userProfile()->save($dbr_user_profile);    
+        }else{
+            $dbr_user_profile->save();
+        }        
 
-        return Redirect::route('home');
-
+        return  Redirect::route('frontend.user.edit_perfil');
     }
 
     public function loginWithFacebook() {
@@ -205,6 +244,32 @@ class UserController extends BaseController {
             return Redirect::to('/');
         }
 
+    }
+
+    public function loadCity(){
+        $name = Input::get('country_name', null);
+        $data = array();
+
+        if(Request::ajax()){
+            if($name){
+                $data = UserHelper::getCityByCountry($name);
+            }
+        }
+
+        return Response::json($data);
+    }
+
+    public function loadProvince(){
+        $name = Input::get('department_name', null);
+        $data = array();
+        
+        if(Request::ajax()){
+            if($name){
+                $data = UserHelper::getProvinceByDepartment($name);
+            }
+        }
+
+        return Response::json($data);
     }
 
 

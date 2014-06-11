@@ -52,6 +52,11 @@ class BannerHelper{
 			}
 		}
 
+
+		if(!$module){
+			return;
+		}
+
 		$params['module_id'] 	= $module;
 		$params['sector_id'] 	= $sector_id;
 		$params['type'] 		= $type;

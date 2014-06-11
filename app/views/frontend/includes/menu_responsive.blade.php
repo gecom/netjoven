@@ -1,8 +1,8 @@
+<?php $current_url = Request::segment(1); ?>
 <ul class="menu" >
-    <li class="li_menu active custom_color_bg"><a href="#" >Ultimas</a></li>
-    <li class="li_menu"><a href="#">Cine</a></li>
-    <li class="li_menu"><a href="#">Video</a></li>
-    <li class="li_menu"><a href="#">Radio</a></li>
+    <li class="li_menu {{!empty($current_url) && $current_url == 'noticias' ? 'active custom_color_bg' : ''}}"><a href="{{ route('frontend.post.more_news') }}" >Ultimas</a></li>
+    <li class="li_menu {{!empty($current_url) && $current_url == 'cartelera' ? 'active custom_color_bg' : ''}}"><a href="{{ route('frontend.section.list', array('cartelera')) }}">Cine</a></li>
+    <li class="li_menu {{!empty($current_url) && $current_url == 'radio' ? 'active custom_color_bg' : ''}}"><a href="{{ route('frontend.radio') }}">Radio</a></li>
 </ul>
 <div class="options">
     <a href="#" class="show_menu"></a>

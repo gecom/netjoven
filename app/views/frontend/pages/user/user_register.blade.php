@@ -22,11 +22,15 @@
 				@endif
 			</div>
 			{{ Form::open(array('role'=>'form')) }}
-				<ul>
-					@foreach($errors->all() as $error)
-						<li>{{ $error }}</li>
-					@endforeach
-				</ul>
+				@if ($errors->all())
+					<div class="form-group col-md-12">
+						<div class="alert alert-danger">
+							@foreach($errors->all() as $error)
+								{{$error . "<br/>"}}
+							@endforeach
+						</div>
+					</div>
+				@endif
 				<div class="form-group col-md-8">
 					<label for="frm_user_name">Nombres</label>
 					<input type="text" value="{{(isset($dbr_user) ? $dbr_user_profile->first_name : null)}}" class="form-control" id="frm_user_name" name="frm_user[first_name]" placeholder="Nombres" />
@@ -49,26 +53,38 @@
 
 					<div class="form-group col-md-8">
 						<label for="frm_user_gender">Pais</label>
-						<select class="form-control" id="frm_user_gender" name="frm_user[gender]">
+						<select class="form-control" id="frm_user_country" name="frm_user[country]">
 							<option value="">--Seleccione--</option>
-							<option value="M">Hombre</option>
-							<option value="F">Mujer</option>
+							@foreach ($dbl_country as $dbr_country)
+								<?php
+									$selected = ($country_current_user == $dbr_country->country ? 'selected="selected"' : '' );
+								 ?>
+								<option {{$selected}} value="{{$dbr_country->country}}">{{$dbr_country->country}}</option>
+							@endforeach
 						</select>
 					</div>
-					<div class="form-group col-md-8">
+					<div id="wrapper_department" class="form-group col-md-8" style="{{ $country_current_user != 'Peru' ? 'display:none' : 'display:block'}}" >
 						<label for="frm_user_gender">Departamento</label>
-						<select class="form-control" id="frm_user_gender" name="frm_user[gender]">
+						<select class="form-control" id="frm_user_department" name="frm_user[department]"  {{$country_current_user != 'Peru' ? 'disabled="disabled"' : ''}} >
 							<option value="">--Seleccione--</option>
-							<option value="M">Hombre</option>
-							<option value="F">Mujer</option>
+							@foreach ($dbl_department as $dbr_department)							
+								<?php  $dbr_department->department = ucwords ( strtolower($dbr_department->department)); ?>
+								<?php $selected = ( isset($dbr_user) && $dbr_user_profile->department == $dbr_department->department ? 'selected="selected"' : '' ) ?>
+								<option {{$selected}} value="{{$dbr_department->department}}">{{$dbr_department->department}}</option>
+							@endforeach
 						</select>
 					</div>
 					<div class="form-group col-md-8">
 						<label for="frm_user_gender">Ciudad</label>
-						<select class="form-control" id="frm_user_gender" name="frm_user[gender]">
+						<select class="form-control" id="frm_user_city" name="frm_user[city]">
 							<option value="">--Seleccione--</option>
-							<option value="M">Hombre</option>
-							<option value="F">Mujer</option>
+							@if (isset($dbl_city))
+								@foreach ($dbl_city as $dbr_city)
+									<?php  $dbr_city->name = ucwords ( strtolower($dbr_city->name)); ?>
+									<?php $selected = ( isset($dbr_user) && $dbr_user_profile->city == $dbr_city->name ? 'selected="selected"' : '' ) ?>
+									<option {{$selected}} value="{{$dbr_city->name}}">{{$dbr_city->name}}</option>	
+								@endforeach
+							@endif
 						</select>
 					</div>
 				@endif
@@ -122,4 +138,5 @@
 @stop
 
 @section('js')
+    {{ HTML::script('assets/js/fn/user.js'); }}
 @stop

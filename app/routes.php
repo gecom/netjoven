@@ -168,6 +168,9 @@ Route::post('/iniciar_sesion', array('as' => 'frontend.login', 'uses' => 'UserCo
 Route::get('/registrate.html', array('as' => 'frontend.user.register', 'uses' => 'UserController@userRegister' ));
 Route::post('/registrate.html', array('as' => 'frontend.user.save_register', 'uses' => 'UserController@saveUserProfile' ));
 Route::get('/edita_tu_perfil.html', array('as' => 'frontend.user.edit_perfil', 'uses' => 'UserController@editPerfilUser' ));
+Route::post('/edita_tu_perfil.html', array('as' => 'frontend.user.save_edit_perfil', 'uses' => 'UserController@saveUserProfile' ));
+Route::post('/load_province.html', array('as' => 'frontend.user.load_province', 'uses' => 'UserController@loadProvince' ));
+Route::post('/load_city.html', array('as' => 'frontend.user.load_city', 'uses' => 'UserController@loadCity' ));
 
 Route::get('/iniciar_sesion_facebook', array('as' => 'frontend.login.facebook', 'uses' => 'UserController@loginWithFacebook' ));
 Route::get('/cerrar_sesion', array('as' => 'frontend.login.close_session', 'uses' => 'UserController@logout' ));
@@ -177,4 +180,3 @@ Route::post('/cambiar_color', array('as' => 'frontend.user.tools.savechangecolor
 Route::get('/cambiar_tipo_vista/{type_module}', array('as' => 'frontend.change_view', 'uses' => 'FrontendUserToolsController@changeTypeModule' ));
 Route::post('/cambiar_tipo_vista/{type_module}', array('as' => 'frontend.save.change_view', 'uses' => 'FrontendUserToolsController@saveTypeModule' ));
 Route::get('/galeria_imagenes/{post}', array('as' => 'frontend.post.gallery', 'uses' => 'FrontendSectionController@viewPostGallery' ));
-

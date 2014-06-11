@@ -8,7 +8,7 @@ class FrontendHomeController extends BaseController {
 		$type_module = (empty($type_module) ? Helpers::TYPE_MODULE_ESTANDAR : $type_module);
 		$type_module = Helpers::getTypeModule();
 
-		$key = 'home';
+		$key = 'home_'.$type_module;
 
 		if (!Cache::has($key)) {
 			$params_template = Cache::remember($key, 3, function() use ($type_module) {
