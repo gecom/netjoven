@@ -51,6 +51,10 @@ class UserHelper{
 	}
 
 	public static function getCityByCountry($name){
+		if(!$name){
+			return;
+		}
+
 		$dbr_country = self::getCountrybyName($name);
 
 		return DB::table('njv_city')

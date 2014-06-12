@@ -171,6 +171,7 @@ Route::get('/edita_tu_perfil.html', array('as' => 'frontend.user.edit_perfil', '
 Route::post('/edita_tu_perfil.html', array('as' => 'frontend.user.save_edit_perfil', 'uses' => 'UserController@saveUserProfile' ));
 Route::post('/load_province.html', array('as' => 'frontend.user.load_province', 'uses' => 'UserController@loadProvince' ));
 Route::post('/load_city.html', array('as' => 'frontend.user.load_city', 'uses' => 'UserController@loadCity' ));
+Route::post('/upload_image_user.html',array('as'=>'upload_file_image_user','uses'=>'UploadController@uploadPhotoPerfil'));
 
 Route::get('/iniciar_sesion_facebook', array('as' => 'frontend.login.facebook', 'uses' => 'UserController@loginWithFacebook' ));
 Route::get('/cerrar_sesion', array('as' => 'frontend.login.close_session', 'uses' => 'UserController@logout' ));

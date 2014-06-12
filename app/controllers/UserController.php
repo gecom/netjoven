@@ -29,6 +29,12 @@ class UserController extends BaseController {
         $params_template['meter_likebox'] = array(300, 286);
         $params_template['dbr_user'] = ($dbr_user ? $dbr_user : null);
         $params_template['dbr_user_profile'] = $dbr_user_profile = ($dbr_user ? $dbr_user->userProfile()->first() : null);
+
+        if($dbr_user_profile && $dbr_user_profile->image){
+            $data_image = explode("-",$dbr_user_profile->image);
+            $params_template['image_avatar'] = Helpers::getImage($data_image[1], 'user/'. $data_image[0]);
+        }
+
         $params_template['dbl_country'] = UserHelper::getCountry();
         $country_current_user = null;
 
@@ -100,6 +106,7 @@ class UserController extends BaseController {
         $dbr_user_profile->country = $params_form['country'];
         $dbr_user_profile->department = $params_form['department'];
         $dbr_user_profile->city = $params_form['city'];
+        $dbr_user_profile->image = $params_form['image'];
         $dbr_user_profile->birthday = $params_form['year'].'-'.$params_form['month'].'-'.$params_form['day'];
 
         if($is_new_user == true){

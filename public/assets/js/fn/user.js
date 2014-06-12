@@ -58,6 +58,27 @@ $(function(){
 
 				$frm_user_city.html(data_city.join(''));
 			})
-	})
+	});
+
+
+	$('#file_upload_image').fileupload({
+	    url: '/upload_image_user.html',
+	    dataType: 'json',
+	   	autoUpload: true,
+	    acceptFileTypes: /(\.|\/)(jpe?g|png|gif)$/i,
+	    maxFileSize: 5000000,
+		done: function (e, response) {
+			if(response.result.success == 1){
+				$('#photo_user').attr('src', response.result.filename);	
+				$('#frm_user_image').val(response.result.image_original);
+			}else{
+				$('#wrapper_message').html(response.result.message);
+			}
+	    },
+	    progressall: function (e, data) {
+	    	console.log(data);
+	    }
+	}).prop('disabled', !$.support.fileInput)
+	.parent().addClass($.support.fileInput ? undefined : 'disabled');
 
 });

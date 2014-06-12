@@ -101,6 +101,31 @@ class UploadController extends BaseController{
 
     }
 
+
+    public function uploadPhotoPerfil(){
+
+        $rand = rand(1,50);
+        $time = time();
+        $upload = 'user/' . $rand . '/';
+        $imagen_name = $rand . "-" . $time. Helpers::$extension;
+        $imagen = $time . Helpers::$extension;
+
+        $file = Input::file('file_image');
+        Helpers::createDir(Config::get('settings.upload') . $upload);
+        $data_size['width'] = 200;
+        $data_size['height'] = 200;
+        $response_image = Helpers::uploadImage($file, $imagen , $upload, $data_size);
+        $response_image['image_original'] = $imagen_name;
+
+        $data_size['width'] = 42;
+        $data_size['height'] = 42;
+        $upload = $upload.'pp/';
+        Helpers::createDir(Config::get('settings.upload') . $upload);
+        $response_image_thumb = Helpers::uploadImage($file, $imagen , $upload, $data_size);
+
+        return Response::json($response_image);
+    }
+
     public function cropImage(){
 
         $filename = Input::get('filename');

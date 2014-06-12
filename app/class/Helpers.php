@@ -49,6 +49,15 @@ class Helpers {
 		self::TYPE_MODULE_LISTADO => 'Listado',
 	);
 
+	public static function createDir($directory){
+
+		if (!file_exists($directory)) {
+			mkdir($directory, 0777);
+			chmod($directory,  0777);
+		}
+
+	}
+
 	public static function getCategoriesHome(){
 		$dbl_parent_categories = Category::getParentCategoriesHome()->get();
 		$categories = array();
