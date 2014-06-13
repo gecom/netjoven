@@ -10,9 +10,9 @@
 </div>
 <div class="footer_social">
     <ul>
-        <li class="fb"><span class="d1">Hazte fan</span><a href="http://www.facebook.com/netjoven"></a></li>
-        <li class="tw"><span class="d1">Síguenos es</span><a href="http://twitter.com/#!/netjoven"></a></li>
-        <li class="gp"><span class="d1">Únete a</span><a href="#"></a></li>
+        <li class="fb"><span class="d1">Hazte fan</span><a target="_blank" href="http://www.facebook.com/netjoven"></a></li>
+        <li class="tw"><span class="d1">Síguenos es</span><a target="_blank" href="http://twitter.com/#!/netjoven"></a></li>
+        <!--<li class="gp"><span class="d1">Únete a</span><a target="_blank" href="#"></a></li>-->
     </ul>
 </div>
 <div class="footer_devices">
