@@ -23,7 +23,9 @@
              <div class="col-lg-12">
                 <ul id="myTab" class="nav nav-tabs">
                     <li id="body_tabHeaderPost" class="active"><a id="body_lnkHeaderPost" href="#register_publication" data-toggle="tab">Registrar</a></li>
-                    <li id="body_tabHeaderImages" class="{{($is_new ? 'disabled' : '')}}"><a id="body_lnkHeaderImages" href="#register_publication_gallery" data-toggle="tab">Registrar Galeria</a></li>
+                    @if ( $type_post != Helpers::TYPE_POST_FAIL)
+                        <li id="body_tabHeaderImages" class="{{($is_new ? 'disabled' : '')}}"><a id="body_lnkHeaderImages" href="#register_publication_gallery" data-toggle="tab">Registrar Galeria</a></li>
+                    @endif
                 </ul>
                 <?php
 
@@ -111,16 +113,19 @@
                                             {{ Form::checkbox('frm_news[twitter]', '1', ($is_new ? false : ($dbr_post->twitter == '1' ? true : false))) }} Twitter
                                         </label>
                                         </div>
-                                        <div class="checkbox">
-                                        <label>
-                                            {{ Form::checkbox('frm_news[america]', '1', ($is_new ? false : ($dbr_post->america == '1' ? true : false))) }} America
-                                        </label>
-                                        </div>
-                                        <div class="checkbox">
-                                        <label>
-                                            {{ Form::checkbox('frm_news[frecuencia]', '1', ($is_new ? false : ($dbr_post->frecuencia == '1' ? true : false))) }} Frecuencia Latina
-                                        </label>
-                                        </div>
+
+                                        @if ( $type_post != Helpers::TYPE_POST_FAIL)
+                                            <div class="checkbox">
+                                            <label>
+                                                {{ Form::checkbox('frm_news[america]', '1', ($is_new ? false : ($dbr_post->america == '1' ? true : false))) }} America
+                                            </label>
+                                            </div>
+                                            <div class="checkbox">
+                                            <label>
+                                                {{ Form::checkbox('frm_news[frecuencia]', '1', ($is_new ? false : ($dbr_post->frecuencia == '1' ? true : false))) }} Frecuencia Latina
+                                            </label>
+                                            </div>
+                                        @endif
                                     </div>
                                     <div class="col-lg-6 pull-right">
                                         <div class="checkbox">

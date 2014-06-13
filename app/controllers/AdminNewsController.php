@@ -201,25 +201,25 @@ class AdminNewsController extends BaseController {
 
                 $post->type = $type_post;
 
-                if(isset($data_frm_news['twitter'])){
-                   $post->twitter = $data_frm_news['twitter'];
+                $is_post_twitter = false;
+
+                if(!$is_new){
+                    if($post->twitter == 1){
+                        $is_post_twitter = false;
+                    }elseif(isset($data_frm_news['twitter'])){
+                        $is_post_twitter = true;
+                    }
+                }else{
+                    if(isset($data_frm_news['twitter'])){
+                        $is_post_twitter = true;
+                    }
                 }
 
-                if(isset($data_frm_news['america'])){
-                   $post->america = $data_frm_news['america'];
-                }
-
-                if(isset($data_frm_news['frecuencia'])){
-                   $post->frecuencia = $data_frm_news['frecuencia'];
-                }
-
-                if(isset($data_frm_news['view_index'])){
-                    $post->view_index = $data_frm_news['view_index'];
-                }
-
-                if(isset($data_frm_news['display'])){
-                    $post->display = $data_frm_news['display'];
-                }
+                $post->twitter = isset($data_frm_news['twitter']) ? $data_frm_news['twitter'] : 0;
+                $post->america = isset($data_frm_news['america']) ? $data_frm_news['america'] : 0;
+                $post->frecuencia = isset($data_frm_news['frecuencia']) ? $data_frm_news['frecuencia'] : 0;
+                $post->view_index = isset($data_frm_news['view_index']) ? $data_frm_news['view_index'] : 0;
+                $post->display = isset($data_frm_news['display']) ? $data_frm_news['display'] : 0;
 
                 $content = '';
                 if(!empty($data_frm_news['description'])){
@@ -235,6 +235,8 @@ class AdminNewsController extends BaseController {
                     if($post->save()){
                         $data_frm_news['keywords'] = explode(',', $data_frm_news['keywords']);
                         $post->tags = Helpers::getTagIds($data_frm_news['keywords']);
+                        $this->postTwitter($post, $is_post_twitter);
+
                         $this->saveGalleryByPost($data_image_principal, $post);
                         $response['success'] = true;
                         $response['message'] =  'Nota registrada satisfactorimente';
@@ -266,6 +268,15 @@ class AdminNewsController extends BaseController {
         }
 
         return Response::json($response);
+    }
+
+    private function postTwitter($post, $is_post_twitter = true){
+
+        if($is_post_twitter){
+            $post_id = base_convert(intval($post->id),10,36);
+            $short_url_post = route('frontend.show_url_post', array($post_id));
+            Twitter::postTweet(array('status' =>  $post->title. '   ' . $short_url_post, 'format' => 'json'));
+        }
     }
 
 

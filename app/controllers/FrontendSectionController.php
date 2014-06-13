@@ -544,5 +544,18 @@ class FrontendSectionController extends BaseController {
 		return View::make('frontend.pages.section.radio', $params_template);
 	}
 
+	public function shortUrlPosting($id){
+		$post_id = substr($id, 0,15);
+		$post_id = base_convert($post_id,36,10);
+
+		$dbr_post = Post::getPostById($post_id)->first();
+
+		if(!$dbr_post){
+			App::abort(404);			
+		}
+
+		return Redirect::route('frontend.post.view', array($dbr_post->category_parent_slug, $dbr_post->id, $dbr_post->slug), 301);
+	}
+
 }
 

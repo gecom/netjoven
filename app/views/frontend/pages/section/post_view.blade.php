@@ -51,11 +51,25 @@
                     {{$dbr_post->content}}
                 </div>
                 <div class="author">
-
                     @if (isset($dbr_redactor))
                         <span class="custom_color_bg"></span> {{$dbr_redactor->userProfile-> first_name . ' ' . $dbr_redactor->userProfile->last_name }} / NetJoven
+                    @endif                    
+                </div>
+                <div class="tags">
+                    <?php $image_tv_post = array(); ?>
+
+                    @if ($dbr_post->america == 1)
+                        <?php $image_tv_post[] = '<a href="'.PostHelper::$image_tv_post['A'][1].'" target="_blank">'.PostHelper::$image_tv_post['A'][0].'</a>' ; ?>
+
                     @endif
-                    
+
+                    @if ( $dbr_post->frecuencia == 1 )
+                        <?php $image_tv_post[] = '<a href="'.PostHelper::$image_tv_post['F'][1].'" target="_blank">'.PostHelper::$image_tv_post['F'][0].'</a>' ; ?>
+                    @endif
+
+                    @if (count($image_tv_post))
+                        <span class="custom_color_text">Imagenes: </span>{{ implode(', ', $image_tv_post)}}
+                    @endif
                 </div>
                 <div class="social">
                     @include('frontend.pages.section.post_button_social')

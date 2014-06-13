@@ -143,6 +143,8 @@ Route::get('/noticias/page/{page}', array('as' => 'frontend.post.more_news_pagin
 Route::any('/noticias/buscar/{keyword?}', array('as' => 'frontend.post.search', 'uses' => 'FrontendSectionController@searchPost' ));
 Route::any('/noticias/buscar/{keyword?}/{page}', array('as' => 'frontend.post.search.pagination', 'uses' => 'FrontendSectionController@searchPost' ));
 
+Route::get('/N{id}', array('as' => 'frontend.show_url_post', 'uses' => 'FrontendSectionController@shortUrlPosting' ));
+
 Route::get('/radio', array('as' => 'frontend.radio', 'uses' => 'FrontendSectionController@radio' ));
 
 Route::get('/sitemap', array('as' => 'sitemap', 'uses' => 'SitemapsController@index' ));
