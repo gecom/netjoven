@@ -27,7 +27,7 @@
                 <a href="#" class="log_in_mobile"  >Iniciar Sesión</a>
                 <span class="user_icon" ></span>
                 <div class="iniciar_sesion" style="display:none">
-                {{ Form::open(array('role'=>'form', 'id' => 'frm_login', 'autocomplete' => 'off')) }}
+                {{ Form::open(array('route' => 'frontend.login.post', 'role'=>'form', 'id' => 'frm_login', 'autocomplete' => 'off')) }}
                     <div class="form-group">
                         <input type="text" name="email" class="form-control" placeholder="Correo electronico" />
                     </div>

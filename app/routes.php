@@ -164,7 +164,7 @@ Route::get('/{slug_category}/{keyword?}', array('as' => 'frontend.post.redirect_
 
 
 Route::get('/iniciar_sesion', array('as' => 'frontend.login', 'uses' => 'UserController@login' ));
-Route::post('/iniciar_sesion', array('as' => 'frontend.login', 'uses' => 'UserController@signin' ));
+Route::post('/iniciar_sesion', array('as' => 'frontend.login.post', 'uses' => 'UserController@signin' ));
 Route::get('/registrate.html', array('as' => 'frontend.user.register', 'uses' => 'UserController@userRegister' ));
 Route::post('/registrate.html', array('as' => 'frontend.user.save_register', 'uses' => 'UserController@saveUserProfile' ));
 Route::get('/edita_tu_perfil.html', array('as' => 'frontend.user.edit_perfil', 'uses' => 'UserController@editPerfilUser' ));
