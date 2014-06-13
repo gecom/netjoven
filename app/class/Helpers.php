@@ -294,8 +294,6 @@ class Helpers {
 
 		$dbr_country_data = Cache::get($key);
 
-		dd($dbr_country_data);
-
 		return $dbr_country_data;
 	}
 
@@ -303,6 +301,8 @@ class Helpers {
 	public static function getCountrycode(){
 
 		$dbr_country_data = self::getCountryData();
+
+		dd($dbr_country_data);
 
 		$country_code = null;
 		if(Cookie::has('country_code')){
