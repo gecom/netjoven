@@ -51,7 +51,11 @@
                     {{$dbr_post->content}}
                 </div>
                 <div class="author">
-                    <span class="custom_color_bg"></span> {{$dbr_redactor->userProfile-> first_name . ' ' . $dbr_redactor->userProfile->last_name }} / NetJoven
+
+                    @if (isset($dbr_redactor))
+                        <span class="custom_color_bg"></span> {{$dbr_redactor->userProfile-> first_name . ' ' . $dbr_redactor->userProfile->last_name }} / NetJoven
+                    @endif
+                    
                 </div>
                 <div class="social">
                     @include('frontend.pages.section.post_button_social')

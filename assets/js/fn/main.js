@@ -157,7 +157,6 @@ $(function(){
 
 	});
 
-
 	$(' #frm_login').on('submit', function(e){
 		e.preventDefault();
 		var $this = $(this);
@@ -177,7 +176,7 @@ $(function(){
 
 			$this.append('<strong class="text-danger">'+response.message+'</strong>');
 		});		
-	})
+	});
 
 	$modal.on('submit', '#frm_popup_login', function(e){
 		e.preventDefault();
