@@ -39,6 +39,18 @@
                 <div class="tab-content" style="padding-top: 20px;">
                     <div class="tab-pane active" id="register_publication">
                         <form id="frm_news_register" enctype="multipart/form-data" accept-charset="UTF-8" method="post" action="{{ $url_post }}"  autocomplete="off">
+                            
+                            <div class="col-lg-8">
+                                <div class="alert alert-info">
+                                    <ul>
+                                        <li>Los tags van separados por comas y será 3 a 4 palabras claves, siendo especifica y más importantes del tema.</li>
+                                        <li>Para poner un video de youtube pon el siguiente codigo [video]IDVIDEO[/video]</li>
+                                        <li>Para una ultima noticia [en]Titulo Tag[/en] ejm: [en]Melcochita[/en]</li>
+                                        <li>Para los tags usa el siguiente código [tag]Titulo Tag[/tag] ejm: [tag]Melcochita[/tag]</li>
+                                    </ul>
+                                </div>
+                            </div>
+
                             <div class="col-lg-8">
                                 {{ Form::hidden('frm_news[is_new]', ($is_new ? 1 : 0) , array('id' => 'frm_is_new')) }}
                                 {{ Form::hidden('frm_news[image_principal]', null, array('id' => 'frm_news_image_principal')) }}
@@ -147,6 +159,15 @@
 
                                 @if ( $type_post != Helpers::TYPE_POST_FAIL)
                                     <div class="form-group">
+                                        <div class="col-md-12">
+                                            <div class="alert alert-info">
+                                                [video][/video] <br/>
+                                                [en][/en]<br/>
+                                                [tag][/tag]<br/>
+                                                ?feature=player_embedded&start=555
+                                            </div>
+                                        </div>          
+
                                         {{ Form::label('frm_news_description', 'Descripción') }}
                                         {{ Form::textarea('frm_news[description]', ($is_new ? null: $dbr_post->content ), array('id' => 'frm_news_description', 'placeholder' => 'Ingrese Descripción', 'class' => 'form-control')) }}
                                     </div>

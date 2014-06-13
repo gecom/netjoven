@@ -61,7 +61,7 @@ $(function(){
 
     var elt = $('#frm_news_keywords');
 
-    elt.tagsinput();
+    elt.tagsinput({maxTags: 4});
     elt.tagsinput('input').typeahead({
         name: 'user-search',
 	    remote: '/backend/autocompletar_tag?keyword=%QUERY',
