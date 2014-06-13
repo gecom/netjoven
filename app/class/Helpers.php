@@ -313,7 +313,8 @@ class Helpers {
 			if(!$dbr_country_data){
 				$country_code = 'PE';
 			}else{
-				dd($dbr_country_data->country_code);
+				print_r($dbr_country_data);
+				die();
 				$country_code = $dbr_country_data->country_code;
 			}
 
