@@ -1,10 +1,10 @@
 <?php
 	$dbr_country_data = Helpers::getCountryData();
 	$country_name = ($dbr_country_data ? $dbr_country_data->country_name : 'Peru');
-	$page_view = (!empty(Request::segment(1)) ? Request::segment(1) : 'index');
-?> 
+	$page_view = (Request::segment(1) ? Request::segment(1) : 'index');
+?>
 
-<script type="text/javascript">	
+<script type="text/javascript">
 	var _gaq = _gaq || [];
 	_gaq.push(['_setAccount', 'UA-6925229-1']);
 	_gaq.push(['_trackPageview', '/{{$page_view}}']);
