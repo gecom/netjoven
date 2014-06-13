@@ -302,7 +302,7 @@ class Helpers {
 
 		$dbr_country_data = self::getCountryData();
 
-		dd($dbr_country_data);
+
 
 		$country_code = null;
 		if(Cookie::has('country_code')){
@@ -313,6 +313,7 @@ class Helpers {
 			if(!$dbr_country_data){
 				$country_code = 'PE';
 			}else{
+				dd($dbr_country_data->country_code);
 				$country_code = $dbr_country_data->country_code;
 			}
 
