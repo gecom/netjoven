@@ -294,6 +294,8 @@ class Helpers {
 
 		$dbr_country_data = Cache::get($key);
 
+		dd($dbr_country_data);
+
 		return $dbr_country_data;
 	}
 
