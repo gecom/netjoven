@@ -290,7 +290,7 @@ class Helpers {
 
 		$dbr_country_data = DB::table('njv_ip2c')
 					->select('country_code','country_name')
-					->whereRaw('? BETWEEN begin_ip_num AND end_ip_num',array($ip_num))
+					->whereRaw($ip_num.' BETWEEN begin_ip_num AND end_ip_num')
 					->first();
 
 
