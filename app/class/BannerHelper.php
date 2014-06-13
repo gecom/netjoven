@@ -69,7 +69,7 @@ class BannerHelper{
 	}
 
 	private static function loadBanner($params, $do){
-		$dbl_banner_detail = BannerDeTail::getBannerDetail($params)->get();
+		$dbl_banner_detail = BannerDetail::getBannerDetail($params)->get();
 
 		if(!$dbl_banner_detail){
 			if($do){
