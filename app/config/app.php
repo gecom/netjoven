@@ -115,6 +115,7 @@ return array(
 		'Artdarek\OAuth\OAuthServiceProvider',
 		'Barryvdh\Debugbar\ServiceProvider',
 		'Roumen\Sitemap\SitemapServiceProvider',
+		'Liebig\Cron\CronServiceProvider',
 
 	),
 

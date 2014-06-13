@@ -10,6 +10,7 @@ class Post extends Eloquent {
 
         static::creating(function($post){
             $post->user_id = Auth::user()->id;
+            $post->ip = Helpers::getClientIp();
         });
     }
 

@@ -80,3 +80,13 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
+
+Event::listen('cron.collectJobs', function() {
+    Cron::add('example1', '*/2 * * * *', function() {
+                    // Do some crazy things unsuccessfully every minute
+                    DB::insert('INSERT INTO testing (name) values (?)', array('pavel2'));
+	});
+
+	Cron::setRunInterval(1);
+
+});

@@ -15,7 +15,8 @@
 		"scalia/sphinxsearch": "dev-master",
 		"artdarek/oauth-4-laravel": "dev-master",
 		"torann/geoip": "dev-master",
-		"roumen/sitemap": "dev-master"
+		"roumen/sitemap": "dev-master",
+		"liebig/cron": "dev-master"
 	},
 	"require-dev": {
 		"barryvdh/laravel-debugbar": "1.*"
