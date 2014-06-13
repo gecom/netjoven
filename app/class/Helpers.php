@@ -284,10 +284,19 @@ class Helpers {
 
 		$ip_num = sprintf("%u",ip2long(self::getClientIp()));
 
-		$key = "dbr_country_data" . $ip_num;
+		$key = "dbr_country_data_" . $ip_num;
 
 		if (!Cache::has($key)) {
-			$dbr_country_data = DB::select("SELECT country_code,country_name FROM njv_ip2c WHERE ". $ip_num." BETWEEN begin_ip_num AND end_ip_num LIMIT 1 ");
+
+		$dbr_country_data = DB::table('njv_ip2c')
+					->select('country_code','country_name')
+					->whereRaw('? BETWEEN begin_ip_num AND end_ip_num', $ip_num)
+					->first();
+
+
+				dd($dbr_country_data);
+
+			//$dbr_country_data = DB::select("SELECT country_code,country_name FROM njv_ip2c WHERE ". $ip_num." BETWEEN begin_ip_num AND end_ip_num LIMIT 1 ");
 
 			Cache::forever($key, $dbr_country_data);
 		}
@@ -313,8 +322,6 @@ class Helpers {
 			if(!$dbr_country_data){
 				$country_code = 'PE';
 			}else{
-				print_r($dbr_country_data);
-				die();
 				$country_code = $dbr_country_data->country_code;
 			}
 
