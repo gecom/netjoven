@@ -157,7 +157,29 @@ $(function(){
 
 	});
 
-	$modal.on('submit', '#frm_popup_login, #frm_login', function(e){
+
+	$(' #frm_login').on('submit', function(e){
+		e.preventDefault();
+		var $this = $(this);
+
+		$.ajax({
+			url: $this.attr('action') ,
+			type:'post',
+			dataType:'json',
+			data: $this.serializeArray()
+		}).done(function(response){
+			$this.find('.text-danger').remove();
+			if(response.success == true){
+				setTimeout(function(){
+					window.location.href = response.redirect;
+				}, 1500)
+			}
+
+			$this.append('<strong class="text-danger">'+response.message+'</strong>');
+		});		
+	})
+
+	$modal.on('submit', '#frm_popup_login', function(e){
 		e.preventDefault();
 		var $this = $(this);
 
