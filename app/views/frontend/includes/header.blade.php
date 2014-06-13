@@ -10,9 +10,9 @@
         </div>
         <div class="social">
             <ul>
-                <li><a href="https://twitter.com/#!/netjoven" class="tw"></a><!--<span>20613</span>--></li>
-                <li><a href="http://www.facebook.com/netjoven" class="fb"></a><!--<span>20613</span>--></li>
-                <li><a href="#" class="gp"></a><!--<span>20613</span>--></li>
+                <li><a target="_blank" href="https://twitter.com/#!/netjoven" class="tw"></a><!--<span>20613</span>--></li>
+                <li><a target="_blank" href="http://www.facebook.com/netjoven" class="fb"></a><!--<span>20613</span>--></li>
+                <!--<li><a href="#" class="gp"></a></li>-->
             </ul>
         </div>
     </div>

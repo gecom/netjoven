@@ -29,11 +29,11 @@
 </div>
 <div class="sponsors">
     <ul>
-        <li ><a class="sp1" href="http://www.divas.pe/"></a></li>
-        <li ><a class="sp2" href="http://www.netjoven.pe/"></a></li>
-        <li ><a class="sp3" href="http://iabperu.com/"></a></li>
-        <li ><a class="sp4" href="http://www.comscore.com/"></a></li>
-        <li ><a class="sp5" href="http://gecom.pe/"></a></li>
+        <li ><a target="_blank" class="sp1" href="http://www.divas.pe/"></a></li>
+        <li ><a target="_blank" class="sp2" href="http://www.netjoven.pe/"></a></li>
+        <li ><a target="_blank" class="sp3" href="http://iabperu.com/"></a></li>
+        <li ><a target="_blank" class="sp4" href="http://www.comscore.com/"></a></li>
+        <li ><a target="_blank" class="sp5" href="http://gecom.pe/"></a></li>
     </ul>
 </div>
 <div class="footer_rights">
