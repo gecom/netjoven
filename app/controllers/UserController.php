@@ -181,7 +181,7 @@ class UserController extends BaseController {
             // Send a request with it
             $result = json_decode( $twit->request( 'account/verify_credentials.json' ), true );
 
-            echo print_r($result);
+            dd($result);
 
         }
         // if not ask for permission first
