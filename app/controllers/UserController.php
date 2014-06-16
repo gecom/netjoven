@@ -126,6 +126,8 @@ class UserController extends BaseController {
         // get fb service
         $fb = OAuth::consumer( 'Facebook' );
 
+        dd($fb->getUser());
+
         // check if code is valid
 
         // if code is provided get user data and sign in
@@ -136,6 +138,10 @@ class UserController extends BaseController {
 
             // Send a request with it
             $result = json_decode( $fb->request( '/me' ), true );
+
+
+
+
 
             $message = 'Your unique facebook user id is: ' . $result['id'] . ' and your name is ' . $result['name'];
             echo $message. "<br/>";
@@ -151,7 +157,7 @@ class UserController extends BaseController {
             $url = $fb->getAuthorizationUri();
 
             // return to facebook login url
-             return Redirect::to( (string)$url );
+             return Redirect::to( (string) $url );
         }
 
     }
