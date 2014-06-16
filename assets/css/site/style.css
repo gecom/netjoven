@@ -741,7 +741,7 @@ footer{display:none}
 .v_news .no_title{padding-top:25px}
 .banner_view{width: 95%;margin:0 auto 14px}
 .banner_view iframe img, .fullbanner img{width: 100% !important;}
-.fullbanner{width:690px;margin:0 auto 14px;margin-bottom:0;min-height:0;padding-top:0;border-bottom:1px solid #d8d8d8;border-top:1px solid #d8d8d8;text-align:center;}
+.fullbanner{width:690px;margin:0 auto 14px;margin-bottom:0;min-height:0;padding-top:0;text-align:center;}
 #videos{display:none}
 #ads{width:690px;text-align:center;margin:0 auto 14px;}
 #ads .item{width:140px}

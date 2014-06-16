@@ -195,6 +195,7 @@ class Helpers {
 
         if($image->resize($size['width'], $size['height'], function($constraint){
         	 $constraint->aspectRatio();
+        	 $constraint->upsize();
         })->save($path . $name)){
         	$image->destroy();
         	return true;
@@ -565,7 +566,7 @@ class Helpers {
 		return $string;
 	}
 
-	public static function getMoreSlider($params, $limit = 5){
+	public static function getMoreSlider($params, $limit = 6){
 
 		$params_default = array('tags' => null,'order_read' => false , 'order_commented' => false,'order_shared' => false, 'has_gallery' => false, 'has_video' => false, 'category_id' => null);
 		$params = array_merge($params_default, $params);

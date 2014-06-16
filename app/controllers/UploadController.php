@@ -34,7 +34,6 @@ class UploadController extends BaseController{
                 $type_featured = Input::get('type_featured');
                 $is_video = Input::get('is_video');
 
-
                 $with_thumb = true;
 
                 if($type_featured == Helpers::TYPE_POST_SUPER_FEATURED){

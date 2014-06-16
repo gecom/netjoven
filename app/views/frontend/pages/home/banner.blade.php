@@ -2,8 +2,8 @@
     <article class="p1">
         @include('frontend.pages.partials.banner_cuadrado')
     </article>
-    @if ($is_monsterbox == false)
-        @include('frontend.pages.partials.likebox', array('meter_likebox' => array(300,500)));
+    @if (empty($banner_cuadrado))
+        @include('frontend.pages.partials.likebox', array('meter_likebox' => array(300,300)));
     @endif
 </div>
 <div class="right_banner">
@@ -25,9 +25,4 @@
             @endif
         </ul>
     </div>
-    @if ($is_monsterbox == true)
-        <div class="fb">
-            @include('frontend.pages.partials.likebox')
-        </div>
-    @endif
 </div>

@@ -169,8 +169,6 @@ class UserController extends BaseController {
 
         $oauth_token = Input::get('oauth_token');
         $oauth_verifier = Input::get('oauth_verifier');
-
-         dd(UserHelper::$type_social[UserHelper::TYPE_SOCIAL_TWITTER]);
         // get service
         $twit = OAuth::consumer(UserHelper::$type_social[UserHelper::TYPE_SOCIAL_TWITTER]);
 
@@ -178,7 +176,7 @@ class UserController extends BaseController {
         if (!empty($oauth_token)) {
             dd($oauth_token);
 
-            $token = $twit->getStorage()->retrieveAccessToken('Twitter');
+            $token = $twit->getStorage()->retrieveAccessToken(UserHelper::$type_social[UserHelper::TYPE_SOCIAL_TWITTER]);
 
             // This was a callback request from google, get the token
             $twit->requestAccessToken( $code, $oauth_verifier, $token->getRequestTokenSecret() );
@@ -189,11 +187,10 @@ class UserController extends BaseController {
             dd($result);
 
         }else {
-            // get authorization
-                    $token = $twit->requestRequestToken();
-                    $url = $twit->getAuthorizationUri(['oauth_token' => $token->getRequestToken()]);
-                        // return to twitter login url
-                        return Response::make()->header( 'Location', (string)$url );
+            $token = $twit->requestRequestToken();
+            $url = $twit->getAuthorizationUri(['oauth_token' => $token->getRequestToken()]);
+
+            return Response::make()->header( 'Location', (string)$url );
         }
 
     }

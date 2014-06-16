@@ -8,7 +8,7 @@
     <a href="#" class="show_menu"></a>
     <div class="search_box">
         <input type="text" class="input-search" name="keyword" placeholder="BUSCAR..."/>
-        <input type="button" class="btn-search" value="" />
+        <input type="button" class="btn_search" value="" />
         <div class="bg_search"></div>
     </div>
     <div class="circles" style="display:none"></div>
