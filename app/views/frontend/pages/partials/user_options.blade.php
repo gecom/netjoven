@@ -11,10 +11,15 @@
             <?php
                 $dbr_user = Auth::user();
                 $dbr_user_profie = $dbr_user->userProfile()->first();
+                $image_avatar = UserHelper::getImageAvatarUser($dbr_user, $dbr_user_profie, 'square');
             ?>
             <a href="{{ route('frontend.user.edit_perfil') }}">
                 <span>{{Lang::get('messages.frontend.welcome_user') . ' ' . $dbr_user_profie->first_name }}</span>
-                <figure class="icon_v4"><img src="assets/images/maq/user.jpg" alt=""></figure>
+            @if ($image_avatar)
+                <div class="icon_v4 custom_color_bg"></div>
+            @else
+                <figure class="icon_v4"><img alt="{{$dbr_user_profie->first_name}}" src="{{$image_avatar}}"></figure>
+            @endif  
                 <span class="glyphicon glyphicon-info-sign"></span>
             </a>
         @else
