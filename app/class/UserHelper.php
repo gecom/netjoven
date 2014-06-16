@@ -32,8 +32,8 @@ class UserHelper{
 				$image_avatar = $dbr_user_profile->image.'?type='.$type_image;
 			}else{
 	            $data_image = explode("-",$dbr_user_profile->image);
-	            $directory = ($type_image == 'normal' ? 'user/' : 'user/pp/');
-	            $image_avatar = Helpers::getImage($data_image[1], $directory . $data_image[0]);
+	            $directory = ($type_image == 'normal' ? 'user/'.$data_image[0] : 'user/'.$data_image[0].'/pp');
+	            $image_avatar = Helpers::getImage($data_image[1], $directory);
 			}
 
 		}

@@ -117,8 +117,8 @@ class UploadController extends BaseController{
         $response_image = Helpers::uploadImage($file, $imagen , $upload, $data_size);
         $response_image['image_original'] = $imagen_name;
 
-        $data_size['width'] = 42;
-        $data_size['height'] = 42;
+        $data_size['width'] = 38;
+        $data_size['height'] = 38;
         $upload = $upload.'pp/';
         Helpers::createDir(Config::get('settings.upload') . $upload);
         $response_image_thumb = Helpers::uploadImage($file, $imagen , $upload, $data_size);

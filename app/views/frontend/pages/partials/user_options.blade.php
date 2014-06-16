@@ -15,7 +15,7 @@
             ?>
             <a href="{{ route('frontend.user.edit_perfil') }}">
                 <span>{{Lang::get('messages.frontend.welcome_user') . ' ' . $dbr_user_profie->first_name }}</span>
-            @if ($image_avatar)
+            @if (!$image_avatar)
                 <div class="icon_v4 custom_color_bg"></div>
             @else
                 <figure class="icon_v4"><img alt="{{$dbr_user_profie->first_name}}" src="{{$image_avatar}}"></figure>
