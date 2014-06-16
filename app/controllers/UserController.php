@@ -117,18 +117,49 @@ class UserController extends BaseController {
         return  Redirect::route('frontend.user.edit_perfil');
     }
 
-    public function loginWithSocial($social) {
+    private function loginTwitter($social){
 
-        // get data from input
-        $code = Input::get( 'code' );
+        $oauth_token = Input::get('oauth_token');
+        $oauth_verifier = Input::get('oauth_verifier');
 
-        // get fb service
+
+
+        $twit = OAuth::consumer('Twitter');
+
+            dd($oauth_token);
+
+        if(!empty($oauth_token)){
+            $token = $twit->getStorage()->retrieveAccessToken(UserHelper::$type_social[$social]);
+
+            $twit->requestAccessToken( $code, $oauth_verifier, $token->getRequestTokenSecret() );
+
+            $result = json_decode( $twit->request( 'account/verify_credentials.json') );
+
+            // try to login
+
+            // get user by twitter_id
+            // $user = User::where( [ 'twitter_id' => $result->id ] )->first();
+
+            dd($result);
+        }else{
+
+            $token = $twit->requestRequestToken();
+            $url = $twit->getAuthorizationUri(['oauth_token' => $token->getRequestToken()]);
+
+            return Response::make()->header( 'Location', (string)$url );
+        }
+
+
+    }
+
+    private function loginFacebook(){
+
         $fb = OAuth::consumer(UserHelper::$type_social[$social]);
 
         // if code is provided get user data and sign in
-        if ( !empty( $code ) ) {
+        if ((isset($code) && !empty( $code )) && (isset($oauth_token) && !empty($oauth_token))) {
 
-            // This was a callback request from facebook, get the token
+            
             $token = $fb->requestAccessToken( $code );
 
             // Send a request with it
@@ -154,7 +185,6 @@ class UserController extends BaseController {
             }           
 
             Auth::loginUsingId($dbr_user->id);
-            //Auth::login($dbr_user);
 
             if($is_new_user_social){
                 return Redirect::route('frontend.user.register');
@@ -162,11 +192,20 @@ class UserController extends BaseController {
                 return Redirect::route('home');
             }
 
-        }
-        // if not ask for permission first
-        else {
+        }else {
             $url = $fb->getAuthorizationUri();
             return Redirect::to( (string) $url );
+        }
+
+
+    }
+
+    public function loginWithSocial($social) {
+
+        if($social == UserHelper::TYPE_SOCIAL_TWITTER){
+            $this->loginTwitter($social);
+        }else{
+            $code = Input::get( 'code' );
         }
 
     }
