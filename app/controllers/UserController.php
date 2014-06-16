@@ -126,8 +126,6 @@ class UserController extends BaseController {
         // get fb service
         $fb = OAuth::consumer( 'Facebook' );
 
-        dd($fb->getUser());
-
         // check if code is valid
 
         // if code is provided get user data and sign in
@@ -139,16 +137,26 @@ class UserController extends BaseController {
             // Send a request with it
             $result = json_decode( $fb->request( '/me' ), true );
 
+            $dbr_user = User::where('id', '=', $result['id']);
+            $is_new_user_social = false;
 
+            if(!$dbr_user){
+                $dbr_user = new User();
+                $dbr_user->user = $result['id'];
+                $dbr_user->level = UserHelper::LEVEL_USER_NORMAL;
+                $dbr_user->save();
 
+                $dbr_user_profile = new UserProfile();
+                $dbr_user_profile->first_name = $result['first_name'];
+                $dbr_user_profile->last_name = $result['last_name'];
+                $dbr_user_profile->gender = ($result['gender'] == 'male' ? 'M' : 'F' );
+                $dbr_user_profile->save();
+                $is_new_user_social = true;
+            }
 
+            Auth::login($dbr_user);
 
-            $message = 'Your unique facebook user id is: ' . $result['id'] . ' and your name is ' . $result['name'];
-            echo $message. "<br/>";
-
-            //Var_dump
-            //display whole array().
-            dd($result);
+            Redirect::route('frontend.user.register');
 
         }
         // if not ask for permission first
