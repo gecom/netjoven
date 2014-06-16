@@ -155,9 +155,6 @@ class UserController extends BaseController {
             }
 
 
-
-            dd($dbr_user);
-
             Auth::login($dbr_user);
 
             Redirect::route('frontend.user.register');
