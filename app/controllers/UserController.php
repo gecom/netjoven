@@ -138,8 +138,6 @@ class UserController extends BaseController {
             // Send a request with it
             $result = json_decode( $fb->request( '/me' ), true );
 
-            dd($result);
-
             $dbr_user = User::where('user', '=', $result['id'])->first();
             $is_new_user_social = false;
 
@@ -158,8 +156,8 @@ class UserController extends BaseController {
             }
 
             //Session::flush();
-            Auth::login($dbr_user);
-            //Auth::loginUsingId($dbr_user->id);
+            //Auth::login($dbr_user);
+            Auth::loginUsingId($dbr_user->id);
 
            return Redirect::route('frontend.user.register');
 
