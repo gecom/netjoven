@@ -121,13 +121,13 @@ class UserController extends BaseController {
 
         // get data from input
         $code = Input::get( 'code' );
-
+        
         if(!in_array($social,UserHelper::$type_social)){
             return Redirect::route('home');
         }
 
         // get fb service
-        $fb = OAuth::consumer($type_social);
+        $fb = OAuth::consumer(UserHelper::$type_social[$social]);
 
         // if code is provided get user data and sign in
         if ( !empty( $code ) ) {

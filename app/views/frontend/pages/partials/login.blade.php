@@ -17,8 +17,8 @@
 			<div class="share">
 				<span>Registrate con: </span>
 				<a class="gp" href="#"><span></span></a>
-				<a class="tw" href="{{ route('frontend.login.social', UserHelper::TYPE_SOCIAL_FACEBOOK) }}"><span></span></a>
-				<a class="fb" href="{{ route('frontend.login.social', UserHelper::TYPE_SOCIAL_TWITTER) }}"><span></span></a>
+				<a class="tw" href="{{ route('frontend.login.social', UserHelper::TYPE_SOCIAL_TWITTER) }}"><span></span></a>
+				<a class="fb" href="{{ route('frontend.login.social', UserHelper::TYPE_SOCIAL_FACEBOOK) }}"><span></span></a>
 			</div>
 			<div class="registrate">
 				¿Eres nuevo en Netjoven?<br>
