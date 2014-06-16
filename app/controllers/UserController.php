@@ -203,6 +203,10 @@ class UserController extends BaseController {
     public function loginWithSocial($social) {
 
         if($social == UserHelper::TYPE_SOCIAL_TWITTER){
+        $oauth_token = Input::get('oauth_token');
+        $oauth_verifier = Input::get('oauth_verifier');
+dd($oauth_token);
+
             $this->loginTwitter($social);
         }else{
             $code = Input::get( 'code' );
