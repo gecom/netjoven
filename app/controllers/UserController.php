@@ -137,7 +137,7 @@ class UserController extends BaseController {
             // Send a request with it
             $result = json_decode( $fb->request( '/me' ), true );
 
-            $dbr_user = User::where('id', '=', $result['id']);
+            $dbr_user = User::where('user', '=', $result['id']);
             $is_new_user_social = false;
 
             if(!$dbr_user){
