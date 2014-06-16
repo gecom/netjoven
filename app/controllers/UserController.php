@@ -127,6 +127,7 @@ class UserController extends BaseController {
         $fb = OAuth::consumer( 'Facebook' );
 
         // check if code is valid
+        Session::flush();
 
         // if code is provided get user data and sign in
         if ( !empty( $code ) ) {
@@ -150,7 +151,7 @@ class UserController extends BaseController {
                 $dbr_user_profile->first_name = $result['first_name'];
                 $dbr_user_profile->last_name = $result['last_name'];
                 $dbr_user_profile->gender = ($result['gender'] == 'male' ? 'M' : 'F' );
-                $dbr_user_profile->save();
+                $dbr_user->userProfile()->save($dbr_user_profile);  
                 $is_new_user_social = true;
             }
 

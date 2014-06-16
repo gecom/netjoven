@@ -21,7 +21,7 @@
                     $dbr_user = Auth::user();
                     $dbr_user_profie = $dbr_user->userProfile()->first();
                 ?>
-                <div class="bien">{{Lang::get('messages.frontend.welcome_user') . ' ' . $dbr_user_profie->first_name }}</div>
+                <div class="bien">{{Lang::get('messages.frontend.welcome_user') . ' ' . ($dbr_user_profie ? $dbr_user_profie->first_name) : '' }}</div>
                 <figure class="icon_v4"><img alt="" src="assets/images/maq/user.jpg"></figure>
             @else
                 <a href="#" class="log_in_mobile"  >Iniciar Sesión</a>
