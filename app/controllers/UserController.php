@@ -161,7 +161,7 @@ class UserController extends BaseController {
             Auth::login($dbr_user);
             //Auth::loginUsingId($dbr_user->id);
 
-            Redirect::route('frontend.user.register');
+           return Redirect::route('frontend.user.register');
 
         }
         // if not ask for permission first
