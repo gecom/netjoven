@@ -151,13 +151,10 @@ class UserController extends BaseController {
                 $dbr_user_profile->image = 'https://graph.facebook.com/'.$result['id'].'/picture';
                 $dbr_user->userProfile()->save($dbr_user_profile);  
                 $is_new_user_social = true;
-            }
+            }           
 
-            $dbr_user->remember_token = $fb->getAccessToken();
-            $dbr_user->save();            
-
-            //Auth::loginUsingId($dbr_user->id);
-            Auth::login($dbr_user);
+            Auth::loginUsingId($dbr_user->id);
+            //Auth::login($dbr_user);
 
             if($is_new_user_social){
                 return Redirect::route('frontend.user.register');
