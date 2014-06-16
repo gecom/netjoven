@@ -175,23 +175,23 @@ class UserController extends BaseController {
         // if code is provided get user data and sign in
         if (!empty($oauth_token)) {
 
-            // This was a callback request from google, get the token
-            $token = $twit->requestAccessToken($oauth_token, $oauth_verifier);
+
+                $token = $twit->getStorage()->retrieveAccessToken('Twitter');
+
+                        // This was a callback request from google, get the token
+                        $twit->requestAccessToken( $code, $oauth_verifier, $token->getRequestTokenSecret() );
 
             // Send a request with it
             $result = json_decode( $twit->request( 'account/verify_credentials.json' ), true );
 
             dd($result);
 
-        }
-        // if not ask for permission first
-        else {
+        }else {
             // get authorization
-            $token = $twit->requestRequestToken();
-            $url = $twit->getAuthorizationUri(array('oauth_token' => $token->getRequestToken()));
-
-            // return to login url
-            return Response::make()->header( 'Location', (string)$url );
+                    $token = $twit->requestRequestToken();
+                    $url = $twit->getAuthorizationUri(['oauth_token' => $token->getRequestToken()]);
+                        // return to twitter login url
+                        return Response::make()->header( 'Location', (string)$url );
         }
 
     }
