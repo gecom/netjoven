@@ -29,12 +29,7 @@ class UserController extends BaseController {
         $params_template['meter_likebox'] = array(300, 286);
         $params_template['dbr_user'] = ($dbr_user ? $dbr_user : null);
         $params_template['dbr_user_profile'] = $dbr_user_profile = ($dbr_user ? $dbr_user->userProfile()->first() : null);
-
-        if($dbr_user_profile && $dbr_user_profile->image){
-            $data_image = explode("-",$dbr_user_profile->image);
-            $params_template['image_avatar'] = Helpers::getImage($data_image[1], 'user/'. $data_image[0]);
-        }
-
+        $params_template['image_avatar'] = $UserHelper::getImageAvatarUser($dbr_user, $dbr_user_profile );
         $params_template['dbl_country'] = UserHelper::getCountry();
         $country_current_user = null;
 
@@ -80,7 +75,9 @@ class UserController extends BaseController {
             $rules['department'] = 'required';
         }
 
-        if($is_new_user){
+        $dbr_user = $is_new_user == false ? Auth::User() : new User() ;
+
+        if($is_new_user || ($is_new_user && $dbr_user->user_social)){
             $rules['password'] = 'required|alpha_num|between:6,12';
             $rules['email'] = 'required|email|unique:njv_user';
         }
@@ -89,13 +86,15 @@ class UserController extends BaseController {
         if ($validation->fails()) {
             return Redirect::route(Route::currentRouteName())->with('message', 'The following errors occurred')->withErrors($validation)->withInput();
         }
-
-        $dbr_user = $is_new_user == false ? Auth::User() : new User() ;
+        
         if($is_new_user == true){
             $dbr_user->user = uniqid();
             $dbr_user->email = $params_form['email'];
             $dbr_user->password = Hash::make($params_form['password']);
             $dbr_user->level = UserHelper::LEVEL_USER_NORMAL;
+            $dbr_user->save();
+        }else{
+            $dbr_user->email = $params_form['email'];
             $dbr_user->save();
         }
 
@@ -118,16 +117,17 @@ class UserController extends BaseController {
         return  Redirect::route('frontend.user.edit_perfil');
     }
 
-    public function loginWithFacebook() {
+    public function loginWithSocial($social) {
 
         // get data from input
         $code = Input::get( 'code' );
 
-        // get fb service
-        $fb = OAuth::consumer( 'Facebook' );
+        if(!in_array($social,UserHelper::$type_social)){
+            return Redirect::route('home');
+        }
 
-        // check if code is valid
-        //Session::flush();
+        // get fb service
+        $fb = OAuth::consumer($type_social);
 
         // if code is provided get user data and sign in
         if ( !empty( $code ) ) {
@@ -144,6 +144,7 @@ class UserController extends BaseController {
             if(!$dbr_user){
                 $dbr_user = new User();
                 $dbr_user->user = $result['id'];
+                $dbr_user->user_social = $result['id'];
                 $dbr_user->level = UserHelper::LEVEL_USER_NORMAL;
                 $dbr_user->save();
 
@@ -151,24 +152,28 @@ class UserController extends BaseController {
                 $dbr_user_profile->first_name = $result['first_name'];
                 $dbr_user_profile->last_name = $result['last_name'];
                 $dbr_user_profile->gender = ($result['gender'] == 'male' ? 'M' : 'F' );
+                $dbr_user_profile->image = 'https://graph.facebook.com/'.$result['id'].'/picture';
                 $dbr_user->userProfile()->save($dbr_user_profile);  
                 $is_new_user_social = true;
             }
 
-            //Session::flush();
-            //Auth::login($dbr_user);
-            Auth::loginUsingId($dbr_user->id);
+            $dbr_user->remember_token = $fb->getAccessToken();
+            $dbr_user->save();            
 
-           return Redirect::route('frontend.user.register');
+            //Auth::loginUsingId($dbr_user->id);
+            Auth::login($dbr_user);
+
+            if($is_new_user_social){
+                return Redirect::route('frontend.user.register');
+            }else{
+                return Redirect::route('home');
+            }
 
         }
         // if not ask for permission first
         else {
-            // get fb authorization
             $url = $fb->getAuthorizationUri();
-
-            // return to facebook login url
-             return Redirect::to( (string) $url );
+            return Redirect::to( (string) $url );
         }
 
     }

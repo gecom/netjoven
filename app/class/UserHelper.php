@@ -7,12 +7,38 @@ class UserHelper{
 	const LEVEL_USER_MODE = 'mode';
 	const LEVEL_USER_NORMAL = 'usuario';
 
+	const TYPE_SOCIAL_FACEBOOK = 'fb';
+	const TYPE_SOCIAL_TWITTER = 'tw';
+
+	public static $type_social = array(
+		self::TYPE_SOCIAL_FACEBOOK => 'Facebook',
+		self::TYPE_SOCIAL_TWITTER => 'Twitter'
+	);
+
 	public static function getUsersAdmin(){
 		return User::getAdmin()
 					->with(array('userProfile' => function($query){
 							return $query->orderBy('first_name')->orderBy('last_name');
 					}))
 					->get();
+	}
+
+	public static function getImageAvatarUser($dbr_user, $dbr_user_profile, $type_image = 'normal' ){
+
+		$image_avatar = null;
+
+		if($dbr_user && $dbr_user_profile){
+			if($dbr_user->user_social){ //square, nomral
+				$image_avatar = $dbr_user_profile->image.'?type='.$type_image;
+			}else{
+	            $data_image = explode("-",$dbr_user_profile->image);
+	            $directory = ($type_image == 'normal' ? 'user/' : 'user/pp/');
+	            $image_avatar = Helpers::getImage($data_image[1], $directory . $data_image[0]);
+			}
+
+		}
+
+		return $image_avatar;
 	}
 
 

@@ -48,7 +48,7 @@
 						<input type="email" value="{{(isset($dbr_user) ? $dbr_user->email : null)}}" class="form-control" id="frm_user_email" name="frm_user[email]" placeholder="Correo electronico" />
 					</div>
 
-					@if (!isset($dbr_user))
+					@if (!isset($dbr_user) || (isset($dbr_user) && $dbr_user->user_social))
 						<div class="form-group col-md-12">
 							<label for="frm_user_password">Contraseña</label>
 							<input type="password" class="form-control" id="frm_user_password" name="frm_user[password]" placeholder="Contraseña" />
@@ -130,13 +130,11 @@
                         </span>
                     </div>				
 					<figure>
-						<?php 
-							if(!isset($image_avatar)){
-								$image_avatar = 'http://www.localcrimenews.com/wp-content/uploads/2013/07/default-user-icon-profile.png';
-							}
-						?>
-
-						<img id="photo_user" src="{{$image_avatar}}" alt="" class="img-circle img-responsive">				
+						@if ($image_avatar)
+							<img id="photo_user" src="{{$image_avatar}}" alt="" class="img-circle img-responsive">
+						@else
+							<img id="photo_user" src="http://www.localcrimenews.com/wp-content/uploads/2013/07/default-user-icon-profile.png" alt="" class="img-circle img-responsive">
+						@endif				
 					</figure>
 				</div>
 				<div class="actions form-group col-md-12">

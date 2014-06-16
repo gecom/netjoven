@@ -20,9 +20,15 @@
                 <?php
                     $dbr_user = Auth::user();
                     $dbr_user_profie = $dbr_user->userProfile()->first();
+                    $image_avatar = UserHelper::getImageAvatarUser($dbr_user, $dbr_user_profie, 'square');
                 ?>
                 <div class="bien">{{Lang::get('messages.frontend.welcome_user') . ' ' . ($dbr_user_profie ? $dbr_user_profie->first_name : '') }}</div>
-                <figure class="icon_v4"><img alt="" src="assets/images/maq/user.jpg"></figure>
+
+                @if ($image_avatar)
+                    <div class="icon_v4 custom_color_bg"></div>
+                @else
+                    <figure class="icon_v4"><img alt="{{$dbr_user_profie->first_name}}" src="{{$image_avatar}}"></figure>
+                @endif                        
             @else
                 <a href="#" class="log_in_mobile"  >Iniciar Sesión</a>
                 <span class="user_icon" ></span>
