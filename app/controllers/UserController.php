@@ -127,7 +127,7 @@ class UserController extends BaseController {
         $fb = OAuth::consumer( 'Facebook' );
 
         // check if code is valid
-        Session::flush();
+        //Session::flush();
 
         // if code is provided get user data and sign in
         if ( !empty( $code ) ) {
@@ -156,8 +156,8 @@ class UserController extends BaseController {
             }
 
             //Session::flush();
-            //Auth::login($dbr_user);
-            Auth::loginUsingId($dbr_user->id);
+            Auth::login($dbr_user);
+            //Auth::loginUsingId($dbr_user->id);
 
             Redirect::route('frontend.user.register');
 
