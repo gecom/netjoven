@@ -117,52 +117,17 @@ class UserController extends BaseController {
         return  Redirect::route('frontend.user.edit_perfil');
     }
 
-    private function loginTwitter($social){
 
-        $oauth_token = Input::get('oauth_token');
-        $oauth_verifier = Input::get('oauth_verifier');
+    public function loginFacebook(){
 
+        $code = Input::get('code');
 
-
-        $twit = OAuth::consumer('Twitter');
-
-            dd($oauth_token);
-
-        if(!empty($oauth_token)){
-            $token = $twit->getStorage()->retrieveAccessToken(UserHelper::$type_social[$social]);
-
-            $twit->requestAccessToken( $code, $oauth_verifier, $token->getRequestTokenSecret() );
-
-            $result = json_decode( $twit->request( 'account/verify_credentials.json') );
-
-            // try to login
-
-            // get user by twitter_id
-            // $user = User::where( [ 'twitter_id' => $result->id ] )->first();
-
-            dd($result);
-        }else{
-
-            $token = $twit->requestRequestToken();
-            $url = $twit->getAuthorizationUri(['oauth_token' => $token->getRequestToken()]);
-
-            return Response::make()->header( 'Location', (string)$url );
-        }
-
-
-    }
-
-    private function loginFacebook(){
-
-        $fb = OAuth::consumer(UserHelper::$type_social[$social]);
+        $fb = OAuth::consumer(UserHelper::$type_social[UserHelper::TYPE_SOCIAL_FACEBOOK]);
 
         // if code is provided get user data and sign in
-        if ((isset($code) && !empty( $code )) && (isset($oauth_token) && !empty($oauth_token))) {
-
+        if (!empty( $code )) {
             
             $token = $fb->requestAccessToken( $code );
-
-            // Send a request with it
             $result = json_decode( $fb->request( '/me' ), true );
 
             $dbr_user = User::where('user', '=', $result['id'])->first();
@@ -200,16 +165,33 @@ class UserController extends BaseController {
 
     }
 
-    public function loginWithSocial($social) {
+    public function loginTwitter() {
 
-        if($social == UserHelper::TYPE_SOCIAL_TWITTER){
         $oauth_token = Input::get('oauth_token');
         $oauth_verifier = Input::get('oauth_verifier');
-dd($oauth_token);
+        // get service
+        $twit = OAuth::consumer(UserHelper::$type_social[UserHelper::TYPE_SOCIAL_TWITTER]);
 
-            $this->loginTwitter($social);
-        }else{
-            $code = Input::get( 'code' );
+        // if code is provided get user data and sign in
+        if (!empty($oauth_token)) {
+
+            // This was a callback request from google, get the token
+            $token = $twit->requestAccessToken($oauth_token, $oauth_verifier);
+
+            // Send a request with it
+            $result = json_decode( $twit->request( 'account/verify_credentials.json' ), true );
+
+            echo print_r($result);
+
+        }
+        // if not ask for permission first
+        else {
+            // get authorization
+            $token = $twit->requestRequestToken();
+            $url = $twit->getAuthorizationUri(array('oauth_token' => $token->getRequestToken()));
+
+            // return to login url
+            return Response::make()->header( 'Location', (string)$url );
         }
 
     }

@@ -175,7 +175,8 @@ Route::post('/load_province.html', array('as' => 'frontend.user.load_province', 
 Route::post('/load_city.html', array('as' => 'frontend.user.load_city', 'uses' => 'UserController@loadCity' ));
 Route::post('/upload_image_user.html',array('as'=>'upload_file_image_user','uses'=>'UploadController@uploadPhotoPerfil'));
 
-Route::get('/iniciar_sesion_{type_social}', array('as' => 'frontend.login.social', 'uses' => 'UserController@loginWithSocial' ));
+Route::get('/iniciar_sesion_fb', array('as' => 'frontend.login.facebook', 'uses' => 'UserController@loginFacebook' ));
+Route::get('/iniciar_sesion_tw', array('as' => 'frontend.login.twitter', 'uses' => 'UserController@loginTwitter' ));
 Route::get('/cerrar_sesion', array('as' => 'frontend.login.close_session', 'uses' => 'UserController@logout' ));
 
 Route::get('/cambiar_color', array('as' => 'frontend.user.tools.changecolor', 'uses' => 'FrontendUserToolsController@viewChangeColor' ));
