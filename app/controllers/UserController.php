@@ -29,7 +29,7 @@ class UserController extends BaseController {
         $params_template['meter_likebox'] = array(300, 286);
         $params_template['dbr_user'] = ($dbr_user ? $dbr_user : null);
         $params_template['dbr_user_profile'] = $dbr_user_profile = ($dbr_user ? $dbr_user->userProfile()->first() : null);
-        $params_template['image_avatar'] = UserHelper::getImageAvatarUser($dbr_user, $dbr_user_profile );
+        $params_template['image_avatar'] = UserHelper::getImageAvatarUser($dbr_user, $dbr_user_profile, 'normal');
         $params_template['dbl_country'] = UserHelper::getCountry();
         $country_current_user = null;
 
