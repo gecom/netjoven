@@ -154,7 +154,7 @@ class UserController extends BaseController {
                 $is_new_user_social = true;
             }
 
-
+            Session::flush();
             Auth::login($dbr_user);
 
             Redirect::route('frontend.user.register');
