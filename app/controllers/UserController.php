@@ -169,6 +169,8 @@ class UserController extends BaseController {
 
         $oauth_token = Input::get('oauth_token');
         $oauth_verifier = Input::get('oauth_verifier');
+
+         dd($oauth_token);
         // get service
         $twit = OAuth::consumer(UserHelper::$type_social[UserHelper::TYPE_SOCIAL_TWITTER]);
 
