@@ -571,22 +571,22 @@ class Helpers {
 		$params_default = array('tags' => null,'order_read' => false , 'order_commented' => false,'order_shared' => false, 'has_gallery' => false, 'has_video' => false, 'category_id' => null);
 		$params = array_merge($params_default, $params);
 
-		$query = DB::table('njv_slider_more')
-			->select('njv_slider_more.post_id',
-						Db::raw('(SELECT image FROM njv_post_multimedia WHERE post_id = njv_slider_more.post_id and is_principal = 1 ) as image') ,
-						DB::raw('(SELECT slug FROM njv_category WHERE id = njv_slider_more.category_parent_id) category_parent_slug'),
-						'njv_slider_more.title',
-						'njv_slider_more.slug',
-						'njv_slider_more.id_video',
-						'njv_slider_more.type_video',
-						'njv_slider_more.category_id' ,
-						'njv_slider_more.category_parent_id' ,
-						'njv_slider_more.tags')
+		$query = DB::table('njv_search')
+			->select('njv_search.post_id',
+						Db::raw('(SELECT image FROM njv_post_multimedia WHERE post_id = njv_search.post_id and is_principal = 1 ) as image') ,
+						DB::raw('(SELECT slug FROM njv_category WHERE id = njv_search.category_parent_id) category_parent_slug'),
+						'njv_search.title',
+						'njv_search.slug',
+						'njv_search.id_video',
+						'njv_search.type_video',
+						'njv_search.category_id' ,
+						'njv_search.category_parent_id' ,
+						'njv_search.tag')
 			->take($limit);
 
 		if($params['tags']){
-			$query->addSelect(DB::raw("MATCH (tags) AGAINST ( '" . $params['tags'] . "' IN BOOLEAN MODE) as ranking"))
-					->whereRaw("MATCH (tags) AGAINST ( '" . $params['tags'] . "' IN BOOLEAN MODE)")
+			$query->addSelect(DB::raw("MATCH (tag) AGAINST ( '" . $params['tags'] . "' IN BOOLEAN MODE) as ranking"))
+					->whereRaw("MATCH (tag) AGAINST ( '" . $params['tags'] . "' IN BOOLEAN MODE)")
 					->orderBy('ranking', 'desc');
 		}
 

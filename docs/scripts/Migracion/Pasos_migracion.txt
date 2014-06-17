@@ -1,0 +1,9 @@
+Pasos para migracion 
+
+1) corremos  el primer archivo estructura_netjoven.sql
+2) una ves terminado el primer paso corremos este archivo store_procedure.sql
+3) Terminado el segundo paso ejecutamos el siguiente archivo netjoven_script_1.sql
+4) Ahora ejecutamos el siguente store procedure con el comando CALL migrate_post() pasando como parametros año(2006-2014) y mes(1-12)
+5) una ves terminado el cuanto paso ejecutamos el siguiente script netjoven_script_2.sql
+6) una ves terminado el quinto paso ejecutamos el siguiente script netjoven_script_3.sql
+7) 
