@@ -1,16 +1,17 @@
-CREATE PROCEDURE add_post_search(p_year INT)
+CREATE PROCEDURE add_post_search(p_year INT, p_month INT)
 BEGIN
 
 DELETE FROM njv_search where post_id in (SELECT id FROM njv_post where is_deleted = 1 and updated_at >= DATE_SUB(CURDATE(), INTERVAL 15 MINUTE));
 
-REPLACE INTO njv_search(post_id, category, category_slug,category_id, category_parent_id ,tag, title,slug, summary, content, has_gallery, has_video, count_read , id_video, type_video, created_at)
+REPLACE INTO njv_search(post_id,category, category_slug,category_id, category_parent_id ,tag, title,slug, summary, content, has_gallery, has_video, count_read , id_video, type_video, created_at)
 SELECT p.id, c.name as categoria,c.slug, c.id,c.parent_id, GROUP_CONCAT(t.tag) as tags, p.title, p.slug, p.summary, p.content, p.has_gallery, IF(p.id_video is NULL,0,1) as has_video, total_read, p.id_video, p.type_video ,p.created_at FROM njv_post p
 LEFT JOIN njv_post_tag pt ON p.id = pt.post_id
 LEFT JOIN njv_tag t ON t.id = pt.tag_id
 INNER JOIN njv_category c ON c.id =  p.category_id
--- WHERE p.updated_at >= DATE_SUB(CURDATE(), INTERVAL 1 MINUTE)
+-- WHERE p.updated_at >= DATE_SUB(CURDATE(), INTERVAL 15 MINUTE)
 WHERE YEAR(p.created_at) = p_year
-AND P.is_deleted = 0
+AND MONTH(p.created_at) = p_month
+AND p.is_deleted = 0
 GROUP BY p.id;
 
 END;
