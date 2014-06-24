@@ -80,6 +80,7 @@
 
 @section('js')
     {{ HTML::script('http://code.jquery.com/ui/1.10.3/jquery-ui.js'); }}
+	{{ HTML::script('assets/js/sb-admin.js'); }}
     {{ HTML::script('assets/js/jquery_file_upload/jquery.iframe-transport.js'); }}
     {{ HTML::script('assets/js/jquery_file_upload/jquery.fileupload.js'); }}
     {{ HTML::script('assets/js/jquery_file_upload/jquery.fileupload-process.js'); }}
