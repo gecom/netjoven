@@ -152,6 +152,7 @@ header .social ul li .gp{background-position:-129px -90px}
 .v_news .paginate ul li:hover a,.v_news .paginate ul .active a{color:#fff;text-decoration:none}
 .banner_view{width:468px;min-height:0;margin:14px 66px;display:block;text-align:center}
 .banner_view iframe,.banner_view object,.banner_view embed{top: 0;left: 0;width: 100%;}
+.banner_view img{width: 100%;height: auto}
 #notes iframe img{ width: 100% !important;}
 .fullbanner{width:960px;min-height:0;margin:14px 0;display:block;text-align:center;position: relative;}
 .fullbanner iframe, .fullbanner object,.fullbanner embed {position: absolute;top: 0;left: 0;width: 100%;}
