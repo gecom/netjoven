@@ -462,7 +462,7 @@ class Helpers {
 					$params['category_id'] = $dbr_post->category_id;
 					$dbr_slider_more['related'] 	= self::getMoreSlider(array('tags' => $dbr_post->tags));
 				}else{
-					$dbr_slider_more['more_read'] 		= self::getMoreSlider(array('order_read' => true));
+					$dbr_slider_more['more_read']	= self::getMoreSlider(array('order_read' => true));
 				}
 
 				$dbr_slider_more['more_commented'] 	= self::getMoreSlider(array('order_commented' => true));
