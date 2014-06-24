@@ -398,9 +398,9 @@ footer .footer_devices .fd2{background:url("/../assets/images/sprite.png") -144p
 #portada_espectaculos .features .mas_visto .list .item figure img{width:120px;height:74px}
 #portada_espectaculos .features .mas_visto .list .item .des{width:162px;vertical-align:top;display:inline-block;font-size:1rem;padding-left:7px;height:74px}
 #portada_espectaculos .features .mas_visto .list .item:nth-child(even){background-color:#f1f1f1}
-#portada_espectaculos .features .mas_visto .pagine{height:42px;text-align:center}
-#portada_espectaculos .features .mas_visto .pagine .bx-pager-item{display:inline-block;padding: 15px 3px 0 0;}
-#portada_espectaculos .features .mas_visto .pagine .bx-pager-item a.bx-pager-link{background: none repeat scroll 0 0 #666;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;-webkit-box-shadow: 1px 1px 4px 0 #6d6d6d;-moz-box-shadow: 1px 1px 4px 0 #6d6d6d;box-shadow: 1px 1px 4px 0 #6d6d6d;display: block;height: 10px;outline: 0 none;text-indent: -9999px;width: 10px;}
+ .mas_visto .pagine{height:42px;text-align:center}
+ .mas_visto .pagine .bx-pager-item{display:inline-block;padding: 15px 3px 0 0;}
+ .mas_visto .pagine .bx-pager-item a.bx-pager-link{background: none repeat scroll 0 0 #666;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;-webkit-box-shadow: 1px 1px 4px 0 #6d6d6d;-moz-box-shadow: 1px 1px 4px 0 #6d6d6d;box-shadow: 1px 1px 4px 0 #6d6d6d;display: block;height: 10px;outline: 0 none;text-indent: -9999px;width: 10px;}
 #portada_espectaculos .features .plugin_fb{-webkit-box-shadow:1px 1px 4px 0 #6d6d6d;-moz-box-shadow:1px 1px 4px 0 #6d6d6d;box-shadow:1px 1px 4px 0 #6d6d6d;margin-top:21px}
 #portada_espectaculos .features .view2{width:300px;display:inline-block;vertical-align:top;font-size:1rem;margin-top:29px;margin-bottom:30px;-webkit-box-shadow:1px 1px 4px 0 #6d6d6d;-moz-box-shadow:1px 1px 4px 0 #6d6d6d;box-shadow:1px 1px 4px 0 #6d6d6d;}
 #portada_espectaculos .features .view2:first-child,#portada_espectaculos .features .view2:nth-child(2n+1){margin-right:18px;margin-left:-10px}
@@ -460,7 +460,7 @@ footer .footer_devices .fd2{background:url("/../assets/images/sprite.png") -144p
 #notes .left_notes .mas_visto .list .item figure img{width:120px;height:74px}
 #notes .left_notes .mas_visto .list .item .des{width:162px;vertical-align:top;display:inline-block;font-size:1rem;padding-left:7px;height:74px}
 #notes .left_notes .mas_visto .list .item:nth-child(even){background-color:#f1f1f1}
-#notes .left_notes .mas_visto .pagine{height:49px;text-align:center}
+#notes .left_notes .mas_visto .pagine{height:49px;text-align:center;position: static;}
 #notes .left_notes .plugin_fb{width:300px;-webkit-box-shadow:1px 1px 4px 0 #6d6d6d;-moz-box-shadow:1px 1px 4px 0 #6d6d6d;box-shadow:1px 1px 4px 0 #6d6d6d;margin:15px 0}
 #notes .left_notes #ads{width:300px;border:0;padding:0;}
 #notes .left_notes #ads .item{width:140px;margin-left:20px;margin-bottom:20px;}
