@@ -39,6 +39,7 @@ class AdminNewsController extends BaseController {
         $data_frm_news['expired_at'] = Helpers::changeToMysql( $data_frm_news['expired_at']);
 
          $dbr_post_featured = PostFeatured::getFeaturedActiveByPostId($post->id)->first();
+         $is_new = $dbr_post_featured ? false : true;
 
          if($post->type == Helpers::TYPE_POST_NEWS && !$dbr_post_featured){
             $rules['type'] = 'required';
@@ -55,12 +56,14 @@ class AdminNewsController extends BaseController {
             }
         }else{
 
-            $dbr_post_featured = ($dbr_post_featured ? $dbr_post_featured : new PostFeatured());
+            $dbr_post_featured = (!$is_new ? $dbr_post_featured : new PostFeatured());
 
-            if( isset($data_frm_news['type'])){
-                $dbr_post_featured->type = $data_frm_news['type'];
-            }else{
-                $dbr_post_featured->type = Helpers::TYPE_VIDEO_FEATURED;
+            if($is_new){
+                if( isset($data_frm_news['type'])){
+                    $dbr_post_featured->type = $data_frm_news['type'];
+                }else{
+                    $dbr_post_featured->type = Helpers::TYPE_VIDEO_FEATURED;
+                }
             }
 
             $dbr_post_featured->title       =   $data_frm_news['title'];
