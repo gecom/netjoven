@@ -306,6 +306,13 @@ $(function(){
 		}
 	});
 
+
+	$('.go_top a').on('click', function(e){
+		e.preventDefault();
+		$('html, body').animate({scrollTop: 0}, 300);
+	});
+
+
 })
 
 
