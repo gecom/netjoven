@@ -26,9 +26,12 @@ $(function(){
 		         .end().appendTo('#slider_more');
 
 		var $slider_item_visible = $('#slider_more div.slider_item:visible');
-		$('#slider_more_tab').html($slider_item_visible.attr('data-title') + '<span class="'+$slider_item_visible.attr('data-class')+'"></span>');
 
-     }, 4000);
+		$('#slider_more_tab').html($slider_item_visible.attr('data-title') + '<span class="'+$slider_item_visible.attr('data-class')+'"></span>');
+		$('.mas_visto .bx-pager-link').removeClass('active');
+		$('.mas_visto .bx-pager-link[data-slide-index="'+$slider_item_visible.attr('data-slider')+'"]').addClass('active');
+
+     }, 5000);
 
 	$('.dropdown ul').each(function(){
 		$("li:first",$(this)).addClass('active custom_color_bg');
