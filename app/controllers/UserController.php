@@ -174,7 +174,6 @@ class UserController extends BaseController {
 
         // if code is provided get user data and sign in
         if (!empty($oauth_token)) {
-            dd($oauth_token);
 
             $token = $twit->getStorage()->retrieveAccessToken(UserHelper::$type_social[UserHelper::TYPE_SOCIAL_TWITTER]);
 
