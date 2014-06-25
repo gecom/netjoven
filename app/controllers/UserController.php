@@ -175,13 +175,13 @@ class UserController extends BaseController {
         // if code is provided get user data and sign in
         if (!empty($oauth_token)) {
 
-            $token = $twitterService->getStorage()->retrieveAccessToken('Twitter');
+            $token = $twit->getStorage()->retrieveAccessToken('Twitter');
 
             // This was a callback request from google, get the token
-            $twitterService->requestAccessToken( $oauth_token, $oauth_verifier, $token->getRequestTokenSecret() );
+            $twit->requestAccessToken( $oauth_token, $oauth_verifier, $token->getRequestTokenSecret() );
 
             // Send a request with it
-            $result = json_decode( $twitterService->request( 'account/verify_credentials.json') );
+            $result = json_decode( $twit->request( 'account/verify_credentials.json') );
 
                         // try to login
 
