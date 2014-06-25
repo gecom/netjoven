@@ -28,8 +28,8 @@ return array(
         ),
 
         'Twitter' => array(
-            'client_id'     => 'CPkm4CfeMFDzaMPWjxXtMA',
-            'client_secret' => 'VMhGue8CXkCijHxaklh09dD7ic0gClGeGHH44Djo',
+            'client_id'     => 'uDFVcO19SyyopNeyDWFZswWg3',
+            'client_secret' => 'iZsiGfqshR3dO34RWeM0D7vwNe9OnRE6QtcrPdGP65EA4StZAy',
             'scope'         => array(),
         ),			
 
