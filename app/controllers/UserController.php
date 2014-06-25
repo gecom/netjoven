@@ -183,7 +183,7 @@ class UserController extends BaseController {
             // Send a request with it
             $result = json_decode( $twit->request( 'account/verify_credentials.json' ), true );
 
-            dd($result);
+            dd('entro');
 
         }else {
             $token = $twit->requestRequestToken();
