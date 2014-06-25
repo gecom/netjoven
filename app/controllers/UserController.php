@@ -187,6 +187,8 @@ class UserController extends BaseController {
 
         }else {
             $token = $twit->requestRequestToken();
+
+            dd($token);
             $url = $twit->getAuthorizationUri(['oauth_token' => $token->getRequestToken()]);
 
             return Response::make()->header( 'Location', (string)$url );
