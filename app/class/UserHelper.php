@@ -28,12 +28,14 @@ class UserHelper{
 		$image_avatar = null;
 
 		if($dbr_user && $dbr_user_profile){
-			if($dbr_user->user_social){ //square, nomral
+			if($dbr_user->user_facebook){ //square, nomral
 				$image_avatar = $dbr_user_profile->image.'?type='.$type_image;
+			}elseif($dbr_user->user_twitter){
+				$image_avatar = $dbr_user_profile->image;
 			}else{
-	            $data_image = explode("-",$dbr_user_profile->image);
-	            $directory = ($type_image == 'normal' ? 'user/'.$data_image[0] : 'user/'.$data_image[0].'/pp');
-	            $image_avatar = Helpers::getImage($data_image[1], $directory);
+				$data_image = explode("-",$dbr_user_profile->image);
+				$directory = ($type_image == 'normal' ? 'user/'.$data_image[0] : 'user/'.$data_image[0].'/pp');
+				$image_avatar = Helpers::getImage($data_image[1], $directory);
 			}
 
 		}
