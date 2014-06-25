@@ -177,7 +177,7 @@ class UserController extends BaseController {
 
             $token = $twit->getStorage()->retrieveAccessToken('Twitter');
             $twit->requestAccessToken( $oauth_token, $oauth_verifier, $token->getRequestTokenSecret() );
-            $result = json_decode( $twit->request( 'account/verify_credentials.json') );
+            $result = json_decode( $twit->request( 'account/verify_credentials.json'), true );
 
             $dbr_user = User::where('user', '=', $result['screen_name'])->first();
             $is_new_user_social = false;
