@@ -175,23 +175,23 @@ class UserController extends BaseController {
         // if code is provided get user data and sign in
         if (!empty($oauth_token)) {
 
-            $token = $twit->getStorage()->retrieveAccessToken(UserHelper::$type_social[UserHelper::TYPE_SOCIAL_TWITTER]);
+            $token = $twitterService->getStorage()->retrieveAccessToken('Twitter');
 
             // This was a callback request from google, get the token
-            $twit->requestAccessToken( $code, $oauth_verifier, $token->getRequestTokenSecret() );
+            $twitterService->requestAccessToken( $oauth_token, $oauth_verifier, $token->getRequestTokenSecret() );
 
             // Send a request with it
-            $result = json_decode( $twit->request( 'account/verify_credentials.json' ), true );
+            $result = json_decode( $twitterService->request( 'account/verify_credentials.json') );
+
+                        // try to login
+
 
             dd($result);
 
         }else {
             $token = $twit->requestRequestToken();
             $url = $twit->getAuthorizationUri(['oauth_token' => $token->getRequestToken()]);
-
-            //            dd($url);
             return Redirect::to( (string)$url );
-            //return Response::make()->header( 'Location', (string)$url );
         }
 
     }
