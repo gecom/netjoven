@@ -179,12 +179,12 @@ class UserController extends BaseController {
             $twit->requestAccessToken( $oauth_token, $oauth_verifier, $token->getRequestTokenSecret() );
             $result = json_decode( $twit->request( 'account/verify_credentials.json'), true );
 
-            $dbr_user = User::where('user', '=', $result['screen_name'])->first();
+            $dbr_user = User::where('user', '=', $result['id'])->first();
             $is_new_user_social = false;
 
             if(!$dbr_user){
                 $dbr_user = new User();
-                $dbr_user->user = $result['screen_name'];
+                $dbr_user->user = $result['id'];
                 $dbr_user->user_twitter = $result['screen_name'];
                 $dbr_user->level = UserHelper::LEVEL_USER_NORMAL;
                 $dbr_user->save();
