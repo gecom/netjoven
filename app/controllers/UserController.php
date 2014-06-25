@@ -136,7 +136,7 @@ class UserController extends BaseController {
             if(!$dbr_user){
                 $dbr_user = new User();
                 $dbr_user->user = $result['id'];
-                $dbr_user->user_social = $result['id'];
+                $dbr_user->user_facebook = $result['id'];
                 $dbr_user->level = UserHelper::LEVEL_USER_NORMAL;
                 $dbr_user->save();
 
@@ -176,17 +176,33 @@ class UserController extends BaseController {
         if (!empty($oauth_token)) {
 
             $token = $twit->getStorage()->retrieveAccessToken('Twitter');
-
-            // This was a callback request from google, get the token
             $twit->requestAccessToken( $oauth_token, $oauth_verifier, $token->getRequestTokenSecret() );
-
-            // Send a request with it
             $result = json_decode( $twit->request( 'account/verify_credentials.json') );
 
-                        // try to login
+            $dbr_user = User::where('user', '=', $result['screen_name'])->first();
+            $is_new_user_social = false;
 
+            if(!$dbr_user){
+                $dbr_user = new User();
+                $dbr_user->user = $result['screen_name'];
+                $dbr_user->user_twitter = $result['screen_name'];
+                $dbr_user->level = UserHelper::LEVEL_USER_NORMAL;
+                $dbr_user->save();
 
-            dd($result);
+                $dbr_user_profile = new UserProfile();
+                $dbr_user_profile->first_name = $result['name'];
+                $dbr_user_profile->image = $result['profile_image_url']; //'https://graph.facebook.com/'.$result['id'].'/picture';
+                $dbr_user->userProfile()->save($dbr_user_profile);  
+                $is_new_user_social = true;
+            }           
+
+            Auth::loginUsingId($dbr_user->id);
+
+            if($is_new_user_social){
+                return Redirect::route('frontend.user.register');
+            }else{
+                return Redirect::route('home');
+            }
 
         }else {
             $token = $twit->requestRequestToken();
