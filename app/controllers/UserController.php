@@ -175,7 +175,7 @@ class UserController extends BaseController {
         // if code is provided get user data and sign in
         if (!empty($oauth_token)) {
 
-            $token = $twit->getStorage()->retrieveAccessToken('Twitter');
+            $token = $twit->getStorage()->retrieveAccessToken(UserHelper::$type_social[UserHelper::TYPE_SOCIAL_TWITTER]);
             $twit->requestAccessToken( $oauth_token, $oauth_verifier, $token->getRequestTokenSecret() );
             $result = json_decode( $twit->request( 'account/verify_credentials.json'), true );
 
@@ -191,7 +191,7 @@ class UserController extends BaseController {
 
                 $dbr_user_profile = new UserProfile();
                 $dbr_user_profile->first_name = $result['name'];
-                $dbr_user_profile->image = $result['profile_image_url']; //'https://graph.facebook.com/'.$result['id'].'/picture';
+                $dbr_user_profile->image = $result['profile_image_url'];
                 $dbr_user->userProfile()->save($dbr_user_profile);  
                 $is_new_user_social = true;
             }           
